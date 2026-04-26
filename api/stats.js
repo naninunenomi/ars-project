@@ -3,6 +3,11 @@
  * データベースから実統計データを取得してダッシュボードへ届ける
  */
 
+if (!process.env.KV_URL && process.env.KV_REDIS_URL) {
+    process.env.KV_URL = process.env.KV_REDIS_URL;
+    process.env.KV_REST_API_URL = process.env.KV_REDIS_REST_API_URL;
+    process.env.KV_REST_API_TOKEN = process.env.KV_REDIS_REST_API_TOKEN;
+}
 const { kv } = require('@vercel/kv');
 
 module.exports = async (req, res) => {

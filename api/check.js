@@ -3,7 +3,13 @@
  * Vercel KV (Redis) を活用した収益・取引履歴の永続化
  */
 
-// 注: 実際には npm install @vercel/kv が必要です
+// 環境変数名の不一致を解消（Vercel Redis統合は KV_REDIS_URL を使う場合があるため）
+if (!process.env.KV_URL && process.env.KV_REDIS_URL) {
+    process.env.KV_URL = process.env.KV_REDIS_URL;
+    process.env.KV_REST_API_URL = process.env.KV_REDIS_REST_API_URL;
+    process.env.KV_REST_API_TOKEN = process.env.KV_REDIS_REST_API_TOKEN;
+}
+
 const { kv } = require('@vercel/kv'); 
 
 module.exports = async (req, res) => {
