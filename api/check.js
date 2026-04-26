@@ -4,10 +4,16 @@
  */
 
 // 環境変数の詳細ブリッジ（Vercel Redis / Upstash / KV 各パターンに対応）
+// さらにPrefix（KV_PROD等）がついていても自動で検知してエイリアスを作成します。
+const restUrlKey = Object.keys(process.env).find(key => key.includes('_REST_API_URL'));
+const restTokenKey = Object.keys(process.env).find(key => key.includes('_REST_API_TOKEN'));
+
+if (restUrlKey && restTokenKey && !process.env.KV_REST_API_URL) {
+    process.env.KV_REST_API_URL = process.env[restUrlKey];
+    process.env.KV_REST_API_TOKEN = process.env[restTokenKey];
+}
 if (!process.env.KV_URL) {
-    process.env.KV_URL = process.env.KV_REDIS_URL || process.env.REDIS_URL || process.env.UPSTASH_REDIS_REST_URL;
-    process.env.KV_REST_API_URL = process.env.KV_REDIS_REST_API_URL || process.env.UPSTASH_REDIS_REST_URL;
-    process.env.KV_REST_API_TOKEN = process.env.KV_REDIS_REST_API_TOKEN || process.env.UPSTASH_REDIS_REST_TOKEN;
+    process.env.KV_URL = process.env.KV_REDIS_URL || process.env.REDIS_URL || process.env[restUrlKey];
 }
 const { kv } = require('@vercel/kv'); 
 
