@@ -3,13 +3,12 @@
  * Vercel KV (Redis) を活用した収益・取引履歴の永続化
  */
 
-// 環境変数名の不一致を解消（Vercel Redis統合は KV_REDIS_URL を使う場合があるため）
-if (!process.env.KV_URL && process.env.KV_REDIS_URL) {
-    process.env.KV_URL = process.env.KV_REDIS_URL;
-    process.env.KV_REST_API_URL = process.env.KV_REDIS_REST_API_URL;
-    process.env.KV_REST_API_TOKEN = process.env.KV_REDIS_REST_API_TOKEN;
+// 環境変数の詳細ブリッジ（Vercel Redis / Upstash / KV 各パターンに対応）
+if (!process.env.KV_URL) {
+    process.env.KV_URL = process.env.KV_REDIS_URL || process.env.REDIS_URL || process.env.UPSTASH_REDIS_REST_URL;
+    process.env.KV_REST_API_URL = process.env.KV_REDIS_REST_API_URL || process.env.UPSTASH_REDIS_REST_URL;
+    process.env.KV_REST_API_TOKEN = process.env.KV_REDIS_REST_API_TOKEN || process.env.UPSTASH_REDIS_REST_TOKEN;
 }
-
 const { kv } = require('@vercel/kv'); 
 
 module.exports = async (req, res) => {
