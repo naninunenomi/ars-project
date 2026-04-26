@@ -12,6 +12,7 @@
   ],
   "routes": [
     { "src": "/api/check", "dest": "/api/check.js" },
+    { "src": "/api/stats", "dest": "/api/stats.js" },
     { "src": "/api/watcher", "dest": "/api/watcher.js" },
     { "src": "/", "dest": "/public/index.html" }
   ],
