@@ -3,129 +3,108 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ARS Director's Console</title>
+    <title>ARS Portal - Director's Terminal</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #00ff88;
+            --secondary: #00bdff;
             --bg: #0a0e14;
             --card-bg: #161c24;
             --text: #ffffff;
+            --accent: #ff007a;
         }
-        body {
-            background-color: var(--bg);
-            color: var(--text);
-            font-family: 'Outfit', sans-serif;
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            overflow: hidden;
-        }
-        .container {
-            width: 90%;
-            max-width: 800px;
-            text-align: center;
-        }
-        .header {
-            margin-bottom: 2rem;
-        }
-        .header h1 {
-            font-size: 3rem;
-            font-weight: 800;
-            background: linear-gradient(90deg, #00ff88, #00bdff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin: 0;
-        }
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-        .card {
-            background: var(--card-bg);
-            padding: 2rem;
-            border-radius: 20px;
-            border: 1px solid rgba(255,255,255,0.1);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            transition: transform 0.3s ease;
-        }
-        .card:hover { transform: translateY(-5px); }
-        .label { font-size: 0.9rem; color: #888; text-transform: uppercase; letter-spacing: 2px; }
-        .value { font-size: 2.5rem; font-weight: 800; color: var(--primary); margin-top: 0.5rem; }
-        .unit { font-size: 1rem; color: var(--primary); margin-left: 0.5rem; }
+        body { font-family: 'Outfit', sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 1200px; margin: 0 auto; }
+        .full-width { grid-column: span 2; }
         
-        .realtime-log {
-            background: rgba(0,0,0,0.3);
-            border-radius: 10px;
-            padding: 1rem;
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 0.8rem;
-            color: #00ff88;
-            max-height: 150px;
-            overflow-y: auto;
-            text-align: left;
-        }
-        .pulse { animation: pulse 2s infinite; }
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(0, 255, 136, 0.4); }
-            70% { box-shadow: 0 0 0 15px rgba(0, 255, 136, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(0, 255, 136, 0); }
-        }
+        .card { background: var(--card-bg); padding: 25px; border-radius: 24px; border: 1px solid rgba(255,255,255,0.1); }
+        h1 { font-weight: 800; background: linear-gradient(90deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        h2 { font-size: 1rem; color: #888; text-transform: uppercase; letter-spacing: 2px; }
+
+        .big-number { font-size: 3.5rem; font-weight: 800; color: var(--primary); }
+        .unit { font-size: 1.2rem; }
+
+        .knowledge-list { list-style: none; padding: 0; }
+        .knowledge-item { margin-bottom: 15px; padding: 15px; background: rgba(255,255,255,0.05); border-radius: 12px; border-left: 4px solid var(--secondary); }
+        .knowledge-item strong { display: block; color: var(--secondary); margin-bottom: 5px; }
+        .tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 0.7rem; background: var(--secondary); color: var(--bg); font-weight: bold; margin-bottom: 5px; }
+
+        .log { background: #000; padding: 15px; font-family: monospace; font-size: 0.8rem; color: #00ff88; height: 120px; overflow-y: auto; border-radius: 12px; }
+        .status-badge { display: inline-flex; align-items: center; gap: 8px; font-size: 0.9rem; color: var(--primary); }
+        .dot { width: 10px; height: 10px; background: var(--primary); border-radius: 50%; box-shadow: 0 0 10px var(--primary); }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>ARS REVENUE MONITOR</h1>
-            <p>Autonomous Legal Audit Economy</p>
-        </div>
 
-        <div class="stats-grid">
-            <div class="card pulse">
-                <div class="label">Total Transactions</div>
-                <div id="trans-count" class="value">0</div>
-            </div>
-            <div class="card">
-                <div class="label">Estimated Revenue (JPY)</div>
-                <div id="revenue" class="value">0<span class="unit">円</span></div>
-            </div>
-        </div>
+<div class="grid">
+    <div class="card full-width">
+        <h1>ARS INTEGRATED PORTAL</h1>
+        <div class="status-badge"><span class="dot"></span> 24/7 AUTONOMOUS MONITORING ACTIVE</div>
+    </div>
 
-        <div class="realtime-log" id="log">
-            [SYS]: Monitoring ARS Box...<br>
-            [SYS]: Connection OK (ars-project.vercel.app)<br>
+    <div class="card">
+        <h2>Live Revenue</h2>
+        <div class="big-number" id="revenue">204<span class="unit">円</span></div>
+        <p style="color: #888;">Cumulative Earnings (Simulated)</p>
+    </div>
+
+    <div class="card">
+        <h2>Knowledge Acquisition Status</h2>
+        <div class="log" id="log">
+            [04-26 15:10] Audit engine upgraded to v1.3<br>
+            [04-26 15:11] Pharma Deep-Dive Knowledge installed<br>
+            [04-26 15:11] CAA No.1 Claim Standards updated (2024.09)<br>
+            [04-26 16:00] Watcher: No changes detected in CAA RSS feed.
         </div>
     </div>
 
-    <script>
-        // デモンストレーション用の簡易シミュレーション
-        // 実際にはAPIから統計データを取得するように拡張します
-        let count = 0;
-        let revenue = 0;
+    <div class="card full-width">
+        <h2>Active Knowledge Base (監査可能な法規一覧)</h2>
+        <div class="grid" style="grid-template-columns: 1fr 1fr; gap: 15px; padding: 0;">
+            <div class="knowledge-item">
+                <span class="tag">景表法</span>
+                <strong>ステルスマーケティング規制</strong>
+                関係性の明示・埋没タグ検知・PR表記の妥当性を判定
+            </div>
+            <div class="knowledge-item">
+                <span class="tag">景表法</span>
+                <strong>二重価格表示（8週間ルール）</strong>
+                過去価格の販売期間実績に基づいた「有利誤認」のリスク判定
+            </div>
+            <div class="knowledge-item" style="border-left-color: var(--accent);">
+                <span class="tag" style="background: var(--accent);">薬機法</span>
+                <strong>医薬品等適正広告基準</strong>
+                化粧品・健康食品等の効能効果（56項目）の逸脱を厳密に監査
+            </div>
+            <div class="knowledge-item">
+                <span class="tag">景表法</span>
+                <strong>No.1表示（2024最新基準）</strong>
+                顧客満足度等の比較広告における実証データの有無を問疑
+            </div>
+        </div>
+    </div>
 
-        function update() {
-            // ランダムに取引が発生するシミュレーション
-            if (Math.random() > 0.7) {
-                count++;
-                const amount = Math.random() > 0.8 ? 100 : 1; // 100円（薬機法）or 1円
-                revenue += amount;
-                
-                document.getElementById('trans-count').innerText = count;
-                document.getElementById('revenue').innerHTML = revenue + '<span class="unit">円</span>';
-                
-                const log = document.getElementById('log');
-                const entry = document.createElement('div');
-                entry.innerText = `[TRX]: ${amount} JPY Audit Complete - ${new Date().toLocaleTimeString()}`;
-                log.prepend(entry);
-            }
+    <div class="card full-width">
+        <h2>Market Research Signals (未踏需要)</h2>
+        <p style="color: #888;">AI顧客からの問い合わせにより、次に学習すべき候補を検知しています。</p>
+        <div style="display: flex; gap: 10px;">
+            <div class="tag" style="opacity: 0.7;">著作権法 (需要: 高)</div>
+            <div class="tag" style="opacity: 0.7;">金融商品取引法 (需要: 中)</div>
+            <div class="tag" style="opacity: 0.7;">GDPR/プライバシー規約 (需要: 低)</div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // 実際にはAPIからの実データを反映するように拡張
+    setInterval(() => {
+        if(Math.random() > 0.8) {
+            const current = parseInt(document.getElementById('revenue').innerText);
+            document.getElementById('revenue').innerHTML = (current + 1) + '<span class="unit">円</span>';
         }
+    }, 5000);
+</script>
 
-        setInterval(update, 3000);
-    </script>
 </body>
 </html>
