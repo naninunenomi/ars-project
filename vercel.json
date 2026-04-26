@@ -11,13 +11,14 @@
     }
   ],
   "routes": [
+    { "src": "/api/check", "dest": "/api/check.js" },
+    { "src": "/api/watcher", "dest": "/api/watcher.js" },
+    { "src": "/", "dest": "/public/index.html" }
+  ],
+  "crons": [
     {
-      "src": "/api/check",
-      "dest": "/api/check.js"
-    },
-    {
-      "src": "/",
-      "dest": "/public/index.html"
+      "path": "/api/watcher",
+      "schedule": "0 4 * * *"
     }
   ]
 }
