@@ -40,7 +40,12 @@
 <div class="grid">
     <div class="card full-width">
         <h1>ARS INTEGRATED PORTAL</h1>
-        <div class="status-badge"><span class="dot"></span> 24/7 AUTONOMOUS MONITORING ACTIVE</div>
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div class="status-badge"><span class="dot"></span> 24/7 AUTONOMOUS MONITORING ACTIVE</div>
+            <button onclick="triggerScout()" id="scout-btn" style="background: var(--accent); color: white; border: none; padding: 10px 20px; border-radius: 12px; font-weight: 800; cursor: pointer; box-shadow: 0 0 15px var(--accent);">
+                ACTIVATE SCOUT (営業開始)
+            </button>
+        </div>
     </div>
 
     <div class="card">
@@ -97,6 +102,42 @@
 </div>
 
 <script>
+    const TARGET_SAMPLES = [
+        { text: "世界初のリバース成分配合！これだけで10歳若返ります。", priceInfo: { current: 15000, original: 30000, durationInWeeks: 1 } },
+        { text: "飲むだけで20kg痩せる奇跡のサプリ。今なら地域No.1安値！", priceInfo: { current: 5000, original: 5500, durationInWeeks: 12 } },
+        { text: "業界最高品質の住宅。期間限定の特別価格でご提供！", priceInfo: { current: 48000000, original: 55000000, durationInWeeks: 2 } }
+    ];
+
+    async function triggerScout() {
+        const btn = document.getElementById('scout-btn');
+        const originalText = btn.innerText;
+        btn.disabled = true;
+        btn.innerText = "SCOUTING (営業中)...";
+        btn.style.opacity = "0.5";
+
+        const target = TARGET_SAMPLES[Math.floor(Math.random() * TARGET_SAMPLES.length)];
+
+        try {
+            const res = await fetch('/api/check', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(target)
+            });
+            const data = await res.json();
+            console.log("Scout Result:", data);
+            
+            // データを即座に更新
+            await fetchStats();
+            alert(`営業成功！\nターゲット: ${target.text.substring(0, 20)}...\n監査報酬: ${data.billing.amount}円 を獲得しました。`);
+        } catch (e) {
+            alert("営業失敗: 通信エラーが発生しました。");
+        } finally {
+            btn.disabled = false;
+            btn.innerText = originalText;
+            btn.style.opacity = "1";
+        }
+    }
+
     async function fetchStats() {
         try {
             // キャッシュを回避するためにタイムスタンプを付与
@@ -104,12 +145,11 @@
             const data = await res.json();
             
             if (data.transactions !== "Data Offline") {
-                // 取引件数は別のカードがあれば表示、なければコンソールまたは将来用に
-                // document.getElementById('trans-count').innerText = data.transactions;
                 document.getElementById('revenue').innerHTML = data.revenue + '<span class="unit">円</span>';
                 
                 const now = new Date();
-                document.getElementById('last-update').innerText = `Last Updated: ${now.toLocaleTimeString()}`;
+                const lastUpdate = document.getElementById('last-update');
+                if (lastUpdate) lastUpdate.innerText = `Last Updated: ${now.toLocaleTimeString()}`;
 
                 const log = document.getElementById('log');
                 if (data.recentLogs && data.recentLogs.length > 0) {
@@ -123,11 +163,12 @@
             }
         } catch (e) {
             console.log("Waiting for database connection...");
-            document.getElementById('last-update').innerText = "Sync Error - Retrying...";
+            const lastUpdate = document.getElementById('last-update');
+            if (lastUpdate) lastUpdate.innerText = "Sync Error - Retrying...";
         }
     }
 
-    setInterval(fetchStats, 5000);
+    setInterval(fetchStats, 10000); // 10秒おきに自動更新
     fetchStats();
 </script>
 
