@@ -97,13 +97,30 @@
 </div>
 
 <script>
-    // 実際にはAPIからの実データを反映するように拡張
-    setInterval(() => {
-        if(Math.random() > 0.8) {
-            const current = parseInt(document.getElementById('revenue').innerText);
-            document.getElementById('revenue').innerHTML = (current + 1) + '<span class="unit">円</span>';
+    async function fetchStats() {
+        try {
+            const res = await fetch('/api/stats');
+            const data = await res.json();
+            
+            if (data.transactions !== "Data Offline") {
+                document.getElementById('trans-count').innerText = data.transactions;
+                document.getElementById('revenue').innerHTML = data.revenue + '<span class="unit">円</span>';
+                
+                const log = document.getElementById('log');
+                log.innerHTML = '';
+                data.recentLogs.forEach(entry => {
+                    const div = document.createElement('div');
+                    div.innerText = `[TRX]: ${entry.amount} JPY Audit Complete (${entry.verdict}) - ${new Date(entry.timestamp).toLocaleTimeString()}`;
+                    log.appendChild(div);
+                });
+            }
+        } catch (e) {
+            console.log("Waiting for database connection...");
         }
-    }, 5000);
+    }
+
+    setInterval(fetchStats, 5000);
+    fetchStats();
 </script>
 
 </body>
