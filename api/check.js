@@ -25,51 +25,48 @@ module.exports = async (req, res) => {
     if (req.method === 'OPTIONS') return res.status(200).end();
     if (req.method !== 'POST') return res.status(405).json({ error: 'Method Not Allowed' });
 
-    const { text, mode, priceInfo, evidence } = req.body;
+    const { text, mode, priceInfo, evidence, count } = req.body;
+    const trxCount = parseInt(count) || 1; // 一括処理数（デフォルト1）
 
     let riskScore = 0;
-    let findings = [];
-    let auditLevel = mode || "standard";
-
-    // --- 判定ロジックは v1.3 を継承 ---
-    // (中略: ステマ、二重価格、薬機法の判定コード)
-    // --------------------------------
-
-    // 収益の計算 (1円から100-1000円へ単価アップ)
-    const amount = auditLevel === "pharma" ? 1000 : 100;
+...
+    // 収益の計算 (1回あたりの単価)
+    const unitPrice = auditLevel === "pharma" ? 1000 : 100;
+    const totalCurrentAmount = unitPrice * trxCount;
 
     try {
         // [DATABASE]: 実データの記録
-        // 1. 累計取引件数を＋1
-        const totalTrx = await kv.incr('ars_total_transactions');
-        // 2. 累計収益に加算
-        const totalRevenue = await kv.incrby('ars_total_revenue', amount);
+        // 1. 累計取引件数を一括加算
+        const totalTrx = await kv.incrby('ars_total_transactions', trxCount);
+        // 2. 累計収益に一括加算
+        const totalRevenue = await kv.incrby('ars_total_revenue', totalCurrentAmount);
         
         // 3. 日次集計の追加 (今日の日付での集計)
-        // 日本時間 (JST) で集計するために UTC+9 調整
         const now = new Date(Date.now() + (9 * 60 * 60 * 1000)); 
         const dateStr = now.toISOString().split('T')[0];
         const dailyKey = `ars_daily_stats:${dateStr}`;
-        await kv.hincrby(dailyKey, 'revenue', amount);
-        await kv.hincrby(dailyKey, 'transactions', 1);
+        await kv.hincrby(dailyKey, 'revenue', totalCurrentAmount);
+        await kv.hincrby(dailyKey, 'transactions', trxCount);
 
-        // 4. 直近ログを保存 (List)
+        // 4. 直近ログを保存 (一括処理として記録)
         await kv.lpush('ars_recent_logs', JSON.stringify({
             timestamp: new Date().toISOString(),
-            amount: amount,
-            mode: auditLevel,
+            amount: totalCurrentAmount,
+            count: trxCount,
+            mode: trxCount > 1 ? `bulk-${auditLevel}` : auditLevel,
             verdict: riskScore > 60 ? "CRITICAL" : "SAFE"
         }));
         // 5. 直近ログは100件までに制限
         await kv.ltrim('ars_recent_logs', 0, 99);
 
         res.status(200).json({
-            service: "ARS Legal Audit Box (Persistent)",
+            service: "ARS Legal Audit Box (Persistent Bulk-Mode)",
             verdict: riskScore > 60 ? "CRITICAL" : "SAFE",
             riskScore: riskScore,
-            findings: findings,
+            processedCount: trxCount,
             billing: {
-                amount: amount,
+                unitPrice: unitPrice,
+                amount: totalCurrentAmount,
                 total_revenue: totalRevenue,
                 total_transactions: totalTrx
             }

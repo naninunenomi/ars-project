@@ -17,22 +17,16 @@
         body { font-family: 'Outfit', sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; }
         .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 1200px; margin: 0 auto; }
         .full-width { grid-column: span 2; }
-        
         .card { background: var(--card-bg); padding: 25px; border-radius: 24px; border: 1px solid rgba(255,255,255,0.1); }
         h1 { font-weight: 800; background: linear-gradient(90deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         h2 { font-size: 1rem; color: #888; text-transform: uppercase; letter-spacing: 2px; }
-
         .big-number { font-size: 3.5rem; font-weight: 800; color: var(--primary); }
         .unit { font-size: 1.2rem; }
-
-        .knowledge-list { list-style: none; padding: 0; }
-        .knowledge-item { margin-bottom: 15px; padding: 15px; background: rgba(255,255,255,0.05); border-radius: 12px; border-left: 4px solid var(--secondary); }
-        .knowledge-item strong { display: block; color: var(--secondary); margin-bottom: 5px; }
-        .tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 0.7rem; background: var(--secondary); color: var(--bg); font-weight: bold; margin-bottom: 5px; }
-
         .log { background: #000; padding: 15px; font-family: monospace; font-size: 0.8rem; color: #00ff88; height: 120px; overflow-y: auto; border-radius: 12px; }
         .status-badge { display: inline-flex; align-items: center; gap: 8px; font-size: 0.9rem; color: var(--primary); }
         .dot { width: 10px; height: 10px; background: var(--primary); border-radius: 50%; box-shadow: 0 0 10px var(--primary); }
+        .tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 0.7rem; background: var(--secondary); color: var(--bg); font-weight: bold; margin-bottom: 5px; }
+        select { background: #000; color: white; border: 1px solid var(--primary); padding: 5px; border-radius: 8px; font-family: 'Outfit'; }
     </style>
 </head>
 <body>
@@ -42,9 +36,16 @@
         <h1>ARS INTEGRATED PORTAL</h1>
         <div style="display: flex; justify-content: space-between; align-items: center;">
             <div class="status-badge"><span class="dot"></span> 24/7 AUTONOMOUS MONITORING ACTIVE</div>
-            <button onclick="triggerScout()" id="scout-btn" style="background: var(--accent); color: white; border: none; padding: 10px 20px; border-radius: 12px; font-weight: 800; cursor: pointer; box-shadow: 0 0 15px var(--accent);">
-                ACTIVATE SCOUT (営業開始)
-            </button>
+            <div>
+                <select id="scout-volume">
+                    <option value="1">Standard (1 ad)</option>
+                    <option value="100">Enterprise (100 ads)</option>
+                    <option value="1000">Infrastructure (1000 ads)</option>
+                </select>
+                <button onclick="triggerScout()" id="scout-btn" style="background: var(--accent); color: white; border: none; padding: 10px 20px; border-radius: 12px; font-weight: 800; cursor: pointer; box-shadow: 0 0 15px var(--accent);">
+                    ACTIVATE SCOUT (営業開始)
+                </button>
+            </div>
         </div>
     </div>
 
@@ -58,7 +59,7 @@
     <div class="card">
         <h2>Daily Performance (日次集計)</h2>
         <div style="max-height: 120px; overflow-y: auto;">
-            <table style="width: 100%; font-size: 0.8rem; border-collapse: collapse;" id="daily-table">
+            <table style="width: 100%; font-size: 0.8rem; border-collapse: collapse;">
                 <thead>
                     <tr style="border-bottom: 1px solid rgba(255,255,255,0.1); color: #888; text-align: left;">
                         <th style="padding: 5px;">Date</th>
@@ -66,83 +67,45 @@
                         <th style="padding: 5px;">Revenue</th>
                     </tr>
                 </thead>
-                <tbody id="daily-body">
-                    <!-- Data will be injected here -->
-                </tbody>
+                <tbody id="daily-body"></tbody>
             </table>
         </div>
     </div>
 
     <div class="card full-width">
-        <h2>Active Knowledge Base (監査可能な法規一覧)</h2>
-        <div class="grid" style="grid-template-columns: 1fr 1fr; gap: 15px; padding: 0;">
-            <div class="knowledge-item">
-                <span class="tag">景表法</span>
-                <strong>ステルスマーケティング規制</strong>
-                関係性の明示・埋没タグ検知・PR表記の妥当性を判定
-            </div>
-            <div class="knowledge-item">
-                <span class="tag">景表法</span>
-                <strong>二重価格表示（8週間ルール）</strong>
-                過去価格の販売期間実績に基づいた「有利誤認」のリスク判定
-            </div>
-            <div class="knowledge-item" style="border-left-color: var(--accent);">
-                <span class="tag" style="background: var(--accent);">薬機法</span>
-                <strong>医薬品等適正広告基準</strong>
-                化粧品・健康食品等の効能効果（56項目）の逸脱を厳密に監査
-            </div>
-            <div class="knowledge-item">
-                <span class="tag">景表法</span>
-                <strong>No.1表示（2024最新基準）</strong>
-                顧客満足度等の比較広告における実証データの有無を問疑
-            </div>
-        </div>
-    </div>
-
-    <div class="card full-width">
-        <h2>Market Research Signals (未踏需要)</h2>
-        <p style="color: #888;">AI顧客からの問い合わせにより、次に学習すべき候補を検知しています。</p>
-        <div style="display: flex; gap: 10px;">
-            <div class="tag" style="opacity: 0.7;">著作権法 (需要: 高)</div>
-            <div class="tag" style="opacity: 0.7;">金融商品取引法 (需要: 中)</div>
-            <div class="tag" style="opacity: 0.7;">GDPR/プライバシー規約 (需要: 低)</div>
-        </div>
+        <h2>Recent Transaction Logs</h2>
+        <div class="log" id="log">Waiting for first sync...</div>
     </div>
 </div>
 
 <script>
     const TARGET_SAMPLES = [
         { text: "世界初のリバース成分配合！これだけで10歳若返ります。", priceInfo: { current: 15000, original: 30000, durationInWeeks: 1 } },
-        { text: "飲むだけで20kg痩せる奇跡のサプリ。今なら地域No.1安値！", priceInfo: { current: 5000, original: 5500, durationInWeeks: 12 } },
         { text: "業界最高品質の住宅。期間限定の特別価格でご提供！", priceInfo: { current: 48000000, original: 55000000, durationInWeeks: 2 } }
     ];
 
     async function triggerScout() {
         const btn = document.getElementById('scout-btn');
+        const count = document.getElementById('scout-volume').value;
         const originalText = btn.innerText;
         btn.disabled = true;
-        btn.innerText = "SCOUTING (営業中)...";
-        btn.style.opacity = "0.5";
-
-        const target = TARGET_SAMPLES[Math.floor(Math.random() * TARGET_SAMPLES.length)];
-
+        btn.innerText = `PROCESS ${count} ADS...`;
+        
         try {
+            const target = TARGET_SAMPLES[Math.floor(Math.random() * TARGET_SAMPLES.length)];
             const res = await fetch('/api/check', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(target)
+                body: JSON.stringify({ ...target, count: parseInt(count) })
             });
             const data = await res.json();
-            
-            // データを即座に更新
             await fetchStats();
-            alert(`営業成功！\nターゲット: ${target.text.substring(0, 20)}...\n監査報酬: ${data.billing.amount}円 を獲得しました。`);
+            alert(`監査成功: ${count} 件の広告を一括処理しました。\n報酬 ${data.billing.amount}円 を獲得。`);
         } catch (e) {
-            alert("営業失敗: 通信エラーが発生しました。");
+            alert("通信エラーが発生しました。");
         } finally {
             btn.disabled = false;
             btn.innerText = originalText;
-            btn.style.opacity = "1";
         }
     }
 
@@ -154,54 +117,40 @@
             if (data.transactions !== "Data Offline") {
                 document.getElementById('revenue').innerHTML = data.revenue + '<span class="unit">円</span>';
                 
-                // 日付表示の修正
                 const now = new Date();
-                const lastUpdate = document.getElementById('last-update');
-                if (lastUpdate) {
-                    const dateStr = (now.getMonth() + 1) + '/' + now.getDate() + ' ' + now.toLocaleTimeString();
-                    lastUpdate.innerText = `Last Updated: ${dateStr}`;
-                }
+                const dateStr = (now.getMonth() + 1) + '/' + now.getDate() + ' ' + now.toLocaleTimeString();
+                document.getElementById('last-update').innerText = `Last Updated: ${dateStr}`;
 
-                // 日次集計の表示
                 const dailyBody = document.getElementById('daily-body');
-                if (dailyBody && data.dailyStats) {
+                if (data.dailyStats) {
                     dailyBody.innerHTML = '';
                     data.dailyStats.forEach(day => {
                         const tr = document.createElement('tr');
                         tr.style.borderBottom = "1px solid rgba(255,255,255,0.05)";
-                        tr.innerHTML = `
-                            <td style="padding: 5px;">${day.date}</td>
-                            <td style="padding: 5px;">${day.transactions}</td>
-                            <td style="padding: 5px;">${day.revenue} <span class="unit">円</span></td>
-                        `;
+                        tr.innerHTML = `<td>${day.date}</td><td>${day.transactions}</td><td>${day.revenue}円</td>`;
                         dailyBody.appendChild(tr);
                     });
                 }
 
-                // ログの表示 (最近の10件)
                 const log = document.getElementById('log');
-                if (data.recentLogs && data.recentLogs.length > 0) {
+                if (data.recentLogs) {
                     log.innerHTML = '';
                     data.recentLogs.forEach(entry => {
                         const div = document.createElement('div');
-                        const targetInfo = entry.target ? ` (${entry.target})` : "";
-                        const logDate = new Date(entry.timestamp);
-                        const dateStr = (logDate.getMonth() + 1) + '/' + logDate.getDate() + ' ' + logDate.toLocaleTimeString();
-                        div.innerText = `[TRX]: ${entry.amount} JPY Audit Complete (${entry.verdict})${targetInfo} - ${dateStr}`;
+                        const date = new Date(entry.timestamp);
+                        const ts = (date.getMonth() + 1) + '/' + date.getDate() + ' ' + date.toLocaleTimeString();
+                        div.innerText = `[TRX]: ${entry.amount} JPY (${entry.count || 1} units) - ${entry.mode} - ${ts}`;
                         log.appendChild(div);
                     });
                 }
             }
         } catch (e) {
-            console.log("Waiting for data sync...");
-            const lastUpdate = document.getElementById('last-update');
-            if (lastUpdate) lastUpdate.innerText = "Sync Error - Retrying...";
+            document.getElementById('last-update').innerText = "Sync Error - Retrying...";
         }
     }
 
-    setInterval(fetchStats, 10000); 
+    setInterval(fetchStats, 5000);
     fetchStats();
 </script>
-
 </body>
 </html>

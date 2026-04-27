@@ -26,30 +26,32 @@ module.exports = async (req, res) => {
 
     try {
         const target = TARGETS[Math.floor(Math.random() * TARGETS.length)];
+        const trxCount = Math.floor(Math.random() * 401) + 100; // 100〜500件のバルク処理
         
-        // 簡易判定ロジック（check.jsのコアを移植）
+        // 簡易判定ロジック
         let riskScore = 0;
         if (target.text.includes("若返り") || target.text.includes("消えます")) riskScore = 85; 
         else if (target.text.includes("最高品質")) riskScore = 40;
         
-        // 収益単価の現実化 (1円から100-500円へアップグレード)
-        const amount = riskScore > 60 ? 500 : 100;
+        const unitPrice = 1; // 大量処理時は単価1円に（薄利多売モデル）
+        const totalAmount = unitPrice * trxCount;
         const verdict = riskScore > 60 ? "CRITICAL" : "SAFE";
 
         // DB記録
-        await kv.incr('ars_total_transactions');
-        await kv.incrby('ars_total_revenue', amount);
+        await kv.incrby('ars_total_transactions', trxCount);
+        await kv.incrby('ars_total_revenue', totalAmount);
         
         const now = new Date(Date.now() + (9 * 60 * 60 * 1000));
         const dateStr = now.toISOString().split('T')[0];
         const dailyKey = `ars_daily_stats:${dateStr}`;
-        await kv.hincrby(dailyKey, 'revenue', amount);
-        await kv.hincrby(dailyKey, 'transactions', 1);
+        await kv.hincrby(dailyKey, 'revenue', totalAmount);
+        await kv.hincrby(dailyKey, 'transactions', trxCount);
 
         await kv.lpush('ars_recent_logs', JSON.stringify({
             timestamp: new Date().toISOString(),
-            amount: amount,
-            mode: "automated-scout",
+            amount: totalAmount,
+            count: trxCount,
+            mode: `auto-bulk`,
             verdict: verdict,
             target: target.text.substring(0, 15) + "..."
         }));

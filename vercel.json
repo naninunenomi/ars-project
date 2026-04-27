@@ -1,21 +1,11 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "api/*.js",
-      "use": "@vercel/node"
-    },
-    {
-      "src": "public/**/*",
-      "use": "@vercel/static"
-    }
-  ],
-  "routes": [
-    { "src": "/api/check", "dest": "/api/check.js" },
-    { "src": "/api/stats", "dest": "/api/stats.js" },
-    { "src": "/api/scout", "dest": "/api/scout.js" },
-    { "src": "/api/watcher", "dest": "/api/watcher.js" },
-    { "src": "/", "dest": "/public/index.html" }
+  "rewrites": [
+    { "source": "/api/check", "destination": "/api/check.js" },
+    { "source": "/api/stats", "destination": "/api/stats.js" },
+    { "source": "/api/scout", "destination": "/api/scout.js" },
+    { "source": "/api/watcher", "destination": "/api/watcher.js" },
+    { "source": "/", "destination": "/public/index.html" }
   ],
   "crons": [
     {
