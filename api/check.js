@@ -1,19 +1,14 @@
 /**
- * ARS API Handler - Persistence v1.4
- * Vercel KV (Redis) を活用した収益・取引履歴の永続化
+ * ARS API Handler - Persistence v1.5
+ * 大量取引（バルク処理）に対応した高スケーリングモデル
  */
 
-// 環境変数の詳細ブリッジ（Vercel Redis / Upstash / KV 各パターンに対応）
-// さらにPrefix（KV_PROD等）がついていても自動で検知してエイリアスを作成します。
 const restUrlKey = Object.keys(process.env).find(key => key.includes('_REST_API_URL'));
 const restTokenKey = Object.keys(process.env).find(key => key.includes('_REST_API_TOKEN'));
 
 if (restUrlKey && restTokenKey && !process.env.KV_REST_API_URL) {
     process.env.KV_REST_API_URL = process.env[restUrlKey];
     process.env.KV_REST_API_TOKEN = process.env[restTokenKey];
-}
-if (!process.env.KV_URL) {
-    process.env.KV_URL = process.env.KV_REDIS_URL || process.env.REDIS_URL || process.env[restUrlKey];
 }
 const { kv } = require('@vercel/kv'); 
 
@@ -25,30 +20,35 @@ module.exports = async (req, res) => {
     if (req.method === 'OPTIONS') return res.status(200).end();
     if (req.method !== 'POST') return res.status(405).json({ error: 'Method Not Allowed' });
 
-    const { text, mode, priceInfo, evidence, count } = req.body;
-    const trxCount = parseInt(count) || 1; // 一括処理数（デフォルト1）
+    const { text, mode, priceInfo, count } = req.body;
+    const trxCount = parseInt(count) || 1; 
 
+    // 簡易判定ロジック
     let riskScore = 0;
-...
-    // 収益の計算 (1回あたりの単価)
+    let findings = [];
+    let auditLevel = mode || "standard";
+
+    if (text && (text.includes("若返り") || text.includes("10歳") || text.includes("消えます"))) {
+        riskScore = 85;
+        findings.push("薬機法：絶対的表現（若返り等）の使用を検知");
+    }
+
+    // 収益の計算 (1回あたりの単価100円)
     const unitPrice = auditLevel === "pharma" ? 1000 : 100;
     const totalCurrentAmount = unitPrice * trxCount;
 
     try {
         // [DATABASE]: 実データの記録
-        // 1. 累計取引件数を一括加算
         const totalTrx = await kv.incrby('ars_total_transactions', trxCount);
-        // 2. 累計収益に一括加算
         const totalRevenue = await kv.incrby('ars_total_revenue', totalCurrentAmount);
         
-        // 3. 日次集計の追加 (今日の日付での集計)
         const now = new Date(Date.now() + (9 * 60 * 60 * 1000)); 
         const dateStr = now.toISOString().split('T')[0];
         const dailyKey = `ars_daily_stats:${dateStr}`;
         await kv.hincrby(dailyKey, 'revenue', totalCurrentAmount);
         await kv.hincrby(dailyKey, 'transactions', trxCount);
 
-        // 4. 直近ログを保存 (一括処理として記録)
+        // ログ保存
         await kv.lpush('ars_recent_logs', JSON.stringify({
             timestamp: new Date().toISOString(),
             amount: totalCurrentAmount,
@@ -56,7 +56,6 @@ module.exports = async (req, res) => {
             mode: trxCount > 1 ? `bulk-${auditLevel}` : auditLevel,
             verdict: riskScore > 60 ? "CRITICAL" : "SAFE"
         }));
-        // 5. 直近ログは100件までに制限
         await kv.ltrim('ars_recent_logs', 0, 99);
 
         res.status(200).json({
@@ -72,12 +71,11 @@ module.exports = async (req, res) => {
             }
         });
     } catch (dbError) {
-        // DB未設定時のフォールバック（動作継続を優先）
-        console.error("DB Error (KV not integrated):", dbError);
+        console.error("DB Error:", dbError);
         res.status(200).json({
-            service: "ARS (Simulated-due-to-DB-offline)",
+            service: "ARS (Offline-Fallback)",
             verdict: riskScore > 60 ? "CRITICAL" : "SAFE",
-            billing: { amount: amount, status: "simulated" }
+            billing: { amount: totalCurrentAmount, status: "simulated" }
         });
     }
 };
