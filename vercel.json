@@ -1,12 +1,5 @@
 {
   "version": 2,
-  "rewrites": [
-    { "source": "/api/check", "destination": "/api/check.js" },
-    { "source": "/api/stats", "destination": "/api/stats.js" },
-    { "source": "/api/scout", "destination": "/api/scout.js" },
-    { "source": "/api/watcher", "destination": "/api/watcher.js" },
-    { "source": "/", "destination": "/public/index.html" }
-  ],
   "crons": [
     {
       "path": "/api/scout",
