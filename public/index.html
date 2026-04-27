@@ -149,7 +149,10 @@
                 
                 const now = new Date();
                 const lastUpdate = document.getElementById('last-update');
-                if (lastUpdate) lastUpdate.innerText = `Last Updated: ${now.toLocaleTimeString()}`;
+                if (lastUpdate) {
+                    const dateStr = now.getMonth() + 1 + '/' + now.getDate() + ' ' + now.toLocaleTimeString();
+                    lastUpdate.innerText = `Last Updated: ${dateStr}`;
+                }
 
                 const log = document.getElementById('log');
                 if (data.recentLogs && data.recentLogs.length > 0) {
