@@ -32,7 +32,8 @@ module.exports = async (req, res) => {
         if (target.text.includes("若返り") || target.text.includes("消えます")) riskScore = 85; 
         else if (target.text.includes("最高品質")) riskScore = 40;
         
-        const amount = 1;
+        // 収益単価の現実化 (1円から100-500円へアップグレード)
+        const amount = riskScore > 60 ? 500 : 100;
         const verdict = riskScore > 60 ? "CRITICAL" : "SAFE";
 
         // DB記録

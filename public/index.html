@@ -185,7 +185,9 @@
                     data.recentLogs.forEach(entry => {
                         const div = document.createElement('div');
                         const targetInfo = entry.target ? ` (${entry.target})` : "";
-                        div.innerText = `[TRX]: ${entry.amount} JPY Audit Complete (${entry.verdict})${targetInfo} - ${new Date(entry.timestamp).toLocaleTimeString()}`;
+                        const logDate = new Date(entry.timestamp);
+                        const dateStr = (logDate.getMonth() + 1) + '/' + logDate.getDate() + ' ' + logDate.toLocaleTimeString();
+                        div.innerText = `[TRX]: ${entry.amount} JPY Audit Complete (${entry.verdict})${targetInfo} - ${dateStr}`;
                         log.appendChild(div);
                     });
                 }

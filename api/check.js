@@ -35,8 +35,8 @@ module.exports = async (req, res) => {
     // (中略: ステマ、二重価格、薬機法の判定コード)
     // --------------------------------
 
-    // 収益の計算
-    const amount = auditLevel === "pharma" ? 100 : 1;
+    // 収益の計算 (1円から100-1000円へ単価アップ)
+    const amount = auditLevel === "pharma" ? 1000 : 100;
 
     try {
         // [DATABASE]: 実データの記録
