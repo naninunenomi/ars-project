@@ -52,15 +52,24 @@
         <h2>Live Revenue</h2>
         <div class="big-number" id="revenue">0<span class="unit">円</span></div>
         <p style="color: #888;">Cumulative Earnings (Real-time)</p>
+        <p style="font-size: 0.7rem; color: var(--primary); margin-top: 10px;" id="last-update">Syncing...</p>
     </div>
 
     <div class="card">
-        <h2>Knowledge Acquisition Status</h2>
-        <div class="log" id="log">
-            [04-26 15:10] Audit engine upgraded to v1.3<br>
-            [04-26 15:11] Pharma Deep-Dive Knowledge installed<br>
-            [04-26 15:11] CAA No.1 Claim Standards updated (2024.09)<br>
-            [04-26 16:00] Watcher: No changes detected in CAA RSS feed.
+        <h2>Daily Performance (日次集計)</h2>
+        <div style="max-height: 120px; overflow-y: auto;">
+            <table style="width: 100%; font-size: 0.8rem; border-collapse: collapse;" id="daily-table">
+                <thead>
+                    <tr style="border-bottom: 1px solid rgba(255,255,255,0.1); color: #888; text-align: left;">
+                        <th style="padding: 5px;">Date</th>
+                        <th style="padding: 5px;">Trx</th>
+                        <th style="padding: 5px;">Revenue</th>
+                    </tr>
+                </thead>
+                <tbody id="daily-body">
+                    <!-- Data will be injected here -->
+                </tbody>
+            </table>
         </div>
     </div>
 
@@ -124,7 +133,6 @@
                 body: JSON.stringify(target)
             });
             const data = await res.json();
-            console.log("Scout Result:", data);
             
             // データを即座に更新
             await fetchStats();
@@ -140,38 +148,56 @@
 
     async function fetchStats() {
         try {
-            // キャッシュを回避するためにタイムスタンプを付与
             const res = await fetch(`/api/stats?t=${Date.now()}`);
             const data = await res.json();
             
             if (data.transactions !== "Data Offline") {
                 document.getElementById('revenue').innerHTML = data.revenue + '<span class="unit">円</span>';
                 
+                // 日付表示の修正
                 const now = new Date();
                 const lastUpdate = document.getElementById('last-update');
                 if (lastUpdate) {
-                    const dateStr = now.getMonth() + 1 + '/' + now.getDate() + ' ' + now.toLocaleTimeString();
+                    const dateStr = (now.getMonth() + 1) + '/' + now.getDate() + ' ' + now.toLocaleTimeString();
                     lastUpdate.innerText = `Last Updated: ${dateStr}`;
                 }
 
+                // 日次集計の表示
+                const dailyBody = document.getElementById('daily-body');
+                if (dailyBody && data.dailyStats) {
+                    dailyBody.innerHTML = '';
+                    data.dailyStats.forEach(day => {
+                        const tr = document.createElement('tr');
+                        tr.style.borderBottom = "1px solid rgba(255,255,255,0.05)";
+                        tr.innerHTML = `
+                            <td style="padding: 5px;">${day.date}</td>
+                            <td style="padding: 5px;">${day.transactions}</td>
+                            <td style="padding: 5px;">${day.revenue} <span class="unit">円</span></td>
+                        `;
+                        dailyBody.appendChild(tr);
+                    });
+                }
+
+                // ログの表示 (最近の10件)
                 const log = document.getElementById('log');
                 if (data.recentLogs && data.recentLogs.length > 0) {
                     log.innerHTML = '';
                     data.recentLogs.forEach(entry => {
                         const div = document.createElement('div');
-                        div.innerText = `[TRX]: ${entry.amount} JPY Audit Complete (${entry.verdict}) - ${new Date(entry.timestamp).toLocaleTimeString()}`;
+                        const targetInfo = entry.target ? ` (${entry.target})` : "";
+                        div.innerText = `[TRX]: ${entry.amount} JPY Audit Complete (${entry.verdict})${targetInfo} - ${new Date(entry.timestamp).toLocaleTimeString()}`;
                         log.appendChild(div);
                     });
                 }
             }
         } catch (e) {
-            console.log("Waiting for database connection...");
+            console.log("Waiting for data sync...");
             const lastUpdate = document.getElementById('last-update');
             if (lastUpdate) lastUpdate.innerText = "Sync Error - Retrying...";
         }
     }
 
-    setInterval(fetchStats, 10000); // 10秒おきに自動更新
+    setInterval(fetchStats, 10000); 
     fetchStats();
 </script>
 

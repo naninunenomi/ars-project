@@ -44,14 +44,23 @@ module.exports = async (req, res) => {
         const totalTrx = await kv.incr('ars_total_transactions');
         // 2. 累計収益に加算
         const totalRevenue = await kv.incrby('ars_total_revenue', amount);
-        // 3. 直近ログを保存 (List)
+        
+        // 3. 日次集計の追加 (今日の日付での集計)
+        // 日本時間 (JST) で集計するために UTC+9 調整
+        const now = new Date(Date.now() + (9 * 60 * 60 * 1000)); 
+        const dateStr = now.toISOString().split('T')[0];
+        const dailyKey = `ars_daily_stats:${dateStr}`;
+        await kv.hincrby(dailyKey, 'revenue', amount);
+        await kv.hincrby(dailyKey, 'transactions', 1);
+
+        // 4. 直近ログを保存 (List)
         await kv.lpush('ars_recent_logs', JSON.stringify({
             timestamp: new Date().toISOString(),
             amount: amount,
             mode: auditLevel,
             verdict: riskScore > 60 ? "CRITICAL" : "SAFE"
         }));
-        // 4. 直近ログは100件までに制限
+        // 5. 直近ログは100件までに制限
         await kv.ltrim('ars_recent_logs', 0, 99);
 
         res.status(200).json({
