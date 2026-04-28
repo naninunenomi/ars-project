@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "axios": "^1.6.0",
-    "@vercel/kv": "^1.0.1"
+    "@vercel/kv": "^1.0.1",
+    "@google/generative-ai": "^0.2.1"
   }
 }

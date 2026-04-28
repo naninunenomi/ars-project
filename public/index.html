@@ -27,6 +27,12 @@
         .dot { width: 10px; height: 10px; background: var(--primary); border-radius: 50%; box-shadow: 0 0 10px var(--primary); }
         .tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 0.7rem; background: var(--secondary); color: var(--bg); font-weight: bold; margin-bottom: 5px; }
         select { background: #000; color: white; border: 1px solid var(--primary); padding: 5px; border-radius: 8px; font-family: 'Outfit'; }
+        
+        .knowledge-panel { background: rgba(0,255,136,0.05); border: 1px solid var(--primary); padding: 15px; border-radius: 16px; margin-top: 20px; }
+        .rule-btn { background: #000; color: white; border: 1px solid rgba(255,255,255,0.2); padding: 8px 15px; border-radius: 20px; font-size: 0.8rem; cursor: pointer; margin-right: 10px; margin-bottom: 10px; transition: all 0.2s; }
+        .rule-btn:hover { border-color: var(--secondary); color: var(--secondary); }
+        .learn-btn { background: var(--secondary); color: var(--bg); border: none; padding: 8px 15px; border-radius: 20px; font-size: 0.8rem; font-weight: bold; cursor: pointer; }
+        .rule-detail { display: none; background: #000; padding: 15px; border-radius: 8px; margin-top: 10px; font-size: 0.85rem; border-left: 3px solid var(--primary); }
     </style>
 </head>
 <body>
@@ -49,6 +55,17 @@
                     ACTIVATE SCOUT (手動)
                 </button>
             </div>
+        </div>
+        
+        <div class="knowledge-panel">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                <h3 style="margin:0; font-size: 1rem; color: var(--primary);">ACTIVE KNOWLEDGE BASE (学習済み法規)</h3>
+                <button class="learn-btn" onclick="learnNewLaw()">+ 新しい法規を学習 (Gemini AI)</button>
+            </div>
+            <div id="knowledge-tags">
+                <span style="color: #888; font-size: 0.8rem;">Loading knowledge base...</span>
+            </div>
+            <div id="knowledge-detail" class="rule-detail"></div>
         </div>
     </div>
 
@@ -186,8 +203,71 @@
         }
     }
 
+    async function fetchKnowledge() {
+        try {
+            const res = await fetch('/api/knowledge');
+            const data = await res.json();
+            const container = document.getElementById('knowledge-tags');
+            if (data.knowledge && data.knowledge.length > 0) {
+                container.innerHTML = '';
+                data.knowledge.forEach(rule => {
+                    const btn = document.createElement('button');
+                    btn.className = 'rule-btn';
+                    btn.innerText = rule.lawName;
+                    btn.onclick = () => showKnowledgeDetail(rule);
+                    container.appendChild(btn);
+                });
+            } else {
+                container.innerHTML = '<span style="color: #888; font-size: 0.8rem;">未学習（基本ルールで稼働中）</span>';
+            }
+        } catch (e) {
+            console.error("Knowledge load error:", e);
+        }
+    }
+
+    function showKnowledgeDetail(rule) {
+        const detail = document.getElementById('knowledge-detail');
+        detail.style.display = 'block';
+        detail.innerHTML = `
+            <strong style="color: var(--secondary);">${rule.lawName}</strong><br><br>
+            <span style="color:#aaa">概要:</span> ${rule.summary}<br><br>
+            <span style="color:#aaa">検知NGワード:</span> <span style="color:#ff007a">${rule.ngKeywords.join(', ')}</span>
+        `;
+    }
+
+    async function learnNewLaw() {
+        const lawText = prompt("学習させたい法律の概要テキストを入力してください（Geminiが自動で解析・ルール化します）:\n\n例: 「金融商品取引法。元本保証や絶対儲かるといった表現を禁止する。」");
+        if (!lawText) return;
+
+        const btn = document.querySelector('.learn-btn');
+        btn.innerText = "Gemini AI 学習中...";
+        btn.disabled = true;
+
+        try {
+            const res = await fetch('/api/learn', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ text: lawText })
+            });
+            const data = await res.json();
+            
+            if (data.success) {
+                alert(`学習完了: ${data.learnedData.lawName}\n\nデータベースに新しい法規とNGキーワードが追加されました！`);
+                await fetchKnowledge(); // UIを即座に更新
+            } else {
+                alert(`エラー: ${data.error}`);
+            }
+        } catch (e) {
+            alert("通信エラーが発生しました。");
+        } finally {
+            btn.innerText = "+ 新しい法規を学習 (Gemini AI)";
+            btn.disabled = false;
+        }
+    }
+
     setInterval(fetchStats, 5000);
     fetchStats();
+    fetchKnowledge();
 </script>
 </body>
 </html>

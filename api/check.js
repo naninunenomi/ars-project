@@ -23,14 +23,40 @@ module.exports = async (req, res) => {
     const { text, mode, priceInfo, count } = req.body;
     const trxCount = parseInt(count) || 1; 
 
-    // 簡易判定ロジック
+    // 知識ベースの取得と動的判定ロジック
     let riskScore = 0;
     let findings = [];
     let auditLevel = mode || "standard";
 
-    if (text && (text.includes("若返り") || text.includes("10歳") || text.includes("消えます"))) {
-        riskScore = 85;
-        findings.push("薬機法：絶対的表現（若返り等）の使用を検知");
+    try {
+        let rules = await kv.get('ars_knowledge:rules') || [];
+        if (typeof rules === 'string') {
+            try { rules = JSON.parse(rules); } catch(e) { rules = []; }
+        }
+
+        // デフォルトルール（KVが空の場合のフォールバック）
+        if (rules.length === 0) {
+            rules = [{
+                id: "default_rule",
+                lawName: "基本NGルール",
+                ngKeywords: ["若返り", "10歳", "消えます", "絶対", "100%"]
+            }];
+        }
+
+        // 全ルールを走査してNGキーワードを検知
+        if (text) {
+            for (const rule of rules) {
+                for (const keyword of rule.ngKeywords) {
+                    if (text.includes(keyword)) {
+                        riskScore = Math.max(riskScore, 85); // いずれかに引っかかれば85点
+                        findings.push(`${rule.lawName}：禁止ワード「${keyword}」の使用を検知`);
+                        break; // このルールのキーワードに1つでも引っかかれば次のルールへ
+                    }
+                }
+            }
+        }
+    } catch (e) {
+        console.error("Knowledge base fetch error:", e);
     }
 
     // 収益の計算 (薄利多売インフラモデル: 1回1円)
