@@ -40,10 +40,13 @@
                 <select id="scout-volume">
                     <option value="1">Standard (1 ad)</option>
                     <option value="100">Enterprise (100 ads)</option>
-                    <option value="1000">Infrastructure (1000 ads)</option>
+                    <option value="1000" selected>Infrastructure (1000 ads)</option>
                 </select>
+                <button onclick="toggleAutoPilot()" id="autopilot-btn" style="background: transparent; color: var(--primary); border: 1px solid var(--primary); padding: 10px 15px; border-radius: 12px; font-weight: 800; cursor: pointer; margin-right: 10px; transition: all 0.3s ease;">
+                    AUTO PILOT (OFF)
+                </button>
                 <button onclick="triggerScout()" id="scout-btn" style="background: var(--accent); color: white; border: none; padding: 10px 20px; border-radius: 12px; font-weight: 800; cursor: pointer; box-shadow: 0 0 15px var(--accent);">
-                    ACTIVATE SCOUT (営業開始)
+                    ACTIVATE SCOUT (手動)
                 </button>
             </div>
         </div>
@@ -106,6 +109,40 @@
         } finally {
             btn.disabled = false;
             btn.innerText = originalText;
+        }
+    }
+
+    let autoPilotInterval = null;
+    function toggleAutoPilot() {
+        const btn = document.getElementById('autopilot-btn');
+        if (autoPilotInterval) {
+            clearInterval(autoPilotInterval);
+            autoPilotInterval = null;
+            btn.innerText = "AUTO PILOT (OFF)";
+            btn.style.background = "transparent";
+            btn.style.color = "var(--primary)";
+            btn.style.boxShadow = "none";
+        } else {
+            autoPilotInterval = setInterval(triggerScoutSilent, 1000);
+            btn.innerText = "AUTO PILOT (ON)";
+            btn.style.background = "var(--primary)";
+            btn.style.color = "var(--bg)";
+            btn.style.boxShadow = "0 0 15px var(--primary)";
+        }
+    }
+
+    async function triggerScoutSilent() {
+        const count = document.getElementById('scout-volume').value;
+        try {
+            const target = TARGET_SAMPLES[Math.floor(Math.random() * TARGET_SAMPLES.length)];
+            await fetch('/api/check', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ ...target, count: parseInt(count), mode: "auto-pilot" })
+            });
+            await fetchStats();
+        } catch (e) {
+            console.error("AutoPilot Error:", e);
         }
     }
 

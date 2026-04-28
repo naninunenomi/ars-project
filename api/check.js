@@ -33,8 +33,8 @@ module.exports = async (req, res) => {
         findings.push("薬機法：絶対的表現（若返り等）の使用を検知");
     }
 
-    // 収益の計算 (1回あたりの単価100円)
-    const unitPrice = auditLevel === "pharma" ? 1000 : 100;
+    // 収益の計算 (薄利多売インフラモデル: 1回1円)
+    const unitPrice = 1;
     const totalCurrentAmount = unitPrice * trxCount;
 
     try {
