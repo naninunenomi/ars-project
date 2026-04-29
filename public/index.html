@@ -31,8 +31,13 @@
         .knowledge-panel { background: rgba(0,255,136,0.05); border: 1px solid var(--primary); padding: 15px; border-radius: 16px; margin-top: 20px; }
         .rule-btn { background: #000; color: white; border: 1px solid rgba(255,255,255,0.2); padding: 8px 15px; border-radius: 20px; font-size: 0.8rem; cursor: pointer; margin-right: 10px; margin-bottom: 10px; transition: all 0.2s; }
         .rule-btn:hover { border-color: var(--secondary); color: var(--secondary); }
-        .learn-btn { background: var(--secondary); color: var(--bg); border: none; padding: 8px 15px; border-radius: 20px; font-size: 0.8rem; font-weight: bold; cursor: pointer; }
+        .learn-btn { background: linear-gradient(90deg, #ff007a, #7a00ff); color: var(--text); border: none; padding: 10px 15px; border-radius: 12px; font-size: 0.8rem; font-weight: 800; cursor: pointer; box-shadow: 0 0 15px rgba(255,0,122,0.5); transition: all 0.3s; }
+        .learn-btn:hover { box-shadow: 0 0 25px rgba(255,0,122,0.8); }
         .rule-detail { display: none; background: #000; padding: 15px; border-radius: 8px; margin-top: 10px; font-size: 0.85rem; border-left: 3px solid var(--primary); }
+        .boardroom-terminal { background: #050505; border: 1px solid #333; border-radius: 12px; padding: 15px; margin-top: 15px; font-family: monospace; display: none; }
+        .ai-chat { margin-bottom: 8px; line-height: 1.4; }
+        .ai-market { color: #00bdff; }
+        .ai-legal { color: #ff007a; }
     </style>
 </head>
 <body>
@@ -60,9 +65,15 @@
         <div class="knowledge-panel">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
                 <h3 style="margin:0; font-size: 1rem; color: var(--primary);">ACTIVE KNOWLEDGE BASE (学習済み法規)</h3>
-                <button class="learn-btn" onclick="learnNewLaw()">+ 新しい法規を学習 (Gemini AI)</button>
+                <button class="learn-btn" onclick="triggerAutonomousBoardroom()">🤖 AUTONOMOUS DEMAND DISCOVERY</button>
             </div>
-            <div id="knowledge-tags">
+            
+            <div id="boardroom-terminal" class="boardroom-terminal">
+                <div style="color: #666; margin-bottom: 10px;">--- SECURE BOARDROOM CHANNEL OPENED ---</div>
+                <div id="boardroom-logs"></div>
+            </div>
+
+            <div id="knowledge-tags" style="margin-top: 15px;">
                 <span style="color: #888; font-size: 0.8rem;">Loading knowledge base...</span>
             </div>
             <div id="knowledge-detail" class="rule-detail"></div>
@@ -235,32 +246,56 @@
         `;
     }
 
-    async function learnNewLaw() {
-        const lawText = prompt("学習させたい法律の概要テキストを入力してください（Geminiが自動で解析・ルール化します）:\n\n例: 「金融商品取引法。元本保証や絶対儲かるといった表現を禁止する。」");
-        if (!lawText) return;
-
+    async function triggerAutonomousBoardroom() {
         const btn = document.querySelector('.learn-btn');
-        btn.innerText = "Gemini AI 学習中...";
+        const terminal = document.getElementById('boardroom-terminal');
+        const logsDiv = document.getElementById('boardroom-logs');
+        
+        btn.innerText = "⚡ ANALYZING MARKET DEMAND...";
         btn.disabled = true;
+        terminal.style.display = 'block';
+        logsDiv.innerHTML = '<div class="ai-chat" style="color:#888;">[SYSTEM] Initializing AI Agent Conference...</div>';
 
         try {
             const res = await fetch('/api/learn', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ text: lawText })
+                headers: { 'Content-Type': 'application/json' }
             });
             const data = await res.json();
             
             if (data.success) {
-                alert(`学習完了: ${data.learnedData.lawName}\n\nデータベースに新しい法規とNGキーワードが追加されました！`);
-                await fetchKnowledge(); // UIを即座に更新
+                logsDiv.innerHTML = '';
+                data.boardroomLog.forEach((logStr, index) => {
+                    setTimeout(() => {
+                        const div = document.createElement('div');
+                        div.className = 'ai-chat';
+                        if (logStr.includes('市場分析AI')) div.innerHTML = `<span class="ai-market">📊 ${logStr}</span>`;
+                        else if (logStr.includes('法務AI')) div.innerHTML = `<span class="ai-legal">⚖️ ${logStr}</span>`;
+                        else div.innerHTML = `<span style="color:#fff">${logStr}</span>`;
+                        logsDiv.appendChild(div);
+                    }, index * 1000); // 1秒ごとにログを表示する演出
+                });
+
+                setTimeout(async () => {
+                    const div = document.createElement('div');
+                    div.className = 'ai-chat';
+                    div.style.color = 'var(--primary)';
+                    div.style.marginTop = '10px';
+                    div.innerHTML = `[SYSTEM] Successfully integrated ${data.learnedData.lawName} into Knowledge Base.`;
+                    logsDiv.appendChild(div);
+                    await fetchKnowledge(); // UIを即座に更新
+                    btn.innerText = "🤖 AUTONOMOUS DEMAND DISCOVERY";
+                    btn.disabled = false;
+                }, data.boardroomLog.length * 1000 + 1000);
+
             } else {
                 alert(`エラー: ${data.error}`);
+                btn.innerText = "🤖 AUTONOMOUS DEMAND DISCOVERY";
+                btn.disabled = false;
             }
         } catch (e) {
             alert("通信エラーが発生しました。");
-        } finally {
-            btn.innerText = "+ 新しい法規を学習 (Gemini AI)";
+            btn.innerText = "🤖 AUTONOMOUS DEMAND DISCOVERY";
             btn.disabled = false;
         }
     }
