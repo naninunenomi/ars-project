@@ -27,8 +27,8 @@ module.exports = async (req, res) => {
 
     try {
         const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-        // 環境やAPIキーの権限に左右されず確実に動作する安定版の gemini-pro を指定
-        const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+        // APIキーで利用可能な最新モデル gemini-2.5-flash を指定
+        const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
 
         const prompt = `
 あなたは、最新のビジネスコンプライアンスを監視する「自律型AIエージェント会議（Boardroom）」です。
