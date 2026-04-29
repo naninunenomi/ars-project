@@ -81,10 +81,15 @@
     </div>
 
     <div class="card">
-        <h2>Live Revenue</h2>
-        <div class="big-number" id="revenue">0<span class="unit">円</span></div>
-        <p style="color: #888;">Cumulative Earnings (Real-time)</p>
-        <p style="font-size: 0.7rem; color: var(--primary); margin-top: 10px;" id="last-update">Syncing...</p>
+        <h2>Arbitrage Spread Extracted</h2>
+        <div class="big-number" id="revenue">0<span class="unit"> ARS</span></div>
+        <p style="color: #888;">Total Token Margin (Real-time)</p>
+        
+        <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1);">
+            <h3 style="font-size: 0.9rem; color: var(--secondary); margin-bottom: 5px;">DEVELOPER API KEY (TEST)</h3>
+            <button onclick="generateApiKey()" style="background: transparent; color: white; border: 1px solid var(--secondary); padding: 5px 10px; border-radius: 6px; cursor: pointer; font-size: 0.8rem;">+ 発行 (10,000トークン付与)</button>
+            <div id="active-key-display" style="font-family: monospace; color: #aaa; margin-top: 10px; font-size: 0.8rem;"></div>
+        </div>
     </div>
 
     <div class="card">
@@ -115,7 +120,32 @@
         { text: "業界最高品質の住宅。期間限定の特別価格でご提供！", priceInfo: { current: 48000000, original: 55000000, durationInWeeks: 2 } }
     ];
 
+    let currentApiKey = null;
+    let currentApiBalance = 0;
+
+    async function generateApiKey() {
+        try {
+            const res = await fetch('/api/keys', { method: 'POST' });
+            const data = await res.json();
+            if (data.success) {
+                currentApiKey = data.apiKey;
+                currentApiBalance = data.balance;
+                document.getElementById('active-key-display').innerHTML = `
+                    <span style="color:var(--primary)">ACTIVE KEY:</span> ${currentApiKey}<br>
+                    <span style="color:var(--primary)">BALANCE:</span> <span id="ui-balance">${currentApiBalance}</span>
+                `;
+            }
+        } catch (e) {
+            alert("APIキー生成エラー");
+        }
+    }
+
     async function triggerScout() {
+        if (!currentApiKey) {
+            alert("監査を実行するには、まず右側のパネルでAPIキー（通行手形）を発行してください！");
+            return;
+        }
+
         const btn = document.getElementById('scout-btn');
         const count = document.getElementById('scout-volume').value;
         const originalText = btn.innerText;
@@ -126,12 +156,28 @@
             const target = TARGET_SAMPLES[Math.floor(Math.random() * TARGET_SAMPLES.length)];
             const res = await fetch('/api/check', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${currentApiKey}`
+                },
                 body: JSON.stringify({ ...target, count: parseInt(count) })
             });
+
+            if (res.status === 402 || res.status === 401) {
+                const errorData = await res.json();
+                alert(`関所エラー: ${errorData.error}`);
+                return;
+            }
+
             const data = await res.json();
+            if (data.remainingTokens !== undefined) {
+                currentApiBalance = data.remainingTokens;
+                const uiBal = document.getElementById('ui-balance');
+                if(uiBal) uiBal.innerText = currentApiBalance;
+            }
+
             await fetchStats();
-            alert(`監査成功: ${count} 件の広告を一括処理しました。\n報酬 ${data.billing.amount}円 を獲得。`);
+            alert(`監査成功: ${count} 件を一括処理しました。\nスプレッド利益 ${data.billing.amount} ARS を獲得。`);
         } catch (e) {
             alert("通信エラーが発生しました。");
         } finally {
@@ -160,14 +206,38 @@
     }
 
     async function triggerScoutSilent() {
+        if (!currentApiKey) {
+            toggleAutoPilot(); // 停止
+            alert("オートパイロットを実行するには、まず右側のパネルでAPIキー（通行手形）を発行してください！");
+            return;
+        }
+
         const count = document.getElementById('scout-volume').value;
         try {
             const target = TARGET_SAMPLES[Math.floor(Math.random() * TARGET_SAMPLES.length)];
-            await fetch('/api/check', {
+            const res = await fetch('/api/check', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${currentApiKey}`
+                },
                 body: JSON.stringify({ ...target, count: parseInt(count), mode: "auto-pilot" })
             });
+
+            if (res.status === 402 || res.status === 401) {
+                const errorData = await res.json();
+                toggleAutoPilot(); // 停止
+                alert(`関所エラー: ${errorData.error}\n\nトークンが尽きたため、オートパイロットが強制停止されました！再度トークンを発行して再開してください。`);
+                return;
+            }
+
+            const data = await res.json();
+            if (data.remainingTokens !== undefined) {
+                currentApiBalance = data.remainingTokens;
+                const uiBal = document.getElementById('ui-balance');
+                if(uiBal) uiBal.innerText = currentApiBalance;
+            }
+
             await fetchStats();
         } catch (e) {
             console.error("AutoPilot Error:", e);
@@ -180,11 +250,12 @@
             const data = await res.json();
             
             if (data.transactions !== "Data Offline") {
-                document.getElementById('revenue').innerHTML = data.revenue + '<span class="unit">円</span>';
+                document.getElementById('revenue').innerHTML = data.revenue + '<span class="unit"> ARS</span>';
                 
                 const now = new Date();
                 const dateStr = (now.getMonth() + 1) + '/' + now.getDate() + ' ' + now.toLocaleTimeString();
-                document.getElementById('last-update').innerText = `Last Updated: ${dateStr}`;
+                const updateEl = document.getElementById('last-update');
+                if (updateEl) updateEl.innerText = `Last Updated: ${dateStr}`;
 
                 const dailyBody = document.getElementById('daily-body');
                 if (data.dailyStats) {
@@ -192,7 +263,7 @@
                     data.dailyStats.forEach(day => {
                         const tr = document.createElement('tr');
                         tr.style.borderBottom = "1px solid rgba(255,255,255,0.05)";
-                        tr.innerHTML = `<td>${day.date}</td><td>${day.transactions}</td><td>${day.revenue}円</td>`;
+                        tr.innerHTML = `<td>${day.date}</td><td>${day.transactions}</td><td>${day.revenue} ARS</td>`;
                         dailyBody.appendChild(tr);
                     });
                 }

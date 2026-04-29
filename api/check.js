@@ -15,13 +15,36 @@ const { kv } = require('@vercel/kv');
 module.exports = async (req, res) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
 
     if (req.method === 'OPTIONS') return res.status(200).end();
     if (req.method !== 'POST') return res.status(405).json({ error: 'Method Not Allowed' });
 
+    // --- Phase 7: アービトラージ関所（トークン認証） ---
+    const authHeader = req.headers.authorization;
+    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+        return res.status(401).json({ error: 'Unauthorized: 通行手形（APIキー）がありません。' });
+    }
+    const apiKey = authHeader.split(' ')[1];
+
+    // 残高チェック
+    const balance = await kv.get(`apikey:${apiKey}`);
+    if (balance === null) {
+        return res.status(401).json({ error: 'Unauthorized: 無効なAPIキーです。' });
+    }
+    let currentBalance = parseInt(balance);
+    
     const { text, mode, priceInfo, count } = req.body;
     const trxCount = parseInt(count) || 1; 
+
+    if (currentBalance < trxCount) {
+        return res.status(402).json({ error: 'Payment Required: トークン残高が不足しています。チャージしてください。' });
+    }
+
+    // トークン消費（1回の審査でtrxCount分を消費）
+    currentBalance -= trxCount;
+    await kv.set(`apikey:${apiKey}`, currentBalance);
+    // --- 関所通過 ---
 
     // 知識ベースの取得と動的判定ロジック
     let riskScore = 0;
@@ -93,7 +116,8 @@ module.exports = async (req, res) => {
                 unitPrice: unitPrice,
                 amount: totalCurrentAmount,
                 total_revenue: totalRevenue,
-                total_transactions: totalTrx
+                total_transactions: totalTrx,
+                remainingTokens: currentBalance
             }
         });
     } catch (dbError) {
