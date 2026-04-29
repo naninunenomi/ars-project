@@ -27,9 +27,7 @@ module.exports = async (req, res) => {
 
     try {
         const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-        // APIキーで利用可能な最新モデル gemini-2.5-flash を指定
-        const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
-
+        
         const prompt = `
 あなたは、最新のビジネスコンプライアンスを監視する「自律型AIエージェント会議（Boardroom）」です。
 現在、日本国内のインターネット広告やデジタルビジネスにおいて、新たにトラブルや摘発リスクが急増している分野を1つランダムに自律的に推論・発見してください。（例：仮想通貨詐欺、悪質なサブスク定期購入、情報商材、ディープフェイク広告、著作権侵害など、毎回異なるランダムな分野を選んでください）。
@@ -53,7 +51,16 @@ module.exports = async (req, res) => {
 }
 `;
 
-        const result = await model.generateContent(prompt);
+        let result;
+        try {
+            const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+            result = await model.generateContent(prompt);
+        } catch (apiError) {
+            console.warn("Primary model failed, falling back to 2.0-flash:", apiError.message);
+            const fallbackModel = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
+            result = await fallbackModel.generateContent(prompt);
+        }
+
         const responseText = result.response.text().trim().replace(/```json/g, '').replace(/```/g, '');
         
         let outputData;
