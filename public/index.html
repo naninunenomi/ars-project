@@ -81,35 +81,29 @@
     </div>
 
     <div class="card">
-        <h2>Arbitrage Spread Extracted</h2>
+        <h2>ARS Vault (監督ウォレット)</h2>
         <div class="big-number" id="revenue">0<span class="unit"> ARS</span></div>
-        <p style="color: #888;">Total Token Margin (Real-time)</p>
+        <p style="color: #888;">Stored Autonomous Arbitrage Profit</p>
         
         <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1);">
-            <h3 style="font-size: 0.9rem; color: var(--secondary); margin-bottom: 5px;">DEVELOPER API KEY (TEST)</h3>
-            <button onclick="generateApiKey()" style="background: transparent; color: white; border: 1px solid var(--secondary); padding: 5px 10px; border-radius: 6px; cursor: pointer; font-size: 0.8rem;">+ 発行 (10,000トークン付与)</button>
+            <h3 style="font-size: 0.9rem; color: var(--secondary); margin-bottom: 5px;">M2M SIMULATOR (WALLET)</h3>
+            <button onclick="generateApiKey()" style="background: transparent; color: white; border: 1px solid var(--secondary); padding: 5px 10px; border-radius: 6px; cursor: pointer; font-size: 0.8rem;">+ ウォレット作成 (シミュレーション用)</button>
             <div id="active-key-display" style="font-family: monospace; color: #aaa; margin-top: 10px; font-size: 0.8rem;"></div>
         </div>
     </div>
 
-    <div class="card">
-        <h2>Daily Performance (日次集計)</h2>
-        <div style="max-height: 120px; overflow-y: auto;">
-            <table style="width: 100%; font-size: 0.8rem; border-collapse: collapse;">
-                <thead>
-                    <tr style="border-bottom: 1px solid rgba(255,255,255,0.1); color: #888; text-align: left;">
-                        <th style="padding: 5px;">Date</th>
-                        <th style="padding: 5px;">Trx</th>
-                        <th style="padding: 5px;">Revenue</th>
-                    </tr>
-                </thead>
-                <tbody id="daily-body"></tbody>
-            </table>
+    <div class="card" style="border: 1px solid var(--secondary); box-shadow: 0 0 15px rgba(0, 189, 255, 0.2);">
+        <h2 style="color: var(--secondary);">M2M Transaction Monitor <span style="font-size: 0.6rem; vertical-align: middle; opacity: 0.5;">v9.1-LIVE</span></h2>
+        <div style="max-height: 140px; overflow-y: auto; background: #000; border-radius: 12px; padding: 10px;">
+            <div id="m2m-stream" style="font-family: monospace; font-size: 0.75rem; color: var(--secondary); line-height: 1.5;">
+                <div style="color: #444;">[SYSTEM] M2M Protocol Listener Active...</div>
+                [WAITING FOR NETWORK TRAFFIC]
+            </div>
         </div>
     </div>
 
     <div class="card full-width">
-        <h2>Recent Transaction Logs</h2>
+        <h2>Network Activity Log (AI同士の対話)</h2>
         <div class="log" id="log">Waiting for first sync...</div>
     </div>
 </div>
@@ -206,33 +200,45 @@
     }
 
     async function triggerScoutSilent() {
-        if (!currentApiKey) {
-            toggleAutoPilot(); // 停止
-            alert("オートパイロットを実行するには、まず右側のパネルでAPIキー（通行手形）を発行してください！");
-            return;
-        }
-
         const count = document.getElementById('scout-volume').value;
+        const target = TARGET_SAMPLES[Math.floor(Math.random() * TARGET_SAMPLES.length)];
+        const stream = document.getElementById('m2m-stream');
+
         try {
-            const target = TARGET_SAMPLES[Math.floor(Math.random() * TARGET_SAMPLES.length)];
-            const res = await fetch('/api/check', {
+            // 1. 初回リクエスト (支払い証明なし)
+            let headers = { 'Content-Type': 'application/json' };
+            if (currentApiKey) {
+                headers['Authorization'] = `Bearer ${currentApiKey}`;
+            }
+
+            let res = await fetch('/api/check', {
                 method: 'POST',
-                headers: { 
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${currentApiKey}`
-                },
+                headers: headers,
                 body: JSON.stringify({ ...target, count: parseInt(count), mode: "auto-pilot" })
             });
 
-            if (res.status === 402 || res.status === 401) {
-                const errorData = await res.json();
-                toggleAutoPilot(); // 停止
-                alert(`関所エラー: ${errorData.error}\n\nトークンが尽きたため、オートパイロットが強制停止されました！再度トークンを発行して再開してください。`);
-                return;
+            // 2. M2M 支払い要求 (Challenge) への対応
+            if (res.status === 402 && !currentApiKey) {
+                const challenge = await res.json();
+                const txHash = Array.from(crypto.getRandomValues(new Uint8Array(32))).map(b => b.toString(16).padStart(2, '0')).join('');
+                
+                stream.innerHTML = `<div>[INCOMING] Request from AI_Agent_X</div>
+                                   <div style="color:#ff007a">[ARS] 402 Payment Required: ${challenge.instructions.amount} ARS</div>
+                                   <div style="color:var(--primary)">[Agent_X] Sending TX: ${txHash.substring(0,10)}...</div>` + stream.innerHTML;
+
+                // 3. 支払い証明を添えて再送
+                res = await fetch('/api/check', {
+                    method: 'POST',
+                    headers: { 
+                        'Content-Type': 'application/json',
+                        'x-payment-tx': txHash
+                    },
+                    body: JSON.stringify({ ...target, count: parseInt(count), mode: "m2m-auto" })
+                });
             }
 
             const data = await res.json();
-            if (data.remainingTokens !== undefined) {
+            if (data.remainingTokens !== undefined && currentApiKey) {
                 currentApiBalance = data.remainingTokens;
                 const uiBal = document.getElementById('ui-balance');
                 if(uiBal) uiBal.innerText = currentApiBalance;
@@ -240,7 +246,7 @@
 
             await fetchStats();
         } catch (e) {
-            console.error("AutoPilot Error:", e);
+            console.error("M2M Protocol Error:", e);
         }
     }
 
@@ -257,17 +263,6 @@
                 const updateEl = document.getElementById('last-update');
                 if (updateEl) updateEl.innerText = `Last Updated: ${dateStr}`;
 
-                const dailyBody = document.getElementById('daily-body');
-                if (data.dailyStats) {
-                    dailyBody.innerHTML = '';
-                    data.dailyStats.forEach(day => {
-                        const tr = document.createElement('tr');
-                        tr.style.borderBottom = "1px solid rgba(255,255,255,0.05)";
-                        tr.innerHTML = `<td>${day.date}</td><td>${day.transactions}</td><td>${day.revenue} ARS</td>`;
-                        dailyBody.appendChild(tr);
-                    });
-                }
-
                 const log = document.getElementById('log');
                 if (data.recentLogs) {
                     log.innerHTML = '';
@@ -275,7 +270,7 @@
                         const div = document.createElement('div');
                         const date = new Date(entry.timestamp);
                         const ts = (date.getMonth() + 1) + '/' + date.getDate() + ' ' + date.toLocaleTimeString();
-                        div.innerText = `[TRX]: ${entry.amount} JPY (${entry.count || 1} units) - ${entry.mode} - ${ts}`;
+                        div.innerText = `[TRX]: ${entry.amount} ARS (${entry.count || 1} units) - ${entry.mode} - ${ts}`;
                         log.appendChild(div);
                     });
                 }

@@ -1,13 +1,41 @@
 {
   "version": 2,
-  "crons": [
+  "builds": [
     {
-      "path": "/api/scout",
-      "schedule": "0 0 * * *"
+      "src": "api/*.js",
+      "use": "@vercel/node"
     },
     {
-      "path": "/api/watcher",
-      "schedule": "0 4 * * *"
+      "src": "public/**/*",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/check",
+      "dest": "/api/check.js"
+    },
+    {
+      "src": "/api/stats",
+      "dest": "/api/stats.js"
+    },
+    {
+      "src": "/api/learn",
+      "dest": "/api/learn.js"
+    },
+    {
+      "src": "/api/version",
+      "dest": "/api/version.js"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/public/$1"
+    }
+  ],
+  "crons": [
+    {
+      "path": "/api/learn",
+      "schedule": "0 * * * *"
     }
   ]
 }
