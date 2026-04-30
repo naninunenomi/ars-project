@@ -35,7 +35,7 @@
   "crons": [
     {
       "path": "/api/learn",
-      "schedule": "0 * * * *"
+      "schedule": "0 0 * * *"
     }
   ]
 }
