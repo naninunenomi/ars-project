@@ -114,7 +114,7 @@ module.exports = async (req, res) => {
                     }
                 }
             } else {
-                const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+                const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY, { apiVersion: 'v1' });
                 const prompt = `
 あなたは世界最高峰の法務・コンプライアンス審査AIです。
 以下の「広告・文章」が、現在の「学習済み法律・ルール」に違反していないかを精密に審査してください。

@@ -26,7 +26,7 @@ module.exports = async (req, res) => {
     }
 
     try {
-        const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+        const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY, { apiVersion: 'v1' });
         
         const prompt = `
 あなたは、最新のビジネスコンプライアンスを監視する「自律型AIエージェント会議（Boardroom）」です。
