@@ -52,14 +52,21 @@ module.exports = async (req, res) => {
 `;
 
         let result;
-        try {
-            const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-            result = await model.generateContent(prompt);
-        } catch (apiError) {
-            console.warn("Primary model failed, falling back to 1.5-flash:", apiError.message);
-            const fallbackModel = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-            result = await fallbackModel.generateContent(prompt);
+        const modelsToTry = ["gemini-1.5-flash-latest", "gemini-1.5-flash", "gemini-pro"];
+        let lastError;
+
+        for (const modelName of modelsToTry) {
+            try {
+                const model = genAI.getGenerativeModel({ model: modelName });
+                result = await model.generateContent(prompt);
+                if (result) break;
+            } catch (e) {
+                lastError = e;
+                console.warn(`Model ${modelName} failed, trying next...`);
+            }
         }
+
+        if (!result) throw lastError;
 
         const responseText = result.response.text().trim().replace(/```json/g, '').replace(/```/g, '');
         
