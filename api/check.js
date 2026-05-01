@@ -133,13 +133,21 @@ ${JSON.stringify(rules, null, 2)}
 }
 `;
                 let llmResult;
-                try {
-                    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-                    llmResult = await model.generateContent(prompt);
-                } catch (e) {
-                    const fallbackModel = genAI.getGenerativeModel({ model: "gemini-1.5-flash-8b" });
-                    llmResult = await fallbackModel.generateContent(prompt);
+                const modelsToTry = ["gemini-1.5-flash-latest", "gemini-1.5-flash", "gemini-pro"];
+                let lastError;
+
+                for (const modelName of modelsToTry) {
+                    try {
+                        const model = genAI.getGenerativeModel({ model: modelName });
+                        llmResult = await model.generateContent(prompt);
+                        if (llmResult) break;
+                    } catch (e) {
+                        lastError = e;
+                        console.warn(`Audit Model ${modelName} failed, trying next...`);
+                    }
                 }
+                
+                if (!llmResult) throw lastError;
                 
                 const responseText = llmResult.response.text().trim().replace(/```json/g, '').replace(/```/g, '');
                 const outputData = JSON.parse(responseText);
