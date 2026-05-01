@@ -57,7 +57,8 @@ module.exports = async (req, res) => {
 
         for (const modelName of modelsToTry) {
             try {
-                const model = genAI.getGenerativeModel({ model: modelName });
+                // apiVersionを第2引数で明示的に指定
+                const model = genAI.getGenerativeModel({ model: modelName }, { apiVersion: 'v1' });
                 result = await model.generateContent(prompt);
                 if (result) break;
             } catch (e) {
