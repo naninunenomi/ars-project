@@ -133,7 +133,7 @@ ${JSON.stringify(rules, null, 2)}
 }
 `;
                 let llmResult;
-                const modelsToTry = ["gemini-1.5-flash-latest", "gemini-1.5-flash", "gemini-pro"];
+                const modelsToTry = ["gemini-2.0-flash", "gemini-1.5-flash-latest", "gemini-1.5-flash", "gemini-pro"];
                 let lastError;
 
                 for (const modelName of modelsToTry) {
