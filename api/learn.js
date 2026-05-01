@@ -53,11 +53,11 @@ module.exports = async (req, res) => {
 
         let result;
         try {
-            const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+            const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
             result = await model.generateContent(prompt);
         } catch (apiError) {
-            console.warn("Primary model failed, falling back to 2.0-flash:", apiError.message);
-            const fallbackModel = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
+            console.warn("Primary model failed, falling back to 1.5-flash:", apiError.message);
+            const fallbackModel = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
             result = await fallbackModel.generateContent(prompt);
         }
 
