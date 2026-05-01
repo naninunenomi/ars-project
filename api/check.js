@@ -138,7 +138,8 @@ ${JSON.stringify(rules, null, 2)}
 
                 for (const modelName of modelsToTry) {
                     try {
-                        const model = genAI.getGenerativeModel({ model: modelName });
+                        // apiVersionを第2引数で明示的に指定
+                        const model = genAI.getGenerativeModel({ model: modelName }, { apiVersion: 'v1' });
                         llmResult = await model.generateContent(prompt);
                         if (llmResult) break;
                     } catch (e) {
