@@ -134,10 +134,10 @@ ${JSON.stringify(rules, null, 2)}
 `;
                 let llmResult;
                 try {
-                    const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+                    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
                     llmResult = await model.generateContent(prompt);
                 } catch (e) {
-                    const fallbackModel = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
+                    const fallbackModel = genAI.getGenerativeModel({ model: "gemini-1.5-flash-8b" });
                     llmResult = await fallbackModel.generateContent(prompt);
                 }
                 
