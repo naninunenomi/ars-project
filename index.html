@@ -9,12 +9,14 @@
         :root {
             --bg-deep: #0a0c10;
             --bg-card: #161b22;
+            --bg-modal: #1c2128;
             --accent: #58a6ff;
             --accent-glow: rgba(88, 166, 255, 0.3);
             --text-main: #c9d1d9;
             --text-dim: #8b949e;
             --success: #238636;
             --danger: #da3633;
+            --border: #30363d;
         }
 
         body {
@@ -40,147 +42,93 @@
             justify-content: space-between;
             align-items: center;
             padding-bottom: 20px;
-            border-bottom: 1px solid #30363d;
+            border-bottom: 1px solid var(--border);
         }
 
-        .system-status {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-weight: 600;
-        }
-
-        .status-lamp {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background-color: var(--success);
-            box-shadow: 0 0 10px var(--success);
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% { opacity: 0.5; }
-            50% { opacity: 1; }
-            100% { opacity: 0.5; }
-        }
+        .system-status { display: flex; align-items: center; gap: 10px; font-weight: 600; }
+        .status-lamp { width: 12px; height: 12px; border-radius: 50%; background-color: var(--success); box-shadow: 0 0 10px var(--success); animation: pulse 2s infinite; }
+        @keyframes pulse { 0% { opacity: 0.5; } 50% { opacity: 1; } 100% { opacity: 0.5; } }
 
         /* Stats Section */
-        .stats-grid {
-            grid-column: span 2;
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
-        }
-
-        .stat-card {
-            background: var(--bg-card);
-            border: 1px solid #30363d;
-            border-radius: 12px;
-            padding: 20px;
-            text-align: center;
-        }
-
-        .stat-value {
-            font-size: 24px;
-            font-weight: 700;
-            color: var(--accent);
-            display: block;
-        }
-
-        .stat-label {
-            font-size: 12px;
-            color: var(--text-dim);
-            text-transform: uppercase;
-        }
+        .stats-grid { grid-column: span 2; display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+        .stat-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 20px; text-align: center; }
+        .stat-value { font-size: 24px; font-weight: 700; color: var(--accent); display: block; }
+        .stat-label { font-size: 12px; color: var(--text-dim); text-transform: uppercase; }
 
         /* Main Monitoring Area */
-        .main-col {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
+        .main-col { display: flex; flex-direction: column; gap: 20px; }
+        .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+        .card-header { padding: 15px 20px; background: rgba(255,255,255,0.05); border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+        .card-title { margin: 0; font-size: 14px; font-weight: 600; color: var(--text-dim); }
 
-        .card {
-            background: var(--bg-card);
-            border: 1px solid #30363d;
-            border-radius: 12px;
-            overflow: hidden;
-        }
-
-        .card-header {
-            padding: 15px 20px;
-            background: rgba(255,255,255,0.05);
-            border-bottom: 1px solid #30363d;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .card-title {
-            margin: 0;
-            font-size: 14px;
-            font-weight: 600;
-            color: var(--text-dim);
-        }
-
-        .monitor-log {
-            height: 300px;
-            overflow-y: auto;
-            padding: 10px;
-            font-family: monospace;
-            font-size: 12px;
-            color: #d1d5da;
-        }
-
-        .log-entry {
-            padding: 5px 10px;
-            border-left: 2px solid #30363d;
-            margin-bottom: 5px;
-            background: rgba(0,0,0,0.2);
-        }
-
+        .monitor-log { height: 250px; overflow-y: auto; padding: 10px; font-family: monospace; font-size: 12px; color: #d1d5da; }
+        .log-entry { padding: 8px 10px; border-left: 2px solid var(--border); margin-bottom: 5px; background: rgba(0,0,0,0.2); cursor: pointer; transition: background 0.2s; }
+        .log-entry:hover { background: rgba(88, 166, 255, 0.1); border-left-color: var(--accent); }
         .log-time { color: var(--text-dim); margin-right: 10px; }
         .log-tag { color: var(--accent); font-weight: bold; margin-right: 10px; }
 
         /* Sidebar Controls */
-        .sidebar {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .btn {
-            background: var(--accent);
-            color: white;
-            border: none;
-            padding: 12px;
-            border-radius: 6px;
-            font-weight: 600;
-            cursor: pointer;
-            width: 100%;
-            transition: transform 0.1s;
-        }
-
+        .sidebar { display: flex; flex-direction: column; gap: 20px; }
+        .btn { background: var(--accent); color: white; border: none; padding: 12px; border-radius: 6px; font-weight: 600; cursor: pointer; width: 100%; transition: transform 0.1s; }
         .btn:active { transform: scale(0.98); }
-        .btn-secondary { background: #21262d; border: 1px solid #30363d; }
+        .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .btn-secondary { background: #21262d; border: 1px solid var(--border); }
 
-        .knowledge-item {
-            padding: 10px;
-            border-bottom: 1px solid #30363d;
-            font-size: 13px;
-        }
-
+        .knowledge-item { padding: 12px; border-bottom: 1px solid var(--border); font-size: 13px; cursor: pointer; }
+        .knowledge-item:hover { background: rgba(255,255,255,0.05); }
         .knowledge-theme { color: var(--accent); font-weight: bold; }
+
+        /* Modal / Detail View */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8); display: none; justify-content: center; align-items: center; z-index: 1000;
+        }
+        .modal-content {
+            background: var(--bg-modal); width: 80%; max-width: 800px; max-height: 90vh;
+            border: 1px solid var(--accent); border-radius: 16px; padding: 30px; overflow-y: auto;
+            position: relative; box-shadow: 0 0 30px rgba(88, 166, 255, 0.2);
+        }
+        .close-btn { position: absolute; top: 20px; right: 20px; cursor: pointer; font-size: 24px; color: var(--text-dim); }
+        .detail-section { margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid var(--border); }
+        .detail-label { color: var(--accent); font-weight: bold; font-size: 12px; display: block; margin-bottom: 5px; }
+        .detail-text { font-size: 14px; }
+        .tag-pill { display: inline-block; background: #30363d; border-radius: 4px; padding: 2px 8px; font-size: 11px; margin-right: 5px; margin-bottom: 5px; }
     </style>
 </head>
 <body>
+
+<div id="modal" class="modal-overlay">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeModal()">&times;</span>
+        <h2 id="modal-theme" style="color: var(--accent); margin-top: 0;">Knowledge Detail</h2>
+        
+        <div class="detail-section">
+            <span class="detail-label">CONCEPT / 核心概念</span>
+            <div id="detail-concept" class="detail-text"></div>
+        </div>
+
+        <div class="detail-section">
+            <span class="detail-label">DEEP INSIGHTS / 深層分析</span>
+            <div id="detail-insights" class="detail-text"></div>
+        </div>
+
+        <div class="detail-section">
+            <span class="detail-label">AUDIT CRITERIA / 鑑定基準</span>
+            <div id="detail-criteria" class="detail-text"></div>
+        </div>
+
+        <div class="detail-section">
+            <span class="detail-label">NG PATTERNS / 禁止表現例</span>
+            <div id="detail-ng" class="detail-text"></div>
+        </div>
+    </div>
+</div>
 
 <div class="dashboard">
     <header>
         <div>
             <h1 style="margin:0; font-size: 20px;">ARS CONTROL CENTER</h1>
-            <span style="font-size: 12px; color: var(--text-dim);">Autonomous Arbitrage Gateway v4.0</span>
+            <span style="font-size: 12px; color: var(--text-dim);">Autonomous Arbitrage Gateway v4.5 | Gemini 2.5 Engaged</span>
         </div>
         <div class="system-status">
             <span id="health-text">SYSTEM HEALTHY</span>
@@ -194,6 +142,10 @@
             <span id="stat-trx" class="stat-value">0</span>
         </div>
         <div class="stat-card">
+            <span class="stat-label">Market Avg Price</span>
+            <span id="stat-avg" class="stat-value">0.00 ARS</span>
+        </div>
+        <div class="stat-card">
             <span class="stat-label">Accumulated Revenue</span>
             <span id="stat-revenue" class="stat-value">0 ARS</span>
         </div>
@@ -201,27 +153,19 @@
             <span class="stat-label">JPY Projection (Est.)</span>
             <span id="stat-jpy" class="stat-value">¥0</span>
         </div>
-        <div class="stat-card">
-            <span class="stat-label">Active Knowledge Themes</span>
-            <span id="stat-themes" class="stat-value">0</span>
-        </div>
     </div>
 
     <div class="main-col">
         <div class="card">
-            <div class="card-header">
-                <h3 class="card-title">M2M TRANSACTION MONITOR</h3>
-            </div>
+            <div class="card-header"><h3 class="card-title">M2M TRANSACTION MONITOR</h3></div>
             <div id="trx-log" class="monitor-log">
                 <div class="log-entry">Waiting for traffic...</div>
             </div>
         </div>
 
         <div class="card">
-            <div class="card-header">
-                <h3 class="card-title">AUTONOMOUS LEARNING LOGS</h3>
-            </div>
-            <div id="learning-log" class="monitor-log" style="height: 200px;">
+            <div class="card-header"><h3 class="card-title">AUTONOMOUS LEARNING LOGS (Click to see details)</h3></div>
+            <div id="learning-log" class="monitor-log" style="height: 350px;">
                 <div class="log-entry">No learning data yet.</div>
             </div>
         </div>
@@ -229,7 +173,15 @@
 
     <div class="sidebar">
         <div class="card">
-            <div class="card-header"><h3 class="card-title">OPERATIONS</h3></div>
+            <div class="card-header">
+                <h3 class="card-title">OPERATIONS</h3>
+                <div style="display:flex; align-items:center; gap:8px;">
+                    <span style="font-size:10px; color:var(--text-dim);">AUTO PILOT</span>
+                    <button id="btn-autopilot" onclick="toggleAutoPilot()" style="width:50px; height:24px; border-radius:12px; border:none; background:#30363d; cursor:pointer; position:relative; transition:background 0.3s;">
+                        <div id="autopilot-knob" style="width:18px; height:18px; border-radius:50%; background:white; position:absolute; top:3px; left:3px; transition:left 0.3s;"></div>
+                    </button>
+                </div>
+            </div>
             <div style="padding: 15px; display:flex; flex-direction:column; gap:10px;">
                 <button onclick="triggerLearn()" id="btn-learn" class="btn">EXECUTE BOARDROOM (LEARN)</button>
                 <button onclick="triggerScout()" id="btn-scout" class="btn btn-secondary">ACTIVATE SCOUT (TEST)</button>
@@ -246,6 +198,8 @@
 </div>
 
 <script>
+    let learningHistoryData = [];
+
     async function updateStats() {
         try {
             const res = await fetch('/api/stats');
@@ -253,9 +207,18 @@
 
             document.getElementById('stat-trx').textContent = data.summary.totalTransactions.toLocaleString();
             document.getElementById('stat-revenue').textContent = data.summary.totalRevenue.toLocaleString() + ' ARS';
+            document.getElementById('stat-avg').textContent = data.summary.avgPrice + ' ARS';
             document.getElementById('stat-jpy').textContent = '¥' + data.summary.jpyProjection.toLocaleString();
-            document.getElementById('stat-themes').textContent = data.knowledgeThemes.length;
             document.getElementById('health-text').textContent = 'SYSTEM ' + data.summary.health.status;
+
+            // スイッチの見た目を同期
+            const knob = document.getElementById('autopilot-knob');
+            const btn = document.getElementById('btn-autopilot');
+            const isAuto = data.summary.autopilot;
+            knob.style.left = isAuto ? '29px' : '3px';
+            btn.style.background = isAuto ? 'var(--success)' : '#30363d';
+
+            learningHistoryData = data.learningLogs;
 
             // Update Transaction Logs
             const trxContainer = document.getElementById('trx-log');
@@ -264,7 +227,7 @@
                     <div class="log-entry">
                         <span class="log-time">${new Date(log.timestamp).toLocaleTimeString()}</span>
                         <span class="log-tag">[M2M_TX]</span>
-                        <span>Verdict: ${log.verdict} | Fee: ${log.amount} ARS</span>
+                        <span>Verdict: <b style="color:${log.verdict === 'SAFE' ? 'var(--success)' : 'var(--danger)'}">${log.verdict}</b> | Fee: ${log.amount} ARS</span>
                     </div>
                 `).join('');
             }
@@ -272,11 +235,11 @@
             // Update Learning Logs
             const learnContainer = document.getElementById('learning-log');
             if (data.learningLogs.length > 0) {
-                learnContainer.innerHTML = data.learningLogs.map(log => `
-                    <div class="log-entry">
+                learnContainer.innerHTML = data.learningLogs.map((log, index) => `
+                    <div class="log-entry" onclick="showKnowledgeDetail(${index})">
                         <span class="log-time">${new Date(log.timestamp).toLocaleDateString()}</span>
                         <span class="log-tag">[LEARN]</span>
-                        <span>${log.theme}: ${log.summary}</span>
+                        <span style="color:var(--accent); font-weight:bold;">${log.theme}</span>: ${log.summary}
                     </div>
                 `).join('');
             }
@@ -292,18 +255,50 @@
                 `).join('');
             }
 
-        } catch (e) {
-            console.error("Stats update failed", e);
-        }
+        } catch (e) { console.error("Stats update failed", e); }
     }
+
+    function showKnowledgeDetail(index) {
+        const log = learningHistoryData[index];
+        if (!log || !log.knowledgeData) return;
+
+        document.getElementById('modal-theme').textContent = '【深層学習】 ' + log.theme;
+        document.getElementById('detail-concept').textContent = log.knowledgeData.concept;
+        
+        const insights = log.knowledgeData.deepInsights || {};
+        document.getElementById('detail-insights').innerHTML = `
+            <p><b>心理トリック:</b> ${insights.psychologicalTricks}</p>
+            <p><b>法的抜け穴:</b> ${insights.legalLoophole}</p>
+            <p><b>事例:</b> ${insights.caseStudies ? insights.caseStudies.map(s => `<span class="tag-pill">${s}</span>`).join('') : 'なし'}</p>
+        `;
+
+        document.getElementById('detail-criteria').innerHTML = log.knowledgeData.auditCriteria ? log.knowledgeData.auditCriteria.map(c => `
+            <div style="margin-bottom:10px;">
+                <b>・${c.point}</b><br><small style="color:var(--text-dim)">${c.detail}</small>
+            </div>
+        `).join('') : 'データなし';
+
+        document.getElementById('detail-ng').innerHTML = log.knowledgeData.ngPatterns ? log.knowledgeData.ngPatterns.map(p => `
+            <div style="background:rgba(255,0,0,0.1); padding:10px; margin-bottom:10px; border-radius:8px;">
+                <b style="color:var(--danger)">[NG] ${p.pattern}</b><br>
+                <small>理由: ${p.reason}</small><br>
+                <b style="color:var(--success)">[ALT] ${p.alternative}</b>
+            </div>
+        `).join('') : 'データなし';
+
+        document.getElementById('modal').style.display = 'flex';
+    }
+
+    function closeModal() { document.getElementById('modal').style.display = 'none'; }
 
     async function triggerLearn() {
         const btn = document.getElementById('btn-learn');
-        btn.textContent = "LEARNING...";
+        btn.textContent = "DEEP LEARNING...";
         btn.disabled = true;
         try {
-            await fetch('/api/learn', { method: 'POST' });
-            updateStats();
+            const res = await fetch('/api/learn', { method: 'POST' });
+            if (!res.ok) alert("Learning failed. Check console.");
+            await updateStats();
         } finally {
             btn.textContent = "EXECUTE BOARDROOM (LEARN)";
             btn.disabled = false;
@@ -319,14 +314,44 @@
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ text: "今なら絶対若返る！最新の細胞治療で100%満足を保証します。", mode: "standard" })
             });
-            updateStats();
+            await updateStats();
         } finally {
             btn.disabled = false;
         }
     }
 
-    setInterval(updateStats, 3000);
+    async function toggleAutoPilot() {
+        const knob = document.getElementById('autopilot-knob');
+        const btn = document.getElementById('btn-autopilot');
+        const currentState = knob.style.left === '29px';
+        const newState = !currentState;
+        
+        knob.style.left = newState ? '29px' : '3px';
+        btn.style.background = newState ? 'var(--success)' : '#30363d';
+        
+        // 保存（サーバー側へ通知）
+        await fetch('/api/stats', { 
+            method: 'POST', 
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ autopilot: newState }) 
+        });
+    }
+
+    // オートパイロット実行ループ
+    async function runAutoPilot() {
+        const knob = document.getElementById('autopilot-knob');
+        if (knob.style.left === '29px') {
+            try {
+                await fetch('/api/autopilot', { method: 'POST' });
+                updateStats();
+            } catch (e) {}
+        }
+        setTimeout(runAutoPilot, 8000); // 8秒ごとに自律探索
+    }
+
+    setInterval(updateStats, 5000);
     updateStats();
+    runAutoPilot();
 </script>
 
 </body>
