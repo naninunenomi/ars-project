@@ -3,6 +3,13 @@
  * 記憶(キャッシュ)・知識ライブラリ・Gemini鑑定を統合した「AI鑑定所」エンジン
  */
 
+// Vercel KVの環境変数補完
+const restUrlKey = Object.keys(process.env).find(key => key.includes('_REST_API_URL'));
+const restTokenKey = Object.keys(process.env).find(key => key.includes('_REST_API_TOKEN'));
+if (restUrlKey && restTokenKey && !process.env.KV_REST_API_URL) {
+    process.env.KV_REST_API_URL = process.env[restUrlKey];
+    process.env.KV_REST_API_TOKEN = process.env[restTokenKey];
+}
 const { kv } = require('@vercel/kv');
 const crypto = require('crypto');
 
