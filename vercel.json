@@ -12,6 +12,10 @@
   ],
   "routes": [
     {
+      "src": "/",
+      "dest": "/public/control-center.html"
+    },
+    {
       "src": "/api/check",
       "dest": "/api/check.js"
     },
