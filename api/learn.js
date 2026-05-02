@@ -10,6 +10,13 @@ if (restUrlKey && restTokenKey && !process.env.KV_REST_API_URL) {
     process.env.KV_REST_API_URL = process.env[restUrlKey];
     process.env.KV_REST_API_TOKEN = process.env[restTokenKey];
 }
+// Vercel KVの環境変数補完
+const restUrlKey = Object.keys(process.env).find(key => key.includes('_REST_API_URL'));
+const restTokenKey = Object.keys(process.env).find(key => key.includes('_REST_API_TOKEN'));
+if (restUrlKey && restTokenKey && !process.env.KV_REST_API_URL) {
+    process.env.KV_REST_API_URL = process.env[restUrlKey];
+    process.env.KV_REST_API_TOKEN = process.env[restTokenKey];
+}
 const { kv } = require('@vercel/kv');
 
 module.exports = async (req, res) => {
@@ -47,7 +54,7 @@ module.exports = async (req, res) => {
 }
 `;
 
-        const apiUrl = `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash-latest:generateContent?key=${process.env.GEMINI_API_KEY}`;
+        const apiUrl = `https://generativelanguage.googleapis.com/v1/models/gemini-flash-latest:generateContent?key=${process.env.GEMINI_API_KEY}`;
         
         const response = await fetch(apiUrl, {
             method: 'POST',
