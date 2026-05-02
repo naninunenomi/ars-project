@@ -24,6 +24,10 @@
       "dest": "/api/learn.js"
     },
     {
+      "src": "/api/models",
+      "dest": "/api/models.js"
+    },
+    {
       "src": "/api/version",
       "dest": "/api/version.js"
     },
