@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ARS Control Center | AI Arbitrage Monitor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Noto+Sans+JP:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-deep: #0a0c10;
+            --bg-card: #161b22;
+            --accent: #58a6ff;
+            --accent-glow: rgba(88, 166, 255, 0.3);
+            --text-main: #c9d1d9;
+            --text-dim: #8b949e;
+            --success: #238636;
+            --danger: #da3633;
+        }
+
+        body {
+            background-color: var(--bg-deep);
+            color: var(--text-main);
+            font-family: 'Outfit', 'Noto Sans JP', sans-serif;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .dashboard {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 20px;
+        }
+
+        header {
+            grid-column: span 2;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #30363d;
+        }
+
+        .system-status {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+        }
+
+        .status-lamp {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: var(--success);
+            box-shadow: 0 0 10px var(--success);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.5; }
+            50% { opacity: 1; }
+            100% { opacity: 0.5; }
+        }
+
+        /* Stats Section */
+        .stats-grid {
+            grid-column: span 2;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid #30363d;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--accent);
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: var(--text-dim);
+            text-transform: uppercase;
+        }
+
+        /* Main Monitoring Area */
+        .main-col {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: 1px solid #30363d;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .card-header {
+            padding: 15px 20px;
+            background: rgba(255,255,255,0.05);
+            border-bottom: 1px solid #30363d;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card-title {
+            margin: 0;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-dim);
+        }
+
+        .monitor-log {
+            height: 300px;
+            overflow-y: auto;
+            padding: 10px;
+            font-family: monospace;
+            font-size: 12px;
+            color: #d1d5da;
+        }
+
+        .log-entry {
+            padding: 5px 10px;
+            border-left: 2px solid #30363d;
+            margin-bottom: 5px;
+            background: rgba(0,0,0,0.2);
+        }
+
+        .log-time { color: var(--text-dim); margin-right: 10px; }
+        .log-tag { color: var(--accent); font-weight: bold; margin-right: 10px; }
+
+        /* Sidebar Controls */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .btn {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: transform 0.1s;
+        }
+
+        .btn:active { transform: scale(0.98); }
+        .btn-secondary { background: #21262d; border: 1px solid #30363d; }
+
+        .knowledge-item {
+            padding: 10px;
+            border-bottom: 1px solid #30363d;
+            font-size: 13px;
+        }
+
+        .knowledge-theme { color: var(--accent); font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<div class="dashboard">
+    <header>
+        <div>
+            <h1 style="margin:0; font-size: 20px;">ARS CONTROL CENTER</h1>
+            <span style="font-size: 12px; color: var(--text-dim);">Autonomous Arbitrage Gateway v4.0</span>
+        </div>
+        <div class="system-status">
+            <span id="health-text">SYSTEM HEALTHY</span>
+            <div class="status-lamp"></div>
+        </div>
+    </header>
+
+    <div class="stats-grid">
+        <div class="stat-card">
+            <span class="stat-label">Total Transactions</span>
+            <span id="stat-trx" class="stat-value">0</span>
+        </div>
+        <div class="stat-card">
+            <span class="stat-label">Accumulated Revenue</span>
+            <span id="stat-revenue" class="stat-value">0 ARS</span>
+        </div>
+        <div class="stat-card">
+            <span class="stat-label">JPY Projection (Est.)</span>
+            <span id="stat-jpy" class="stat-value">¥0</span>
+        </div>
+        <div class="stat-card">
+            <span class="stat-label">Active Knowledge Themes</span>
+            <span id="stat-themes" class="stat-value">0</span>
+        </div>
+    </div>
+
+    <div class="main-col">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">M2M TRANSACTION MONITOR</h3>
+            </div>
+            <div id="trx-log" class="monitor-log">
+                <div class="log-entry">Waiting for traffic...</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">AUTONOMOUS LEARNING LOGS</h3>
+            </div>
+            <div id="learning-log" class="monitor-log" style="height: 200px;">
+                <div class="log-entry">No learning data yet.</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="sidebar">
+        <div class="card">
+            <div class="card-header"><h3 class="card-title">OPERATIONS</h3></div>
+            <div style="padding: 15px; display:flex; flex-direction:column; gap:10px;">
+                <button onclick="triggerLearn()" id="btn-learn" class="btn">EXECUTE BOARDROOM (LEARN)</button>
+                <button onclick="triggerScout()" id="btn-scout" class="btn btn-secondary">ACTIVATE SCOUT (TEST)</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header"><h3 class="card-title">KNOWLEDGE LIBRARY</h3></div>
+            <div id="knowledge-list" style="max-height: 400px; overflow-y:auto;">
+                <div class="knowledge-item">Library is empty.</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    async function updateStats() {
+        try {
+            const res = await fetch('/api/stats');
+            const data = await res.json();
+
+            document.getElementById('stat-trx').textContent = data.summary.totalTransactions.toLocaleString();
+            document.getElementById('stat-revenue').textContent = data.summary.totalRevenue.toLocaleString() + ' ARS';
+            document.getElementById('stat-jpy').textContent = '¥' + data.summary.jpyProjection.toLocaleString();
+            document.getElementById('stat-themes').textContent = data.knowledgeThemes.length;
+            document.getElementById('health-text').textContent = 'SYSTEM ' + data.summary.health.status;
+
+            // Update Transaction Logs
+            const trxContainer = document.getElementById('trx-log');
+            if (data.transactionLogs.length > 0) {
+                trxContainer.innerHTML = data.transactionLogs.map(log => `
+                    <div class="log-entry">
+                        <span class="log-time">${new Date(log.timestamp).toLocaleTimeString()}</span>
+                        <span class="log-tag">[M2M_TX]</span>
+                        <span>Verdict: ${log.verdict} | Fee: ${log.amount} ARS</span>
+                    </div>
+                `).join('');
+            }
+
+            // Update Learning Logs
+            const learnContainer = document.getElementById('learning-log');
+            if (data.learningLogs.length > 0) {
+                learnContainer.innerHTML = data.learningLogs.map(log => `
+                    <div class="log-entry">
+                        <span class="log-time">${new Date(log.timestamp).toLocaleDateString()}</span>
+                        <span class="log-tag">[LEARN]</span>
+                        <span>${log.theme}: ${log.summary}</span>
+                    </div>
+                `).join('');
+            }
+
+            // Update Knowledge List
+            const knowledgeContainer = document.getElementById('knowledge-list');
+            if (data.knowledgeThemes.length > 0) {
+                knowledgeContainer.innerHTML = data.knowledgeThemes.map(theme => `
+                    <div class="knowledge-item">
+                        <span class="knowledge-theme">${theme}</span>
+                        <span style="display:block; font-size:11px; color:var(--text-dim);">Expert Data Accumulated</span>
+                    </div>
+                `).join('');
+            }
+
+        } catch (e) {
+            console.error("Stats update failed", e);
+        }
+    }
+
+    async function triggerLearn() {
+        const btn = document.getElementById('btn-learn');
+        btn.textContent = "LEARNING...";
+        btn.disabled = true;
+        try {
+            await fetch('/api/learn', { method: 'POST' });
+            updateStats();
+        } finally {
+            btn.textContent = "EXECUTE BOARDROOM (LEARN)";
+            btn.disabled = false;
+        }
+    }
+
+    async function triggerScout() {
+        const btn = document.getElementById('btn-scout');
+        btn.disabled = true;
+        try {
+            await fetch('/api/check', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ text: "今なら絶対若返る！最新の細胞治療で100%満足を保証します。", mode: "standard" })
+            });
+            updateStats();
+        } finally {
+            btn.disabled = false;
+        }
+    }
+
+    setInterval(updateStats, 3000);
+    updateStats();
+</script>
+
+</body>
+</html>
