@@ -176,17 +176,22 @@
             <div class="card-header">
                 <h3 class="card-title">OPERATIONS</h3>
                 <div style="display:flex; align-items:center; gap:8px;">
-                    <span style="font-size:10px; color:var(--text-dim);">AUTO PILOT</span>
+                    <span id="autopilot-status-text" style="font-size:10px; color:var(--text-dim); transition: color 0.3s;">AUTO PILOT</span>
                     <button id="btn-autopilot" onclick="toggleAutoPilot()" style="width:50px; height:24px; border-radius:12px; border:none; background:#30363d; cursor:pointer; position:relative; transition:background 0.3s;">
                         <div id="autopilot-knob" style="width:18px; height:18px; border-radius:50%; background:white; position:absolute; top:3px; left:3px; transition:left 0.3s;"></div>
                     </button>
                 </div>
             </div>
             <div style="padding: 15px; display:flex; flex-direction:column; gap:10px;">
+                <div id="autopilot-indicator" style="display:none; font-size:11px; color:var(--accent); text-align:center; animation: blink 1.5s infinite;">● ARS is autonomously exploring market demands...</div>
                 <button onclick="triggerLearn()" id="btn-learn" class="btn">EXECUTE BOARDROOM (LEARN)</button>
                 <button onclick="triggerScout()" id="btn-scout" class="btn btn-secondary">ACTIVATE SCOUT (TEST)</button>
             </div>
         </div>
+
+        <style>
+            @keyframes blink { 0% { opacity: 0.4; } 50% { opacity: 1; } 100% { opacity: 0.4; } }
+        </style>
 
         <div class="card">
             <div class="card-header"><h3 class="card-title">KNOWLEDGE LIBRARY</h3></div>
@@ -214,9 +219,14 @@
             // スイッチの見た目を同期
             const knob = document.getElementById('autopilot-knob');
             const btn = document.getElementById('btn-autopilot');
+            const statusText = document.getElementById('autopilot-status-text');
+            const indicator = document.getElementById('autopilot-indicator');
+            
             const isAuto = data.summary.autopilot;
             knob.style.left = isAuto ? '29px' : '3px';
             btn.style.background = isAuto ? 'var(--success)' : '#30363d';
+            statusText.style.color = isAuto ? 'var(--success)' : 'var(--text-dim)';
+            indicator.style.display = isAuto ? 'block' : 'none';
 
             learningHistoryData = data.learningLogs;
 
@@ -323,11 +333,16 @@
     async function toggleAutoPilot() {
         const knob = document.getElementById('autopilot-knob');
         const btn = document.getElementById('btn-autopilot');
+        const statusText = document.getElementById('autopilot-status-text');
+        const indicator = document.getElementById('autopilot-indicator');
+        
         const currentState = knob.style.left === '29px';
         const newState = !currentState;
         
         knob.style.left = newState ? '29px' : '3px';
         btn.style.background = newState ? 'var(--success)' : '#30363d';
+        statusText.style.color = newState ? 'var(--success)' : 'var(--text-dim)';
+        indicator.style.display = newState ? 'block' : 'none';
         
         // 保存（サーバー側へ通知）
         await fetch('/api/stats', { 
@@ -335,18 +350,28 @@
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ autopilot: newState }) 
         });
+
+        // ONにした瞬間に一度実行
+        if (newState) {
+            try { await fetch('/api/autopilot', { method: 'POST' }); updateStats(); } catch(e) {}
+        }
     }
 
     // オートパイロット実行ループ
     async function runAutoPilot() {
         const knob = document.getElementById('autopilot-knob');
+        const indicator = document.getElementById('autopilot-indicator');
+        
         if (knob.style.left === '29px') {
+            indicator.style.display = 'block';
             try {
                 await fetch('/api/autopilot', { method: 'POST' });
                 updateStats();
             } catch (e) {}
+        } else {
+            indicator.style.display = 'none';
         }
-        setTimeout(runAutoPilot, 8000); // 8秒ごとに自律探索
+        setTimeout(runAutoPilot, 5000); // 5秒ごとに短縮
     }
 
     setInterval(updateStats, 5000);
