@@ -343,21 +343,27 @@
         const currentState = knob.style.left === '29px';
         const newState = !currentState;
         
+        // UIを即座に更新 (楽観的更新)
+        indicator.style.display = newState ? 'block' : 'none';
         knob.style.left = newState ? '29px' : '3px';
         btn.style.background = newState ? 'var(--success)' : '#30363d';
         statusText.style.color = newState ? 'var(--success)' : 'var(--text-dim)';
-        indicator.style.display = newState ? 'block' : 'none';
         
-        // 保存（サーバー側へ通知）
-        await fetch('/api/stats', { 
-            method: 'POST', 
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ autopilot: newState }) 
-        });
+        try {
+            // 保存（サーバー側へ通知）
+            await fetch('/api/stats', { 
+                method: 'POST', 
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ autopilot: newState }) 
+            });
 
-        // ONにした瞬間に一度実行
-        if (newState) {
-            try { await fetch('/api/autopilot', { method: 'POST' }); updateStats(); } catch(e) {}
+            // ONにした瞬間に一度実行
+            if (newState) {
+                await fetch('/api/autopilot', { method: 'POST' });
+                updateStats();
+            }
+        } catch (e) {
+            console.error("Toggle Error:", e);
         }
     }
 
