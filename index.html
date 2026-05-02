@@ -204,6 +204,7 @@
 
 <script>
     let learningHistoryData = [];
+    let lastToggleTime = 0;
 
     async function updateStats() {
         try {
@@ -216,17 +217,19 @@
             document.getElementById('stat-jpy').textContent = '¥' + data.summary.jpyProjection.toLocaleString();
             document.getElementById('health-text').textContent = 'SYSTEM ' + data.summary.health.status;
 
-            // スイッチの見た目を同期
-            const knob = document.getElementById('autopilot-knob');
-            const btn = document.getElementById('btn-autopilot');
-            const statusText = document.getElementById('autopilot-status-text');
-            const indicator = document.getElementById('autopilot-indicator');
-            
-            const isAuto = data.summary.autopilot;
-            knob.style.left = isAuto ? '29px' : '3px';
-            btn.style.background = isAuto ? 'var(--success)' : '#30363d';
-            statusText.style.color = isAuto ? 'var(--success)' : 'var(--text-dim)';
-            indicator.style.display = isAuto ? 'block' : 'none';
+            // スイッチの見た目を同期 (ユーザー操作直後はスキップ)
+            if (Date.now() - lastToggleTime > 3000) {
+                const knob = document.getElementById('autopilot-knob');
+                const btn = document.getElementById('btn-autopilot');
+                const statusText = document.getElementById('autopilot-status-text');
+                const indicator = document.getElementById('autopilot-indicator');
+                
+                const isAuto = data.summary.autopilot;
+                knob.style.left = isAuto ? '29px' : '3px';
+                btn.style.background = isAuto ? 'var(--success)' : '#30363d';
+                statusText.style.color = isAuto ? 'var(--success)' : 'var(--text-dim)';
+                indicator.style.display = isAuto ? 'block' : 'none';
+            }
 
             learningHistoryData = data.learningLogs;
 
@@ -331,6 +334,7 @@
     }
 
     async function toggleAutoPilot() {
+        lastToggleTime = Date.now();
         const knob = document.getElementById('autopilot-knob');
         const btn = document.getElementById('btn-autopilot');
         const statusText = document.getElementById('autopilot-status-text');
