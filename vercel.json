@@ -24,6 +24,10 @@
       "dest": "/api/learn.js"
     },
     {
+      "src": "/api/autopilot",
+      "dest": "/api/autopilot.js"
+    },
+    {
       "src": "/api/models",
       "dest": "/api/models.js"
     },

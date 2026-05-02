@@ -14,12 +14,24 @@ const { kv } = require('@vercel/kv');
 
 module.exports = async (req, res) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
+    if (req.method === 'OPTIONS') return res.status(200).end();
+
+    // オートパイロット状態の更新 (POST)
+    if (req.method === 'POST') {
+        const { autopilot } = req.body || {};
+        await kv.set('ars_autopilot_status', !!autopilot);
+        return res.status(200).json({ success: true });
+    }
     
     try {
         // 1. 基本統計
-        const totalRevenue = await kv.get('ars_total_revenue') || 0;
-        const totalTransactions = await kv.get('ars_total_transactions') || 0;
-        const health = await kv.get('ars_system_health') || { status: 'UNKNOWN' };
+        const totalRevenue = parseFloat(await kv.get('ars_total_revenue') || 0);
+        const totalTransactions = parseInt(await kv.get('ars_total_transactions') || 0);
+        const autopilotStatus = await kv.get('ars_autopilot_status') || false;
+        const health = await kv.get('ars_system_health') || { status: 'HEALTHY' };
 
         // 2. 直近7日の推移
         const history = [];
@@ -37,19 +49,23 @@ module.exports = async (req, res) => {
         const learningLogs = await kv.lrange('ars_learning_history', 0, 9) || [];
         const parsedLearningLogs = learningLogs.map(log => typeof log === 'string' ? JSON.parse(log) : log);
 
-        // 4. 取引ログ (直近10件)
-        const trxLogs = await kv.lrange('ars_transaction_logs', 0, 9) || [];
+        // 4. 取引ログ (直近15件)
+        const trxLogs = await kv.lrange('ars_transactions', 0, 14) || [];
         const parsedTrxLogs = trxLogs.map(log => typeof log === 'string' ? JSON.parse(log) : log);
 
-        // 5. 学習データの概要（現在持っている知識のテーマ一覧）
+        // 5. 学習データの概要
         const knowledgeBase = await kv.hgetall('ars_knowledge_base') || {};
         const knowledgeThemes = Object.keys(knowledgeBase);
 
+        const avgPrice = totalTransactions > 0 ? (totalRevenue / totalTransactions).toFixed(2) : "0.00";
+
         res.status(200).json({
             summary: {
-                totalRevenue: parseInt(totalRevenue),
+                totalRevenue: parseFloat(totalRevenue),
                 totalTransactions: parseInt(totalTransactions),
-                jpyProjection: parseInt(totalRevenue) * 1, // 1トークン=1円換算
+                avgPrice: avgPrice,
+                jpyProjection: Math.floor(parseFloat(totalRevenue)),
+                autopilot: autopilotStatus,
                 health: health
             },
             history: history,
