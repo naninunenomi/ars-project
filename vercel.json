@@ -3,7 +3,7 @@
   "routes": [
     {
       "src": "/",
-      "dest": "/control-center.html"
+      "dest": "/ars-gateway.html"
     },
     {
       "src": "/api/check",
