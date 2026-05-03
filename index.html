@@ -248,13 +248,17 @@
             // Update Learning Logs
             const learnContainer = document.getElementById('learning-log');
             if (data.learningLogs.length > 0) {
-                learnContainer.innerHTML = data.learningLogs.map((log, index) => `
-                    <div class="log-entry" onclick="showKnowledgeDetail(${index})">
-                        <span class="log-time">${new Date(log.timestamp).toLocaleDateString()}</span>
-                        <span class="log-tag">[LEARN]</span>
-                        <span style="color:var(--accent); font-weight:bold;">${log.theme}</span>: ${log.summary}
-                    </div>
-                `).join('');
+                learnContainer.innerHTML = data.learningLogs.map((log, index) => {
+                    const isTrigger = log.isTrigger;
+                    return `
+                        <div class="log-entry" ${!isTrigger ? `onclick="showKnowledgeDetail(${index})"` : ''} style="${isTrigger ? 'border-left-color: var(--accent); background: rgba(88, 166, 255, 0.05);' : ''}">
+                            <span class="log-time">${new Date(log.timestamp).toLocaleTimeString()}</span>
+                            <span class="log-tag">${isTrigger ? '[TRIGGER]' : '[LEARN]'}</span>
+                            <span style="color:var(--accent); font-weight:bold;">${log.theme}</span>: ${log.summary}
+                            ${isTrigger ? '<span style="float:right; font-size:10px; color:var(--accent);">Analysing...</span>' : ''}
+                        </div>
+                    `;
+                }).join('');
             }
 
             // Update Knowledge List
