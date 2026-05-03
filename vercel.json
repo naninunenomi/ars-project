@@ -30,6 +30,10 @@
       "dest": "/api/version.js"
     },
     {
+      "src": "/api/debug_kv",
+      "dest": "/api/debug_kv.js"
+    },
+    {
       "src": "/(.*)",
       "dest": "/$1"
     }
