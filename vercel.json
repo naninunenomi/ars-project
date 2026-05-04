@@ -34,6 +34,10 @@
       "dest": "/api/debug_kv.js"
     },
     {
+      "src": "/api/inspect_env",
+      "dest": "/api/inspect_env.js"
+    },
+    {
       "src": "/(.*)",
       "dest": "/$1"
     }
