@@ -9,7 +9,7 @@ const crypto = require('crypto');
 
 // Gemini 2.5 設定
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY || process.env.GOOGLE_GENAI_API_KEY;
-const MODEL_NAME = "gemini-2.5-flash";
+const MODEL_NAME = "gemini-2.0-flash";
 
 module.exports = async (req, res) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -58,21 +58,33 @@ module.exports = async (req, res) => {
             await kv.lpush('ars_learning_history', JSON.stringify({
                 timestamp: new Date().toISOString(),
                 theme: scenario.theme,
-                summary: "Demand detected. Initializing deep analysis via Gemini 2.5...",
+                summary: "Demand detected. Initializing deep analysis via Gemini 2.0...",
                 isTrigger: true
             }));
+
+            // レガシーデータの救済：もし古い形式のデータ（ars_knowledge:rules）があれば、それをGeminiの代わりに使う
+            const legacyRules = await kv.get('ars_knowledge:rules');
+            let recoveredContent = null;
+            if (legacyRules) {
+                // 配列形式ならマージ、文字列ならそのまま
+                recoveredContent = Array.isArray(legacyRules) ? legacyRules.join("\n") : legacyRules;
+            }
 
             // 直接Geminiを呼んで学習（非同期だが、awaitして確実に行う）
             const prompt = `あなたは法規制と広告審査の専門家です。「${scenario.theme}」という分野について、最新の規制、心理的トリック、摘発事例、そしてクリーンな代替表現案を、プロフェッショナルな視点で詳細に解説してください。`;
             
             try {
-                const response = await fetch(`https://generativelanguage.googleapis.com/v1/models/${MODEL_NAME}:generateContent?key=${GEMINI_API_KEY}`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
-                });
-                const data = await response.json();
-                const content = data.candidates?.[0]?.content?.parts?.[0]?.text || "Deep learning failed but theme registered.";
+                let content = recoveredContent;
+                
+                if (!content) {
+                    const response = await fetch(`https://generativelanguage.googleapis.com/v1/models/${MODEL_NAME}:generateContent?key=${GEMINI_API_KEY}`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
+                    });
+                    const data = await response.json();
+                    content = data.candidates?.[0]?.content?.parts?.[0]?.text || "Deep learning failed but theme registered.";
+                }
 
                 // 知識ベースと履歴に保存
                 await kv.hset('ars_knowledge_base', { [scenario.theme]: content });

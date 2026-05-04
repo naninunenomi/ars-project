@@ -53,8 +53,15 @@ module.exports = async (req, res) => {
         const trxLogs = await kv.lrange('ars_transactions', 0, 14) || [];
         const parsedTrxLogs = trxLogs.map(log => typeof log === 'string' ? JSON.parse(log) : log);
 
-        // 5. 学習データの概要
+        // 5. 学習データの概要 (古い形式と新しい形式を統合して救済)
         const knowledgeBase = await kv.hgetall('ars_knowledge_base') || {};
+        
+        // 旧データ (ars_latest_knowledge 等) があればマージ
+        const oldKnowledge = await kv.get('ars_latest_knowledge');
+        if (oldKnowledge && !knowledgeBase['Imported Data']) {
+            knowledgeBase['Recovered Wisdom'] = typeof oldKnowledge === 'string' ? oldKnowledge : JSON.stringify(oldKnowledge);
+        }
+        
         const knowledgeThemes = Object.keys(knowledgeBase);
 
         const avgPrice = totalTransactions > 0 ? (totalRevenue / totalTransactions).toFixed(2) : "0.00";
