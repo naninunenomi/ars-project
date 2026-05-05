@@ -1,45 +1,17 @@
 {
   "version": 2,
+  "name": "ars-project",
+  "builds": [
+    { "src": "api/*.js", "use": "@vercel/node" },
+    { "src": "*.html", "use": "@vercel/static" }
+  ],
   "routes": [
-    {
-      "src": "/",
-      "dest": "/ars-gateway.html"
-    },
-    {
-      "src": "/api/check",
-      "dest": "/api/check.js"
-    },
-    {
-      "src": "/api/stats",
-      "dest": "/api/stats.js"
-    },
-    {
-      "src": "/api/learn",
-      "dest": "/api/learn.js"
-    },
-    {
-      "src": "/api/autopilot",
-      "dest": "/api/autopilot.js"
-    },
-    {
-      "src": "/api/models",
-      "dest": "/api/models.js"
-    },
-    {
-      "src": "/api/version",
-      "dest": "/api/version.js"
-    },
-    {
-      "src": "/api/debug_kv",
-      "dest": "/api/debug_kv.js"
-    },
-    {
-      "src": "/api/inspect_env",
-      "dest": "/api/inspect_env.js"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/$1"
-    }
-  ]
+    { "src": "/api/(.*)", "dest": "/api/$1" },
+    { "src": "/(.*)", "dest": "/$1" }
+  ],
+  "env": {
+    "KV_REST_API_URL": "",
+    "KV_REST_API_TOKEN": "",
+    "BYPASS_DB": "true"
+  }
 }
