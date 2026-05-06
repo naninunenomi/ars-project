@@ -1,27 +1,50 @@
+const { kv } = require('@vercel/kv');
+
 module.exports = async (req, res) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
-    // データベースを一切使わない「不沈のダミーモード」
-    const now = new Date();
-    const mockRevenue = (Math.random() * 10 + 10).toFixed(2); // 仮の数値を見せる
+    if (req.method === 'OPTIONS') return res.status(200).end();
 
-    res.status(200).json({
-        summary: {
-            totalRevenue: parseFloat(mockRevenue),
-            totalTransactions: Math.floor(Math.random() * 5) + 10,
-            avgPrice: "1.20",
-            jpyProjection: Math.floor(mockRevenue * 150),
-            autopilot: true,
-            health: { status: 'STANDALONE_MODE' }
-        },
-        learningLogs: [
-            { timestamp: now.toISOString(), theme: "システム復旧", summary: "データベース制限(500k)を検知。一時的にスタンドアロンモードで稼働中。" }
-        ],
-        transactionLogs: [
-            { timestamp: now.toISOString(), amount: "0.85", verdict: "SAFE", theme: "Market Scan" }
-        ],
-        knowledgeThemes: ["System Recovery"]
-    });
+    try {
+        // オートパイロット状態の更新 (POST)
+        if (req.method === 'POST') {
+            const { autopilot } = req.body || {};
+            await kv.set('ars_autopilot_status', !!autopilot);
+            return res.status(200).json({ success: true });
+        }
+
+        // 基本統計の取得
+        const [totalRevenue, totalTransactions, autopilotStatus] = await Promise.all([
+            kv.get('ars_total_revenue') || 0,
+            kv.get('ars_total_transactions') || 0,
+            kv.get('ars_autopilot_status') || false
+        ]);
+
+        // 学習履歴と取引ログ
+        const learningLogs = await kv.lrange('ars_learning_history', 0, 9) || [];
+        const trxLogs = await kv.lrange('ars_transactions', 0, 14) || [];
+        const knowledgeBase = await kv.hgetall('ars_knowledge_base') || {};
+
+        const parsedLearningLogs = learningLogs.map(l => typeof l === 'string' ? JSON.parse(l) : l);
+        const parsedTrxLogs = trxLogs.map(l => typeof l === 'string' ? JSON.parse(l) : l);
+
+        res.status(200).json({
+            summary: {
+                totalRevenue: parseFloat(totalRevenue),
+                totalTransactions: parseInt(totalTransactions),
+                avgPrice: totalTransactions > 0 ? (totalRevenue / totalTransactions).toFixed(2) : "0.00",
+                jpyProjection: Math.floor(parseFloat(totalRevenue) * 150),
+                autopilot: !!autopilotStatus,
+                health: { status: 'HEALTHY' }
+            },
+            learningLogs: parsedLearningLogs,
+            transactionLogs: parsedTrxLogs,
+            knowledgeThemes: Object.keys(knowledgeBase)
+        });
+
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
 };
