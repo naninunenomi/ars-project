@@ -356,7 +356,7 @@
 
     async function fetchData() {
         try {
-            const r = await fetch('/api/stats');
+            const r = await fetch('/api/stats.js');
             const d = await r.json();
             
             // Stats
@@ -427,13 +427,13 @@
         pulse.style.display = active ? 'block' : 'none';
 
         try {
-            await fetch('/api/stats', { 
+            await fetch('/api/stats.js', { 
                 method: 'POST', 
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({ autopilot: active }) 
             });
             if (active) {
-                await fetch('/api/autopilot', { method: 'POST' });
+                await fetch('/api/autopilot.js', { method: 'POST' });
             }
             fetchData();
         } catch (e) {}
@@ -442,10 +442,10 @@
 
     async function triggerLearn() {
         const b = document.getElementById('btn-learn');
-        b.innerText = "ENGAGING GEMINI 2.5...";
+        b.innerText = "ENGAGING GEMINI 2.0...";
         b.disabled = true;
         try {
-            await fetch('/api/learn', { method: 'POST' });
+            await fetch('/api/learn.js', { method: 'POST' });
             fetchData();
         } finally {
             b.innerText = "EXECUTE DEEP LEARNING";
@@ -454,7 +454,7 @@
     }
 
     async function triggerScout() {
-        await fetch('/api/check', {
+        await fetch('/api/check.js', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({ text: "Test Ad for Scouting", mode: "standard" })
