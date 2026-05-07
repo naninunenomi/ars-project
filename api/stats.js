@@ -1,6 +1,6 @@
 /**
- * ARS Stats API - v7.0 (Hardcore Standalone)
- * Vercelの環境変数バグを回避するため、ライブラリを使わず直接Upstash APIを叩く
+ * ARS Stats API - v8.0 (Final Verified)
+ * Using RAW REST FETCH for maximum reliability.
  */
 
 module.exports = async (req, res) => {
@@ -8,14 +8,12 @@ module.exports = async (req, res) => {
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
-    const UPSTASH_URL = "https://expert-lamb-67610.upstash.io";
-    const UPSTASH_TOKEN = "gQAAAAAAAQgaAAIgcDE3ODU3NWY3NWY5NmU0NDhjYWZmMWUzYmExMmM0MDdmOA";
+    const UPSTASH_URL = "https://pretty-llama-117521.upstash.io";
+    const UPSTASH_TOKEN = "gQAAAAAAAcsRAAIgcDIzMTUxOGQzNmY5Yzg0ZjE1YTA0OWE4YWRmNzc2N2E3NQ";
 
-    // 汎用的なRedis呼び出し関数
     const redis = async (command, ...args) => {
-        const response = await fetch(`${UPSTASH_URL}/${command}/${args.join('/')}`, {
-            headers: { Authorization: `Bearer ${UPSTASH_TOKEN}` }
-        });
+        const url = `${UPSTASH_URL}/${command}${args.length ? '/' + args.join('/') : ''}`;
+        const response = await fetch(url, { headers: { Authorization: `Bearer ${UPSTASH_TOKEN}` } });
         const data = await response.json();
         return data.result;
     };
@@ -27,25 +25,33 @@ module.exports = async (req, res) => {
             return res.status(200).json({ success: true });
         }
 
-        const totalRevenue = parseFloat(await redis('get', 'ars_total_revenue') || 0);
-        const totalTransactions = parseInt(await redis('get', 'ars_total_transactions') || 0);
-        const autopilotStatus = (await redis('get', 'ars_autopilot_status')) === 'true';
+        const [totalRevenue, totalTransactions, autopilotStatus, learningLogs, trxLogs, knowledgeBase] = await Promise.all([
+            redis('get', 'ars_total_revenue') || 0,
+            redis('get', 'ars_total_transactions') || 0,
+            redis('get', 'ars_autopilot_status'),
+            redis('lrange', 'ars_learning_history', 0, 9) || [],
+            redis('lrange', 'ars_transactions', 0, 14) || [],
+            redis('hgetall', 'ars_knowledge_base') || {}
+        ]);
+
+        const parsedLearningLogs = (learningLogs || []).map(l => typeof l === 'string' ? JSON.parse(l) : l);
+        const parsedTrxLogs = (trxLogs || []).map(l => typeof l === 'string' ? JSON.parse(l) : l);
 
         res.status(200).json({
             summary: {
-                totalRevenue,
-                totalTransactions,
+                totalRevenue: parseFloat(totalRevenue || 0),
+                totalTransactions: parseInt(totalTransactions || 0),
                 avgPrice: totalTransactions > 0 ? (totalRevenue / totalTransactions).toFixed(2) : "0.00",
-                jpyProjection: Math.floor(totalRevenue * 150),
-                autopilot: autopilotStatus,
-                health: { status: 'STANDALONE_REST_ACTIVE' }
+                jpyProjection: Math.floor(parseFloat(totalRevenue || 0) * 150),
+                autopilot: autopilotStatus === 'true',
+                health: { status: 'LIVE_REST_CONNECTED' }
             },
-            learningLogs: [], // 後ほど復旧
-            transactionLogs: [], // 後ほど復旧
-            knowledgeThemes: []
+            learningLogs: parsedLearningLogs,
+            transactionLogs: parsedTrxLogs,
+            knowledgeThemes: Object.keys(knowledgeBase || {})
         });
 
     } catch (error) {
-        res.status(200).json({ error: "BYPASS_FAILED", detail: error.message });
+        res.status(200).json({ error: "REST_CONNECTION_ERROR", detail: error.message });
     }
 };
