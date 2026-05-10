@@ -64,7 +64,7 @@ module.exports = async (req, res) => {
 };
 
 async function checkMarketSignal() {
-    const models = ["gemini-3-flash-preview", "gemini-3-flash", "gemini-3.1-flash", "gemini-1.5-flash-latest"];
+    const models = ["gemini-flash-latest", "gemini-3-flash-preview", "gemini-2.5-flash"];
     for (const model of models) {
         try {
             const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${process.env.GEMINI_API_KEY}`, {
