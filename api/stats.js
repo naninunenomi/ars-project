@@ -4,21 +4,10 @@
 
 // Redis Helper (Direct Fetch)
 const redis = async (command, ...args) => {
-    // 環境変数の自動マッピング (KV_... がなくても _REST_API_URL を探す)
-    let url = process.env.KV_REST_API_URL;
-    let token = process.env.KV_REST_API_TOKEN;
+    // 優先順位: 1.環境変数 2.ハードコード(救済用)
+    let url = process.env.KV_REST_API_URL || "https://pretty-llama-117521.upstash.io";
+    let token = process.env.KV_REST_API_TOKEN || "gQAAAAAAAcsRAAIgcDIzMTUxOGQzNmY5Yzg0ZjE1YTA0OWE4YWRmNzc2N2E3NQ";
 
-    if (!url || !token) {
-        const urlKey = Object.keys(process.env).find(k => k.includes('_REST_API_URL'));
-        const tokenKey = Object.keys(process.env).find(k => k.includes('_REST_API_TOKEN'));
-        if (urlKey && tokenKey) {
-            url = process.env[urlKey];
-            token = process.env[tokenKey];
-        }
-    }
-
-    if (!url || !token) throw new Error("Missing KV environment variables. Please check Vercel Settings.");
-    
     const res = await fetch(`${url}/${command}/${args.join('/')}`, {
         headers: { Authorization: `Bearer ${token}` }
     });
