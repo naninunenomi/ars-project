@@ -7,11 +7,18 @@ const DISCLAIMER = "※本結果はAIによる鑑定であり、100%の正確性
 
 // Redis Helper (Direct Fetch)
 const redis = async (command, ...args) => {
-    // 優先順位: 1.環境変数 2.ハードコード(救済用)
-    let url = process.env.KV_REST_API_URL || "https://pretty-llama-117521.upstash.io";
-    let token = process.env.KV_REST_API_TOKEN || "gQAAAAAAAcsRAAIgcDIzMTUxOGQzNmY5Yzg0ZjE1YTA0OWE4YWRmNzc2N2E3NQ";
+    // 徹底した空文字・スペース対策
+    let rawUrl = (process.env.KV_REST_API_URL || "").trim();
+    let url = rawUrl.startsWith("http") ? rawUrl : "https://pretty-llama-117521.upstash.io";
+    
+    let rawToken = (process.env.KV_REST_API_TOKEN || "").trim();
+    let token = rawToken.length > 10 ? rawToken : "gQAAAAAAAcsRAAIgcDIzMTUxOGQzNmY5Yzg0ZjE1YTA0OWE4YWRmNzc2N2E3NQ";
 
-    const res = await fetch(`${url}/${command}/${args.join('/')}`, {
+    // 全ての引数を安全にエンコード
+    const encodedArgs = args.map(a => encodeURIComponent(a)).join('/');
+    const fullUrl = `${url}/${command}/${encodedArgs}`;
+
+    const res = await fetch(fullUrl, {
         headers: { Authorization: `Bearer ${token}` }
     });
     const data = await res.json();
