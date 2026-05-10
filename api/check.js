@@ -60,7 +60,15 @@ module.exports = async (req, res) => {
             });
 
             const data = await geminiRes.json();
-            if (!data.candidates) throw new Error('Gemini API Error');
+            
+            if (data.error) {
+                // キーが怪しい場合は、一応ハードコード救済も視野（今はエラー詳細を返す）
+                throw new Error(`Gemini API Error: ${data.error.message} (${data.error.status})`);
+            }
+            
+            if (!data.candidates || data.candidates.length === 0) {
+                throw new Error('Gemini API Error: No candidates returned. (Possible safety block)');
+            }
             const responseText = data.candidates[0].content.parts[0].text;
             const jsonMatch = responseText.match(/\{[\s\S]*\}/);
             const finalVerdict = JSON.parse(jsonMatch ? jsonMatch[0] : responseText);
