@@ -79,19 +79,15 @@ module.exports = async (req, res) => {
                 const result = `Initiating research for: ${topic}`;
                 await redis('hset', 'ars_research_state', 'step', "1", 'data', result);
                 return res.json({ status: "PROGRESS", topic, step: 1, message: "Research plan initialized." });
-            }
-
-            if (step === 1) {
+            } else if (step === 1) {
                 // 【Step 1: 深層リサーチ（Google Grounding）】
                 const deepPrompt = `「${topic}」について、最新の法規制（景表法、薬機法等）、公的機関の摘発事例、市場での詐欺手口、消費者の不満、および信頼される表現基準をネットで徹底的に調査し、詳細なレポートを作成してください。`;
                 const researchResult = await callGemini(deepPrompt, true);
                 await redis('hset', 'ars_research_state', 'step', "2", 'data', researchResult);
                 return res.json({ status: "PROGRESS", topic, step: 2, message: "Deep research completed. Data gathered." });
-            }
-
-            if (step === 2) {
+            } else if (step === 2) {
                 // 【Step 2: 巨大マニュアルの生成と保存】
-                const synthPrompt = `以下の調査データを基に、ARS鑑定窓口用の【3,000文字超の構造化鑑定マニュアル】を作成してください。\n\nデータ:\n${state.data}\n\n構成:\n# 概要\n## 関連法規と公的基準\n## 具体的NG表現と事例（詳細）\n## 改善案と信頼構築ガイド\n## 鑑定用チェックリスト\n\n圧倒的な情報量で出力してください。`;
+                const synthPrompt = `以下の調査データを基に、ARS鑑定窓口用の【3,000文字超の構造化鑑定マニュアル】を作成してください。\n\nデータ:\n${state?.data || ""}\n\n構成:\n# 概要\n## 関連法規と公的基準\n## 具体的NG表現と事例（詳細）\n## 改善案と信頼構築ガイド\n## 鑑定用チェックリスト\n\n圧倒的な情報量で出力してください。`;
                 const manual = await callGemini(synthPrompt, false);
                 
                 await redis('hset', 'ars_knowledge_base', topic, manual);
@@ -99,6 +95,9 @@ module.exports = async (req, res) => {
                 await redis('zrem', 'ars_learning_queue', topic);
                 
                 return res.json({ status: "COMPLETED", topic, message: "Massive manual generated and saved." });
+            } else {
+                // やるべきことが無ければ即終了
+                return res.json({ status: "IDLE", message: "No active relay step." });
             }
         }
 
