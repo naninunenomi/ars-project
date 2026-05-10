@@ -65,7 +65,7 @@ module.exports = async (req, res) => {
 
 async function checkMarketSignal() {
     try {
-        const res = await fetch(`https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${process.env.GEMINI_API_KEY}`, {
+        const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${process.env.GEMINI_API_KEY}`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ contents: [{ parts: [{ text: "ARS市場監視員として、現在のAI広告法規制の動きを15文字以内で一言で。" }] }] })
