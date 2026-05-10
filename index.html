@@ -145,26 +145,33 @@
         const btn = document.querySelector('.btn-refresh');
         btn.innerText = "更新中...";
         try {
-            const r = await fetch('/api/stats.js');
+            const r = await fetch('/api/stats');
             const d = await r.json();
 
+            if (d.error) {
+                alert('Server Error: ' + d.error);
+                return;
+            }
+
             // Summary
-            document.getElementById('total-revenue').innerHTML = `${d.summary.totalRevenue}<small style="font-size:14px; margin-left:5px;">ARS</small>`;
-            document.getElementById('jpy-revenue').innerText = `¥${d.summary.jpyEquivalent}`;
+            document.getElementById('total-revenue').innerHTML = `${d.summary.totalRevenue || "0.00"}<small style="font-size:14px; margin-left:5px;">ARS</small>`;
+            document.getElementById('jpy-revenue').innerText = `¥${d.summary.jpyEquivalent || "0"}`;
             
             // History
             const histBody = document.querySelector('#history-table tbody');
-            histBody.innerHTML = Object.entries(d.dailyStats).reverse().map(([date, s]) => `
+            const dailyStats = d.dailyStats || {};
+            histBody.innerHTML = Object.entries(dailyStats).reverse().map(([date, s]) => `
                 <tr>
                     <td>${date}</td>
-                    <td>${s.transactions || 0}</td>
-                    <td>${parseFloat(s.revenue || 0).toFixed(2)} ARS</td>
+                    <td>${s?.transactions || 0}件</td>
+                    <td>${parseFloat(s?.revenue || 0).toFixed(2)} ARS</td>
                 </tr>
             `).join('') || '<tr><td colspan="3" style="text-align:center">No records.</td></tr>';
 
             // Library
             const libList = document.getElementById('library-list');
-            libList.innerHTML = Object.entries(d.library).map(([theme, content]) => `
+            const library = d.library || {};
+            libList.innerHTML = Object.entries(library).map(([theme, content]) => `
                 <div class="lib-item" onclick="showModal('${theme}', \`${content}\`)">
                     <span class="lib-theme">${theme}</span>
                     <div class="lib-content">${content}</div>
@@ -172,24 +179,27 @@
             `).join('') || '<div style="padding:20px; text-align:center">Library is empty.</div>';
 
             // Learning
-            document.getElementById('active-task').innerText = d.learning.active ? `RESEARCHING: ${d.learning.active}` : 'IDLE';
-            document.getElementById('active-progress').innerText = d.learning.progress ? `Step: ${d.learning.progress}` : 'Scanning market signals...';
-            document.getElementById('system-mode').innerText = d.learning.active ? 'LEARNING' : 'MONITORING';
+            const learning = d.learning || { queue: [] };
+            document.getElementById('active-task').innerText = learning.active ? `RESEARCHING: ${learning.active}` : 'IDLE';
+            document.getElementById('active-progress').innerText = learning.active ? 'Deep analysis in progress...' : 'Scanning market signals...';
+            document.getElementById('system-mode').innerText = learning.active ? 'LEARNING' : 'MONITORING';
             
             const queueList = document.getElementById('learning-queue');
-            queueList.innerHTML = d.learning.queue.map(q => `<div class="queue-item">${q}<span class="status-tag">WAITING</span></div>`).join('') || '<div style="padding:20px; text-align:center">Queue is empty.</div>';
+            queueList.innerHTML = learning.queue.map(q => `<div class="queue-item">${q}<span class="status-tag">WAITING</span></div>`).join('') || '<div style="padding:20px; text-align:center">Queue is empty.</div>';
 
             // Recent Transcations
             const trxList = document.getElementById('recent-transactions');
-            trxList.innerHTML = d.transactions.map(t => `
+            const transactions = d.transactions || [];
+            trxList.innerHTML = transactions.map(t => `
                 <div style="padding:8px; border-bottom:1px solid #222; display:flex; justify-content:space-between;">
-                    <span>${new Date(t.timestamp).toLocaleTimeString()} - ${t.source}</span>
-                    <span style="font-weight:700;">+${t.amount} ARS</span>
+                    <span>${t.timestamp ? new Date(t.timestamp).toLocaleTimeString() : 'N/A'} - ${t.source || 'TRX'}</span>
+                    <span style="font-weight:700;">+${t.amount || '0'} ARS</span>
                 </div>
             `).join('');
 
         } catch (e) {
-            alert('Failed to fetch stats: ' + e.message);
+            console.error(e);
+            alert('接続エラー: ' + e.message + '\n環境変数の設定を確認してください。');
         } finally {
             btn.innerText = "最新の情報に更新";
         }

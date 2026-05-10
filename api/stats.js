@@ -1,50 +1,55 @@
 /**
- * ARS Management Portal API - v10.0
- * 監督（経営者）が必要な情報をリロード時に一括提供する
+ * ARS Stats API - v10.1 (Robust Edition)
  */
 
-// Vercel KVの環境変数補完
-const restUrlKey = Object.keys(process.env).find(key => key.includes('_REST_API_URL'));
-const restTokenKey = Object.keys(process.env).find(key => key.includes('_REST_API_TOKEN'));
-if (restUrlKey && restTokenKey && !process.env.KV_REST_API_URL) {
-    process.env.KV_REST_API_URL = process.env[restUrlKey];
-    process.env.KV_REST_API_TOKEN = process.env[restTokenKey];
-}
-const { kv } = require('@vercel/kv');
+// Redis Helper (Direct Fetch)
+const redis = async (command, ...args) => {
+    const url = process.env.KV_REST_API_URL;
+    const token = process.env.KV_REST_API_TOKEN;
+    if (!url || !token) throw new Error("Missing KV environment variables");
+    
+    const res = await fetch(`${url}/${command}/${args.join('/')}`, {
+        headers: { Authorization: `Bearer ${token}` }
+    });
+    const data = await res.json();
+    return data.result;
+};
 
 module.exports = async (req, res) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
 
     try {
-        // 1. 収益・統計情報の取得
-        const totalRevenue = await kv.get('ars_total_revenue') || 0;
+        const totalRevenue = await redis('get', 'ars_total_revenue') || 0;
         
-        // 直近7日間の日別統計を取得
-        const today = new Date();
-        const days = Array.from({length: 7}, (_, i) => {
-            const d = new Date(today);
-            d.setDate(d.getDate() - i);
-            return d.toISOString().split('T')[0];
-        });
-
+        // 7日間の履歴取得
         const dailyStats = {};
-        for (const date of days) {
-            const stats = await kv.hgetall(`ars_daily_stats:${date}`);
-            if (stats) dailyStats[date] = stats;
+        for (let i = 0; i < 7; i++) {
+            const date = new Date();
+            date.setDate(date.getDate() - i);
+            const dateStr = date.toISOString().split('T')[0];
+            const stats = await redis('hgetall', `ars_daily_stats:${dateStr}`) || {};
+            // hgetallの戻り値形式を整形 (Upstash REST APIは配列 [key, val, key, val...] を返す)
+            const formatted = {};
+            if (Array.isArray(stats)) {
+                for (let j = 0; j < stats.length; j += 2) formatted[stats[j]] = stats[j+1];
+            } else {
+                Object.assign(formatted, stats);
+            }
+            dailyStats[dateStr] = formatted;
         }
 
-        // 2. 知識ライブラリ（階層構造）の取得
-        const knowledgeBase = await kv.hgetall('ars_knowledge_base') || {};
+        const knowledgeBase = await redis('hgetall', 'ars_knowledge_base') || {};
+        const formattedLib = {};
+        if (Array.isArray(knowledgeBase)) {
+            for (let j = 0; j < knowledgeBase.length; j += 2) formattedLib[knowledgeBase[j]] = knowledgeBase[j+1];
+        } else {
+            Object.assign(formattedLib, knowledgeBase);
+        }
 
-        // 3. 学習状況（進行中・予定）の取得
-        const learningQueue = await kv.lrange('ars_learning_queue', 0, 19) || [];
-        const activeTopic = await kv.get('ars_active_research_topic') || null;
-        const progress = activeTopic ? await kv.hget('ars_research_progress', activeTopic) : null;
-
-        // 4. 直近の取引履歴
-        const transactions = await kv.lrange('ars_transactions', 0, 19) || [];
-        const parsedTrx = transactions.map(t => typeof t === 'string' ? JSON.parse(t) : t);
+        const activeTopic = await redis('get', 'ars_active_research_topic');
+        const learningQueue = await redis('lrange', 'ars_learning_queue', 0, -1) || [];
+        const rawTrx = await redis('lrange', 'ars_transactions', 0, 9) || [];
+        const parsedTrx = rawTrx.map(t => JSON.parse(decodeURIComponent(t)));
 
         res.status(200).json({
             summary: {
@@ -53,10 +58,9 @@ module.exports = async (req, res) => {
                 lastUpdated: new Date().toISOString()
             },
             dailyStats,
-            library: knowledgeBase,
+            library: formattedLib,
             learning: {
                 active: activeTopic,
-                progress: progress,
                 queue: learningQueue
             },
             transactions: parsedTrx
