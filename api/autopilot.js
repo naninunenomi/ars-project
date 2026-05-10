@@ -64,19 +64,17 @@ module.exports = async (req, res) => {
 };
 
 async function checkMarketSignal() {
-    const models = ["gemini-flash-latest", "gemini-3-flash-preview", "gemini-2.5-flash"];
-    for (const model of models) {
-        try {
-            const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${process.env.GEMINI_API_KEY}`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ contents: [{ parts: [{ text: "ARS市場監視員として、現在のAI広告法規制の動きを15文字以内で一言で。" }] }] })
-            });
-            const data = await res.json();
-            if (data.candidates && data.candidates.length > 0) {
-                return data.candidates[0].content.parts[0].text.trim();
-            }
-        } catch (e) {}
-    }
+    const model = "gemini-2.5-flash";
+    try {
+        const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${process.env.GEMINI_API_KEY}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ contents: [{ parts: [{ text: "ARS市場監視員として、現在のAI広告法規制の動きを15文字以内で一言で。" }] }] })
+        });
+        const data = await res.json();
+        if (data.candidates && data.candidates.length > 0) {
+            return data.candidates[0].content.parts[0].text.trim();
+        }
+    } catch (e) {}
     return "Market stable.";
 }
