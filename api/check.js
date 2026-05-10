@@ -53,8 +53,8 @@ module.exports = async (req, res) => {
 
             const prompt = `以下のテキストを「${theme}」の観点で精密に鑑定してください。\n【テキスト】: "${text}"\n【参照知識】: ${knowledge || "なし。"}\nJSON形式のみで回答: { "verdict": "SAFE/RISKY/DANGER", "reason": "理由" }`;
 
-            // 【二段構えの脳】
-            const models = ["gemini-1.5-flash", "gemini-pro", "gemini-1.0-pro"];
+            // 【2026年版：最新世代の三段構え】
+            const models = ["gemini-1.5-flash-latest", "gemini-3.1-flash", "gemini-pro-latest"];
             let lastError = null;
 
             for (const model of models) {
