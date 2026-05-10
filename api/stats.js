@@ -54,7 +54,7 @@ module.exports = async (req, res) => {
         }
 
         const activeTopic = await redis('get', 'ars_active_research_topic');
-        const learningQueue = await redis('lrange', 'ars_learning_queue', 0, -1) || [];
+        const learningQueue = await redis('zrevrange', 'ars_learning_queue', 0, -1) || [];
         const rawTrx = await redis('lrange', 'ars_transactions', 0, 9) || [];
         const parsedTrx = rawTrx.map(t => JSON.parse(decodeURIComponent(t)));
 
