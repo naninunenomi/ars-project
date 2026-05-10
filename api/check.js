@@ -1,117 +1,82 @@
 /**
- * ARS AI Appraisal Window - v10.1 (Robust Edition)
+ * ARS Gatekeeper - v11.0 (Charter Compliant)
+ * 憲章第2条に基づき、爆速判定・需要可視化・階層検索を実装
  */
 
-const crypto = require('crypto');
 const DISCLAIMER = "※本結果はAIによる鑑定であり、100%の正確性を保証するものではありません。最終的な判断は専門家にご確認ください。";
 
-// Redis Helper (Direct Fetch)
+// Redis Helper (Hardened for v11.0)
 const redis = async (command, ...args) => {
-    // 徹底した空文字・スペース対策
     let rawUrl = (process.env.KV_REST_API_URL || "").trim();
     let url = rawUrl.startsWith("http") ? rawUrl : "https://pretty-llama-117521.upstash.io";
-    
     let rawToken = (process.env.KV_REST_API_TOKEN || "").trim();
     let token = rawToken.length > 10 ? rawToken : "gQAAAAAAAcsRAAIgcDIzMTUxOGQzNmY5Yzg0ZjE1YTA0OWE4YWRmNzc2N2E3NQ";
-
-    // 全ての引数を安全にエンコード
     const encodedArgs = args.map(a => encodeURIComponent(a)).join('/');
-    const fullUrl = `${url}/${command}/${encodedArgs}`;
-
-    const res = await fetch(fullUrl, {
-        headers: { Authorization: `Bearer ${token}` }
-    });
+    const res = await fetch(`${url}/${command}/${encodedArgs}`, { headers: { Authorization: `Bearer ${token}` } });
     const data = await res.json();
     return data.result;
 };
 
 module.exports = async (req, res) => {
-    const startTime = Date.now();
     res.setHeader('Access-Control-Allow-Origin', '*');
-    if (req.method === 'OPTIONS') return res.status(200).end();
-
-    const { text, theme = "一般広告" } = req.body || {};
-    if (!text) return res.status(400).json({ error: 'Text is required' });
-
-    const timeoutPromise = new Promise((_, reject) => setTimeout(() => reject(new Error('TIMEOUT_SOON')), 8500));
+    const { text, theme } = req.body;
+    
+    if (!text || !theme) return res.status(400).json({ error: "Text and Theme are required.", disclaimer: DISCLAIMER });
 
     try {
-        const hash = crypto.createHash('md5').update(text).digest('hex');
-        const cacheKey = `ars_cache:${hash}`;
-        
-        const cachedResponse = await redis('get', cacheKey);
-        if (cachedResponse) {
-            const price = (0.5 + Math.random() * 0.2).toFixed(2);
-            await recordTransaction(price, 'CACHE_HIT');
-            return res.json({ ...JSON.parse(cachedResponse), price: `${price} ARS`, source: 'CACHE', disclaimer: DISCLAIMER });
+        // --- 憲章第4条-3: 階層型遡り検索 (Hierarchical Search) ---
+        const themeParts = theme.split('/');
+        let manual = null;
+        let activeTheme = theme;
+
+        // 具体的なテーマから順に親カテゴリへ遡ってマニュアルを探す
+        for (let i = themeParts.length; i > 0; i--) {
+            const currentPath = themeParts.slice(0, i).join('/');
+            manual = await redis('hget', 'ars_knowledge_base', currentPath);
+            if (manual) {
+                activeTheme = currentPath;
+                break;
+            }
         }
 
-        const appraisalTask = async () => {
-            const knowledge = await redis('hget', 'ars_knowledge_base', theme);
-            let source = 'GEMINI_APPRAISAL';
-            let basePrice = 1.1;
+        const unitPrice = await redis('get', 'ars_unit_price') || "1.15";
 
-            if (knowledge) {
-                basePrice = 0.9;
-                source = 'KNOWLEDGE_LIBRARY';
-            } else {
-                await redis('rpush', 'ars_learning_queue', theme);
-            }
-
-            const prompt = `以下のテキストを「${theme}」の観点で精密に鑑定してください。\n【テキスト】: "${text}"\n【参照知識】: ${knowledge || "なし。"}\nJSON形式のみで回答: { "verdict": "SAFE/RISKY/DANGER", "reason": "理由" }`;
-
-            const model = "gemini-2.5-flash"; // 監督のキーで確認済みの最速モデル
-            try {
-                const geminiRes = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${process.env.GEMINI_API_KEY}`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
+        if (manual) {
+            // --- 憲章第2条-1: 即断即決 ---
+            const prompt = `以下の【鑑定マニュアル】を絶対基準として広告を鑑定せよ。\nマニュアル:\n${manual}\n対象テキスト: "${text}"\nJSONのみで回答: { "verdict": "SAFE/RISKY/DANGER", "reason": "理由" }`;
+            
+            const geminiRes = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${process.env.GEMINI_API_KEY}`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
+            });
+            const data = await geminiRes.json();
+            
+            if (data.candidates && data.candidates.length > 0) {
+                const responseText = data.candidates[0].content.parts[0].text;
+                const jsonMatch = responseText.match(/\{.*\}/s);
+                const result = JSON.parse(jsonMatch ? jsonMatch[0] : responseText);
+                
+                return res.json({ 
+                    ...result, 
+                    price: `${unitPrice} ARS`, 
+                    source: manual === theme ? 'KNOWLEDGE_LIBRARY' : `HIERARCHICAL_MATCH (${activeTheme})`, 
+                    disclaimer: DISCLAIMER,
+                    model: "gemini-2.5-flash"
                 });
-                const data = await geminiRes.json();
-                
-                if (data.error) throw new Error(data.error.message);
-                
-                if (data.candidates && data.candidates.length > 0) {
-                    const responseText = data.candidates[0].content.parts[0].text;
-                    const jsonMatch = responseText.match(/\{[\s\S]*\}/);
-                    const finalVerdict = JSON.parse(jsonMatch ? jsonMatch[0] : responseText);
-                    const finalPrice = (basePrice + (Math.random() * 0.1)).toFixed(2);
-                    await recordTransaction(finalPrice, source);
-                    
-                    await fetch(`${process.env.KV_REST_API_URL}/set/${cacheKey}/${encodeURIComponent(JSON.stringify(finalVerdict))}/EX/86400`, {
-                        headers: { Authorization: `Bearer ${process.env.KV_REST_API_TOKEN}` }
-                    });
-                    return { ...finalVerdict, price: `${finalPrice} ARS`, source, model };
-                }
-            } catch (e) {
-                throw new Error(`Gemini Error: ${e.message}`);
             }
-            throw new Error(`Model ${model} returned no candidates.`);
-        };
-
-        const result = await Promise.race([appraisalTask(), timeoutPromise]);
-        return res.json({ ...result, disclaimer: DISCLAIMER });
-
-    } catch (error) {
-        if (error.message === 'TIMEOUT_SOON') {
-            return res.json({ status: 'BUSY', message: "解析に時間を要しています。10秒後に再試行してください。", disclaimer: DISCLAIMER });
+        } else {
+            // --- 憲章第2条-2&3: 誠実な対応 & 需要の可視化 ---
+            // 需要スコアをインクリメント（ZSET）
+            await redis('zincrby', 'ars_learning_queue', 1, theme);
+            
+            return res.json({
+                status: "STUDYING",
+                message: `ARS Manager is researching the theme: "${theme}". Please retry in 60-120 seconds.`,
+                disclaimer: DISCLAIMER
+            });
         }
-        return res.status(500).json({ error: error.message, disclaimer: DISCLAIMER });
+    } catch (e) {
+        return res.status(500).json({ error: e.message, disclaimer: DISCLAIMER });
     }
 };
-
-async function recordTransaction(price, source) {
-    const today = new Date().toISOString().split('T')[0];
-    const revenue = parseFloat(price);
-    const url = process.env.KV_REST_API_URL;
-    const token = process.env.KV_REST_API_TOKEN;
-    
-    const log = JSON.stringify({ timestamp: new Date().toISOString(), amount: price, source });
-    
-    // パイプラインが使えないため個別実行（安定重視）
-    await fetch(`${url}/hincrbyfloat/ars_daily_stats:${today}/revenue/${revenue}`, { headers: { Authorization: `Bearer ${token}` } });
-    await fetch(`${url}/hincrby/ars_daily_stats:${today}/transactions/1`, { headers: { Authorization: `Bearer ${token}` } });
-    await fetch(`${url}/incrbyfloat/ars_total_revenue/${revenue}`, { headers: { Authorization: `Bearer ${token}` } });
-    await fetch(`${url}/lpush/ars_transactions/${encodeURIComponent(log)}`, { headers: { Authorization: `Bearer ${token}` } });
-    await fetch(`${url}/ltrim/ars_transactions/0/49`, { headers: { Authorization: `Bearer ${token}` } });
-}
