@@ -64,13 +64,19 @@ module.exports = async (req, res) => {
 };
 
 async function checkMarketSignal() {
-    try {
-        const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${process.env.GEMINI_API_KEY}`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ contents: [{ parts: [{ text: "ARS市場監視員として、現在のAI広告法規制の動きを15文字以内で一言で。" }] }] })
-        });
-        const data = await res.json();
-        return data.candidates[0].content.parts[0].text.trim();
-    } catch { return "Market stable."; }
+    const models = ["gemini-1.5-flash", "gemini-pro", "gemini-1.0-pro"];
+    for (const model of models) {
+        try {
+            const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${process.env.GEMINI_API_KEY}`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ contents: [{ parts: [{ text: "ARS市場監視員として、現在のAI広告法規制の動きを15文字以内で一言で。" }] }] })
+            });
+            const data = await res.json();
+            if (data.candidates && data.candidates.length > 0) {
+                return data.candidates[0].content.parts[0].text.trim();
+            }
+        } catch (e) {}
+    }
+    return "Market stable.";
 }

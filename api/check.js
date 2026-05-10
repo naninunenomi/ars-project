@@ -53,35 +53,41 @@ module.exports = async (req, res) => {
 
             const prompt = `以下のテキストを「${theme}」の観点で精密に鑑定してください。\n【テキスト】: "${text}"\n【参照知識】: ${knowledge || "なし。"}\nJSON形式のみで回答: { "verdict": "SAFE/RISKY/DANGER", "reason": "理由" }`;
 
-            const geminiRes = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${process.env.GEMINI_API_KEY}`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
-            });
+            // 【二段構えの脳】
+            const models = ["gemini-1.5-flash", "gemini-pro", "gemini-1.0-pro"];
+            let lastError = null;
 
-            const data = await geminiRes.json();
-            
-            if (data.error) {
-                // キーが怪しい場合は、一応ハードコード救済も視野（今はエラー詳細を返す）
-                throw new Error(`Gemini API Error: ${data.error.message} (${data.error.status})`);
+            for (const model of models) {
+                try {
+                    const geminiRes = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${process.env.GEMINI_API_KEY}`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
+                    });
+                    const data = await geminiRes.json();
+                    
+                    if (data.error) {
+                        lastError = data.error.message;
+                        continue; // 次のモデルを試す
+                    }
+                    
+                    if (data.candidates && data.candidates.length > 0) {
+                        const responseText = data.candidates[0].content.parts[0].text;
+                        const jsonMatch = responseText.match(/\{[\s\S]*\}/);
+                        const finalVerdict = JSON.parse(jsonMatch ? jsonMatch[0] : responseText);
+                        const finalPrice = (basePrice + (Math.random() * 0.1)).toFixed(2);
+                        await recordTransaction(finalPrice, source);
+                        
+                        await fetch(`${process.env.KV_REST_API_URL}/set/${cacheKey}/${encodeURIComponent(JSON.stringify(finalVerdict))}/EX/86400`, {
+                            headers: { Authorization: `Bearer ${process.env.KV_REST_API_TOKEN}` }
+                        });
+                        return { ...finalVerdict, price: `${finalPrice} ARS`, source, model };
+                    }
+                } catch (e) {
+                    lastError = e.message;
+                }
             }
-            
-            if (!data.candidates || data.candidates.length === 0) {
-                throw new Error('Gemini API Error: No candidates returned. (Possible safety block)');
-            }
-            const responseText = data.candidates[0].content.parts[0].text;
-            const jsonMatch = responseText.match(/\{[\s\S]*\}/);
-            const finalVerdict = JSON.parse(jsonMatch ? jsonMatch[0] : responseText);
-
-            const finalPrice = (basePrice + (Math.random() * 0.1)).toFixed(2);
-            await recordTransaction(finalPrice, source);
-            
-            // Set cache for 24h
-            await fetch(`${process.env.KV_REST_API_URL}/set/${cacheKey}/${encodeURIComponent(JSON.stringify(finalVerdict))}/EX/86400`, {
-                headers: { Authorization: `Bearer ${process.env.KV_REST_API_TOKEN}` }
-            });
-
-            return { ...finalVerdict, price: `${finalPrice} ARS`, source };
+            throw new Error(`All models failed. Last error: ${lastError}`);
         };
 
         const result = await Promise.race([appraisalTask(), timeoutPromise]);
