@@ -4,8 +4,19 @@
 
 // Redis Helper (Direct Fetch)
 const redis = async (command, ...args) => {
-    const url = process.env.KV_REST_API_URL;
-    const token = process.env.KV_REST_API_TOKEN;
+    // 環境変数の自動マッピング (KV_... がなくても _REST_API_URL を探す)
+    let url = process.env.KV_REST_API_URL;
+    let token = process.env.KV_REST_API_TOKEN;
+
+    if (!url || !token) {
+        const urlKey = Object.keys(process.env).find(k => k.includes('_REST_API_URL'));
+        const tokenKey = Object.keys(process.env).find(k => k.includes('_REST_API_TOKEN'));
+        if (urlKey && tokenKey) {
+            url = process.env[urlKey];
+            token = process.env[tokenKey];
+        }
+    }
+
     if (!url || !token) throw new Error("Missing KV environment variables");
     
     const res = await fetch(`${url}/${command}/${args.join('/')}`, {
