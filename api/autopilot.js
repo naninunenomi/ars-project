@@ -73,17 +73,28 @@ module.exports = async (req, res) => {
         }
 
         // --- 8秒リレー実行ループ ---
+        const host = req.headers.host;
+        const selfUrl = `https://${host}/api/autopilot.js`;
+
         while (Date.now() - startTime < VOW_LIMIT) {
             if (step === 0) {
                 // 【Step 0: 方針決定】
                 const result = `Initiating research for: ${topic}`;
                 await redis('hset', 'ars_research_state', 'step', "1", 'data', result);
+                
+                // 次を予約
+                fetch(selfUrl).catch(() => {});
+                
                 return res.json({ status: "PROGRESS", topic, step: 1, message: "Research plan initialized." });
             } else if (step === 1) {
                 // 【Step 1: 深層リサーチ（Google Grounding）】
                 const deepPrompt = `「${topic}」について、最新の法規制（景表法、薬機法等）、公的機関の摘発事例、市場での詐欺手口、消費者の不満、および信頼される表現基準をネットで徹底的に調査し、詳細なレポートを作成してください。`;
                 const researchResult = await callGemini(deepPrompt, true);
                 await redis('hset', 'ars_research_state', 'step', "2", 'data', researchResult);
+                
+                // 次を予約
+                fetch(selfUrl).catch(() => {});
+                
                 return res.json({ status: "PROGRESS", topic, step: 2, message: "Deep research completed. Data gathered." });
             } else if (step === 2) {
                 // 【Step 2: 巨大マニュアルの生成と保存】

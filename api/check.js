@@ -70,6 +70,11 @@ module.exports = async (req, res) => {
             // 需要スコアをインクリメント（ZSET）
             await redis('zincrby', 'ars_learning_queue', 1, theme);
             
+            // ★【自律化】店長をバックグラウンドで叩き起こす
+            const host = req.headers.host;
+            const protocol = req.headers['x-forwarded-proto'] || 'https';
+            fetch(`${protocol}://${host}/api/autopilot.js`).catch(() => {});
+            
             return res.json({
                 status: "STUDYING",
                 message: `ARS Manager is researching the theme: "${theme}". Please retry in 60-120 seconds.`,
