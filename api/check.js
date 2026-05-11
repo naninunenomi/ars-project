@@ -32,7 +32,7 @@ module.exports = async (req, res) => {
         // 具体的なテーマから順に親カテゴリへ遡ってマニュアルを探す
         for (let i = themeParts.length; i > 0; i--) {
             const currentPath = themeParts.slice(0, i).join('/');
-            manual = await redis('hget', 'ars_knowledge_base', currentPath);
+            manual = await redis('hget', 'ars_v12_knowledge', currentPath);
             if (manual) {
                 activeTheme = currentPath;
                 break;
@@ -67,10 +67,10 @@ module.exports = async (req, res) => {
             }
         } else {
             // --- 憲章第2条-2&3: 誠実な対応 & 需要の可視化 ---
-            // 需要スコアをインクリメント（ZSET）
-            await redis('zincrby', 'ars_learning_queue', 1, theme);
+            // Need to increment demand score (ZSET)
+            await redis('zincrby', 'ars_v12_queue', 1, theme);
             
-            // ★【自律化】店長をバックグラウンドで叩き起こす（接続確立まで0.8秒待機）
+            // ★【自律化】Manager to start background research
             const host = req.headers.host;
             const protocol = req.headers['x-forwarded-proto'] || 'https';
             try {

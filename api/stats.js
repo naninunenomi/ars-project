@@ -45,7 +45,7 @@ module.exports = async (req, res) => {
             dailyStats[dateStr] = formatted;
         }
 
-        const knowledgeBase = await redis('hgetall', 'ars_knowledge_base') || {};
+        const knowledgeBase = await redis('hgetall', 'ars_v12_knowledge') || {};
         const formattedLib = {};
         if (Array.isArray(knowledgeBase)) {
             for (let j = 0; j < knowledgeBase.length; j += 2) formattedLib[knowledgeBase[j]] = knowledgeBase[j+1];
@@ -54,7 +54,7 @@ module.exports = async (req, res) => {
         }
 
         const activeTopic = await redis('get', 'ars_active_research_topic');
-        const learningQueue = await redis('zrevrange', 'ars_learning_queue', 0, -1) || [];
+        const learningQueue = await redis('zrevrange', 'ars_v12_queue', 0, -1) || [];
         const rawTrx = await redis('lrange', 'ars_transactions', 0, 9) || [];
         const parsedTrx = rawTrx.map(t => JSON.parse(decodeURIComponent(t)));
 

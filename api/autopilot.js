@@ -43,27 +43,27 @@ module.exports = async (req, res) => {
         const now = Date.now();
         
         // 2. リレー状態の取得
-        let state = await redis('hgetall', 'ars_research_state');
+        let state = await redis('hgetall', 'ars_v12_state');
         let topic = state?.topic;
         let step = state ? parseInt(state.step) : -1;
 
         // --- ルーチン判定ロジック (憲章第3.2条) ---
         if (step === -1) {
             // 需要（付箋）があるか確認
-            const [topTheme] = await redis('zrevrange', 'ars_learning_queue', 0, 0);
+            const [topTheme] = await redis('zrevrange', 'ars_v12_queue', 0, 0);
             
             if (topTheme) {
                 topic = topTheme;
                 step = 0;
-                await redis('hset', 'ars_research_state', 'topic', topic, 'step', "0", 'data', "");
+                await redis('hset', 'ars_v12_state', 'topic', topic, 'step', "0", 'data', "");
             } else if (now - lastMaint > 86400000) {
                 // 24時間経っていたらメンテナンス（既存知識の1つを再学習）へ
-                const keys = await redis('hkeys', 'ars_knowledge_base');
+                const keys = await redis('hkeys', 'ars_v12_knowledge');
                 if (keys && keys.length > 0) {
                     topic = keys[Math.floor(Math.random() * keys.length)];
                     step = 0;
                     await redis('set', 'ars_last_maint_time', now.toString());
-                    await redis('hset', 'ars_research_state', 'topic', topic, 'step', "0", 'data', "MAINTENANCE");
+                    await redis('hset', 'ars_v12_state', 'topic', topic, 'step', "0", 'data', "MAINTENANCE");
                 }
             } else {
                 // 需要もメンテもなければ「市場パトロール（スカウティング）」
@@ -80,7 +80,7 @@ module.exports = async (req, res) => {
             if (step === 0) {
                 // 【Step 0: 方針決定】
                 const result = `Initiating research for: ${topic}`;
-                await redis('hset', 'ars_research_state', 'step', "1", 'data', result);
+                await redis('hset', 'ars_v12_state', 'step', "1", 'data', result);
                 
                 // 次を予約（0.8秒待機）
                 try {
@@ -92,7 +92,7 @@ module.exports = async (req, res) => {
                 // 【Step 1: 深層リサーチ（Google Grounding）】
                 const deepPrompt = `「${topic}」について、最新の法規制（景表法、薬機法等）、公的機関の摘発事例、市場での詐欺手口、消費者の不満、および信頼される表現基準をネットで徹底的に調査し、詳細なレポートを作成してください。`;
                 const researchResult = await callGemini(deepPrompt, true);
-                await redis('hset', 'ars_research_state', 'step', "2", 'data', researchResult);
+                await redis('hset', 'ars_v12_state', 'step', "2", 'data', researchResult);
                 
                 // 次を予約（0.8秒待機）
                 try {
@@ -105,9 +105,9 @@ module.exports = async (req, res) => {
                 const synthPrompt = `以下の調査データを基に、ARS鑑定窓口用の【3,000文字超の構造化鑑定マニュアル】を作成してください。\n\nデータ:\n${state?.data || ""}\n\n構成:\n# 概要\n## 関連法規と公的基準\n## 具体的NG表現と事例（詳細）\n## 改善案と信頼構築ガイド\n## 鑑定用チェックリスト\n\n圧倒的な情報量で出力してください。`;
                 const manual = await callGemini(synthPrompt, false);
                 
-                await redis('hset', 'ars_knowledge_base', topic, manual);
-                await redis('del', 'ars_research_state');
-                await redis('zrem', 'ars_learning_queue', topic);
+                await redis('hset', 'ars_v12_knowledge', topic, manual);
+                await redis('del', 'ars_v12_state');
+                await redis('zrem', 'ars_v12_queue', topic);
                 
                 return res.json({ status: "COMPLETED", topic, message: "Massive manual generated and saved." });
             } else {
