@@ -70,10 +70,15 @@ module.exports = async (req, res) => {
             // 需要スコアをインクリメント（ZSET）
             await redis('zincrby', 'ars_learning_queue', 1, theme);
             
-            // ★【自律化】店長をバックグラウンドで叩き起こす
+            // ★【自律化】店長をバックグラウンドで叩き起こす（接続確立まで0.8秒待機）
             const host = req.headers.host;
             const protocol = req.headers['x-forwarded-proto'] || 'https';
-            fetch(`${protocol}://${host}/api/autopilot.js`).catch(() => {});
+            try {
+                await Promise.race([
+                    fetch(`${protocol}://${host}/api/autopilot.js`),
+                    new Promise(resolve => setTimeout(resolve, 800))
+                ]);
+            } catch (e) {}
             
             return res.json({
                 status: "STUDYING",

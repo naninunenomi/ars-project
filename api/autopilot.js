@@ -82,8 +82,10 @@ module.exports = async (req, res) => {
                 const result = `Initiating research for: ${topic}`;
                 await redis('hset', 'ars_research_state', 'step', "1", 'data', result);
                 
-                // 次を予約
-                fetch(selfUrl).catch(() => {});
+                // 次を予約（0.8秒待機）
+                try {
+                    await Promise.race([fetch(selfUrl), new Promise(resolve => setTimeout(resolve, 800))]);
+                } catch (e) {}
                 
                 return res.json({ status: "PROGRESS", topic, step: 1, message: "Research plan initialized." });
             } else if (step === 1) {
@@ -92,8 +94,10 @@ module.exports = async (req, res) => {
                 const researchResult = await callGemini(deepPrompt, true);
                 await redis('hset', 'ars_research_state', 'step', "2", 'data', researchResult);
                 
-                // 次を予約
-                fetch(selfUrl).catch(() => {});
+                // 次を予約（0.8秒待機）
+                try {
+                    await Promise.race([fetch(selfUrl), new Promise(resolve => setTimeout(resolve, 800))]);
+                } catch (e) {}
                 
                 return res.json({ status: "PROGRESS", topic, step: 2, message: "Deep research completed. Data gathered." });
             } else if (step === 2) {
