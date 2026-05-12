@@ -42,10 +42,20 @@ module.exports = async (req, res) => {
         const lastMaint = await redis('get', 'ars_last_maint_time') || 0;
         const now = Date.now();
         
-        // 2. リレー状態の取得
-        let state = await redis('hgetall', 'ars_v12_state');
+        // 2. リレー状態の取得 (Upstashのhgetallは空の時に [] を返す)
+        const rawState = await redis('hgetall', 'ars_v12_state');
+        let state = null;
+        if (rawState && !Array.isArray(rawState)) {
+            state = rawState;
+        } else if (Array.isArray(rawState) && rawState.length > 0) {
+            // 配列形式 [key, val, key, val] をオブジェクトに変換
+            state = {};
+            for (let i = 0; i < rawState.length; i += 2) state[rawState[i]] = rawState[i+1];
+        }
+
         let topic = state?.topic;
         let step = state ? parseInt(state.step) : -1;
+        if (isNaN(step)) step = -1;
 
         // --- ルーチン判定ロジック (憲章第3.2条) ---
         if (step === -1) {
