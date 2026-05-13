@@ -66,34 +66,34 @@ module.exports = async (req, res) => {
                 });
             }
         } else {
-            // --- 憲章第2条-3&4: 需要の可視化 & 同期型キックスタート ---
-            // 需要スコアをインクリメント（ZSET）
+            // --- 憲章第2.2条: 非同期キックスタート（GitHubへの指令） ---
             await redis('zincrby', 'ars_v12_queue', 1, theme);
             
-            // ★【要塞化】店長の机が空なら、窓口がその場で「Step 0」を書き込む
-            const currentState = await redis('hgetall', 'ars_v12_state');
-            const isIdle = !currentState || (Array.isArray(currentState) && currentState.length === 0);
+            // ★【要塞化】GitHub Actions 研究員を起動する
+            const owner = "n-kyohei"; // リポジトリの所有者
+            const repo = "ars-project"; // リポジトリ名
+            const ghToken = process.env.GH_PAT; // GitHub Personal Access Token
             
-            if (isIdle) {
-                // 店長に代わって「仕事の予約」を完了させる
-                await redis('hset', 'ars_v12_state', 'topic', theme, 'step', "0", 'data', "INIT_BY_GATEKEEPER");
+            if (ghToken) {
+                try {
+                    // GitHub APIへ指令を送信（非同期）
+                    fetch(`https://api.github.com/repos/${owner}/${repo}/dispatches`, {
+                        method: 'POST',
+                        headers: {
+                            'Authorization': `Bearer ${ghToken}`,
+                            'Accept': 'application/vnd.github+json',
+                            'X-GitHub-Api-Version': '2022-11-28'
+                        },
+                        body: JSON.stringify({ event_type: "ars-research-command" })
+                    });
+                } catch (e) {
+                    console.error("GitHub Trigger Error:", e);
+                }
             }
 
-            // ★【自律化】店長をバックグラウンドで叩き起こす（接続確立まで0.8秒待機）
-            const host = req.headers.host;
-            const protocol = req.headers['x-forwarded-proto'] || 'https';
-            try {
-                await Promise.race([
-                    fetch(`${protocol}://${host}/api/autopilot.js`, {
-                        headers: { 'x-ars-auth': 'fortress-v13' } // 内部呼び出しの合図
-                    }),
-                    new Promise(resolve => setTimeout(resolve, 800))
-                ]);
-            } catch (e) {}
-            
             return res.json({
                 status: "STUDYING",
-                message: `ARS Manager is researching the theme: "${theme}". Please retry in 60-120 seconds.`,
+                message: `ARS Researcher has been dispatched for theme: "${theme}". Deep research is in progress.`,
                 disclaimer: DISCLAIMER
             });
         }
