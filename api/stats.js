@@ -4,19 +4,15 @@
 
 // Redis Helper (Direct Fetch)
 const redis = async (command, ...args) => {
-    // 徹底した空文字・スペース対策
     let rawUrl = (process.env.KV_REST_API_URL || "").trim();
     let url = rawUrl.startsWith("http") ? rawUrl : "https://pretty-llama-117521.upstash.io";
-    
     let rawToken = (process.env.KV_REST_API_TOKEN || "").trim();
     let token = rawToken.length > 10 ? rawToken : "gQAAAAAAAcsRAAIgcDIzMTUxOGQzNmY5Yzg0ZjE1YTA0OWE4YWRmNzc2N2E3NQ";
 
-    // 全ての引数を安全にエンコード
-    const encodedArgs = args.map(a => encodeURIComponent(a)).join('/');
-    const fullUrl = `${url}/${command}/${encodedArgs}`;
-
-    const res = await fetch(fullUrl, {
-        headers: { Authorization: `Bearer ${token}` }
+    const res = await fetch(`${url}/`, {
+        method: 'POST',
+        headers: { Authorization: `Bearer ${token}` },
+        body: JSON.stringify([command, ...args])
     });
     const data = await res.json();
     return data.result;

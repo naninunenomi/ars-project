@@ -11,8 +11,13 @@ const redis = async (command, ...args) => {
     let url = rawUrl.startsWith("http") ? rawUrl : "https://pretty-llama-117521.upstash.io";
     let rawToken = (process.env.KV_REST_API_TOKEN || "").trim();
     let token = rawToken.length > 10 ? rawToken : "gQAAAAAAAcsRAAIgcDIzMTUxOGQzNmY5Yzg0ZjE1YTA0OWE4YWRmNzc2N2E3NQ";
-    const encodedArgs = args.map(a => encodeURIComponent(a)).join('/');
-    const res = await fetch(`${url}/${command}/${encodedArgs}`, { headers: { Authorization: `Bearer ${token}` } });
+
+    // ★【要塞化】POST方式で巨大データを安全にやり取り
+    const res = await fetch(`${url}/`, {
+        method: 'POST',
+        headers: { Authorization: `Bearer ${token}` },
+        body: JSON.stringify([command, ...args])
+    });
     const data = await res.json();
     return data.result;
 };
