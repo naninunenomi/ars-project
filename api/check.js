@@ -50,7 +50,7 @@ module.exports = async (req, res) => {
             // --- 憲章第2条-1: 即断即決 ---
             const prompt = `以下の【鑑定マニュアル】を絶対基準として広告を鑑定せよ。\nマニュアル:\n${manual}\n対象テキスト: "${text}"\nJSONのみで回答: { "verdict": "SAFE/RISKY/DANGER", "reason": "理由" }`;
             
-            const geminiRes = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${process.env.GEMINI_API_KEY}`, {
+            const geminiRes = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${process.env.GEMINI_API_KEY}`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
@@ -67,7 +67,15 @@ module.exports = async (req, res) => {
                     price: `${unitPrice} ARS`, 
                     source: manual === theme ? 'KNOWLEDGE_LIBRARY' : `HIERARCHICAL_MATCH (${activeTheme})`, 
                     disclaimer: DISCLAIMER,
-                    model: "gemini-2.5-flash"
+                    model: "gemini-2.0-flash"
+                });
+            } else {
+                // --- 憲章第4.3条: 誠実性の担保（不適切な回答の回避） ---
+                console.error("Gemini Valuation Failed:", data);
+                return res.json({
+                    status: "STUDYING",
+                    message: "Knowledge exists, but valuation failed. Refining internal logic.",
+                    disclaimer: DISCLAIMER
                 });
             }
         } else {
