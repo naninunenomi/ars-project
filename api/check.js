@@ -76,18 +76,24 @@ module.exports = async (req, res) => {
             
             if (ghToken) {
                 try {
-                    // GitHub APIへ指令を送信（非同期）
-                    fetch(`https://api.github.com/repos/${owner}/${repo}/dispatches`, {
+                    // ★【重要】GitHub APIは User-Agent 必須、かつ確実に届くまで await する
+                    const triggerRes = await fetch(`https://api.github.com/repos/${owner}/${repo}/dispatches`, {
                         method: 'POST',
                         headers: {
                             'Authorization': `Bearer ${ghToken}`,
                             'Accept': 'application/vnd.github+json',
-                            'X-GitHub-Api-Version': '2022-11-28'
+                            'X-GitHub-Api-Version': '2022-11-28',
+                            'User-Agent': 'ARS-Fortress-v14'
                         },
                         body: JSON.stringify({ event_type: "ars-research-command" })
                     });
+                    
+                    if (!triggerRes.ok) {
+                        const errText = await triggerRes.text();
+                        console.error("GitHub Trigger Failed:", triggerRes.status, errText);
+                    }
                 } catch (e) {
-                    console.error("GitHub Trigger Error:", e);
+                    console.error("GitHub Trigger Exception:", e);
                 }
             }
 
