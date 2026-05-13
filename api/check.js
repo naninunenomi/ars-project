@@ -66,16 +66,27 @@ module.exports = async (req, res) => {
                 });
             }
         } else {
-            // --- 憲章第2条-2&3: 誠実な対応 & 需要の可視化 ---
-            // Need to increment demand score (ZSET)
+            // --- 憲章第2条-3&4: 需要の可視化 & 同期型キックスタート ---
+            // 需要スコアをインクリメント（ZSET）
             await redis('zincrby', 'ars_v12_queue', 1, theme);
             
-            // ★【自律化】Manager to start background research
+            // ★【要塞化】店長の机が空なら、窓口がその場で「Step 0」を書き込む
+            const currentState = await redis('hgetall', 'ars_v12_state');
+            const isIdle = !currentState || (Array.isArray(currentState) && currentState.length === 0);
+            
+            if (isIdle) {
+                // 店長に代わって「仕事の予約」を完了させる
+                await redis('hset', 'ars_v12_state', 'topic', theme, 'step', "0", 'data', "INIT_BY_GATEKEEPER");
+            }
+
+            // ★【自律化】店長をバックグラウンドで叩き起こす（接続確立まで0.8秒待機）
             const host = req.headers.host;
             const protocol = req.headers['x-forwarded-proto'] || 'https';
             try {
                 await Promise.race([
-                    fetch(`${protocol}://${host}/api/autopilot.js`),
+                    fetch(`${protocol}://${host}/api/autopilot.js`, {
+                        headers: { 'x-ars-auth': 'fortress-v13' } // 内部呼び出しの合図
+                    }),
                     new Promise(resolve => setTimeout(resolve, 800))
                 ]);
             } catch (e) {}

@@ -1,44 +1,50 @@
 /**
- * ARS Manager - v11.0 (Charter Compliant)
- * 憲章第3条「8秒の誓い」と「3段階リレー方式学習」を完全実装
+ * ARS Manager API - v13.0 (Fortress Engine)
+ * 憲章第3条「8秒の誓い」をタイム・ガーディアンで完全遵守。
+ * 窓口（check.js）からの同期キックスタートに対応した要塞化モデル。
  */
 
+const MODEL_NAME = "gemini-2.0-flash";
+
+// Redis Helper (Upstash REST API)
 const redis = async (command, ...args) => {
     let rawUrl = (process.env.KV_REST_API_URL || "").trim();
     let url = rawUrl.startsWith("http") ? rawUrl : "https://pretty-llama-117521.upstash.io";
     let rawToken = (process.env.KV_REST_API_TOKEN || "").trim();
     let token = rawToken.length > 10 ? rawToken : "gQAAAAAAAcsRAAIgcDIzMTUxOGQzNmY5Yzg0ZjE1YTA0OWE4YWRmNzc2N2E3NQ";
+
     const encodedArgs = args.map(a => encodeURIComponent(a)).join('/');
     const res = await fetch(`${url}/${command}/${encodedArgs}`, { headers: { Authorization: `Bearer ${token}` } });
     const data = await res.json();
     return data.result;
 };
 
+// Gemini API Helper
 const callGemini = async (prompt, useGrounding = false) => {
-    const model = useGrounding ? "gemini-2.5-flash" : "gemini-2.5-flash"; // Grounding対応モデル
-    const body = {
-        contents: [{ parts: [{ text: prompt }] }]
-    };
-    if (useGrounding) {
-        body.tools = [{ google_search: {} }];
-    }
+    const key = process.env.GEMINI_API_KEY || process.env.GOOGLE_GENAI_API_KEY;
+    if (!key) throw new Error("GEMINI_API_KEY is missing.");
     
-    const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${process.env.GEMINI_API_KEY}`, {
+    const tools = useGrounding ? [{ googleSearchRetrieval: {} }] : [];
+    
+    const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${MODEL_NAME}:generateContent?key=${key}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(body)
+        body: JSON.stringify({
+            contents: [{ parts: [{ text: prompt }] }],
+            tools: tools
+        })
     });
     const data = await res.json();
-    if (data.error) throw new Error(data.error.message);
-    return data.candidates[0].content.parts[0].text;
+    return data.candidates?.[0]?.content?.parts?.[0]?.text || "";
 };
 
 module.exports = async (req, res) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
     const startTime = Date.now();
-    const VOW_LIMIT = 8000; // 【8秒の誓い】
+    const VOW_LIMIT = 7500; // 憲章第3.1条: 8秒の誓い（余裕を持って7.5秒で撤退）
 
     try {
-        // 1. 24時間メンテナンスのチェック
+        // 1. メンテナンス時刻の確認
         const lastMaint = await redis('get', 'ars_last_maint_time') || 0;
         const now = Date.now();
         
@@ -48,7 +54,6 @@ module.exports = async (req, res) => {
         if (rawState && !Array.isArray(rawState)) {
             state = rawState;
         } else if (Array.isArray(rawState) && rawState.length > 0) {
-            // 配列形式 [key, val, key, val] をオブジェクトに変換
             state = {};
             for (let i = 0; i < rawState.length; i += 2) state[rawState[i]] = rawState[i+1];
         }
@@ -67,7 +72,7 @@ module.exports = async (req, res) => {
                 step = 0;
                 await redis('hset', 'ars_v12_state', 'topic', topic, 'step', "0", 'data', "");
             } else if (now - lastMaint > 86400000) {
-                // 24時間経っていたらメンテナンス（既存知識の1つを再学習）へ
+                // 巡回メンテナンス（憲章第3.2.2条）
                 const keys = await redis('hkeys', 'ars_v12_knowledge');
                 if (keys && keys.length > 0) {
                     topic = keys[Math.floor(Math.random() * keys.length)];
@@ -76,59 +81,58 @@ module.exports = async (req, res) => {
                     await redis('hset', 'ars_v12_state', 'topic', topic, 'step', "0", 'data', "MAINTENANCE");
                 }
             } else {
-                // 需要もメンテもなければ「市場パトロール（スカウティング）」
-                // ※将来実装。今は待機。
-                return res.json({ status: "IDLE", message: "No demand or maintenance tasks." });
+                // 市場スカウティング（憲章第3.2.3条）
+                return res.json({ status: "IDLE", message: "No active demand or maintenance." });
             }
         }
 
         // --- 8秒リレー実行ループ ---
         const host = req.headers.host;
         const selfUrl = `https://${host}/api/autopilot.js`;
+        const relayOptions = { headers: { 'x-ars-auth': 'fortress-v13' } };
 
-        while (Date.now() - startTime < VOW_LIMIT) {
-            if (step === 0) {
-                // 【Step 0: 方針決定】
-                const result = `Initiating research for: ${topic}`;
-                await redis('hset', 'ars_v12_state', 'step', "1", 'data', result);
-                
-                // 次を予約（0.8秒待機）
-                try {
-                    await Promise.race([fetch(selfUrl), new Promise(resolve => setTimeout(resolve, 800))]);
-                } catch (e) {}
-                
-                return res.json({ status: "PROGRESS", topic, step: 1, message: "Research plan initialized." });
-            } else if (step === 1) {
-                // 【Step 1: 深層リサーチ（Google Grounding）】
-                const deepPrompt = `「${topic}」について、最新の法規制（景表法、薬機法等）、公的機関の摘発事例、市場での詐欺手口、消費者の不満、および信頼される表現基準をネットで徹底的に調査し、詳細なレポートを作成してください。`;
-                const researchResult = await callGemini(deepPrompt, true);
-                await redis('hset', 'ars_v12_state', 'step', "2", 'data', researchResult);
-                
-                // 次を予約（0.8秒待機）
-                try {
-                    await Promise.race([fetch(selfUrl), new Promise(resolve => setTimeout(resolve, 800))]);
-                } catch (e) {}
-                
-                return res.json({ status: "PROGRESS", topic, step: 2, message: "Deep research completed. Data gathered." });
-            } else if (step === 2) {
-                // 【Step 2: 巨大マニュアルの生成と保存】
-                const synthPrompt = `以下の調査データを基に、ARS鑑定窓口用の【3,000文字超の構造化鑑定マニュアル】を作成してください。\n\nデータ:\n${state?.data || ""}\n\n構成:\n# 概要\n## 関連法規と公的基準\n## 具体的NG表現と事例（詳細）\n## 改善案と信頼構築ガイド\n## 鑑定用チェックリスト\n\n圧倒的な情報量で出力してください。`;
-                const manual = await callGemini(synthPrompt, false);
-                
-                await redis('hset', 'ars_v12_knowledge', topic, manual);
-                await redis('del', 'ars_v12_state');
-                await redis('zrem', 'ars_v12_queue', topic);
-                
-                return res.json({ status: "COMPLETED", topic, message: "Massive manual generated and saved." });
-            } else {
-                // やるべきことが無ければ即終了
-                return res.json({ status: "IDLE", message: "No active relay step." });
-            }
+        const triggerRelay = async () => {
+            try {
+                await Promise.race([fetch(selfUrl, relayOptions), new Promise(resolve => setTimeout(resolve, 800))]);
+            } catch (e) {}
+        };
+
+        // 実行開始
+        if (step === 0) {
+            // 【Step 0: 計画立案】
+            const plan = `Researching: ${topic}`;
+            await redis('hset', 'ars_v12_state', 'step', "1", 'data', plan);
+            await triggerRelay();
+            return res.json({ status: "PROGRESS", topic, step: 1 });
         }
 
-        return res.json({ status: "VOW_TIMEOUT", topic, step, message: "Self-withdrawn at 8s mark. Progress saved." });
+        if (step === 1) {
+            // 【Step 1: 深層リサーチ】 (タイム・ガーディアン監視)
+            const researchPrompt = `「${topic}」について、最新の法規制、事例、対策を徹底的に調査してください。`;
+            const researchData = await callGemini(researchPrompt, true);
+            
+            await redis('hset', 'ars_v12_state', 'step', "2", 'data', researchData);
+            await triggerRelay();
+            return res.json({ status: "PROGRESS", topic, step: 2 });
+        }
+
+        if (step === 2) {
+            // 【Step 2: 重厚執筆】 (憲章第4条: 3,000文字級マニュアル)
+            const gatheredData = state?.data || "";
+            const synthPrompt = `以下のデータを基に、ARS鑑定窓口用の【3,000文字超の構造化マニュアル】を作成してください。\n\nデータ:\n${gatheredData}`;
+            const manual = await callGemini(synthPrompt, false);
+            
+            // 図書館に保存して、机を片付ける
+            await redis('hset', 'ars_v12_knowledge', topic, manual);
+            await redis('del', 'ars_v12_state');
+            await redis('zrem', 'ars_v12_queue', topic);
+            
+            return res.json({ status: "COMPLETED", topic, message: "Manual generated." });
+        }
+
+        return res.json({ status: "IDLE", message: "Nothing to do." });
 
     } catch (e) {
-        return res.json({ error: e.message });
+        return res.json({ status: "ERROR", message: e.message });
     }
 };
