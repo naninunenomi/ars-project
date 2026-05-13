@@ -70,7 +70,7 @@ module.exports = async (req, res) => {
             await redis('zincrby', 'ars_v12_queue', 1, theme);
             
             // ★【要塞化】GitHub Actions 研究員を起動する
-            const owner = "n-kyohei"; // リポジトリの所有者
+            const owner = "naninunenomi"; // 正しい所有者名
             const repo = "ars-project"; // リポジトリ名
             const ghToken = process.env.GH_PAT; // GitHub Personal Access Token
             
