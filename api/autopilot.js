@@ -100,34 +100,52 @@ module.exports = async (req, res) => {
         // 実行開始
         if (step === 0) {
             // 【Step 0: 計画立案】
-            const plan = `Researching: ${topic}`;
-            await redis('hset', 'ars_v12_state', 'step', "1", 'data', plan);
-            await triggerRelay();
-            return res.json({ status: "PROGRESS", topic, step: 1 });
+            try {
+                const plan = `Researching: ${topic}`;
+                await redis('hset', 'ars_v12_state', 'step', "1", 'data', plan);
+                await triggerRelay();
+                return res.json({ status: "PROGRESS", topic, step: 1 });
+            } catch (err) {
+                await redis('set', 'ars_v12_error', `Step0: ${err.message}`);
+                throw err;
+            }
         }
 
         if (step === 1) {
             // 【Step 1: 深層リサーチ】 (タイム・ガーディアン監視)
-            const researchPrompt = `「${topic}」について、最新の法規制、事例、対策を徹底的に調査してください。`;
-            const researchData = await callGemini(researchPrompt, true);
-            
-            await redis('hset', 'ars_v12_state', 'step', "2", 'data', researchData);
-            await triggerRelay();
-            return res.json({ status: "PROGRESS", topic, step: 2 });
+            try {
+                // 実行開始を記録
+                await redis('set', 'ars_v12_error', `Step1_START: ${topic}`);
+                
+                const researchPrompt = `「${topic}」について、最新の法規制、事例、対策を徹底的に調査してください。`;
+                const researchData = await callGemini(researchPrompt, true);
+                
+                await redis('hset', 'ars_v12_state', 'step', "2", 'data', researchData);
+                await triggerRelay();
+                return res.json({ status: "PROGRESS", topic, step: 2 });
+            } catch (err) {
+                await redis('set', 'ars_v12_error', `Step1_FAIL: ${err.message}`);
+                throw err;
+            }
         }
 
         if (step === 2) {
             // 【Step 2: 重厚執筆】 (憲章第4条: 3,000文字級マニュアル)
-            const gatheredData = state?.data || "";
-            const synthPrompt = `以下のデータを基に、ARS鑑定窓口用の【3,000文字超の構造化マニュアル】を作成してください。\n\nデータ:\n${gatheredData}`;
-            const manual = await callGemini(synthPrompt, false);
-            
-            // 図書館に保存して、机を片付ける
-            await redis('hset', 'ars_v12_knowledge', topic, manual);
-            await redis('del', 'ars_v12_state');
-            await redis('zrem', 'ars_v12_queue', topic);
-            
-            return res.json({ status: "COMPLETED", topic, message: "Manual generated." });
+            try {
+                const gatheredData = state?.data || "";
+                const synthPrompt = `以下のデータを基に、ARS鑑定窓口用の【3,000文字超の構造化マニュアル】を作成してください。\n\nデータ:\n${gatheredData}`;
+                const manual = await callGemini(synthPrompt, false);
+                
+                // 図書館に保存して、机を片付ける
+                await redis('hset', 'ars_v12_knowledge', topic, manual);
+                await redis('del', 'ars_v12_state');
+                await redis('zrem', 'ars_v12_queue', topic);
+                
+                return res.json({ status: "COMPLETED", topic, message: "Manual generated." });
+            } catch (err) {
+                await redis('set', 'ars_v12_error', `Step2_FAIL: ${err.message}`);
+                throw err;
+            }
         }
 
         return res.json({ status: "IDLE", message: "Nothing to do." });
