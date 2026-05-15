@@ -60,7 +60,7 @@ async function main() {
             console.log(`Target topic: ${topic}`);
             
             const researchPrompt = `「${topic}」について、最新の法規制、事例、リスク、および信頼されるための具体的表現案を徹底的に調査し、専門的なマニュアルを作成してください。情報は網羅的かつ詳細に記載すること。`;
-            const knowledge = await callGemini(researchPrompt, true);
+            const knowledge = await callGemini(researchPrompt, false);
             
             if (knowledge && knowledge.length > 100) {
                 console.log(`Generated knowledge length: ${knowledge.length}`);
