@@ -1,18 +1,20 @@
 /**
- * ARS Researcher Script - v14.6 (Detailed Logging)
- * 配送トラブルを防ぐため、Redisへのアクセスログを詳細化。
+ * ARS Researcher Script - v14.7 (Clean URL Edition)
+ * URLの末尾スラッシュ問題を解決し、確実な配送を実現。
  */
 
 const MODEL_NAME = "gemini-2.0-flash";
 
 const redis = async (command, ...args) => {
-    // 憲章第6.3条に基づき、Vercelと共通の予備URLをセット
-    const url = (process.env.KV_REST_API_URL || "https://pretty-llama-117521.upstash.io").trim();
+    const rawUrl = (process.env.KV_REST_API_URL || "https://pretty-llama-117521.upstash.io").trim();
     const token = (process.env.KV_REST_API_TOKEN || "gQAAAAAAAcsRAAIgcDIzMTUxOGQzNmY5Yzg0ZjE1YTA0OWE4YWRmNzc2N2E3NQ").trim();
+    
+    // スラッシュを排除
+    const cleanUrl = rawUrl.replace(/\/$/, "");
     
     console.log(`[Redis Command] ${command} ${args[0] || ""}...`);
     
-    const res = await fetch(`${url}/`, {
+    const res = await fetch(cleanUrl, {
         method: 'POST',
         headers: { Authorization: `Bearer ${token}` },
         body: JSON.stringify([command, ...args])
@@ -39,9 +41,8 @@ const callGemini = async (prompt, useGrounding = false) => {
 };
 
 async function main() {
-    console.log("ARS Researcher starting (v14.6)...");
+    console.log("ARS Researcher starting (v14.7)...");
     try {
-        // キュー（需要）の確認
         const queue = await redis('zrevrange', 'ars_v12_queue', 0, 0);
         console.log("Queue result:", queue);
 
@@ -54,7 +55,6 @@ async function main() {
             
             console.log(`Generated knowledge length: ${knowledge.length}`);
 
-            // 金庫へ納品
             const hsetRes = await redis('hset', 'ars_v12_knowledge', topic, knowledge);
             console.log("HSET Result:", hsetRes);
             

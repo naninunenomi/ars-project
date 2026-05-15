@@ -12,8 +12,9 @@ const redis = async (command, ...args) => {
     let rawToken = (process.env.KV_REST_API_TOKEN || "").trim();
     let token = rawToken.length > 10 ? rawToken : "gQAAAAAAAcsRAAIgcDIzMTUxOGQzNmY5Yzg0ZjE1YTA0OWE4YWRmNzc2N2E3NQ";
 
-    // ★【要塞化】POST方式で巨大データを安全にやり取り
-    const res = await fetch(`${url}/`, {
+    // ★【要塞化】URL末尾のスラッシュを確実に排除してPOST
+    const cleanUrl = url.replace(/\/$/, "");
+    const res = await fetch(cleanUrl, {
         method: 'POST',
         headers: { Authorization: `Bearer ${token}` },
         body: JSON.stringify([command, ...args])
@@ -29,12 +30,14 @@ module.exports = async (req, res) => {
     if (!text || !theme) return res.status(400).json({ error: "Text and Theme are required.", disclaimer: DISCLAIMER });
 
     try {
+        console.log(`[ARS] Request received for theme: ${theme}`);
+        
         // --- 憲章第4条-3: 階層型遡り検索 (Hierarchical Search) ---
         const themeParts = theme.split('/');
         let manual = null;
         let activeTheme = theme;
 
-        // 具体的なテーマから順に親カテゴリへ遡ってマニュアルを探す
+        console.log(`[ARS] Looking for knowledge library...`);
         for (let i = themeParts.length; i > 0; i--) {
             const currentPath = themeParts.slice(0, i).join('/');
             manual = await redis('hget', 'ars_v12_knowledge', currentPath);
@@ -44,9 +47,10 @@ module.exports = async (req, res) => {
             }
         }
 
-        const unitPrice = await redis('get', 'ars_unit_price') || "1.15";
-
         if (manual) {
+            console.log(`[ARS] Knowledge found: ${activeTheme}. Starting valuation...`);
+            const unitPrice = await redis('get', 'ars_unit_price') || "1.15";
+            
             // --- 憲章第2条-1: 即断即決 ---
             const prompt = `以下の【鑑定マニュアル】を絶対基準として広告を鑑定せよ。\nマニュアル:\n${manual}\n対象テキスト: "${text}"\nJSONのみで回答: { "verdict": "SAFE/RISKY/DANGER", "reason": "理由" }`;
             
@@ -58,6 +62,7 @@ module.exports = async (req, res) => {
             const data = await geminiRes.json();
             
             if (data.candidates && data.candidates.length > 0) {
+                console.log(`[ARS] Valuation completed.`);
                 const responseText = data.candidates[0].content.parts[0].text;
                 const jsonMatch = responseText.match(/\{.*\}/s);
                 const result = JSON.parse(jsonMatch ? jsonMatch[0] : responseText);
@@ -70,26 +75,19 @@ module.exports = async (req, res) => {
                     model: "gemini-2.0-flash"
                 });
             } else {
-                // --- 憲章第4.3条: 誠実性の担保（不適切な回答の回避） ---
-                console.error("Gemini Valuation Failed:", data);
-                return res.json({
-                    status: "STUDYING",
-                    message: "Knowledge exists, but valuation failed. Refining internal logic.",
-                    disclaimer: DISCLAIMER
-                });
+                console.error("[ARS] Gemini Valuation Failed:", data);
+                return res.json({ status: "STUDYING", message: "Valuation failed. Refining...", disclaimer: DISCLAIMER });
             }
         } else {
-            // --- 憲章第2.2条: 非同期キックスタート（GitHubへの指令） ---
+            console.log(`[ARS] No knowledge found. Dispatching Researcher...`);
             await redis('zincrby', 'ars_v12_queue', 1, theme);
             
-            // ★【要塞化】GitHub Actions 研究員を起動する
-            const owner = "naninunenomi"; // 正しい所有者名
-            const repo = "ars-project"; // リポジトリ名
-            const ghToken = process.env.GH_PAT; // GitHub Personal Access Token
+            const owner = "naninunenomi";
+            const repo = "ars-project";
+            const ghToken = process.env.GH_PAT;
             
             if (ghToken) {
                 try {
-                    // ★【重要】GitHub APIは User-Agent 必須、かつ確実に届くまで await する
                     const triggerRes = await fetch(`https://api.github.com/repos/${owner}/${repo}/dispatches`, {
                         method: 'POST',
                         headers: {
@@ -100,13 +98,9 @@ module.exports = async (req, res) => {
                         },
                         body: JSON.stringify({ event_type: "ars-research-command" })
                     });
-                    
-                    if (!triggerRes.ok) {
-                        const errText = await triggerRes.text();
-                        console.error("GitHub Trigger Failed:", triggerRes.status, errText);
-                    }
+                    console.log(`[ARS] Researcher Dispatch Status: ${triggerRes.status}`);
                 } catch (e) {
-                    console.error("GitHub Trigger Exception:", e);
+                    console.error("[ARS] GitHub Trigger Exception:", e);
                 }
             }
 
