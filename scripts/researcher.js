@@ -3,7 +3,7 @@
  * Geminiからの回答が「白紙」になる原因を特定するため、レスポンスを完全可視化。
  */
 
-const MODEL_NAME = "gemini-3.1-flash";
+const MODEL_NAME = "gemini-3-flash-preview";
 
 const redis = async (command, ...args) => {
     const url = (process.env.KV_REST_API_URL || "https://pretty-llama-117521.upstash.io").trim();
