@@ -54,7 +54,7 @@ module.exports = async (req, res) => {
             // --- 憲章第2条-1: 即断即決 ---
             const prompt = `以下の【鑑定マニュアル】を絶対基準として広告を鑑定せよ。\nマニュアル:\n${manual}\n対象テキスト: "${text}"\nJSONのみで回答: { "verdict": "SAFE/RISKY/DANGER", "reason": "理由" }`;
             
-            const geminiRes = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${process.env.GEMINI_API_KEY}`, {
+            const geminiRes = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash:generateContent?key=${process.env.GEMINI_API_KEY}`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
@@ -72,9 +72,10 @@ module.exports = async (req, res) => {
                     price: `${unitPrice} ARS`, 
                     source: manual === theme ? 'KNOWLEDGE_LIBRARY' : `HIERARCHICAL_MATCH (${activeTheme})`, 
                     disclaimer: DISCLAIMER,
-                    model: "gemini-2.0-flash"
+                    model: "gemini-3.1-flash"
                 });
-            } else {
+            }
+ else {
                 console.error("[ARS] Gemini Valuation Failed:", data);
                 return res.json({ status: "STUDYING", message: "Valuation failed. Refining...", disclaimer: DISCLAIMER });
             }
