@@ -23,6 +23,7 @@ jobs:
           KV_REST_API_URL: ${{ secrets.KV_REST_API_URL }}
           KV_REST_API_TOKEN: ${{ secrets.KV_REST_API_TOKEN }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          TAVILY_API_KEY: ${{ secrets.TAVILY_API_KEY }}
           ARS_GAP: ${{ github.event.client_payload.gap }}
           ARS_TOPIC: ${{ github.event.client_payload.topic }}
         run: |

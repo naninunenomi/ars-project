@@ -1,7 +1,7 @@
 /**
- * ARS Researcher Script - v16.0 (Adaptive Self-Growing Engine)
- * 差分リサーチ（Incremental Research）に対応。
- * 既存の知識をベースに、不足している論点（Gap）だけをピンポイントで深掘りし、マニュアルを自己増殖させる。
+ * ARS Researcher Script - v16.2 (Search-Augmented Engine)
+ * Tavily APIを利用した外部検索機能を搭載。
+ * 「内部知識」と「最新のネット情報」を融合させ、真の全知全能を目指す。
  */
 
 const MODEL_NAME = "gemini-3-flash-preview";
@@ -19,90 +19,101 @@ const redis = async (command, ...args) => {
     return data.result;
 };
 
-const callGemini = async (prompt, useGrounding = false) => {
+const callGemini = async (prompt) => {
     const key = process.env.GEMINI_API_KEY;
-    if (!key) throw new Error("GEMINI_API_KEY is missing.");
-    const tools = useGrounding ? [{ googleSearchRetrieval: {} }] : [];
     const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${MODEL_NAME}:generateContent?key=${key}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }], tools })
+        body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
     });
     const data = await res.json();
-    if (!data.candidates) {
-        console.error("[Gemini ERROR]", JSON.stringify(data));
-        return "";
+    return data.candidates?.[0]?.content?.parts?.[0]?.text || "";
+};
+
+const callTavily = async (query) => {
+    const key = process.env.TAVILY_API_KEY;
+    if (!key) {
+        console.log("[Tavily] Key missing. Skipping external search.");
+        return null;
     }
-    return data.candidates[0].content?.parts?.[0]?.text || "";
+    console.log(`[Tavily] Searching for: ${query}`);
+    try {
+        const res = await fetch('https://api.tavily.com/search', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                api_key: key,
+                query: query,
+                search_depth: "advanced",
+                max_results: 5
+            })
+        });
+        return await res.json();
+    } catch (e) {
+        console.error("[Tavily ERROR]", e);
+        return null;
+    }
 };
 
 async function main() {
-    console.log("ARS Researcher starting (v16.0 - Adaptive Mode)...");
+    console.log("ARS Researcher starting (v16.2 - Search-Augmented Mode)...");
     try {
         const gap = process.env.ARS_GAP;
         const targetTopic = process.env.ARS_TOPIC;
-        
         let topic = "";
         let existingManual = "";
         let isIncremental = false;
 
-        // 差分リサーチモードの判定
         if (gap && targetTopic) {
             topic = targetTopic;
             existingManual = await redis('hget', 'ars_v12_knowledge', topic) || "";
             isIncremental = true;
-            console.log(`[Incremental Mode] Topic: ${topic}, Gap: ${gap}`);
         } else {
-            // 通常のリサーチ（キューから取得）
             const queue = await redis('zrevrange', 'ars_v12_queue', 0, 0);
-            if (queue && queue.length > 0) {
-                topic = queue[0];
-                console.log(`[Standard Mode] Target topic: ${topic}`);
-            }
+            if (queue && queue.length > 0) topic = queue[0];
         }
 
-        if (!topic) {
-            console.log("No work found.");
-            return;
+        if (!topic) return console.log("No work found.");
+
+        // --- 外部検索フェーズ ---
+        let searchContext = "";
+        const searchQuery = isIncremental ? `${topic} ${gap} 規制 ニュース 2026` : `${topic} 最新 法規制 2026 事例`;
+        const searchData = await callTavily(searchQuery);
+        
+        if (searchData && searchData.results) {
+            searchContext = "\n【最新の外部検索結果】\n" + searchData.results.map(r => `- ${r.title}: ${r.content} (${r.url})`).join("\n");
         }
 
-        let researchPrompt = "";
+        // --- リサーチフェーズ ---
+        let prompt = "";
         if (isIncremental) {
-            researchPrompt = `あなたは法務コンプライアンスの専門家です。
-現在、テーマ「${topic}」に関して以下の【既存マニュアル】がありますが、論点「${gap}」に関する情報が不足しています。
-
+            prompt = `あなたは法務コンプライアンスの専門家です。テーマ「${topic}」の既存マニュアルに、不足論点「${gap}」を追記せよ。
+${searchContext}
 【既存マニュアル】
-${existingManual.substring(0, 5000)}... (省略)
+${existingManual.substring(0, 3000)}...
 
-指示：
-- 既存のマニュアルの内容と重複させず、「${gap}」という特定の論点に絞って、深淵かつ詳細な法的・倫理的分析を行え。
-- この追記によって、マニュアルが「全知全能」に近づくように、妥協のない詳細さを提供せよ。
-- 回答は、既存のマニュアルの末尾にそのまま追加できる形式（見出し等）で作成せよ。`;
+指示：検索結果の最新事例を優先的に取り込み、既存の内容とマージして、人間が数日がかりで読み込むレベルの詳細な追記を行え。`;
         } else {
-            researchPrompt = `テーマ「${topic}」について、世界最高峰の法学者として極限まで詳細な産業グレードのリファレンスマニュアルを作成せよ。
-指示：
-- 6つの層（民法、刑法、特別法、業界指針、判例、未来予測）で徹底分析せよ。
-- 人間が数日がかりで読み込み、理解しきれないほどの圧倒的な情報密度を提供せよ。
-- 要約は厳禁。全知全能のバイブルを完成させよ。`;
+            prompt = `テーマ「${topic}」について、世界最高峰の法学者として極限まで詳細な産業グレードのリファレンスマニュアルを作成せよ。
+${searchContext}
+指示：検索結果に含まれる2026年の最新ニュースや規制動向を必ず反映させ、全知全能のバイブルを完成させよ。`;
         }
 
-        const newKnowledge = await callGemini(researchPrompt, false); // ※検索機能は現在制限中のためオフ
+        const newKnowledge = await callGemini(prompt);
 
         if (newKnowledge && newKnowledge.length > 100) {
-            const finalKnowledge = isIncremental 
-                ? `${existingManual}\n\n---\n\n## 【自律拡張：${new Date().toISOString()}】\n### 追加論点：${gap}\n${newKnowledge}`
+            let finalKnowledge = isIncremental 
+                ? `${existingManual}\n\n---\n\n## 【自律拡張：${new Date().toISOString()}（外部検索適用）】\n### 追加論点：${gap}\n${newKnowledge}`
                 : newKnowledge;
-
-            console.log(`Generated knowledge length: ${newKnowledge.length}. Total length: ${finalKnowledge.length}`);
-            await redis('hset', 'ars_v12_knowledge', topic, finalKnowledge);
             
-            if (!isIncremental) {
-                await redis('zrem', 'ars_v12_queue', topic);
+            // 出典の追記
+            if (searchData && searchData.results) {
+                finalKnowledge += "\n\n【参考文献・ソース】\n" + searchData.results.map(r => `- ${r.url}`).join("\n");
             }
-            console.log(`Successfully updated knowledge for: ${topic}`);
-        } else {
-            console.error("[CRITICAL] Research resulted in empty or too short response.");
-            process.exit(1);
+
+            await redis('hset', 'ars_v12_knowledge', topic, finalKnowledge);
+            if (!isIncremental) await redis('zrem', 'ars_v12_queue', topic);
+            console.log(`Successfully updated knowledge for: ${topic}. Total length: ${finalKnowledge.length}`);
         }
     } catch (error) {
         console.error("CRITICAL ERROR:", error);
