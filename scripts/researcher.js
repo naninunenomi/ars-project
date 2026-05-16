@@ -1,6 +1,7 @@
 /**
- * ARS Researcher Script - v14.8 (Intelligence Diagnostic)
- * Geminiからの回答が「白紙」になる原因を特定するため、レスポンスを完全可視化。
+ * ARS Researcher Script - v16.0 (Adaptive Self-Growing Engine)
+ * 差分リサーチ（Incremental Research）に対応。
+ * 既存の知識をベースに、不足している論点（Gap）だけをピンポイントで深掘りし、マニュアルを自己増殖させる。
  */
 
 const MODEL_NAME = "gemini-3-flash-preview";
@@ -20,72 +21,88 @@ const redis = async (command, ...args) => {
 
 const callGemini = async (prompt, useGrounding = false) => {
     const key = process.env.GEMINI_API_KEY;
-    if (!key) throw new Error("GEMINI_API_KEY is missing in GitHub Secrets.");
+    if (!key) throw new Error("GEMINI_API_KEY is missing.");
     const tools = useGrounding ? [{ googleSearchRetrieval: {} }] : [];
-    
-    console.log(`[Gemini] Calling ${MODEL_NAME} (Grounding: ${useGrounding})...`);
-    
     const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${MODEL_NAME}:generateContent?key=${key}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            contents: [{ parts: [{ text: prompt }] }],
-            tools: tools
-        })
+        body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }], tools })
     });
-    
     const data = await res.json();
-    
-    // 【詳細ログ】白紙回答の原因を特定する
-    if (!data.candidates || data.candidates.length === 0) {
-        console.error("[Gemini ERROR] No candidates returned. Full Response:", JSON.stringify(data));
+    if (!data.candidates) {
+        console.error("[Gemini ERROR]", JSON.stringify(data));
         return "";
     }
-    
-    const text = data.candidates[0].content?.parts?.[0]?.text || "";
-    if (!text) {
-        console.warn("[Gemini WARNING] Candidate exists but text is empty. FinishReason:", data.candidates[0].finishReason);
-        console.warn("Full Candidate Info:", JSON.stringify(data.candidates[0]));
-    }
-    
-    return text;
+    return data.candidates[0].content?.parts?.[0]?.text || "";
 };
 
 async function main() {
-    console.log("ARS Researcher starting (v14.8)...");
+    console.log("ARS Researcher starting (v16.0 - Adaptive Mode)...");
     try {
-        const queue = await redis('zrevrange', 'ars_v12_queue', 0, 0);
-        if (queue && queue.length > 0) {
-            const topic = queue[0];
-            console.log(`Target topic: ${topic}`);
-            
-            const researchPrompt = `テーマ「${topic}」について、世界最高峰の法学者、規制当局、およびコンプライアンス責任者のコンソーシアムとして、極限まで詳細かつ多層的な法的・倫理的分析を実施し、産業グレードのリファレンスマニュアルを作成せよ。
-分析は以下の「6つの層」で徹底的に行うこと：
-1. 民法・消費者契約法上の責任
-2. 刑法（詐欺等）および行政罰の対象範囲
-3. 該当分野の特別法（金商法、薬機法、景表法等）の詳細な解釈
-4. 業界団体による自主規制・ガイドラインの網羅
-5. 過去10年の重要判例とグレーゾーンの徹底分析
-6. 今後5年以内に予想される規制動向と、それに対する「要塞としての防御策」
+        const gap = process.env.ARS_GAP;
+        const targetTopic = process.env.ARS_TOPIC;
+        
+        let topic = "";
+        let existingManual = "";
+        let isIncremental = false;
+
+        // 差分リサーチモードの判定
+        if (gap && targetTopic) {
+            topic = targetTopic;
+            existingManual = await redis('hget', 'ars_v12_knowledge', topic) || "";
+            isIncremental = true;
+            console.log(`[Incremental Mode] Topic: ${topic}, Gap: ${gap}`);
+        } else {
+            // 通常のリサーチ（キューから取得）
+            const queue = await redis('zrevrange', 'ars_v12_queue', 0, 0);
+            if (queue && queue.length > 0) {
+                topic = queue[0];
+                console.log(`[Standard Mode] Target topic: ${topic}`);
+            }
+        }
+
+        if (!topic) {
+            console.log("No work found.");
+            return;
+        }
+
+        let researchPrompt = "";
+        if (isIncremental) {
+            researchPrompt = `あなたは法務コンプライアンスの専門家です。
+現在、テーマ「${topic}」に関して以下の【既存マニュアル】がありますが、論点「${gap}」に関する情報が不足しています。
+
+【既存マニュアル】
+${existingManual.substring(0, 5000)}... (省略)
 
 指示：
-- 決して要約するな。人間が数日がかりで読み込み、理解しきれないほどの圧倒的な情報密度と詳細さを提供せよ。
-- あらゆるエッジケース（例外事例）を列挙し、その法的リスクを詳細に論じよ。
-- 「なぜその表現が危険なのか」を、科学的・法的根拠に基づき、深淵なレベルで記述せよ。
-- あなたの知能の限界まで情報を凝縮・拡張し、このテーマに関する世界で唯一の、そして究極のバイブルを完成させよ。`;
-            const knowledge = await callGemini(researchPrompt, false);
-            
-            if (knowledge && knowledge.length > 100) {
-                console.log(`Generated knowledge length: ${knowledge.length}`);
-                await redis('hset', 'ars_v12_knowledge', topic, knowledge);
-                await redis('zrem', 'ars_v12_queue', topic);
-                console.log(`Successfully archived knowledge for: ${topic}`);
-            } else {
-                console.error(`[CRITICAL] Research failed or knowledge too short (${knowledge.length} chars). Not saving.`);
-                process.exit(1); // 失敗として終了させる
-            }
+- 既存のマニュアルの内容と重複させず、「${gap}」という特定の論点に絞って、深淵かつ詳細な法的・倫理的分析を行え。
+- この追記によって、マニュアルが「全知全能」に近づくように、妥協のない詳細さを提供せよ。
+- 回答は、既存のマニュアルの末尾にそのまま追加できる形式（見出し等）で作成せよ。`;
         } else {
-            console.log("No work found in queue.");
+            researchPrompt = `テーマ「${topic}」について、世界最高峰の法学者として極限まで詳細な産業グレードのリファレンスマニュアルを作成せよ。
+指示：
+- 6つの層（民法、刑法、特別法、業界指針、判例、未来予測）で徹底分析せよ。
+- 人間が数日がかりで読み込み、理解しきれないほどの圧倒的な情報密度を提供せよ。
+- 要約は厳禁。全知全能のバイブルを完成させよ。`;
+        }
+
+        const newKnowledge = await callGemini(researchPrompt, false); // ※検索機能は現在制限中のためオフ
+
+        if (newKnowledge && newKnowledge.length > 100) {
+            const finalKnowledge = isIncremental 
+                ? `${existingManual}\n\n---\n\n## 【自律拡張：${new Date().toISOString()}】\n### 追加論点：${gap}\n${newKnowledge}`
+                : newKnowledge;
+
+            console.log(`Generated knowledge length: ${newKnowledge.length}. Total length: ${finalKnowledge.length}`);
+            await redis('hset', 'ars_v12_knowledge', topic, finalKnowledge);
+            
+            if (!isIncremental) {
+                await redis('zrem', 'ars_v12_queue', topic);
+            }
+            console.log(`Successfully updated knowledge for: ${topic}`);
+        } else {
+            console.error("[CRITICAL] Research resulted in empty or too short response.");
+            process.exit(1);
         }
     } catch (error) {
         console.error("CRITICAL ERROR:", error);

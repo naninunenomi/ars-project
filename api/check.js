@@ -51,24 +51,53 @@ module.exports = async (req, res) => {
             console.log(`[ARS] Knowledge found: ${activeTheme}. Starting valuation...`);
             const unitPrice = await redis('get', 'ars_unit_price') || "1.15";
             
-            // --- 憲章第2条-1: 即断即決 ---
-            const prompt = `以下の【鑑定マニュアル】を絶対基準として広告を鑑定せよ。\nマニュアル:\n${manual}\n対象テキスト: "${text}"\nJSONのみで回答: { "verdict": "SAFE/RISKY/DANGER", "reason": "理由" }`;
+            // --- 憲章第2.1条: メタ認知（知能の自己採点） ---
+            const evalPrompt = `以下の【鑑定マニュアル】を用いて、この広告を100%の自信を持って鑑定できるか判定せよ。
+マニュアル:
+${manual}
+対象テキスト: "${text}"
+
+JSONのみで回答せよ。もしマニュアルに今回の商材や論点に関する具体的な言及が足りない場合、confidenceを90未満にし、gapに「不足している具体的な法的論点」を1単語で記述せよ。
+{ "confidence": 0-100, "gap": "不足している論点", "verdict": "SAFE/RISKY/DANGER", "reason": "理由" }`;
             
             const geminiRes = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${process.env.GEMINI_API_KEY}`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
+                body: JSON.stringify({ contents: [{ parts: [{ text: evalPrompt }] }] })
             });
             const data = await geminiRes.json();
             
             if (data.candidates && data.candidates.length > 0) {
-                console.log(`[ARS] Valuation completed.`);
                 const responseText = data.candidates[0].content.parts[0].text;
                 const jsonMatch = responseText.match(/\{.*\}/s);
-                const result = JSON.parse(jsonMatch ? jsonMatch[0] : responseText);
+                const evalResult = JSON.parse(jsonMatch ? jsonMatch[0] : responseText);
+                
+                console.log(`[ARS] Knowledge Confidence: ${evalResult.confidence}%`);
+
+                // 知識が不十分（90%未満）なら差分リサーチを起動
+                if (evalResult.confidence < 90 && ghToken) {
+                    console.log(`[ARS] Confidence low. Gap detected: ${evalResult.gap}. Dispatching Incremental Research...`);
+                    try {
+                        await fetch(`https://api.github.com/repos/${owner}/${repo}/dispatches`, {
+                            method: 'POST',
+                            headers: {
+                                'Authorization': `Bearer ${ghToken}`,
+                                'Accept': 'application/vnd.github+json',
+                                'X-GitHub-Api-Version': '2022-11-28',
+                                'User-Agent': 'ARS-Fortress-v16'
+                            },
+                            body: JSON.stringify({ 
+                                event_type: "ars-research-command",
+                                client_payload: { gap: evalResult.gap, topic: activeTheme }
+                            })
+                        });
+                    } catch (e) {
+                        console.error("[ARS] Incremental Dispatch Failed:", e);
+                    }
+                }
                 
                 return res.json({ 
-                    ...result, 
+                    ...evalResult, 
                     price: `${unitPrice} ARS`, 
                     source: manual === theme ? 'KNOWLEDGE_LIBRARY' : `HIERARCHICAL_MATCH (${activeTheme})`, 
                     disclaimer: DISCLAIMER,
