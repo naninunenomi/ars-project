@@ -25,6 +25,10 @@ const redis = async (command, ...args) => {
 
 module.exports = async (req, res) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
+    const ghToken = process.env.GH_PAT;
+    const owner = "naninunenomi";
+    const repo = "ars-project";
+    
     const { text, theme } = req.body;
     
     if (!text || !theme) return res.status(400).json({ error: "Text and Theme are required.", disclaimer: DISCLAIMER });
@@ -111,10 +115,6 @@ JSONのみで回答せよ。もしマニュアルに今回の商材や論点に�
         } else {
             console.log(`[ARS] No knowledge found. Dispatching Researcher...`);
             await redis('zincrby', 'ars_v12_queue', 1, theme);
-            
-            const owner = "naninunenomi";
-            const repo = "ars-project";
-            const ghToken = process.env.GH_PAT;
             
             if (ghToken) {
                 try {
