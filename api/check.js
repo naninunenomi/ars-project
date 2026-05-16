@@ -79,10 +79,15 @@ JSONのみで回答せよ。もしマニュアルに今回の商材や論点に�
                 
                 console.log(`[ARS] Knowledge Confidence: ${evalResult.confidence}%`);
 
-                // 知識が不十分（90%未満）なら差分リサーチを起動
-                if (evalResult.confidence < 90 && ghToken) {
+                // 知識が不十分かつ、現在「勉強中」でない場合のみリサーチを起動
+                const currentStatus = await redis('hget', 'ars_v12_status', activeTheme);
+                
+                if (evalResult.confidence < 90 && ghToken && currentStatus !== 'STUDYING') {
                     console.log(`[ARS] Confidence low. Gap detected: ${evalResult.gap}. Dispatching Incremental Research...`);
                     try {
+                        // 重複を防ぐため、即座にステータスを「勉強中」に設定
+                        await redis('hset', 'ars_v12_status', activeTheme, 'STUDYING');
+                        
                         await fetch(`https://api.github.com/repos/${owner}/${repo}/dispatches`, {
                             method: 'POST',
                             headers: {
