@@ -44,7 +44,8 @@ module.exports = async (req, res) => {
         console.log(`[ARS] Looking for knowledge library...`);
         for (let i = themeParts.length; i > 0; i--) {
             const currentPath = themeParts.slice(0, i).join('/');
-            manual = await redis('hget', 'ars_v12_knowledge', currentPath);
+            // --- 憲章第2.1条: 高速鑑定用チェックリストを優先 ---
+            manual = await redis('hget', 'ars_v12_checklist', currentPath) || await redis('hget', 'ars_v12_knowledge', currentPath);
             if (manual) {
                 activeTheme = currentPath;
                 break;

@@ -112,6 +112,20 @@ ${searchContext}
             }
 
             await redis('hset', 'ars_v12_knowledge', topic, finalKnowledge);
+            
+            // --- 憲章第2.1条: 高速鑑定用チェックリストの生成 ---
+            const checklistPrompt = `以下の【鑑定マニュアル】を、1秒で判定可能な「超凝縮チェックリスト（300-500文字）」に要約せよ。
+法的核心部分（何がアウトか、どう言い換えるべきか）のみを抽出し、無駄な修飾語を一切排除せよ。
+
+【鑑定マニュアル】
+${finalKnowledge.substring(0, 5000)}`;
+
+            const checklist = await callGemini(checklistPrompt);
+            if (checklist) {
+                console.log(`Generated fast checklist (${checklist.length} chars)`);
+                await redis('hset', 'ars_v12_checklist', topic, checklist);
+            }
+
             if (!isIncremental) await redis('zrem', 'ars_v12_queue', topic);
             console.log(`Successfully updated knowledge for: ${topic}. Total length: ${finalKnowledge.length}`);
         }
