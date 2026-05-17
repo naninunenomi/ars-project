@@ -23,9 +23,10 @@
             font-family: 'Inter', sans-serif;
             margin: 0; padding: 0;
             min-height: 100vh;
+            overflow-x: hidden;
         }
 
-        .container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; box-sizing: border-box; }
 
         header {
             display: flex; justify-content: space-between; align-items: center;
@@ -41,11 +42,12 @@
         .btn-refresh:hover { opacity: 0.8; transform: scale(1.02); }
 
         .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 30px; }
-        .stat-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 24px; }
+        .stat-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 24px; box-sizing: border-box; }
         .stat-label { font-size: 11px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px; }
         .stat-value { font-size: 28px; font-family: 'Outfit', sans-serif; font-weight: 600; margin-top: 8px; display: block; }
 
-        .main-grid { display: grid; grid-template-columns: 1fr 400px; gap: 24px; }
+        .main-grid { display: grid; grid-template-columns: minmax(0, 1fr) 400px; gap: 24px; }
+        .left-col { min-width: 0; }
         .panel { background: var(--bg-card); border: 1px solid var(--border); border-radius: 20px; margin-bottom: 24px; overflow: hidden; }
         .panel-header { padding: 16px 20px; background: rgba(255,255,255,0.02); border-bottom: 1px solid var(--border); font-size: 12px; font-weight: 800; color: var(--text-dim); }
 
@@ -53,16 +55,22 @@
         th, td { text-align: left; padding: 12px 20px; border-bottom: 1px solid var(--border); }
         th { color: var(--text-dim); font-weight: 400; }
 
-        .lib-item { padding: 12px 20px; border-bottom: 1px solid var(--border); cursor: pointer; transition: 0.2s; }
+        .lib-item { padding: 16px 20px; border-bottom: 1px solid var(--border); cursor: pointer; transition: 0.2s; display: flex; justify-content: space-between; align-items: center; }
         .lib-item:hover { background: var(--glass); }
-        .lib-theme { color: var(--bg-accent); font-weight: 700; display: block; margin-bottom: 4px; }
-        .lib-content { font-size: 12px; color: var(--text-dim); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .lib-theme { color: var(--bg-accent); font-weight: 700; font-size: 14px; }
+        .lib-btn { background: transparent; color: var(--bg-accent); border: 1px solid var(--bg-accent); padding: 4px 12px; border-radius: 6px; font-size: 11px; cursor: pointer; }
 
-        .queue-item { padding: 8px 20px; font-size: 12px; color: var(--text-dim); border-bottom: 1px solid var(--border); }
-        .status-tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 10px; background: var(--glass); margin-left: 8px; }
+        .queue-item { padding: 12px 20px; font-size: 12px; color: var(--text-dim); border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; }
+        .status-tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 10px; background: var(--glass); margin-left: 8px; color: var(--success); }
 
-        #modal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); justify-content:center; align-items:center; z-index:100; }
-        .modal-content { background:#0d1117; width:90%; max-width:700px; padding:40px; border-radius:20px; border:1px solid var(--border); position:relative; }
+        #modal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); justify-content:center; align-items:center; z-index:100; box-sizing: border-box; }
+        .modal-content { background:#0d1117; width:90%; max-width:700px; padding:40px; border-radius:20px; border:1px solid var(--border); position:relative; box-sizing: border-box; }
+
+        /* Responsive Design */
+        @media (max-width: 900px) {
+            .main-grid { grid-template-columns: 1fr; }
+            .stats-grid { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
 <body>
@@ -141,6 +149,9 @@
 </div>
 
 <script>
+    // グローバルにライブラリを保持して安全に参照する
+    window.arsLibrary = {};
+
     async function updateAll() {
         const btn = document.querySelector('.btn-refresh');
         btn.innerText = "更新中...";
@@ -170,11 +181,12 @@
 
             // Library
             const libList = document.getElementById('library-list');
-            const library = d.library || {};
-            libList.innerHTML = Object.entries(library).map(([theme, content]) => `
-                <div class="lib-item" onclick="showModal('${theme}', \`${content}\`)">
-                    <span class="lib-theme">${theme}</span>
-                    <div class="lib-content">${content}</div>
+            window.arsLibrary = d.library || {};
+            
+            libList.innerHTML = Object.keys(window.arsLibrary).map(theme => `
+                <div class="lib-item" onclick="showVaultDetails('${theme.replace(/'/g, "\\'")}')">
+                    <span class="lib-theme">> ${theme}</span>
+                    <button class="lib-btn">詳細表示</button>
                 </div>
             `).join('') || '<div style="padding:20px; text-align:center">Library is empty.</div>';
 
@@ -205,6 +217,11 @@
         }
     }
 
+    function showVaultDetails(theme) {
+        const content = window.arsLibrary[theme] || "No content found.";
+        showModal(theme, content);
+    }
+
     function showModal(title, body) {
         document.getElementById('modal-title').innerText = title;
         document.getElementById('modal-body').innerText = body;
@@ -218,6 +235,10 @@
     // Initial load
     updateAll();
 </script>
+
+</body>
+</html>
+
 
 </body>
 </html>
