@@ -395,8 +395,8 @@
                 <div class="panel-header">GATEKEEPER SIMULATOR (Test Console)</div>
                 <div style="padding: 20px;">
                     <div style="margin-bottom: 15px;">
-                        <label style="font-size: 11px; color: var(--text-dim); text-transform: uppercase; display: block; margin-bottom: 6px;">Theme (e.g. 不動産広告（宅建業法）)</label>
-                        <input type="text" id="sim-theme" style="width: 100%; background: #0d1117; border: 1px solid var(--border); color: #fff; padding: 10px; border-radius: 8px; box-sizing: border-box; font-family: inherit; font-size: 13px;" placeholder="Input theme...">
+                        <label style="font-size: 11px; color: var(--text-dim); text-transform: uppercase; display: block; margin-bottom: 6px;">Theme (※空欄の場合はAIが自動分類して自律学習します)</label>
+                        <input type="text" id="sim-theme" style="width: 100%; background: #0d1117; border: 1px solid var(--border); color: #fff; padding: 10px; border-radius: 8px; box-sizing: border-box; font-family: inherit; font-size: 13px;" placeholder="テーマを入力（空欄で自動分類）...">
                     </div>
                     <div style="margin-bottom: 15px;">
                         <label style="font-size: 11px; color: var(--text-dim); text-transform: uppercase; display: block; margin-bottom: 6px;">Target Ad Text</label>
@@ -575,8 +575,8 @@
         const resultBox = document.getElementById('sim-result-box');
         const resultPre = document.getElementById('sim-result');
         
-        if (!theme || !text) {
-            alert('テーマと鑑定テキストを入力してください。');
+        if (!text) {
+            alert('鑑定テキストを入力してください。');
             return;
         }
 
