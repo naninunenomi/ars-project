@@ -145,6 +145,8 @@ body {
     flex: 1;
     padding: 2rem;
     overflow-y: auto;
+    overflow-x: hidden;
+    max-width: 100%;
 }
 
 .panel {
@@ -260,6 +262,8 @@ pre {
     white-space: pre-wrap;
     word-wrap: break-word;
     font-size: 0.95rem;
+    max-width: 100%;
+    overflow-x: auto;
 }
 
 /* Modal */
@@ -304,4 +308,23 @@ pre {
 #modal-body {
     padding: 1.5rem;
     overflow-y: auto;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+    .sidebar {
+        width: 100%;
+        border-right: none;
+        border-bottom: 2px solid var(--border-color);
+        padding: 1rem 0;
+    }
+    .content {
+        padding: 1rem;
+    }
+    .modal-content {
+        width: 95%;
+    }
 }

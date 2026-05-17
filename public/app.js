@@ -74,10 +74,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     div.className = 'vault-item';
                     div.innerHTML = `
                         <div class="vault-header">
-                            <span class="theme-title">${item.theme}</span>
-                            <button class="action-btn read-btn" data-theme="${item.theme}">[READ_FULL_MANUAL]</button>
+                            <span class="theme-title">> ${item.theme}</span>
+                            <button class="action-btn read-btn" data-theme="${item.theme}">[VIEW_DETAILS]</button>
                         </div>
-                        <div class="checklist-preview">> CHECKLIST:\n${item.checklist}</div>
                     `;
                     vaultList.appendChild(div);
                 });
