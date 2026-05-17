@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ARS Command Portal</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div class="scanline"></div>
+    <header class="cyber-header">
+        <h1>[ARS_COMMAND_PORTAL] v3.0</h1>
+        <div class="system-status" id="sys-status">SYS: OFFLINE</div>
+    </header>
+
+    <div class="container">
+        <aside class="sidebar">
+            <nav>
+                <button class="nav-btn active" data-target="dashboard">01_DASHBOARD</button>
+                <button class="nav-btn" data-target="vault">02_VAULT</button>
+                <button class="nav-btn" data-target="simulator">03_SIMULATOR</button>
+                <button class="nav-btn" data-target="queue">04_QUEUE</button>
+            </nav>
+            <div class="refresh-box">
+                <button id="refresh-btn" class="action-btn">[REFRESH_DATA]</button>
+                <span class="refresh-note">// ON-DEMAND ONLY</span>
+            </div>
+        </aside>
+
+        <main class="content">
+            <!-- DASHBOARD SECTION -->
+            <section id="dashboard" class="panel active">
+                <h2>> SYSTEM_OVERVIEW</h2>
+                <div class="stats-grid">
+                    <div class="stat-box">
+                        <span class="label">KNOWLEDGE_MANUALS</span>
+                        <span class="value" id="stat-manuals">--</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="label">FAST_CHECKLISTS</span>
+                        <span class="value" id="stat-checklists">--</span>
+                    </div>
+                    <div class="stat-box warning">
+                        <span class="label">ACTIVE_RESEARCH</span>
+                        <span class="value" id="stat-studying">--</span>
+                    </div>
+                    <div class="stat-box success">
+                        <span class="label">EST_COST_SAVED (JPY)</span>
+                        <span class="value" id="stat-savings">--</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- VAULT SECTION -->
+            <section id="vault" class="panel hidden">
+                <h2>> KNOWLEDGE_VAULT</h2>
+                <div id="vault-list" class="vault-list">
+                    <div class="loading">Loading library...</div>
+                </div>
+                <div id="manual-modal" class="modal hidden">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3 id="modal-title">TITLE</h3>
+                            <button id="modal-close">[X]</button>
+                        </div>
+                        <pre id="modal-body">Loading...</pre>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SIMULATOR SECTION -->
+            <section id="simulator" class="panel hidden">
+                <h2>> GATEKEEPER_SIMULATOR</h2>
+                <div class="sim-form">
+                    <div class="input-group">
+                        <label>THEME (ex. 不動産広告（宅建業法）)</label>
+                        <input type="text" id="sim-theme" placeholder="Input target theme...">
+                    </div>
+                    <div class="input-group">
+                        <label>TARGET_TEXT</label>
+                        <textarea id="sim-text" rows="4" placeholder="Input ad text here..."></textarea>
+                    </div>
+                    <button id="sim-submit" class="action-btn primary">> EXECUTE_VALUATION</button>
+                </div>
+                <div class="sim-result">
+                    <h3>> RESULT</h3>
+                    <pre id="sim-output">Awaiting input...</pre>
+                </div>
+            </section>
+
+            <!-- QUEUE SECTION -->
+            <section id="queue" class="panel hidden">
+                <h2>> PENDING_QUEUE</h2>
+                <div id="queue-list" class="queue-list">
+                    <div class="loading">Loading queue...</div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="/app.js"></script>
+</body>
+</html>
