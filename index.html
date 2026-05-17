@@ -430,7 +430,7 @@
 
             <div class="panel">
                 <div class="panel-header">RECENT TRANSACTIONS</div>
-                <div id="recent-transactions" style="font-size:11px; padding:10px;">
+                <div id="recent-transactions" style="padding: 16px 20px;">
                     <!-- Filled by JS -->
                 </div>
             </div>
@@ -513,15 +513,37 @@
             const queueList = document.getElementById('learning-queue');
             queueList.innerHTML = learning.queue.map(q => `<div class="queue-item">${q}<span class="status-tag">WAITING</span></div>`).join('') || '<div style="padding:20px; text-align:center">Queue is empty.</div>';
 
-            // Recent Transcations
+            // Recent Transactions
             const trxList = document.getElementById('recent-transactions');
             const transactions = d.transactions || [];
-            trxList.innerHTML = transactions.map(t => `
-                <div style="padding:8px; border-bottom:1px solid #222; display:flex; justify-content:space-between;">
-                    <span>${t.timestamp ? new Date(t.timestamp).toLocaleTimeString() : 'N/A'} - ${t.source || 'TRX'}</span>
-                    <span style="font-weight:700;">+${t.amount || '0'} ARS</span>
-                </div>
-            `).join('');
+            trxList.innerHTML = transactions.map(t => {
+                let badgeColor = '#10b981';
+                if (t.verdict === 'DANGER') badgeColor = '#ef4444';
+                else if (t.verdict === 'RISKY') badgeColor = '#f59e0b';
+                else if (t.verdict === 'STUDYING') badgeColor = '#38bdf8';
+                
+                const timeStr = t.timestamp ? new Date(t.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' }) : 'N/A';
+                const dateStr = t.timestamp ? new Date(t.timestamp).toLocaleDateString([], { month: 'short', day: 'numeric' }) : '';
+                
+                const tags = (t.violation_codes || []).map(code => `<span style="font-size:10px; background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.15); padding:2px 6px; border-radius:4px; color:#888; font-family:monospace;">${code}</span>`).join(' ');
+                
+                return `
+                    <div style="background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-radius: 12px; padding: 12px; margin-bottom: 12px; transition: 0.2s; box-shadow: 0 4px 6px rgba(0,0,0,0.15);">
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+                            <span style="color:var(--text-dim); font-size:11px; font-weight:500;">${dateStr} ${timeStr} • ${t.source || 'Client-AI'}</span>
+                            <span style="font-weight:800; color:#10b981; font-size:13px;">+${t.amount || '0'} ARS</span>
+                        </div>
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                            <span style="font-weight:700; color:var(--text-main); font-size:12px;">${t.theme || '一般鑑定'}</span>
+                            <span style="background:${badgeColor}20; color:${badgeColor}; border:1px solid ${badgeColor}; font-size:10px; font-weight:800; padding:2px 8px; border-radius:100px; text-transform:uppercase; letter-spacing:0.5px;">${t.verdict || 'SAFE'}</span>
+                        </div>
+                        ${tags ? `<div style="margin-bottom:8px; display:flex; flex-wrap:wrap; gap:4px;">${tags}</div>` : ''}
+                        <div style="font-size:11.5px; line-height:1.5; color:#a1a1aa; padding-top:6px; border-top:1px dashed rgba(255,255,255,0.05); word-break: break-all;">
+                            ${t.details_ja || '監査結果：特になし。'}
+                        </div>
+                    </div>
+                `;
+            }).join('') || '<div style="padding:20px; text-align:center; color:var(--text-dim)">No transactions recorded yet.</div>';
 
         } catch (e) {
             console.error(e);
