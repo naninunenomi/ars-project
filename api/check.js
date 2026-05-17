@@ -100,8 +100,21 @@ ${existingThemes.map(t => `- ${t}`).join('\n') || "(なし)"}
                 // キューに登録
                 await redis('zincrby', 'ars_v12_queue', 1, theme);
                 
-                if (ghToken) {
+                // 重複実行チェック (Race Condition対策 ＆ 無料枠の鉄壁防衛)
+                const activeStatus = await redis('hgetall', 'ars_v12_status') || {};
+                let isResearcherRunning = false;
+                if (Array.isArray(activeStatus)) {
+                    for (let j = 1; j < activeStatus.length; j += 2) {
+                        if (activeStatus[j] === 'STUDYING') { isResearcherRunning = true; break; }
+                    }
+                } else {
+                    isResearcherRunning = Object.values(activeStatus).includes('STUDYING');
+                }
+                const dispatchLock = await redis('get', 'ars_dispatch_lock');
+
+                if (!isResearcherRunning && !dispatchLock && ghToken) {
                     try {
+                        await redis('setex', 'ars_dispatch_lock', 60, '1');
                         await fetch(`https://api.github.com/repos/${owner}/${repo}/dispatches`, {
                             method: 'POST',
                             headers: {
@@ -208,19 +221,34 @@ ${manual}
                     console.log(`[ARS] Confidence low. Gap detected: ${evalResult.gap}. Dispatching Incremental Research...`);
                     try {
                         await redis('hset', 'ars_v12_status', activeTheme, 'STUDYING');
-                        await fetch(`https://api.github.com/repos/${owner}/${repo}/dispatches`, {
-                            method: 'POST',
-                            headers: {
-                                'Authorization': `Bearer ${ghToken}`,
-                                'Accept': 'application/vnd.github+json',
-                                'X-GitHub-Api-Version': '2022-11-28',
-                                'User-Agent': 'ARS-Fortress-v16'
-                            },
-                            body: JSON.stringify({ 
-                                event_type: "ars-research-command",
-                                client_payload: { gap: evalResult.gap, topic: activeTheme }
-                            })
-                        });
+                        
+                        const activeStatus = await redis('hgetall', 'ars_v12_status') || {};
+                        let isResearcherRunning = false;
+                        if (Array.isArray(activeStatus)) {
+                            for (let j = 1; j < activeStatus.length; j += 2) {
+                                if (activeStatus[j] === 'STUDYING') { isResearcherRunning = true; break; }
+                            }
+                        } else {
+                            isResearcherRunning = Object.values(activeStatus).includes('STUDYING');
+                        }
+                        const dispatchLock = await redis('get', 'ars_dispatch_lock');
+
+                        if (!isResearcherRunning && !dispatchLock) {
+                            await redis('setex', 'ars_dispatch_lock', 60, '1');
+                            await fetch(`https://api.github.com/repos/${owner}/${repo}/dispatches`, {
+                                method: 'POST',
+                                headers: {
+                                    'Authorization': `Bearer ${ghToken}`,
+                                    'Accept': 'application/vnd.github+json',
+                                    'X-GitHub-Api-Version': '2022-11-28',
+                                    'User-Agent': 'ARS-Fortress-v16'
+                                },
+                                body: JSON.stringify({ 
+                                    event_type: "ars-research-command",
+                                    client_payload: { gap: evalResult.gap, topic: activeTheme }
+                                })
+                            });
+                        }
                     } catch (e) {
                         console.error("[ARS] Incremental Dispatch Failed:", e);
                     }
@@ -262,8 +290,21 @@ ${manual}
 
             await redis('zincrby', 'ars_v12_queue', 1, activeTheme);
             
-            if (ghToken) {
+            // 重複実行チェック (Race Condition対策 ＆ 無料枠の鉄壁防衛)
+            const activeStatus = await redis('hgetall', 'ars_v12_status') || {};
+            let isResearcherRunning = false;
+            if (Array.isArray(activeStatus)) {
+                for (let j = 1; j < activeStatus.length; j += 2) {
+                    if (activeStatus[j] === 'STUDYING') { isResearcherRunning = true; break; }
+                }
+            } else {
+                isResearcherRunning = Object.values(activeStatus).includes('STUDYING');
+            }
+            const dispatchLock = await redis('get', 'ars_dispatch_lock');
+
+            if (!isResearcherRunning && !dispatchLock && ghToken) {
                 try {
+                    await redis('setex', 'ars_dispatch_lock', 60, '1');
                     await fetch(`https://api.github.com/repos/${owner}/${repo}/dispatches`, {
                         method: 'POST',
                         headers: {

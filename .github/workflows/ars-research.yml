@@ -1,5 +1,9 @@
 name: ARS Researcher (v14.0)
 
+concurrency:
+  group: ars-research-group
+  cancel-in-progress: false
+
 on:
   repository_dispatch:
     types: [ars-research-command]
