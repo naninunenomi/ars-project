@@ -12,9 +12,10 @@ document.addEventListener('DOMContentLoaded', () => {
     navBtns.forEach(btn => {
         btn.addEventListener('click', () => {
             navBtns.forEach(b => b.classList.remove('active'));
-            panels.forEach(p => p.classList.add('hidden'));
-            p.classList.remove('active');
-            
+            panels.forEach(p => {
+                p.classList.add('hidden');
+                p.classList.remove('active');
+            });
             btn.classList.add('active');
             const target = document.getElementById(btn.dataset.target);
             target.classList.remove('hidden');
