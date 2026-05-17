@@ -112,6 +112,27 @@
                     <div style="padding:20px; text-align:center; color:var(--text-dim)">Loading library...</div>
                 </div>
             </div>
+
+            <!-- GATEKEEPER SIMULATOR (Test Console) -->
+            <div class="panel">
+                <div class="panel-header">GATEKEEPER SIMULATOR (Test Console)</div>
+                <div style="padding: 20px;">
+                    <div style="margin-bottom: 15px;">
+                        <label style="font-size: 11px; color: var(--text-dim); text-transform: uppercase; display: block; margin-bottom: 6px;">Theme (e.g. 不動産広告（宅建業法）)</label>
+                        <input type="text" id="sim-theme" style="width: 100%; background: #0d1117; border: 1px solid var(--border); color: #fff; padding: 10px; border-radius: 8px; box-sizing: border-box; font-family: inherit; font-size: 13px;" placeholder="Input theme...">
+                    </div>
+                    <div style="margin-bottom: 15px;">
+                        <label style="font-size: 11px; color: var(--text-dim); text-transform: uppercase; display: block; margin-bottom: 6px;">Target Ad Text</label>
+                        <textarea id="sim-text" rows="4" style="width: 100%; background: #0d1117; border: 1px solid var(--border); color: #fff; padding: 10px; border-radius: 8px; box-sizing: border-box; font-family: inherit; font-size: 13px; resize: vertical;" placeholder="Paste the text to analyze..."></textarea>
+                    </div>
+                    <button id="btn-simulate" onclick="runSimulation()" style="background: var(--bg-accent); color: #fff; border: none; padding: 10px 24px; border-radius: 8px; font-weight: 700; cursor: pointer; transition: 0.3s; width: 100%;">鑑定を実行する (EXECUTE)</button>
+                    
+                    <div id="sim-result-box" style="margin-top: 20px; display: none; padding: 15px; background: rgba(0,0,0,0.3); border-radius: 8px; border: 1px solid var(--border);">
+                        <h4 style="margin: 0 0 10px 0; font-size: 12px; color: var(--bg-accent);">VALUATION RESULT</h4>
+                        <pre id="sim-result" style="white-space: pre-wrap; word-wrap: break-word; font-size: 12px; margin: 0; line-height: 1.5; color: var(--text-main); font-family: monospace;"></pre>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div class="right-col">
@@ -232,13 +253,43 @@
         document.getElementById('modal').style.display = 'none';
     }
 
+    async function runSimulation() {
+        const theme = document.getElementById('sim-theme').value.trim();
+        const text = document.getElementById('sim-text').value.trim();
+        const btn = document.getElementById('btn-simulate');
+        const resultBox = document.getElementById('sim-result-box');
+        const resultPre = document.getElementById('sim-result');
+        
+        if (!theme || !text) {
+            alert('テーマと鑑定テキストを入力してください。');
+            return;
+        }
+
+        btn.disabled = true;
+        btn.innerText = "鑑定中...";
+        resultBox.style.display = "block";
+        resultPre.innerText = "ゲートキーパーの応答を待っています...";
+
+        try {
+            const res = await fetch('/api/check.js', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ theme, text })
+            });
+            const data = await res.json();
+            
+            resultPre.innerText = JSON.stringify(data, null, 2);
+        } catch (e) {
+            resultPre.innerText = "Error: " + e.message;
+        } finally {
+            btn.disabled = false;
+            btn.innerText = "鑑定を実行する (EXECUTE)";
+        }
+    }
+
     // Initial load
     updateAll();
 </script>
-
-</body>
-</html>
-
 
 </body>
 </html>
