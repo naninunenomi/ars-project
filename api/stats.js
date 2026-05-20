@@ -23,6 +23,11 @@ module.exports = async (req, res) => {
 
     try {
         const totalRevenue = await redis('get', 'ars_total_revenue') || 0;
+        const balance = await redis('get', 'ars_balance') || 0;
+        const currentPrice = await redis('get', 'ars_unit_price') || 1.15;
+        const threshold = await redis('get', 'ars_cashout_threshold') || 100000;
+        const withdrawalsRaw = await redis('lrange', 'ars_withdrawals', 0, 9) || [];
+        const withdrawals = withdrawalsRaw.map(t => JSON.parse(decodeURIComponent(t)));
         
         // 7日間の履歴取得
         const dailyStats = {};
@@ -57,8 +62,14 @@ module.exports = async (req, res) => {
         res.status(200).json({
             summary: {
                 totalRevenue: parseFloat(totalRevenue).toFixed(2),
-                jpyEquivalent: Math.floor(totalRevenue * 150).toLocaleString(),
+                jpyEquivalent: Math.floor(totalRevenue * 1).toLocaleString(), // 1 ARS = 1 JPY rate
                 lastUpdated: new Date().toISOString()
+            },
+            finance: {
+                balance: parseFloat(balance).toFixed(2),
+                currentPrice: parseFloat(currentPrice).toFixed(2),
+                threshold: parseFloat(threshold).toFixed(2),
+                withdrawals: withdrawals
             },
             dailyStats,
             library: formattedLib,

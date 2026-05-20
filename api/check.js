@@ -194,7 +194,8 @@ ${manual}
 
                 // 1. 課金＆売上本番反映
                 const unitPrice = parseFloat(await redis('get', 'ars_unit_price') || "1.15");
-                await redis('incrbyfloat', 'ars_total_revenue', unitPrice);
+                await redis('incrbyfloat', 'ars_total_revenue', unitPrice); // 累計売上
+                await redis('incrbyfloat', 'ars_balance', unitPrice);       // 引出可能残高
                 
                 const dateStr = new Date().toISOString().split('T')[0];
                 await redis('hincrby', `ars_daily_stats:${dateStr}`, 'transactions', 1);

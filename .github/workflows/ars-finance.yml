@@ -1,0 +1,26 @@
+name: ARS CFO Agent (Finance & Pricing)
+
+on:
+  schedule:
+    - cron: '0 15 * * *' # 日本時間 0:00 (UTC 15:00) 毎日実行
+  workflow_dispatch: # 手動実行用
+
+jobs:
+  finance:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Run Finance Agent (Dynamic Pricing & Cashout)
+        env:
+          KV_REST_API_URL: ${{ secrets.KV_REST_API_URL }}
+          KV_REST_API_TOKEN: ${{ secrets.KV_REST_API_TOKEN }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          node scripts/finance.js

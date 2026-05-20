@@ -429,6 +429,35 @@
             </div>
 
             <div class="panel">
+                <div class="panel-header">FINANCE & CASH-OUT</div>
+                <div style="padding: 20px;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 15px; border-bottom: 1px solid var(--border); padding-bottom: 15px;">
+                        <div>
+                            <div style="font-size: 11px; color: var(--text-dim);">DYNAMIC PRICE</div>
+                            <div style="font-size: 20px; font-weight: 700; color: #fff;"><span id="current-price">1.15</span> <small style="font-size: 12px; color: var(--bg-accent);">ARS/Tx</small></div>
+                        </div>
+                        <div style="text-align: right;">
+                            <div style="font-size: 11px; color: var(--text-dim);">AVAILABLE BALANCE</div>
+                            <div style="font-size: 20px; font-weight: 700; color: #10b981;"><span id="available-balance">0.00</span> <small style="font-size: 12px;">ARS</small></div>
+                        </div>
+                    </div>
+                    
+                    <div style="margin-bottom: 15px;">
+                        <label style="font-size: 11px; color: var(--text-dim); text-transform: uppercase; display: block; margin-bottom: 6px;">Cash-out Threshold (ARS)</label>
+                        <div style="display: flex; gap: 10px;">
+                            <input type="number" id="cashout-threshold" style="flex: 1; background: #0d1117; border: 1px solid var(--border); color: #fff; padding: 8px 10px; border-radius: 6px; font-family: inherit; font-size: 13px;" placeholder="e.g. 100000">
+                            <button onclick="updateThreshold()" style="background: var(--bg-accent); color: #fff; border: none; padding: 0 15px; border-radius: 6px; font-weight: 700; cursor: pointer; transition: 0.3s; font-size: 12px;">UPDATE</button>
+                        </div>
+                    </div>
+
+                    <div style="font-size: 11px; color: var(--text-dim); margin-bottom: 8px; text-transform: uppercase;">Recent Withdrawals</div>
+                    <div id="withdrawal-history" style="font-size: 12px; color: var(--text-dim); max-height: 120px; overflow-y: auto;">
+                        <div style="text-align:center; padding: 10px;">No withdrawals yet.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel">
                 <div class="panel-header">RECENT TRANSACTIONS</div>
                 <div id="recent-transactions" style="padding: 16px 20px;">
                     <!-- Filled by JS -->
@@ -512,6 +541,21 @@
             
             const queueList = document.getElementById('learning-queue');
             queueList.innerHTML = learning.queue.map(q => `<div class="queue-item">${q}<span class="status-tag">WAITING</span></div>`).join('') || '<div style="padding:20px; text-align:center">Queue is empty.</div>';
+
+            // Finance & Cash-out
+            const finance = d.finance || {};
+            document.getElementById('current-price').innerText = finance.currentPrice || '1.15';
+            document.getElementById('available-balance').innerText = finance.balance || '0.00';
+            document.getElementById('cashout-threshold').value = finance.threshold || '100000';
+            
+            const wHistory = document.getElementById('withdrawal-history');
+            const withdrawals = finance.withdrawals || [];
+            wHistory.innerHTML = withdrawals.map(w => `
+                <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.05);">
+                    <span>${new Date(w.timestamp).toLocaleDateString()}</span>
+                    <span style="color: #10b981; font-weight: 700;">-${parseFloat(w.amount).toFixed(2)} ARS</span>
+                </div>
+            `).join('') || '<div style="text-align:center; padding: 10px;">No withdrawals yet.</div>';
 
             // Recent Transactions
             const trxList = document.getElementById('recent-transactions');
@@ -599,6 +643,33 @@
         } finally {
             btn.disabled = false;
             btn.innerText = "鑑定を実行する (EXECUTE)";
+        }
+    }
+    async function updateThreshold() {
+        const input = document.getElementById('cashout-threshold');
+        const val = input.value;
+        if (!val || isNaN(val)) {
+            alert('数値を入力してください。');
+            return;
+        }
+        input.disabled = true;
+        try {
+            const res = await fetch('/api/settings.js', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ threshold: val })
+            });
+            const data = await res.json();
+            if (data.success) {
+                alert('自動現金化のしきい値を ' + data.newThreshold + ' ARS に設定しました。');
+                updateAll();
+            } else {
+                alert('エラー: ' + data.error);
+            }
+        } catch (e) {
+            alert('エラー: ' + e.message);
+        } finally {
+            input.disabled = false;
         }
     }
 
