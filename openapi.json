@@ -1,0 +1,93 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "ARS Gatekeeper API",
+    "description": "An autonomous AI legal compliance and advertising audit API. This API evaluates advertisement text against Japanese laws (e.g., Pharmaceutical Affairs Law, Act against Unjustifiable Premiums and Misleading Representations, Real Estate Brokerage Act, etc.) and returns specific violation codes and risk scores. Unrecognized legal themes are autonomously researched and added to the knowledge base.",
+    "version": "1.0.0",
+    "contact": {
+      "name": "ARS Fortress Command"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://ars-project.vercel.app",
+      "description": "Production Server"
+    }
+  ],
+  "paths": {
+    "/api/check.js": {
+      "post": {
+        "summary": "Audit Advertisement Text",
+        "description": "Submit advertisement text for legal compliance auditing. The system will automatically classify the text, match it against the ARS legal knowledge base, and return a verdict, risk score, and detailed explanation in Japanese.",
+        "operationId": "auditAdText",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "text": {
+                    "type": "string",
+                    "description": "The target advertisement text to be audited."
+                  },
+                  "theme": {
+                    "type": "string",
+                    "description": "Optional. The specific legal theme or category. Leave blank or omit to allow the AI Auto-Classifier to automatically determine the theme."
+                  }
+                },
+                "required": [
+                  "text"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful audit result. NOTE: If the theme is unrecognized, the API will return a status of 'STUDYING' and the text will be queued for autonomous research. You may retry the request after 1-2 minutes.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": ["success", "STUDYING"]
+                    },
+                    "theme": {
+                      "type": "string",
+                      "description": "The legal theme under which the text was evaluated."
+                    },
+                    "verdict": {
+                      "type": "string",
+                      "enum": ["SAFE", "RISKY", "DANGER"]
+                    },
+                    "risk_score": {
+                      "type": "integer",
+                      "description": "Risk score from 0 to 100."
+                    },
+                    "violation_codes": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "description": "List of specific violation codes."
+                    },
+                    "details_ja": {
+                      "type": "string",
+                      "description": "Detailed explanation of the verdict in Japanese."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request (e.g., missing text)"
+          }
+        }
+      }
+    }
+  }
+}
