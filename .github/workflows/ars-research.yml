@@ -7,6 +7,7 @@ concurrency:
 on:
   repository_dispatch:
     types: [ars-research-command]
+  workflow_dispatch:
   schedule:
     - cron: '0 23 * * *' # 毎日 日本時間 朝8時
     - cron: '0 11 * * *' # 毎日 日本時間 夜20時
