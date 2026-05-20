@@ -97,6 +97,7 @@ ${searchSummary}
 
 async function main() {
     let isIncrementalRun = false;
+    let hasScoutedThisRun = false; // 無限スカウト（暴走）を防ぐためのフラグ
     const gap = process.env.ARS_GAP;
     const targetTopic = process.env.ARS_TOPIC;
     
@@ -125,14 +126,17 @@ async function main() {
             if (!topic) {
                 if (isIncrementalRun) break;
                 
-                // 憲章第3.3条：やることがなければ、SNSからトレンドを拾い「先回り学習」を行う。
-                const scoutFoundWork = await performScout();
-                if (scoutFoundWork) {
-                    continue; // 新しいテーマを見つけたので、ループを回してすぐに学習を開始する
-                } else {
-                    console.log("[ARS] Scout found no new trends. Exiting loop.");
-                    break;
+                // 1回の起動につき、スカウトミッションは1回だけ（無限ループ暴走防止）
+                if (!hasScoutedThisRun) {
+                    hasScoutedThisRun = true;
+                    const scoutFoundWork = await performScout();
+                    if (scoutFoundWork) {
+                        continue; // 新しいテーマを見つけたので、ループを回してすぐに学習を開始する
+                    }
                 }
+                
+                console.log("[ARS] No more work and scout finished. Exiting loop.");
+                break;
             }
             
             // --- ロック開始 ---
