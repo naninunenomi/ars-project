@@ -36,6 +36,10 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
             // Fetch Status
             const statusRes = await fetch('/api/portal/status.js');
+            if (statusRes.status === 429 || statusRes.status === 403 || statusRes.status >= 500) {
+                document.getElementById('emergency-overlay').classList.remove('hidden');
+                throw new Error("SERVER_LIMIT_REACHED: " + statusRes.status);
+            }
             const statusData = await statusRes.json();
             
             document.getElementById('stat-manuals').textContent = statusData.stats.totalManuals;
@@ -61,6 +65,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Fetch Library
             const libRes = await fetch('/api/portal/library.js');
+            if (libRes.status === 429 || libRes.status === 403 || libRes.status >= 500) {
+                document.getElementById('emergency-overlay').classList.remove('hidden');
+                throw new Error("SERVER_LIMIT_REACHED: " + libRes.status);
+            }
             const libData = await libRes.json();
             
             const vaultList = document.getElementById('vault-list');

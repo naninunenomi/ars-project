@@ -1,0 +1,14 @@
+{
+  "name": "ars-mcp",
+  "version": "1.0.0",
+  "description": "ARS (Autonomic Research System) Legal Audit MCP Server",
+  "main": "index.js",
+  "bin": {
+    "ars-mcp": "./index.js"
+  },
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "ARS Fortress",
+  "license": "MIT"
+}
