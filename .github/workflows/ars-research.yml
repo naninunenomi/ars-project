@@ -8,7 +8,8 @@ on:
   repository_dispatch:
     types: [ars-research-command]
   schedule:
-    - cron: '0 0 * * *' # 24時間おきの鮮度メンテナンス
+    - cron: '0 23 * * *' # 毎日 日本時間 朝8時
+    - cron: '0 11 * * *' # 毎日 日本時間 夜20時
 
 jobs:
   research:

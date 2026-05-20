@@ -46,6 +46,55 @@ const callTavily = async (query) => {
     }
 };
 
+async function performScout() {
+    console.log("[ARS] No more work found in queue. Initiating Scout Mission (Market Exploration)...");
+    const queries = [
+        "日本 広告 規制 違反 最新 2026",
+        "消費者庁 措置命令 景表法 最新",
+        "薬機法 違反事例 広告 最新 2026",
+        "金融商品 広告 規制 違反 2026",
+        "個人情報保護法 広告 2026 最新"
+    ];
+    const searchQuery = queries[Math.floor(Math.random() * queries.length)];
+    
+    const searchData = await callTavily(searchQuery);
+    if (!searchData || !searchData.results || searchData.results.length === 0) return false;
+    
+    const searchSummary = searchData.results.map(r => `タイトル: ${r.title}\n要約: ${r.content}`).join("\n\n");
+    const existingKeys = await redis('hkeys', 'ars_v12_knowledge') || [];
+    const existingKeysStr = existingKeys.length > 0 ? existingKeys.join("、") : "（なし）";
+
+    const analysisPrompt = `
+あなたはARSの斥候AIです。最新のWeb検索結果から、ARSがまだ学習していない未知の法律規制テーマを発掘してください。
+【既存の知識】${existingKeysStr}
+【最新ニュース】
+${searchSummary}
+
+【指示】
+既存の知識一覧に「存在しない」全く新しい規制テーマを最大2件抽出してください。
+出力は以下のJSONフォーマットのみとしてください。
+{
+  "new_topics": ["新しいテーマ名1", "新しいテーマ名2"]
+}`;
+
+    const rawResponse = await callGemini(analysisPrompt);
+    let analysis = { new_topics: [] };
+    try {
+        const jsonMatch = rawResponse.match(/\{[\s\S]*\}/);
+        if (jsonMatch) analysis = JSON.parse(jsonMatch[0]);
+    } catch (e) { return false; }
+
+    let addedWork = false;
+    if (analysis.new_topics && analysis.new_topics.length > 0) {
+        for (const t of analysis.new_topics) {
+            await redis('zadd', 'ars_v12_queue', Date.now(), t);
+            console.log(`[Scout] ✅ Queued new topic for learning: ${t}`);
+            addedWork = true;
+        }
+    }
+    return addedWork;
+}
+
 async function main() {
     let isIncrementalRun = false;
     const gap = process.env.ARS_GAP;
@@ -74,8 +123,16 @@ async function main() {
             }
 
             if (!topic) {
-                console.log("[ARS] No more work found in queue. Exiting loop.");
-                break;
+                if (isIncrementalRun) break;
+                
+                // 憲章第3.3条：やることがなければ、SNSからトレンドを拾い「先回り学習」を行う。
+                const scoutFoundWork = await performScout();
+                if (scoutFoundWork) {
+                    continue; // 新しいテーマを見つけたので、ループを回してすぐに学習を開始する
+                } else {
+                    console.log("[ARS] Scout found no new trends. Exiting loop.");
+                    break;
+                }
             }
             
             // --- ロック開始 ---
