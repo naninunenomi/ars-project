@@ -1,5 +1,5 @@
 {
-  "name": "ars-mcp",
+  "name": "ars-mcp-core",
   "version": "1.0.0",
   "description": "ARS (Autonomic Research System) Legal Audit MCP Server",
   "main": "index.js",
