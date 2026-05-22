@@ -3,7 +3,7 @@
  * 毎日定時に実行され、ダイナミックプライシングと自動現金化（Cash-out）を行う。
  */
 
-const fetch = require('node-fetch');
+
 
 const MODEL_NAME = "gemini-3-flash-preview";
 
