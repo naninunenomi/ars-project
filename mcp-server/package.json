@@ -1,7 +1,7 @@
 {
   "name": "ars-mcp-core",
   "version": "1.0.0",
-  "description": "ARS (Autonomic Research System) Legal Audit MCP Server",
+  "description": "ARS Legal Audit & Expert Oracle - A specialized MCP server for high-confidence Japanese legal compliance checks and M2M arbitrage.",
   "main": "index.js",
   "bin": {
     "ars-mcp": "./index.js"

@@ -1,0 +1,7 @@
+{
+  "name": "ars-mcp-core",
+  "version": "1.0.0",
+  "description": "A specialized MCP server providing compliance auditing (Japanese Yakkihou/Keihyouhou) and expert oracle services via dynamic pricing (M2M Arbitrage).",
+  "github": "https://github.com/naninunenomi/ars-project",
+  "mcpName": "ars-mcp-core"
+}
