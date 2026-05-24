@@ -34,6 +34,58 @@ module.exports = async (req, res) => {
     if (!text) return res.status(400).json({ error: "Text is required.", disclaimer: DISCLAIMER });
 
     try {
+        // --- 0. URL鮮度判定 (Freshness Check) ---
+        const urlRegex = /(https?:\/\/[^\s]+)/;
+        const urlMatch = text.match(urlRegex);
+        let freshnessWarning = "";
+        let isStaleNews = false;
+
+        if (urlMatch) {
+            const url = urlMatch[0];
+            const freshnessDataStr = await redis('hget', 'ars_url_freshness', url);
+            
+            if (!freshnessDataStr) {
+                console.log(`[ARS] New URL detected: ${url}. Queuing for Freshness Check...`);
+                // 鮮度キューに追加
+                await redis('zadd', 'ars_freshness_queue', Date.now(), url);
+                
+                // GitHub Actionsを起動
+                const dispatchLock = await redis('get', 'ars_dispatch_lock');
+                if (!dispatchLock && ghToken) {
+                    try {
+                        await redis('setex', 'ars_dispatch_lock', 60, '1');
+                        await fetch(`https://api.github.com/repos/${owner}/${repo}/dispatches`, {
+                            method: 'POST',
+                            headers: {
+                                'Authorization': `Bearer ${ghToken}`,
+                                'Accept': 'application/vnd.github+json',
+                                'X-GitHub-Api-Version': '2022-11-28',
+                                'User-Agent': 'ARS-Fortress-v16'
+                            },
+                            body: JSON.stringify({ event_type: "ars-research-command" })
+                        });
+                    } catch (e) {
+                        console.error("[ARS] GitHub Trigger Exception:", e);
+                    }
+                }
+                
+                return res.json({
+                    status: "STUDYING",
+                    message: `Checking URL freshness for: ${url}. Please retry later.`,
+                    disclaimer: DISCLAIMER
+                });
+            } else {
+                try {
+                    const freshnessData = JSON.parse(freshnessDataStr);
+                    if (freshnessData.status === "STALE") {
+                        isStaleNews = true;
+                        freshnessWarning = `この引用元の記事は古いです（公開日：${freshnessData.date || '不明'}）。最新の状況をご確認ください。`;
+                        console.log(`[ARS] URL is STALE news. Warning added.`);
+                    }
+                } catch(e) {}
+            }
+        }
+
         // --- 1. 自己進化型分類ルーター (Auto-Classifier) ---
         if (!theme || theme === 'auto' || theme === '') {
             console.log(`[ARS] Auto-Classifier activated for text...`);
@@ -254,13 +306,23 @@ ${manual}
                         console.error("[ARS] Incremental Dispatch Failed:", e);
                     }
                 }
+                let finalVerdict = evalResult.verdict;
+                let finalViolations = evalResult.violation_codes || [];
                 
+                if (isStaleNews) {
+                    if (finalVerdict === "SAFE") finalVerdict = "RISKY";
+                    if (!finalViolations.includes("STALE_NEWS_SOURCE")) {
+                        finalViolations.push("STALE_NEWS_SOURCE");
+                    }
+                }
+
                 return res.json({ 
                     status: "success",
-                    verdict: evalResult.verdict,
+                    verdict: finalVerdict,
                     risk_score: evalResult.risk_score || 0,
-                    violation_codes: evalResult.violation_codes || [],
+                    violation_codes: finalViolations,
                     details_ja: evalResult.details_ja || evalResult.reason || '',
+                    freshness_warning: freshnessWarning || undefined,
                     confidence: evalResult.confidence,
                     price: `${unitPrice} ARS`, 
                     source: manual === theme ? 'KNOWLEDGE_LIBRARY' : `HIERARCHICAL_MATCH (${activeTheme})`, 

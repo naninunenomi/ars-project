@@ -111,6 +111,45 @@ async function main() {
         let isIncremental = false;
 
         try {
+            // --- 0. URL鮮度キューの最優先処理 ---
+            const freshnessQueue = await redis('zrevrange', 'ars_freshness_queue', 0, 0);
+            if (freshnessQueue && freshnessQueue.length > 0) {
+                const urlToCheck = freshnessQueue[0];
+                console.log(`[ARS] Processing URL Freshness for: ${urlToCheck}`);
+                
+                const searchData = await callTavily(urlToCheck);
+                let content = "";
+                if (searchData && searchData.results && searchData.results.length > 0) {
+                    content = searchData.results[0].content;
+                }
+                
+                const prompt = `以下のURLの記事について判定せよ。
+URL: ${urlToCheck}
+抽出コンテンツ: ${content.substring(0, 5000)}
+
+これは「ニュース記事（またはブログ記事などの時事情報）」か、それとも「静的な企業サイトやWikipediaなど鮮度が関係ないページ」か？
+ニュース記事の場合、いつ公開または更新されたか（YYYY年MM月DD日）？
+そしてそれは現在（2026年5月）から見て「1ヶ月以内」の『FRESH』な記事か、それとも「1ヶ月以上前」の『STALE』な古い記事か？
+※静的な企業サイトやWikipedia、ツールの公式サイト等であれば『NOT_NEWS』とせよ。
+
+必ず以下のJSONオブジェクト単体のみで回答せよ。
+{
+  "status": "FRESH" | "STALE" | "NOT_NEWS",
+  "date": "YYYY年MM月DD日（不明な場合は『不明』）"
+}`;
+                const rawResponse = await callGemini(prompt);
+                let result = { status: "NOT_NEWS", date: "" };
+                try {
+                    const jsonMatch = rawResponse.match(/\{[\s\S]*\}/);
+                    if (jsonMatch) result = JSON.parse(jsonMatch[0]);
+                } catch(e) { console.error("Freshness parse error"); }
+                
+                await redis('hset', 'ars_url_freshness', urlToCheck, JSON.stringify(result));
+                await redis('zrem', 'ars_freshness_queue', urlToCheck);
+                console.log(`[ARS] URL Freshness completed: ${urlToCheck} -> ${result.status}`);
+                continue; // 次のキューへ
+            }
+
             if (isIncrementalRun) {
                 topic = targetTopic;
                 existingManual = await redis('hget', 'ars_v12_knowledge', topic) || "";
