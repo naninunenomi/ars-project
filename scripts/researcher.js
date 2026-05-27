@@ -214,6 +214,9 @@ URL: ${urlToCheck}
 
                 if (!isIncremental) await redis('zrem', 'ars_v12_queue', topic);
                 console.log(`[ARS] Research completed for: ${topic}`);
+            } else {
+                console.error(`[ARS] Research failed or generated knowledge was too short. Removing from queue to prevent infinite loop.`);
+                if (!isIncremental) await redis('zrem', 'ars_v12_queue', topic);
             }
         } catch (error) {
             console.error("CRITICAL ERROR DURING RESEARCH:", error);
