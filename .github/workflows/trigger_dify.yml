@@ -18,12 +18,12 @@ jobs:
           DIFY_API_KEY: ${{ secrets.DIFY_API_KEY }}
           DIFY_API_URL: "https://api.dify.ai/v1/workflows/run" # 自社ホスト版の場合はここを変更
         run: |
-          MAX_RETRIES=3
-          RETRY_COUNT=0
+          MAX_ARTICLE_TRIES=3 # 古い記事を捨てて別記事を探す最大回数
+          ARTICLE_TRIES=0
           SUCCESS=0
 
-          while [ $RETRY_COUNT -lt $MAX_RETRIES ]; do
-            # ランダムに1件選ぶ (BashのRANDOM変数を使用してjqに渡す)
+          while [ $ARTICLE_TRIES -lt $MAX_ARTICLE_TRIES ]; do
+            # ランダムに1件選ぶ
             RANDOM_INDEX=$((RANDOM))
             TARGET=$(jq --arg idx "$RANDOM_INDEX" '.[($idx | tonumber) % length]' blog/sources.json)
             
@@ -31,40 +31,55 @@ jobs:
             SOURCE_NAME=$(echo "$TARGET" | jq -r '.name')
             SOURCE_ABOUT=$(echo "$TARGET" | jq -r '.category')
 
-            echo "🚀 [Attempt $((RETRY_COUNT + 1))/$MAX_RETRIES] Triggering Dify for: $SOURCE_NAME ($SOURCE_URL)"
+            echo "🚀 [Article $((ARTICLE_TRIES + 1))/$MAX_ARTICLE_TRIES] Selected: $SOURCE_NAME ($SOURCE_URL)"
 
-            # DifyのWebhook（Workflow API）をキックし、レスポンスを変数に格納
-            RESPONSE=$(curl -s -X POST "$DIFY_API_URL" \
-              -H "Authorization: Bearer $DIFY_API_KEY" \
-              -H "Content-Type: application/json" \
-              -d '{
-                "inputs": {
-                  "url": "'"$SOURCE_URL"'",
-                  "source_name": "'"$SOURCE_NAME"'",
-                  "source_about": "'"$SOURCE_ABOUT"'"
-                },
-                "response_mode": "blocking",
-                "user": "github-actions-bot"
-              }')
-            
-            echo "📥 Response from Dify received."
-            
-            # レスポンス内に "STUDYING" か "DANGER" という文字が含まれているかチェック
-            if echo "$RESPONSE" | grep -q "STUDYING"; then
-              echo "⚠️ ARS is currently STUDYING this topic. Skipping to next news..."
-            elif echo "$RESPONSE" | grep -q "DANGER"; then
-              echo "❌ ARS judged this topic as DANGER. Skipping to next news..."
-            else
-              echo "✅ Dify workflow completed successfully (SAFE). Article published!"
-              SUCCESS=1
-              break
+            MAX_STUDY_TRIES=3 # STUDYINGを待つ最大回数 (3回 = 約1時間半)
+            STUDY_TRIES=0
+            ARTICLE_COMPLETED=0
+
+            while [ $STUDY_TRIES -lt $MAX_STUDY_TRIES ]; do
+              echo "📡 [Attempt $((STUDY_TRIES + 1))/$MAX_STUDY_TRIES] Triggering Dify..."
+
+              # DifyのWebhookをキック
+              RESPONSE=$(curl -s -X POST "$DIFY_API_URL" \
+                -H "Authorization: Bearer $DIFY_API_KEY" \
+                -H "Content-Type: application/json" \
+                -d '{
+                  "inputs": {
+                    "url": "'"$SOURCE_URL"'",
+                    "source_name": "'"$SOURCE_NAME"'",
+                    "source_about": "'"$SOURCE_ABOUT"'"
+                  },
+                  "response_mode": "blocking",
+                  "user": "github-actions-bot"
+                }')
+              
+              echo "📥 Response from Dify received."
+              
+              if echo "$RESPONSE" | grep -q "STALE"; then
+                echo "⚠️ Dify judged this article as STALE (too old). Switching to a new article..."
+                break # 内側のループを抜けて、別のURLを探す
+              elif echo "$RESPONSE" | grep -q "STUDYING"; then
+                echo "⏳ ARS is STUDYING this topic. Waiting 30 minutes before retrying the SAME article..."
+                sleep 1800 # 30分待機
+                STUDY_TRIES=$((STUDY_TRIES + 1))
+              else
+                # SAFE または DANGER（修復済み）などで完了した場合
+                echo "✅ Dify workflow completed successfully. Article published!"
+                ARTICLE_COMPLETED=1
+                SUCCESS=1
+                break
+              fi
+            done
+
+            if [ $ARTICLE_COMPLETED -eq 1 ]; then
+              break # 記事が公開できたので、外側のループも終了！
             fi
             
-            RETRY_COUNT=$((RETRY_COUNT + 1))
-            sleep 5
+            ARTICLE_TRIES=$((ARTICLE_TRIES + 1))
           done
 
           if [ $SUCCESS -eq 0 ]; then
-            echo "🚨 All $MAX_RETRIES attempts resulted in STUDYING or DANGER. Exiting."
-            exit 0 # 意図的なスキップなのでエラー(exit 1)にはせず正常終了とする
+            echo "🚨 All attempts failed (too many STALE articles or STUDYING timeouts)."
+            exit 0 # GitHub Action自体をエラーで赤くしないため正常終了とする
           fi
