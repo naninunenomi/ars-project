@@ -27,6 +27,9 @@ const callGemini = async (prompt) => {
         body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
     });
     const data = await res.json();
+    if (!data.candidates) {
+        console.error("[ARS] Gemini API Error Response:", JSON.stringify(data, null, 2));
+    }
     return data.candidates?.[0]?.content?.parts?.[0]?.text || "";
 };
 
@@ -178,6 +181,7 @@ async function main() {
                 console.log(`[ARS] Research completed for: ${topic}`);
             } else {
                 console.error(`[ARS] Research failed or generated knowledge was too short. Removing from queue to prevent infinite loop.`);
+                console.error(`[ARS] DEBUG: newKnowledge was:`, newKnowledge);
                 if (!isIncremental) await redis('zrem', 'ars_v12_queue', topic);
             }
         } catch (error) {
