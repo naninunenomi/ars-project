@@ -4,7 +4,7 @@
  * 憲章第6.1条（低コスト）に基づき、GitHub Actionsの無料枠を鉄壁防衛する。
  */
 
-const MODEL_NAME = "gemini-3-flash-preview";
+const MODEL_NAME = "gemini-2.5-flash";
 
 const redis = async (command, ...args) => {
     const url = (process.env.KV_REST_API_URL || "https://pretty-llama-117521.upstash.io").trim();

@@ -62,7 +62,7 @@ ${existingThemes.map(t => `- ${t}`).join('\n') || "(なし)"}
   "theme": "選択した既存テーマ名、または新規に自動命名したテーマ名"
 }`;
 
-            const geminiClassifyRes = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${process.env.GEMINI_API_KEY}`, {
+            const geminiClassifyRes = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${process.env.GEMINI_API_KEY}`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ contents: [{ parts: [{ text: classifierPrompt }] }] })
@@ -179,7 +179,7 @@ ${manual}
   "details_ja": "監督およびクライクライアントAI向けの、親切で非常にわかりやすい具体的な法律違反解説（日本語）。どの法令のどの部分に、広告テキストのどの表現が違反しているのかを日本語で具体的に説明すること。"
 }`;
             
-            const geminiRes = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${process.env.GEMINI_API_KEY}`, {
+            const geminiRes = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${process.env.GEMINI_API_KEY}`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ contents: [{ parts: [{ text: evalPrompt }] }] })
@@ -269,7 +269,7 @@ ${manual}
                     price: `${unitPrice} ARS`,
                     source: manual === theme ? 'KNOWLEDGE_LIBRARY' : `HIERARCHICAL_MATCH (${activeTheme})`, 
                     disclaimer: DISCLAIMER,
-                    model: "gemini-3-flash-preview"
+                    model: "gemini-2.5-flash"
                 });
             } else {
                 console.error("[ARS] Gemini Valuation Failed:", data);
