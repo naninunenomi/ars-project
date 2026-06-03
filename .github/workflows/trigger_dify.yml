@@ -2,8 +2,10 @@ name: Trigger Dify Workflow (Auto-Blogger)
 
 on:
   schedule:
-    # 毎日 日本時間 朝8時（UTC 23:00）と 夕方18時（UTC 09:00）に起動
-    - cron: '0 23,9 * * *'
+    # 毎日 日本時間 朝8:00, 8:30, 9:00 および 夕方18:00, 18:30, 19:00 に起動
+    # (UTC 23:00, 23:30, 00:00) / (UTC 09:00, 09:30, 10:00)
+    - cron: '0,30 23,0 * * *'
+    - cron: '0,30 9,10 * * *'
   workflow_dispatch: # 手動実行用
 
 jobs:
@@ -12,84 +14,30 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
 
-      - name: Fetch latest news via RSS
+      - name: Install dependencies
         run: |
-          npm install rss-parser
-          node scripts/fetch_news.js
+          npm install rss-parser axios
 
-      - name: Parse sources and trigger Dify API
+      - name: Fetch latest news via RSS
+        run: node scripts/fetch_news.js
+
+      - name: Smart Trigger Dify (Zero Wait Retry)
         env:
           DIFY_API_KEY: ${{ secrets.DIFY_API_KEY }}
-          DIFY_API_URL: "https://api.dify.ai/v1/workflows/run" # 自社ホスト版の場合はここを変更
+          DIFY_API_URL: "https://api.dify.ai/v1/workflows/run"
+        run: node scripts/trigger.js
+
+      - name: Commit state.json if modified
         run: |
-          MAX_ARTICLE_TRIES=3 # 古い記事を捨てて別記事を探す最大回数
-          ARTICLE_TRIES=0
-          SUCCESS=0
-
-          while [ $ARTICLE_TRIES -lt $MAX_ARTICLE_TRIES ]; do
-            # ランダムに1件選ぶ
-            RANDOM_INDEX=$((RANDOM))
-            TARGET=$(jq --arg idx "$RANDOM_INDEX" '.[($idx | tonumber) % length]' blog/sources.json)
-            
-            SOURCE_URL=$(echo "$TARGET" | jq -r '.url')
-            SOURCE_NAME=$(echo "$TARGET" | jq -r '.name')
-            SOURCE_ABOUT=$(echo "$TARGET" | jq -r '.category')
-
-            echo "🚀 [Article $((ARTICLE_TRIES + 1))/$MAX_ARTICLE_TRIES] Selected: $SOURCE_NAME ($SOURCE_URL)"
-
-            MAX_STUDY_TRIES=3 # STUDYINGを待つ最大回数 (3回 = 約1時間半)
-            STUDY_TRIES=0
-            ARTICLE_COMPLETED=0
-
-            while [ $STUDY_TRIES -lt $MAX_STUDY_TRIES ]; do
-              echo "📡 [Attempt $((STUDY_TRIES + 1))/$MAX_STUDY_TRIES] Triggering Dify..."
-
-              # DifyのWebhookをキック
-              RESPONSE=$(curl -s -X POST "$DIFY_API_URL" \
-                -H "Authorization: Bearer $DIFY_API_KEY" \
-                -H "Content-Type: application/json" \
-                -d '{
-                  "inputs": {
-                    "url": "'"$SOURCE_URL"'",
-                    "source_name": "'"$SOURCE_NAME"'",
-                    "source_about": "'"$SOURCE_ABOUT"'"
-                  },
-                  "response_mode": "blocking",
-                  "user": "github-actions-bot"
-                }')
-              
-              echo "📥 Response from Dify received."
-              
-              if echo "$RESPONSE" | grep -q "STALE"; then
-                echo "⚠️ Dify judged this article as STALE (too old). Switching to a new article..."
-                break # 内側のループを抜けて、別のURLを探す
-              elif echo "$RESPONSE" | grep -q "STUDYING"; then
-                echo "⏳ ARS is STUDYING this topic. Waiting 30 minutes before retrying the SAME article..."
-                sleep 1800 # 30分待機
-                STUDY_TRIES=$((STUDY_TRIES + 1))
-              else
-                # SAFE または DANGER（修復済み）などで完了した場合
-                echo "✅ Dify workflow completed successfully. Article published!"
-                ARTICLE_COMPLETED=1
-                SUCCESS=1
-                break
-              fi
-            done
-
-            if [ $ARTICLE_COMPLETED -eq 1 ]; then
-              break # 記事が公開できたので、外側のループも終了！
-            fi
-            
-            ARTICLE_TRIES=$((ARTICLE_TRIES + 1))
-          done
-
-          if [ $SUCCESS -eq 0 ]; then
-            echo "🚨 All attempts failed (too many STALE articles or STUDYING timeouts)."
-            exit 0 # GitHub Action自体をエラーで赤くしないため正常終了とする
-          fi
+          git config --global user.name "github-actions-bot"
+          git config --global user.email "bot@github.com"
+          git add blog/state.json || true
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Update state.json" && git push)
