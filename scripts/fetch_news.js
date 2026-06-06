@@ -49,6 +49,10 @@ async function fetchNews() {
   fs.writeFileSync(targetPath, JSON.stringify(allArticles, null, 2), 'utf8');
 
   console.log(`\n🎉 完了！ 合計 ${allArticles.length} 件の記事を blog/sources.json に保存しました。`);
+  process.exit(0);
 }
 
-fetchNews();
+fetchNews().catch(err => {
+  console.error("Fatal Error:", err);
+  process.exit(1);
+});
