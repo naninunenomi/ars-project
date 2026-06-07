@@ -1,13 +1,18 @@
 [
   {
-    "url": "https://venturebeat.com/technology/salesforce-rolls-out-new-slackbot-ai-agent-as-it-battles-microsoft-and",
+    "url": "https://www.wired.com/story/best-red-light-therapy-for-hair-growth/",
+    "name": "Wired",
+    "category": "Technology / Culture"
+  },
+  {
+    "url": "https://venturebeat.com/technology/google-just-redesigned-the-search-box-for-the-first-time-in-25-years-heres-why-it-matters-more-than-you-think",
     "name": "VentureBeat",
     "category": "AI / Enterprise"
   },
   {
-    "url": "https://venturebeat.com/technology/listen-labs-raises-usd69m-after-viral-billboard-hiring-stunt-to-scale-ai",
-    "name": "VentureBeat",
-    "category": "AI / Enterprise"
+    "url": "https://techcrunch.com/2026/06/06/the-trump-administration-might-take-an-equity-stake-in-openai/",
+    "name": "TechCrunch",
+    "category": "Technology / Startups"
   },
   {
     "url": "https://techcrunch.com/2026/06/06/what-to-expect-from-wwdc-2026-siris-highly-anticipated-revamp-and-apple-intelligence-updates/",
@@ -15,7 +20,7 @@
     "category": "Technology / Startups"
   },
   {
-    "url": "https://www.wired.com/story/anti-vax-dating-apps-are-going-irl-people-are-mad-as-hell-about-it/",
+    "url": "https://www.wired.com/story/how-to-watch-apple-wwdc-2026/",
     "name": "Wired",
     "category": "Technology / Culture"
   },
@@ -25,22 +30,7 @@
     "category": "AI / Enterprise"
   },
   {
-    "url": "https://techcrunch.com/2026/06/06/beyond-instagram-introducing-the-next-generation-of-social-apps/",
-    "name": "TechCrunch",
-    "category": "Technology / Startups"
-  },
-  {
-    "url": "https://techcrunch.com/2026/06/06/the-trump-administration-might-take-an-equity-stake-in-openai/",
-    "name": "TechCrunch",
-    "category": "Technology / Startups"
-  },
-  {
-    "url": "https://techcrunch.com/2026/06/06/sriram-krishnan-is-leaving-his-role-as-white-house-ai-advisor/",
-    "name": "TechCrunch",
-    "category": "Technology / Startups"
-  },
-  {
-    "url": "https://venturebeat.com/technology/google-just-redesigned-the-search-box-for-the-first-time-in-25-years-heres-why-it-matters-more-than-you-think",
+    "url": "https://venturebeat.com/technology/salesforce-rolls-out-new-slackbot-ai-agent-as-it-battles-microsoft-and",
     "name": "VentureBeat",
     "category": "AI / Enterprise"
   },
@@ -50,12 +40,12 @@
     "category": "AI / Enterprise"
   },
   {
-    "url": "https://www.wired.com/gallery/best-apple-3-in-1-wireless-chargers/",
-    "name": "Wired",
-    "category": "Technology / Culture"
+    "url": "https://venturebeat.com/technology/listen-labs-raises-usd69m-after-viral-billboard-hiring-stunt-to-scale-ai",
+    "name": "VentureBeat",
+    "category": "AI / Enterprise"
   },
   {
-    "url": "https://www.wired.com/story/the-best-bluetooth-trackers/",
+    "url": "https://www.wired.com/review/lauf-eelja-electric-mountain-bike/",
     "name": "Wired",
     "category": "Technology / Culture"
   },
@@ -65,13 +55,23 @@
     "category": "Technology / Startups"
   },
   {
-    "url": "https://www.wired.com/review/velotric-nomad-2-fat-tire-ebike/",
+    "url": "https://techcrunch.com/2026/06/06/beyond-instagram-introducing-the-next-generation-of-social-apps/",
+    "name": "TechCrunch",
+    "category": "Technology / Startups"
+  },
+  {
+    "url": "https://www.wired.com/story/anti-vax-dating-apps-are-going-irl-people-are-mad-as-hell-about-it/",
     "name": "Wired",
     "category": "Technology / Culture"
   },
   {
-    "url": "https://www.wired.com/story/security-news-this-week-crypto-funded-chinese-peptide-labs-are-booming/",
+    "url": "https://www.wired.com/gallery/best-apple-3-in-1-wireless-chargers/",
     "name": "Wired",
     "category": "Technology / Culture"
+  },
+  {
+    "url": "https://techcrunch.com/2026/06/06/sriram-krishnan-is-leaving-his-role-as-white-house-ai-advisor/",
+    "name": "TechCrunch",
+    "category": "Technology / Startups"
   }
 ]
