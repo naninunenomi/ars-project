@@ -8,6 +8,9 @@ on:
     - cron: '0,30 9,10,11,12 * * *'
   workflow_dispatch: # 手動実行用
 
+permissions:
+  contents: write
+
 jobs:
   run-dify:
     runs-on: ubuntu-latest
