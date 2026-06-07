@@ -96,10 +96,13 @@ async function main() {
     isRetry = true;
   } else {
     // 新規記事のトリガー時間かどうかを判定
+    // 手動実行（workflow_dispatch）の場合は常に許可
+    const isManualRun = process.env.GITHUB_EVENT_NAME === 'workflow_dispatch';
     // UTC 23:00 (JST 08:00) または UTC 09:00 (JST 18:00) の「ぴったり（0〜15分）」の場合のみ新規スタート
-    const isNewArticleWindow = (currentHourUTC === 23 || currentHourUTC === 9) && currentMinute < 15;
+    const isNewArticleWindow = isManualRun || ((currentHourUTC === 23 || currentHourUTC === 9) && currentMinute < 15);
 
     if (isNewArticleWindow) {
+      if (isManualRun) console.log("👋 Manual run detected. Bypassing time lock!");
       console.log("🌟 Time to post a new article! Picking a random source...");
       articleToProcess = pickRandomArticle();
       if (!articleToProcess) {
