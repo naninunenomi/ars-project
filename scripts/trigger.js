@@ -65,6 +65,11 @@ async function triggerDify(article, currentDate) {
     const responseText = JSON.stringify(output);
     console.log("📥 Response received from Dify.");
 
+    if (output.data && (output.data.status === "failed" || output.data.status === "error")) {
+      console.error("❌ Dify Workflow failed internally:", output.data.error || output.data);
+      return "STUDYING"; // エラーの場合は一旦リトライ対象にする
+    }
+
     if (responseText.includes("STALE")) {
       return "STALE";
     } else if (responseText.includes("STUDYING")) {
