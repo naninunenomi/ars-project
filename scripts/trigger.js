@@ -70,6 +70,32 @@ async function triggerDify(article, currentDate) {
     } else if (responseText.includes("STUDYING")) {
       return "STUDYING";
     } else {
+      // 成功した場合、Difyの出力（記事本文）を抜き出してHTMLファイルとして保存する
+      const outputs = output.data && output.data.outputs;
+      if (outputs) {
+        let articleContent = "";
+        // outputsの中で一番文字数が長いものを「記事本文」とみなして取得
+        for (const key in outputs) {
+          if (typeof outputs[key] === 'string' && outputs[key].length > 100) {
+            articleContent = outputs[key];
+          }
+        }
+        
+        if (articleContent) {
+          const timestamp = new Date().toISOString().replace(/[-:T]/g, '').substring(0, 14); // YYYYMMDDHHMMSS
+          const filename = path.join(__dirname, `../blog/articles/article_${timestamp}.html`);
+          
+          // ディレクトリが存在しない場合は作成
+          if (!fs.existsSync(path.dirname(filename))) {
+            fs.mkdirSync(path.dirname(filename), { recursive: true });
+          }
+          
+          fs.writeFileSync(filename, articleContent, 'utf8');
+          console.log(`✅ Saved generated article to ${filename}`);
+        } else {
+          console.log("⚠️ No valid article text found in Dify response outputs.");
+        }
+      }
       return "SUCCESS";
     }
   } catch (error) {
