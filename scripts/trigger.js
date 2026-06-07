@@ -67,7 +67,8 @@ async function triggerDify(article, currentDate) {
 
     if (output.data && (output.data.status === "failed" || output.data.status === "error")) {
       console.error("❌ Dify Workflow failed internally:", output.data.error || output.data);
-      return "STUDYING"; // エラーの場合は一旦リトライ対象にする
+      // エラーの場合は無限ループを防ぐため、リトライせず破棄する（次の時間に別の新しい記事を探させる）
+      return "ERROR";
     }
 
     if (responseText.includes("STALE")) {
@@ -167,9 +168,10 @@ async function main() {
   // Difyにリクエスト送信
   const result = await triggerDify(articleToProcess, dateStringReadable);
 
-  if (result === "SUCCESS" || result === "STALE") {
+  if (result === "SUCCESS" || result === "STALE" || result === "ERROR") {
     if (result === "SUCCESS") console.log("✅ Article published successfully!");
     if (result === "STALE") console.log("⚠️ Article was STALE (too old). Skipping it.");
+    if (result === "ERROR") console.log("⚠️ Article triggered an internal Dify error. Discarding to avoid infinite loop.");
     
     state.pending_article = null; // 保留を解除
     // 手動実行でなければ、成功したウィンドウを記録
