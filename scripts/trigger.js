@@ -41,14 +41,15 @@ function pickRandomArticle() {
   return sources[Math.floor(Math.random() * sources.length)];
 }
 
-async function triggerDify(article) {
+async function triggerDify(article, currentDate) {
   console.log(`📡 Triggering Dify for: ${article.name} (${article.url})`);
   try {
     const response = await axios.post(DIFY_API_URL, {
       inputs: {
         url: article.url,
         source_name: article.name,
-        source_about: article.category
+        source_about: article.category,
+        current_date: currentDate
       },
       response_mode: "blocking",
       user: "github-actions-bot"
@@ -130,8 +131,10 @@ async function main() {
     }
   }
 
+  const dateStringReadable = `${jstTime.getFullYear()}年${jstTime.getMonth() + 1}月${jstTime.getDate()}日`;
+
   // Difyにリクエスト送信
-  const result = await triggerDify(articleToProcess);
+  const result = await triggerDify(articleToProcess, dateStringReadable);
 
   if (result === "SUCCESS" || result === "STALE") {
     if (result === "SUCCESS") console.log("✅ Article published successfully!");
