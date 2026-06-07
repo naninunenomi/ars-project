@@ -82,35 +82,50 @@ async function main() {
   const state = loadState();
   const now = new Date();
   
-  // 現在のUTC時間を取得（JST = UTC + 9）
-  const currentHourUTC = now.getUTCHours();
-  const currentMinute = now.getUTCMinutes();
+  // 現在のJST時間を取得（UTC + 9時間）
+  const jstTime = new Date(now.getTime() + 9 * 60 * 60 * 1000);
+  const currentHourJST = jstTime.getUTCHours();
+  const dateStringJST = jstTime.toISOString().split('T')[0]; // YYYY-MM-DD in JST
 
-  console.log(`🕒 Current Time (UTC): ${currentHourUTC}:${currentMinute}`);
+  console.log(`🕒 Current Time (JST): ${dateStringJST} ${currentHourJST}:00`);
 
   let articleToProcess = state.pending_article;
   let isRetry = false;
+
+  const isManualRun = process.env.GITHUB_EVENT_NAME === 'workflow_dispatch';
+
+  // ウィンドウ判定 (朝の部: 8~11時台, 夜の部: 18~21時台)
+  const isMorningWindow = currentHourJST >= 8 && currentHourJST <= 11;
+  const isEveningWindow = currentHourJST >= 18 && currentHourJST <= 21;
+  const currentWindow = isMorningWindow ? 'MORNING' : (isEveningWindow ? 'EVENING' : 'NONE');
+  const currentWindowKey = `${dateStringJST}-${currentWindow}`;
 
   if (articleToProcess) {
     console.log("⚠️ Found a pending article from a previous STUDYING state. Retrying...");
     isRetry = true;
   } else {
-    // 新規記事のトリガー時間かどうかを判定
-    // 手動実行（workflow_dispatch）の場合は常に許可
-    const isManualRun = process.env.GITHUB_EVENT_NAME === 'workflow_dispatch';
-    // UTC 23:00 (JST 08:00) または UTC 09:00 (JST 18:00) の「ぴったり（0〜15分）」の場合のみ新規スタート
-    const isNewArticleWindow = isManualRun || ((currentHourUTC === 23 || currentHourUTC === 9) && currentMinute < 15);
+    // 新規記事開始の判定
+    let shouldStartNew = false;
+    
+    if (isManualRun) {
+      console.log("👋 Manual run detected. Bypassing window lock!");
+      shouldStartNew = true;
+    } else if (currentWindow !== 'NONE') {
+      // 現在のウィンドウ枠（例: 2026-06-07-MORNING）でまだ成功していなければスタート
+      if (state.last_success_window_key !== currentWindowKey) {
+        console.log(`🌟 Time to post a new article in the ${currentWindow} window! Picking a random source...`);
+        shouldStartNew = true;
+      }
+    }
 
-    if (isNewArticleWindow) {
-      if (isManualRun) console.log("👋 Manual run detected. Bypassing time lock!");
-      console.log("🌟 Time to post a new article! Picking a random source...");
+    if (shouldStartNew) {
       articleToProcess = pickRandomArticle();
       if (!articleToProcess) {
         console.error("No articles found in sources.json. Exiting.");
         process.exit(0);
       }
     } else {
-      console.log("💤 Not a new article window, and no pending articles. Exiting quickly to save free minutes!");
+      console.log("💤 No pending articles, and already completed (or outside) the current window. Exiting quickly.");
       process.exit(0); // 1秒で即帰宅！
     }
   }
@@ -118,12 +133,15 @@ async function main() {
   // Difyにリクエスト送信
   const result = await triggerDify(articleToProcess);
 
-  if (result === "SUCCESS") {
-    console.log("✅ Article published successfully!");
-    state.pending_article = null; // 成功したので保留を解除
-  } else if (result === "STALE") {
-    console.log("⚠️ Article was STALE (too old). Skipping it.");
-    state.pending_article = null; // STALEなので諦める
+  if (result === "SUCCESS" || result === "STALE") {
+    if (result === "SUCCESS") console.log("✅ Article published successfully!");
+    if (result === "STALE") console.log("⚠️ Article was STALE (too old). Skipping it.");
+    
+    state.pending_article = null; // 保留を解除
+    // 手動実行でなければ、成功したウィンドウを記録
+    if (!isManualRun) {
+      state.last_success_window_key = currentWindowKey;
+    }
   } else if (result === "STUDYING") {
     console.log("⏳ ARS is STUDYING or API is busy. Saving state to retry in the next time slot.");
     state.pending_article = articleToProcess; // 保留状態として保存
