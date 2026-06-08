@@ -5,12 +5,7 @@
     "category": "Technology / Startups"
   },
   {
-    "url": "https://venturebeat.com/infrastructure/claude-code-costs-up-to-usd200-a-month-goose-does-the-same-thing-for-free",
-    "name": "VentureBeat",
-    "category": "AI / Enterprise"
-  },
-  {
-    "url": "https://venturebeat.com/technology/google-just-redesigned-the-search-box-for-the-first-time-in-25-years-heres-why-it-matters-more-than-you-think",
+    "url": "https://venturebeat.com/technology/listen-labs-raises-usd69m-after-viral-billboard-hiring-stunt-to-scale-ai",
     "name": "VentureBeat",
     "category": "AI / Enterprise"
   },
@@ -20,9 +15,14 @@
     "category": "Technology / Culture"
   },
   {
-    "url": "https://www.wired.com/review/sigma-bf-camera/",
-    "name": "Wired",
-    "category": "Technology / Culture"
+    "url": "https://venturebeat.com/technology/google-just-redesigned-the-search-box-for-the-first-time-in-25-years-heres-why-it-matters-more-than-you-think",
+    "name": "VentureBeat",
+    "category": "AI / Enterprise"
+  },
+  {
+    "url": "https://venturebeat.com/infrastructure/railway-secures-usd100-million-to-challenge-aws-with-ai-native-cloud",
+    "name": "VentureBeat",
+    "category": "AI / Enterprise"
   },
   {
     "url": "https://techcrunch.com/2026/06/07/the-worst-hacks-and-breaches-of-2026-so-far/",
@@ -30,12 +30,7 @@
     "category": "Technology / Startups"
   },
   {
-    "url": "https://www.wired.com/story/best-red-light-therapy-for-hair-growth/",
-    "name": "Wired",
-    "category": "Technology / Culture"
-  },
-  {
-    "url": "https://techcrunch.com/2026/06/07/inside-gms-900m-ev-battery-gamble/",
+    "url": "https://techcrunch.com/2026/06/07/openai-is-still-working-on-that-super-app/",
     "name": "TechCrunch",
     "category": "Technology / Startups"
   },
@@ -45,24 +40,19 @@
     "category": "Technology / Startups"
   },
   {
-    "url": "https://venturebeat.com/infrastructure/railway-secures-usd100-million-to-challenge-aws-with-ai-native-cloud",
+    "url": "https://venturebeat.com/infrastructure/claude-code-costs-up-to-usd200-a-month-goose-does-the-same-thing-for-free",
     "name": "VentureBeat",
     "category": "AI / Enterprise"
   },
   {
-    "url": "https://venturebeat.com/technology/salesforce-rolls-out-new-slackbot-ai-agent-as-it-battles-microsoft-and",
-    "name": "VentureBeat",
-    "category": "AI / Enterprise"
-  },
-  {
-    "url": "https://www.wired.com/story/you-may-not-need-a-giant-chefs-knife-when-a-midsize-knife-does-the-trick/",
+    "url": "https://www.wired.com/story/best-red-light-therapy-for-hair-growth/",
     "name": "Wired",
     "category": "Technology / Culture"
   },
   {
-    "url": "https://venturebeat.com/technology/listen-labs-raises-usd69m-after-viral-billboard-hiring-stunt-to-scale-ai",
-    "name": "VentureBeat",
-    "category": "AI / Enterprise"
+    "url": "https://www.wired.com/review/sigma-bf-camera/",
+    "name": "Wired",
+    "category": "Technology / Culture"
   },
   {
     "url": "https://www.wired.com/review/lauf-eelja-electric-mountain-bike/",
@@ -70,8 +60,18 @@
     "category": "Technology / Culture"
   },
   {
-    "url": "https://techcrunch.com/2026/06/07/openai-is-still-working-on-that-super-app/",
+    "url": "https://www.wired.com/story/you-may-not-need-a-giant-chefs-knife-when-a-midsize-knife-does-the-trick/",
+    "name": "Wired",
+    "category": "Technology / Culture"
+  },
+  {
+    "url": "https://techcrunch.com/2026/06/07/inside-gms-900m-ev-battery-gamble/",
     "name": "TechCrunch",
     "category": "Technology / Startups"
+  },
+  {
+    "url": "https://venturebeat.com/technology/salesforce-rolls-out-new-slackbot-ai-agent-as-it-battles-microsoft-and",
+    "name": "VentureBeat",
+    "category": "AI / Enterprise"
   }
 ]
