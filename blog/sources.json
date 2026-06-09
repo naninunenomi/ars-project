@@ -1,5 +1,25 @@
 [
   {
+    "url": "https://techcrunch.com/2026/06/09/ios-27-features-we-didnt-see-on-stage/",
+    "name": "TechCrunch",
+    "category": "Technology / Startups"
+  },
+  {
+    "url": "https://techcrunch.com/2026/06/09/sandstone-raises-30m-to-bring-ai-to-in-house-legal-teams/",
+    "name": "TechCrunch",
+    "category": "Technology / Startups"
+  },
+  {
+    "url": "https://venturebeat.com/infrastructure/claude-code-costs-up-to-usd200-a-month-goose-does-the-same-thing-for-free",
+    "name": "VentureBeat",
+    "category": "AI / Enterprise"
+  },
+  {
+    "url": "https://venturebeat.com/technology/listen-labs-raises-usd69m-after-viral-billboard-hiring-stunt-to-scale-ai",
+    "name": "VentureBeat",
+    "category": "AI / Enterprise"
+  },
+  {
     "url": "https://venturebeat.com/technology/salesforce-rolls-out-new-slackbot-ai-agent-as-it-battles-microsoft-and",
     "name": "VentureBeat",
     "category": "AI / Enterprise"
@@ -10,27 +30,22 @@
     "category": "AI / Enterprise"
   },
   {
-    "url": "https://techcrunch.com/2026/06/08/mercors-brendan-foody-calls-out-sequoia-over-dual-pricing-valuation-tricks/",
-    "name": "TechCrunch",
-    "category": "Technology / Startups"
-  },
-  {
-    "url": "https://techcrunch.com/2026/06/09/anker-backed-evotrex-raises-30m-to-build-its-off-grid-rv/",
-    "name": "TechCrunch",
-    "category": "Technology / Startups"
-  },
-  {
-    "url": "https://www.wired.com/story/best-smart-bird-feeders/",
+    "url": "https://www.wired.com/story/book-excerpt-city-on-the-edge-google-buses-san-francisco/",
     "name": "Wired",
     "category": "Technology / Culture"
   },
   {
-    "url": "https://venturebeat.com/infrastructure/railway-secures-usd100-million-to-challenge-aws-with-ai-native-cloud",
-    "name": "VentureBeat",
-    "category": "AI / Enterprise"
+    "url": "https://techcrunch.com/2026/06/09/apple-brings-streaming-style-subscription-bundles-to-the-app-store/",
+    "name": "TechCrunch",
+    "category": "Technology / Startups"
   },
   {
-    "url": "https://techcrunch.com/2026/06/08/zeptos-ipo-filing-reveals-fast-growth-bigger-losses-and-a-valuation-question-nobodys-answered-yet/",
+    "url": "https://www.wired.com/story/longevity-startup-doses-first-human-in-bid-to-reverse-age-related-sight-loss/",
+    "name": "Wired",
+    "category": "Technology / Culture"
+  },
+  {
+    "url": "https://techcrunch.com/2026/06/09/apple-says-it-may-remove-apps-from-the-app-store-if-they-dont-attract-users/",
     "name": "TechCrunch",
     "category": "Technology / Startups"
   },
@@ -40,37 +55,22 @@
     "category": "Technology / Culture"
   },
   {
-    "url": "https://www.wired.com/story/anguished-parents-crying-doctors-life-amid-utahs-measles-outbreak/",
+    "url": "https://www.wired.com/story/rivian-r2-first-drive/",
     "name": "Wired",
     "category": "Technology / Culture"
   },
   {
-    "url": "https://www.wired.com/story/book-excerpt-city-on-the-edge-google-buses-san-francisco/",
-    "name": "Wired",
-    "category": "Technology / Culture"
-  },
-  {
-    "url": "https://venturebeat.com/infrastructure/claude-code-costs-up-to-usd200-a-month-goose-does-the-same-thing-for-free",
+    "url": "https://venturebeat.com/infrastructure/railway-secures-usd100-million-to-challenge-aws-with-ai-native-cloud",
     "name": "VentureBeat",
     "category": "AI / Enterprise"
   },
   {
-    "url": "https://www.wired.com/story/the-big-interview-podcast-alex-vindman/",
+    "url": "https://www.wired.com/story/best-smart-bird-feeders/",
     "name": "Wired",
     "category": "Technology / Culture"
   },
   {
-    "url": "https://venturebeat.com/technology/listen-labs-raises-usd69m-after-viral-billboard-hiring-stunt-to-scale-ai",
-    "name": "VentureBeat",
-    "category": "AI / Enterprise"
-  },
-  {
-    "url": "https://techcrunch.com/2026/06/08/why-apples-slow-and-steady-ai-bet-is-starting-to-look-pretty-smart/",
-    "name": "TechCrunch",
-    "category": "Technology / Startups"
-  },
-  {
-    "url": "https://techcrunch.com/2026/06/09/how-an-e-scooter-founder-raised-5-million-to-build-space-data-centers/",
+    "url": "https://techcrunch.com/2026/06/09/apples-app-store-rolls-out-personalized-recommendations/",
     "name": "TechCrunch",
     "category": "Technology / Startups"
   }
