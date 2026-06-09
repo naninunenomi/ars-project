@@ -1,6 +1,46 @@
 [
   {
-    "url": "https://techcrunch.com/2026/06/08/as-openai-files-for-ipo-sam-altmans-eye-scanning-company-is-doing-layoffs-report-says/",
+    "url": "https://techcrunch.com/2026/06/08/apples-wwdc-ai-demos-looked-more-real-after-250m-false-ad-settlement/",
+    "name": "TechCrunch",
+    "category": "Technology / Startups"
+  },
+  {
+    "url": "https://venturebeat.com/technology/listen-labs-raises-usd69m-after-viral-billboard-hiring-stunt-to-scale-ai",
+    "name": "VentureBeat",
+    "category": "AI / Enterprise"
+  },
+  {
+    "url": "https://venturebeat.com/technology/salesforce-rolls-out-new-slackbot-ai-agent-as-it-battles-microsoft-and",
+    "name": "VentureBeat",
+    "category": "AI / Enterprise"
+  },
+  {
+    "url": "https://www.wired.com/story/apples-iphone-camera-app-is-getting-an-ai-upgrade-in-ios-27/",
+    "name": "Wired",
+    "category": "Technology / Culture"
+  },
+  {
+    "url": "https://venturebeat.com/technology/google-just-redesigned-the-search-box-for-the-first-time-in-25-years-heres-why-it-matters-more-than-you-think",
+    "name": "VentureBeat",
+    "category": "AI / Enterprise"
+  },
+  {
+    "url": "https://venturebeat.com/infrastructure/claude-code-costs-up-to-usd200-a-month-goose-does-the-same-thing-for-free",
+    "name": "VentureBeat",
+    "category": "AI / Enterprise"
+  },
+  {
+    "url": "https://techcrunch.com/2026/06/08/mercors-brendan-foody-calls-out-sequoia-over-dual-pricing-valuation-tricks/",
+    "name": "TechCrunch",
+    "category": "Technology / Startups"
+  },
+  {
+    "url": "https://techcrunch.com/2026/06/08/following-anthropic-openai-files-confidentially-for-ipo/",
+    "name": "TechCrunch",
+    "category": "Technology / Startups"
+  },
+  {
+    "url": "https://techcrunch.com/2026/06/08/why-apples-slow-and-steady-ai-bet-is-starting-to-look-pretty-smart/",
     "name": "TechCrunch",
     "category": "Technology / Startups"
   },
@@ -10,34 +50,9 @@
     "category": "Technology / Culture"
   },
   {
-    "url": "https://techcrunch.com/2026/06/08/apples-wwdc-ai-demos-looked-more-real-after-250m-false-ad-settlement/",
+    "url": "https://techcrunch.com/2026/06/08/as-openai-files-for-ipo-sam-altmans-eye-scanning-company-is-doing-layoffs-report-says/",
     "name": "TechCrunch",
     "category": "Technology / Startups"
-  },
-  {
-    "url": "https://venturebeat.com/technology/salesforce-rolls-out-new-slackbot-ai-agent-as-it-battles-microsoft-and",
-    "name": "VentureBeat",
-    "category": "AI / Enterprise"
-  },
-  {
-    "url": "https://techcrunch.com/2026/06/08/following-anthropic-openai-files-confidentially-for-ipo/",
-    "name": "TechCrunch",
-    "category": "Technology / Startups"
-  },
-  {
-    "url": "https://www.wired.com/story/kalshi-polymarket-influencer-election-denial-spencer-pratt/",
-    "name": "Wired",
-    "category": "Technology / Culture"
-  },
-  {
-    "url": "https://techcrunch.com/2026/06/08/apple-plays-catch-up-at-wwdc/",
-    "name": "TechCrunch",
-    "category": "Technology / Startups"
-  },
-  {
-    "url": "https://www.wired.com/story/apples-iphone-camera-app-is-getting-an-ai-upgrade-in-ios-27/",
-    "name": "Wired",
-    "category": "Technology / Culture"
   },
   {
     "url": "https://www.wired.com/story/everything-apple-announced-at-wwdc-2026/",
@@ -45,17 +60,7 @@
     "category": "Technology / Culture"
   },
   {
-    "url": "https://venturebeat.com/infrastructure/claude-code-costs-up-to-usd200-a-month-goose-does-the-same-thing-for-free",
-    "name": "VentureBeat",
-    "category": "AI / Enterprise"
-  },
-  {
     "url": "https://venturebeat.com/infrastructure/railway-secures-usd100-million-to-challenge-aws-with-ai-native-cloud",
-    "name": "VentureBeat",
-    "category": "AI / Enterprise"
-  },
-  {
-    "url": "https://venturebeat.com/technology/google-just-redesigned-the-search-box-for-the-first-time-in-25-years-heres-why-it-matters-more-than-you-think",
     "name": "VentureBeat",
     "category": "AI / Enterprise"
   },
@@ -65,13 +70,8 @@
     "category": "Technology / Culture"
   },
   {
-    "url": "https://techcrunch.com/2026/06/08/apple-bets-cheaper-ai-will-woo-small-developers/",
-    "name": "TechCrunch",
-    "category": "Technology / Startups"
-  },
-  {
-    "url": "https://venturebeat.com/technology/listen-labs-raises-usd69m-after-viral-billboard-hiring-stunt-to-scale-ai",
-    "name": "VentureBeat",
-    "category": "AI / Enterprise"
+    "url": "https://www.wired.com/story/kalshi-polymarket-influencer-election-denial-spencer-pratt/",
+    "name": "Wired",
+    "category": "Technology / Culture"
   }
 ]
