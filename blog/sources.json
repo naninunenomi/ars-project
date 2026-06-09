@@ -1,31 +1,11 @@
 [
   {
-    "url": "https://techcrunch.com/2026/06/08/apples-wwdc-ai-demos-looked-more-real-after-250m-false-ad-settlement/",
-    "name": "TechCrunch",
-    "category": "Technology / Startups"
-  },
-  {
-    "url": "https://venturebeat.com/technology/listen-labs-raises-usd69m-after-viral-billboard-hiring-stunt-to-scale-ai",
-    "name": "VentureBeat",
-    "category": "AI / Enterprise"
-  },
-  {
     "url": "https://venturebeat.com/technology/salesforce-rolls-out-new-slackbot-ai-agent-as-it-battles-microsoft-and",
     "name": "VentureBeat",
     "category": "AI / Enterprise"
   },
   {
-    "url": "https://www.wired.com/story/apples-iphone-camera-app-is-getting-an-ai-upgrade-in-ios-27/",
-    "name": "Wired",
-    "category": "Technology / Culture"
-  },
-  {
     "url": "https://venturebeat.com/technology/google-just-redesigned-the-search-box-for-the-first-time-in-25-years-heres-why-it-matters-more-than-you-think",
-    "name": "VentureBeat",
-    "category": "AI / Enterprise"
-  },
-  {
-    "url": "https://venturebeat.com/infrastructure/claude-code-costs-up-to-usd200-a-month-goose-does-the-same-thing-for-free",
     "name": "VentureBeat",
     "category": "AI / Enterprise"
   },
@@ -35,27 +15,12 @@
     "category": "Technology / Startups"
   },
   {
-    "url": "https://techcrunch.com/2026/06/08/following-anthropic-openai-files-confidentially-for-ipo/",
+    "url": "https://techcrunch.com/2026/06/09/anker-backed-evotrex-raises-30m-to-build-its-off-grid-rv/",
     "name": "TechCrunch",
     "category": "Technology / Startups"
   },
   {
-    "url": "https://techcrunch.com/2026/06/08/why-apples-slow-and-steady-ai-bet-is-starting-to-look-pretty-smart/",
-    "name": "TechCrunch",
-    "category": "Technology / Startups"
-  },
-  {
-    "url": "https://www.wired.com/story/openai-confidentially-files-for-ipo/",
-    "name": "Wired",
-    "category": "Technology / Culture"
-  },
-  {
-    "url": "https://techcrunch.com/2026/06/08/as-openai-files-for-ipo-sam-altmans-eye-scanning-company-is-doing-layoffs-report-says/",
-    "name": "TechCrunch",
-    "category": "Technology / Startups"
-  },
-  {
-    "url": "https://www.wired.com/story/everything-apple-announced-at-wwdc-2026/",
+    "url": "https://www.wired.com/story/best-smart-bird-feeders/",
     "name": "Wired",
     "category": "Technology / Culture"
   },
@@ -65,13 +30,48 @@
     "category": "AI / Enterprise"
   },
   {
-    "url": "https://www.wired.com/story/apples-new-siri-ai-is-ready-to-get-personal/",
+    "url": "https://techcrunch.com/2026/06/08/zeptos-ipo-filing-reveals-fast-growth-bigger-losses-and-a-valuation-question-nobodys-answered-yet/",
+    "name": "TechCrunch",
+    "category": "Technology / Startups"
+  },
+  {
+    "url": "https://www.wired.com/review/amazon-ember-artline/",
     "name": "Wired",
     "category": "Technology / Culture"
   },
   {
-    "url": "https://www.wired.com/story/kalshi-polymarket-influencer-election-denial-spencer-pratt/",
+    "url": "https://www.wired.com/story/anguished-parents-crying-doctors-life-amid-utahs-measles-outbreak/",
     "name": "Wired",
     "category": "Technology / Culture"
+  },
+  {
+    "url": "https://www.wired.com/story/book-excerpt-city-on-the-edge-google-buses-san-francisco/",
+    "name": "Wired",
+    "category": "Technology / Culture"
+  },
+  {
+    "url": "https://venturebeat.com/infrastructure/claude-code-costs-up-to-usd200-a-month-goose-does-the-same-thing-for-free",
+    "name": "VentureBeat",
+    "category": "AI / Enterprise"
+  },
+  {
+    "url": "https://www.wired.com/story/the-big-interview-podcast-alex-vindman/",
+    "name": "Wired",
+    "category": "Technology / Culture"
+  },
+  {
+    "url": "https://venturebeat.com/technology/listen-labs-raises-usd69m-after-viral-billboard-hiring-stunt-to-scale-ai",
+    "name": "VentureBeat",
+    "category": "AI / Enterprise"
+  },
+  {
+    "url": "https://techcrunch.com/2026/06/08/why-apples-slow-and-steady-ai-bet-is-starting-to-look-pretty-smart/",
+    "name": "TechCrunch",
+    "category": "Technology / Startups"
+  },
+  {
+    "url": "https://techcrunch.com/2026/06/09/how-an-e-scooter-founder-raised-5-million-to-build-space-data-centers/",
+    "name": "TechCrunch",
+    "category": "Technology / Startups"
   }
 ]
