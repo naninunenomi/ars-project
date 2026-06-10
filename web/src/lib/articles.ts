@@ -12,8 +12,10 @@ export interface Article {
   content: string;
 }
 
-// Get the path to the blog/articles directory relative to the web project
-const ARTICLES_DIR = path.join(process.cwd(), '../blog/articles');
+// Vercel上では process.cwd() は /vercel/path0/web になる。
+// 記事データは web/src/data/articles/ に置く。
+// ローカルでも blog/articles にあるものをGitHub Actionsがここにコピーする仕組みにする。
+const ARTICLES_DIR = path.join(process.cwd(), 'src/data/articles');
 
 export function getAllArticles(includeDrafts: boolean = false): Article[] {
   if (!fs.existsSync(ARTICLES_DIR)) {
@@ -34,9 +36,9 @@ export function getAllArticles(includeDrafts: boolean = false): Article[] {
       return null;
     }
   })
-  .filter((article): article is Article => article !== null) // filter out nulls
-  .filter(article => includeDrafts ? true : !article.draft) // filter drafts
-  .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()); // sort by date
+  .filter((article): article is Article => article !== null)
+  .filter(article => includeDrafts ? true : !article.draft)
+  .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
   return articles;
 }

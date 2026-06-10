@@ -42,8 +42,8 @@ jobs:
         run: |
           git config --global user.name "github-actions-bot"
           git config --global user.email "bot@github.com"
-          git add blog/state.json blog/sources.json blog/articles/ || true
-          git diff --staged --quiet || (git commit -m "Update state and sources" && git push)
+          git add blog/state.json blog/sources.json blog/articles/ web/src/data/articles/ || true
+          git diff --staged --quiet || (git commit -m "Update state, sources, and articles" && git push)
 
       - name: Auto-post to X (Twitter)
         env:

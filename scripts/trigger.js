@@ -89,12 +89,8 @@ async function triggerDify(article, currentDate) {
         
         if (articleContent) {
           const timestamp = new Date().toISOString().replace(/[-:T]/g, '').substring(0, 14); // YYYYMMDDHHMMSS
-          const filename = path.join(__dirname, `../blog/articles/article_${timestamp}.json`);
-          
-          // ディレクトリが存在しない場合は作成
-          if (!fs.existsSync(path.dirname(filename))) {
-            fs.mkdirSync(path.dirname(filename), { recursive: true });
-          }
+          const jsonFilename = path.join(__dirname, `../blog/articles/article_${timestamp}.json`);
+          const webDataFilename = path.join(__dirname, `../web/src/data/articles/article_${timestamp}.json`);
 
           // HTMLから本文部分だけをざっくり抽出（<body>タグの中身）
           let bodyContent = articleContent;
@@ -116,8 +112,17 @@ async function triggerDify(article, currentDate) {
             raw_html: articleContent // 元データも念のため保持
           };
           
-          fs.writeFileSync(filename, JSON.stringify(articleData, null, 2), 'utf8');
-          console.log(`✅ Saved generated article to ${filename}`);
+          // ディレクトリが存在しない場合は作成
+          [jsonFilename, webDataFilename].forEach(f => {
+            if (!fs.existsSync(path.dirname(f))) {
+              fs.mkdirSync(path.dirname(f), { recursive: true });
+            }
+          });
+
+          fs.writeFileSync(jsonFilename, JSON.stringify(articleData, null, 2), 'utf8');
+          fs.writeFileSync(webDataFilename, JSON.stringify(articleData, null, 2), 'utf8');
+          console.log(`✅ Saved generated article to ${jsonFilename}`);
+          console.log(`✅ Also saved to web/src/data/articles for Vercel`);
         } else {
           console.log("⚠️ No valid article text found in Dify response outputs.");
         }

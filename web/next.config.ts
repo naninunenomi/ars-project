@@ -1,8 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  output: "export",
-  trailingSlash: true,
+  // outputはexportを使わない（Vercelの標準Next.jsモードで動かす）
 };
 
 export default nextConfig;
