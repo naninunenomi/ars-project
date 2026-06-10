@@ -1,11 +1,36 @@
 [
   {
-    "url": "https://techcrunch.com/2026/06/09/ios-27-features-we-didnt-see-on-stage/",
+    "url": "https://www.wired.com/story/great-white-shark-mediterranean-sea-sighting-endangered/",
+    "name": "Wired",
+    "category": "Technology / Culture"
+  },
+  {
+    "url": "https://www.wired.com/story/anthropic-releases-claude-fable-5-mythos-5/",
+    "name": "Wired",
+    "category": "Technology / Culture"
+  },
+  {
+    "url": "https://venturebeat.com/technology/listen-labs-raises-usd69m-after-viral-billboard-hiring-stunt-to-scale-ai",
+    "name": "VentureBeat",
+    "category": "AI / Enterprise"
+  },
+  {
+    "url": "https://techcrunch.com/2026/06/09/how-justin-ernest-invested-nearly-400m-into-hot-startups-without-a-traditional-vc-fund/",
     "name": "TechCrunch",
     "category": "Technology / Startups"
   },
   {
-    "url": "https://techcrunch.com/2026/06/09/sandstone-raises-30m-to-bring-ai-to-in-house-legal-teams/",
+    "url": "https://techcrunch.com/2026/06/09/can-tech-companies-learn-to-love-cheaper-models/",
+    "name": "TechCrunch",
+    "category": "Technology / Startups"
+  },
+  {
+    "url": "https://venturebeat.com/technology/salesforce-rolls-out-new-slackbot-ai-agent-as-it-battles-microsoft-and",
+    "name": "VentureBeat",
+    "category": "AI / Enterprise"
+  },
+  {
+    "url": "https://techcrunch.com/2026/06/09/gm-bets-big-on-energy-storage-for-data-centers-and-the-grid/",
     "name": "TechCrunch",
     "category": "Technology / Startups"
   },
@@ -15,14 +40,19 @@
     "category": "AI / Enterprise"
   },
   {
-    "url": "https://venturebeat.com/technology/listen-labs-raises-usd69m-after-viral-billboard-hiring-stunt-to-scale-ai",
+    "url": "https://venturebeat.com/infrastructure/railway-secures-usd100-million-to-challenge-aws-with-ai-native-cloud",
     "name": "VentureBeat",
     "category": "AI / Enterprise"
   },
   {
-    "url": "https://venturebeat.com/technology/salesforce-rolls-out-new-slackbot-ai-agent-as-it-battles-microsoft-and",
-    "name": "VentureBeat",
-    "category": "AI / Enterprise"
+    "url": "https://techcrunch.com/2026/06/09/anthropics-fable-5-can-make-weirdly-fun-video-games-with-the-click-of-a-button/",
+    "name": "TechCrunch",
+    "category": "Technology / Startups"
+  },
+  {
+    "url": "https://www.wired.com/story/macos-27-golden-gate-top-features/",
+    "name": "Wired",
+    "category": "Technology / Culture"
   },
   {
     "url": "https://venturebeat.com/technology/google-just-redesigned-the-search-box-for-the-first-time-in-25-years-heres-why-it-matters-more-than-you-think",
@@ -30,47 +60,17 @@
     "category": "AI / Enterprise"
   },
   {
-    "url": "https://www.wired.com/story/book-excerpt-city-on-the-edge-google-buses-san-francisco/",
+    "url": "https://www.wired.com/story/top-new-features-in-apples-ios-27-and-ipados-27/",
     "name": "Wired",
     "category": "Technology / Culture"
   },
   {
-    "url": "https://techcrunch.com/2026/06/09/apple-brings-streaming-style-subscription-bundles-to-the-app-store/",
-    "name": "TechCrunch",
-    "category": "Technology / Startups"
-  },
-  {
-    "url": "https://www.wired.com/story/longevity-startup-doses-first-human-in-bid-to-reverse-age-related-sight-loss/",
+    "url": "https://www.wired.com/story/gm-vehicle-to-grid-charging-your-electric-car-can-power-your-house-and-your-neighborhood/",
     "name": "Wired",
     "category": "Technology / Culture"
   },
   {
-    "url": "https://techcrunch.com/2026/06/09/apple-says-it-may-remove-apps-from-the-app-store-if-they-dont-attract-users/",
-    "name": "TechCrunch",
-    "category": "Technology / Startups"
-  },
-  {
-    "url": "https://www.wired.com/review/amazon-ember-artline/",
-    "name": "Wired",
-    "category": "Technology / Culture"
-  },
-  {
-    "url": "https://www.wired.com/story/rivian-r2-first-drive/",
-    "name": "Wired",
-    "category": "Technology / Culture"
-  },
-  {
-    "url": "https://venturebeat.com/infrastructure/railway-secures-usd100-million-to-challenge-aws-with-ai-native-cloud",
-    "name": "VentureBeat",
-    "category": "AI / Enterprise"
-  },
-  {
-    "url": "https://www.wired.com/story/best-smart-bird-feeders/",
-    "name": "Wired",
-    "category": "Technology / Culture"
-  },
-  {
-    "url": "https://techcrunch.com/2026/06/09/apples-app-store-rolls-out-personalized-recommendations/",
+    "url": "https://techcrunch.com/2026/06/09/hey-siri-heres-what-i-actually-want-from-ai/",
     "name": "TechCrunch",
     "category": "Technology / Startups"
   }
