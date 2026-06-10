@@ -1,107 +1,27 @@
 [
   {
-    "url": "https://arstechnica.com/security/2026/06/highly-reviewed-speaker-can-be-hacked-over-the-air-to-infect-connected-devices/",
-    "name": "Ars Technica",
-    "category": "テクノロジー",
-    "title": "How a USB-connected speaker can infect a PC without ever being touched",
-    "content": "Operating system makers take many steps to prevent their wares from accepting commands from remote devices. The safeguards, designed to thwart malicious attacks, typically require hackers to jump through all kinds of hoops to bypass the measures. But what if remote code execution were as simple as being within Bluetooth range of a speaker connected to the targeted device? It turns out it can, at least when the speaker is a Sound Blaster Katana V2X sold by Singapore-based Creative Technologies. The speaker, which sells for $283, is widely acclaimed with numerous reviews showering praise on the sound and performance of it and its predecessor, the Sound Blaster V2. A PC-pwning proxy Researcher Rasmus Moorats stumbled on the hack by accident, after he purchased a Katana V2X, a soundbar that connects to PCs, Macs, and Linux devices over USB or Bluetooth. Moorats was curious if he could create a Linux tool that communicated with his speaker. He discovered he could do so through CTP, a proprietary mechanism he guesses is short for Creative Transport Protocol. Read full article Comments",
-    "pubDate": "Fri, 05 Jun 2026 21:00:29 +0000"
-  },
-  {
-    "url": "https://techcrunch.com/2026/06/09/google-just-fired-a-warning-shot-in-the-ai-subscription-price-wars/",
+    "url": "https://techcrunch.com/2026/06/10/why-enterprise-ai-will-be-a-major-focus-at-vivatech-2026/",
     "name": "TechCrunch",
     "category": "テクノロジー",
-    "title": "Google just fired a warning shot in the AI subscription price wars",
-    "content": "Google just made it significantly cheaper to enjoy its budget AI subscription tier.",
-    "pubDate": "Wed, 10 Jun 2026 00:26:10 +0000"
+    "title": "Why enterprise AI will be a major focus at VivaTech 2026",
+    "content": "While Silicon Valley continues pushing aggressively into large language models and consumer-facing AI products, many European companies are focused on applying AI to complex systems already embedded into everyday life.",
+    "pubDate": "Wed, 10 Jun 2026 15:16:00 +0000"
   },
   {
-    "url": "https://www.wired.com/story/soccer-world-cup-biometric-surveillance/",
+    "url": "https://www.wired.com/story/affordable-digital-notebook-comparison-2026/",
     "name": "Wired",
     "category": "テクノロジー・カルチャー",
-    "title": "Soccer Fans, You’re Being Watched",
-    "content": "From anti-drone tech to face recognition, 2026 World Cup stadiums in the US, Canada, and Mexico are subjecting fans to an array of surveillance tech. Here’s what you need to know.",
-    "pubDate": "Wed, 10 Jun 2026 10:00:00 +0000"
+    "title": "Digital Notebook Throwdown (2026): Kindle Scribe, ReMarkable Paper Pure",
+    "content": "The newest Kindle Scribe means there are now three digital notebooks you can buy in the $400 price range. Here’s which one you should get.",
+    "pubDate": "Wed, 10 Jun 2026 13:04:00 +0000"
   },
   {
-    "url": "https://www.wired.com/story/best-college-laptops/",
-    "name": "Wired",
-    "category": "テクノロジー・カルチャー",
-    "title": "Best Laptops For College Students (2026): MacBooks and Beyond",
-    "content": "Laptops for college should be portable, offer long battery life, and remain reasonably affordable. Based on testing hundreds of laptops, these are my top picks.",
-    "pubDate": "Wed, 10 Jun 2026 11:00:00 +0000"
-  },
-  {
-    "url": "https://venturebeat.com/technology/salesforce-rolls-out-new-slackbot-ai-agent-as-it-battles-microsoft-and",
-    "name": "VentureBeat",
-    "category": "AI・機械学習",
-    "title": "Salesforce rolls out new Slackbot AI agent as it battles Microsoft and Google in workplace AI",
-    "content": "Salesforce on Tuesday launched an entirely rebuilt version of Slackbot , the company&#x27;s workplace assistant, transforming it from a simple notification tool into what executives describe as a fully powered AI agent capable of searching enterprise data, drafting documents, and taking action on behalf of employees. The new Slackbot, now generally available to Business+ and Enterprise+ customers, is Salesforce&#x27;s most aggressive move yet to position Slack at the center of the emerging \"agentic AI\" movement — where software agents work alongside humans to complete complex tasks. The launch comes as Salesforce attempts to convince investors that artificial intelligence will bolster its products rather than render them obsolete. \"Slackbot isn&#x27;t just another copilot or AI assistant,\" said Parker Harris , Salesforce co-founder and Slack&#x27;s chief technology officer, in an exclusive interview with Salesforce. \"It&#x27;s the front door to the agentic enterprise, powered by Salesforce.\" From tricycle to Porsche: Salesforce rebuilt Slackbot from the ground up Harris was blunt about what distinguishes the new Slackbot from its predecessor: \"The old Slackbot was, you know, a little tricycle, and the new Slackbot is like, you know, a Porsche.\" The original Slackbot, which has existed since Slack&#x27;s early days, performed basic algorithmic tasks — reminding users to add colleagues to documents, suggesting channel archives, and delivering simple notifications. The new version runs on an entirely different architecture built around a large language model and sophisticated search capabilities that can access Salesforce records, Google Drive files, calendar data, and years of Slack conversations. \"It&#x27;s two different things,\" Harris explained. \"The old Slackbot was algorithmic and fairly simple. The new Slackbot is brand new — it&#x27;s based around an LLM and a very robust search engine, and connections to third-party search engines, third-party enterprise data.\" Salesforce chose to retain the Slackbot brand despite the fundamental technical overhaul. \"People know what Slackbot is, and so we wanted to carry that forward,\" Harris said. Why Anthropic&#x27;s Claude powers the new Slackbot — and which AI models could come next The new Slackbot runs on Claude , Anthropic&#x27;s large language model, a choice driven partly by compliance requirements. Slack&#x27;s commercial service operates under FedRAMP Moderate certification to serve U.S. federal government customers, and Harris said Anthropic was \"the only provider that could give us a compliant LLM\" when Slack began building the new system. But that exclusivity won&#x27;t last. \"We are, this year, going to support additional providers,\" Harris said. \"We have a great relationship with Google. Gemini is incredible — performance is great, cost is great. So we&#x27;re going to use Gemini for some things.\" He added that OpenAI remains a possibility as well. Harris echoed Salesforce CEO Marc Benioff&",
-    "pubDate": "Tue, 13 Jan 2026 13:00:00 GMT"
-  },
-  {
-    "url": "https://www.nytimes.com/2026/06/08/technology/openai-ipo.html",
+    "url": "https://www.nytimes.com/2026/06/09/technology/anthropic-ai-claude-fable-mythos.html",
     "name": "NY Times Tech",
     "category": "テクノロジー",
-    "title": "OpenAI Files Confidentially for IPO as AI Companies Rush to Wall St.",
-    "content": "The company hopes to raise billions in a highly anticipated public offering that could unlock a new generation of tech industry wealth.",
-    "pubDate": "Mon, 08 Jun 2026 21:58:32 +0000"
-  },
-  {
-    "url": "https://www.wired.com/story/artificial-intelligence-sneaks-into-the-world-cup-thanks-to-google-gemini/",
-    "name": "Wired",
-    "category": "テクノロジー・カルチャー",
-    "title": "Artificial Intelligence Sneaks Into the World Cup Thanks to Google Gemini",
-    "content": "The Argentine national team will be Google’s test bench and technological showcase during the World Cup.",
-    "pubDate": "Wed, 10 Jun 2026 10:00:00 +0000"
-  },
-  {
-    "url": "https://www.nytimes.com/2026/06/09/magazine/ai-jobs-workforce-labor.html",
-    "name": "NY Times Tech",
-    "category": "テクノロジー",
-    "title": "In the Hybrid A.I.-Human Work Force, Who Will Actually Thrive?",
-    "content": "A panel of experts explains how job seekers should prepare for the future of work.",
-    "pubDate": "Tue, 09 Jun 2026 09:00:38 +0000"
-  },
-  {
-    "url": "https://www.wired.com/story/us-world-cup-2026-alpr-camera-stadiums/",
-    "name": "Wired",
-    "category": "テクノロジー・カルチャー",
-    "title": "Mapping Every Flock License Plate Reader Near US World Cup Stadiums",
-    "content": "Most US World Cup stadiums are surrounded by surveillance cameras. Want to know if you’re being watched on your way to a match? These maps will help you.",
-    "pubDate": "Wed, 10 Jun 2026 10:00:00 +0000"
-  },
-  {
-    "url": "https://arstechnica.com/security/2026/06/a-single-errant-character-in-the-linux-kernel-allows-attacker-to-gain-root/",
-    "name": "Ars Technica",
-    "category": "テクノロジー",
-    "title": "High-severity vulnerability in Linux caused by a single faulty character",
-    "content": "Researchers have analyzed a high-severity vulnerability in Linux that’s able to escalate untrusted users to root by exploiting a bug you don't often see: a single errant character inside the kernel. The vulnerability, tracked as CVE-2026-23111 , is located in nf_tables, a subsystem of the Linux kernel that provides packet filtering capabilities. It’s used to manage firewall rules and replaces older subsystems such as iptables, ip6tables, arptables, and ebtables. !!!WTF!!! The presence of a single mis-issued exclamation point in code implementing nf_tables introduced a use-after-free, a class of vulnerability that corrupts memory by placing malicious code at memory addresses that haven’t been properly freed of their previous contents. CVE-2026-23111 can be exploited by an unprivileged user or process to elevate system rights to root. Read full article Comments",
-    "pubDate": "Tue, 09 Jun 2026 15:12:43 +0000"
-  },
-  {
-    "url": "https://techcrunch.com/2026/06/10/waymo-says-it-built-a-better-benchmark-for-comparing-robotaxis-to-humans/",
-    "name": "TechCrunch",
-    "category": "テクノロジー",
-    "title": "Waymo says it built a better benchmark for comparing robotaxis to humans",
-    "content": "Waymo created a new computer model to help it better understand how humans behave in crash scenarios that its robotaxis encounter.",
-    "pubDate": "Wed, 10 Jun 2026 09:00:00 +0000"
-  },
-  {
-    "url": "https://arstechnica.com/security/2026/06/dashlane-explains-how-attackers-managed-to-download-encrypted-password-vaults/",
-    "name": "Ars Technica",
-    "category": "テクノロジー",
-    "title": "Dashlane explains how attackers managed to download encrypted password vaults",
-    "content": "Dashlane said that attackers mounted a coordinated hacking campaign against a large base of its users in an attempt to recover as many encrypted password vaults as possible. The password manager provider said fewer than 20 personal user vaults were downloaded before it shut down the operation. In a campaign that started Sunday, the unknown threat actor abused the mechanism that allows Dashlane users to add new devices, such as computers or phones, to their accounts. By abusing Dashlane's programming interfaces for device enrollment, the attackers sent requests to large numbers of existing users’ registered email addresses. In an update published Thursday, Dashlane wrote: The threat actor targeted the API endpoints for device registration and used a brute force attack to send a large volume of automated requests to those endpoints. In response, Dashlane’s automated security systems operated as intended, triggering an automatic lockout of the targeted accounts to protect those users. Before the attack was fully mitigated, the threat actor was able to brute force and generate valid tokens for fewer than 20 personal plan customers, allowing them to register a new device on those accounts and download copies of users’ encrypted vaults. The flow and strategy of the attack When a user installs the Dashlane app on a new device and attempts to enroll it in their existing account, Dashlane first verifies the account holder's identity. This verification is completed by sending a one-time six-digit token to the user’s registered email address (or, for users who have enabled two-factor authentication, by validating a six-digit code generated by their authentication app). Read full article Comments",
-    "pubDate": "Thu, 04 Jun 2026 20:02:04 +0000"
-  },
-  {
-    "url": "https://venturebeat.com/technology/google-just-redesigned-the-search-box-for-the-first-time-in-25-years-heres-why-it-matters-more-than-you-think",
-    "name": "VentureBeat",
-    "category": "AI・機械学習",
-    "title": "Google just redesigned the search box for the first time in 25 years — here’s why it matters more than you think.",
-    "content": "For a quarter century, the Google search box has been one of the most recognizable interfaces in computing: a thin white rectangle, a blinking cursor, a few typed words, and a list of blue links. On Tuesday, Google will formally retire that paradigm. At its annual I/O developer conference , Google announced a sweeping redesign of the search box itself — the literal text field where billions of queries begin every day — transforming it from a simple keyword input into a dynamic, AI-driven conversation starter that can accept text, images, PDFs, videos, and even open Chrome tabs as inputs. The company is also merging its AI Overviews and AI Mode features into a single, seamless search flow, eliminating the friction that previously forced users to choose between a traditional results page and an AI-forward experience. Liz Reid, Google&#x27;s vice president and head of Search, called it \"the biggest upgrade to our iconic search box since its debut over 25 years ago\" during a press briefing on Monday. The announcement arrived alongside a blizzard of other news — new Gemini models , a personal AI agent called Spark , an intelligent shopping cart , a reimagined developer platform — but the search box redesign may prove to be the most consequential. It is the clearest signal yet that Google views the future of its flagship product not as a place where users type fragmented keywords, but as an interface where they hold open-ended, multimodal conversations with an AI system backed by the entire web. The new search box expands, accepts files, and coaches you on what to ask The changes show a fundamental shift in how Google expects people to interact with the product that generates the vast majority of Alphabet&#x27;s revenue. The box itself now dynamically expands to accommodate longer, more conversational queries. Where the old interface subtly encouraged brevity — a narrow field suited to two- or three-word keyword strings — the new design invites users to fully articulate complex questions in granular detail. It also now supports multimodal inputs directly. Users can upload images, PDFs, files, and videos, or drag in content from Chrome tabs, right from the main search interface. Previously, some of these capabilities existed in AI Mode, but reaching them required extra steps. Now they sit at the primary entry point. Google is also deploying what it describes as an AI-powered query suggestion system that \"goes beyond autocomplete.\" Rather than simply predicting the next word a user might type based on popular searches, the system helps users formulate complex, nuanced queries — essentially coaching them toward the kind of detailed questions that AI Mode handles best. The new search box is starting to roll out immediately in all countries and languages where AI Mode is available. Google is merging AI overviews and AI mode into one seamless experience Perhaps more significant than the box itself is the architectural change happening behind it. Google is un",
-    "pubDate": "Tue, 19 May 2026 17:45:00 GMT"
+    "title": "Anthropic Releases ‘Safe’ Version of Its Mythos A.I. Technology",
+    "content": "Called Claude Fable 5, it is twice as expensive as the company’s previous flagship system.",
+    "pubDate": "Tue, 09 Jun 2026 17:16:42 +0000"
   },
   {
     "url": "https://www.nytimes.com/2026/06/10/technology/personaltech/iphone-android-app-removal.html",
@@ -112,12 +32,20 @@
     "pubDate": "Wed, 10 Jun 2026 09:02:01 +0000"
   },
   {
-    "url": "https://techcrunch.com/2026/06/09/top-lucid-motors-executive-departs-amid-new-ceos-leadership-shakeup/",
+    "url": "https://techcrunch.com/2026/06/10/cybersecurity-researchers-arent-happy-about-the-guardrails-on-anthropics-fable/",
     "name": "TechCrunch",
     "category": "テクノロジー",
-    "title": "Top Lucid Motors executive departs amid new CEO’s leadership shakeup",
-    "content": "The exec, Emad Dlala, has left just a few months after being promoted to SVP of engineering and digital, TechCrunch has learned.",
-    "pubDate": "Wed, 10 Jun 2026 03:35:07 +0000"
+    "title": "Cybersecurity researchers aren’t happy about the guardrails on Anthropic’s Fable",
+    "content": "Cybersecurity researchers are complaining that Anthropic's new model Fable has guardrails that are too strict for any cybersecurity work.",
+    "pubDate": "Wed, 10 Jun 2026 15:41:22 +0000"
+  },
+  {
+    "url": "https://arstechnica.com/security/2026/06/dashlane-explains-how-attackers-managed-to-download-encrypted-password-vaults/",
+    "name": "Ars Technica",
+    "category": "テクノロジー",
+    "title": "Dashlane explains how attackers managed to download encrypted password vaults",
+    "content": "Dashlane said that attackers mounted a coordinated hacking campaign against a large base of its users in an attempt to recover as many encrypted password vaults as possible. The password manager provider said fewer than 20 personal user vaults were downloaded before it shut down the operation. In a campaign that started Sunday, the unknown threat actor abused the mechanism that allows Dashlane users to add new devices, such as computers or phones, to their accounts. By abusing Dashlane's programming interfaces for device enrollment, the attackers sent requests to large numbers of existing users’ registered email addresses. In an update published Thursday, Dashlane wrote: The threat actor targeted the API endpoints for device registration and used a brute force attack to send a large volume of automated requests to those endpoints. In response, Dashlane’s automated security systems operated as intended, triggering an automatic lockout of the targeted accounts to protect those users. Before the attack was fully mitigated, the threat actor was able to brute force and generate valid tokens for fewer than 20 personal plan customers, allowing them to register a new device on those accounts and download copies of users’ encrypted vaults. The flow and strategy of the attack When a user installs the Dashlane app on a new device and attempts to enroll it in their existing account, Dashlane first verifies the account holder's identity. This verification is completed by sending a one-time six-digit token to the user’s registered email address (or, for users who have enabled two-factor authentication, by validating a six-digit code generated by their authentication app). Read full article Comments",
+    "pubDate": "Thu, 04 Jun 2026 20:02:04 +0000"
   },
   {
     "url": "https://www.wired.com/gallery/best-ipad-accessories/",
@@ -128,52 +56,28 @@
     "pubDate": "Wed, 10 Jun 2026 11:28:00 +0000"
   },
   {
-    "url": "https://techcrunch.com/2026/06/10/avalanches-desktop-fusion-reactor-delivers-blistering-hot-plasma/",
+    "url": "https://www.nytimes.com/2026/06/09/technology/instagram-hack-ai-bug.html",
+    "name": "NY Times Tech",
+    "category": "テクノロジー",
+    "title": "Meta A.I. Bug Allowed Hackers to Take Over Instagram Accounts",
+    "content": "The flaw, which Meta said it had fixed, allowed anyone to take over accounts using a bug in the company’s new artificial intelligence software.",
+    "pubDate": "Tue, 09 Jun 2026 23:51:26 +0000"
+  },
+  {
+    "url": "https://techcrunch.com/2026/06/10/datadog-veterans-launch-ai-coding-startup-niteshift-on-a-bet-against-big-ai-lock-in/",
     "name": "TechCrunch",
     "category": "テクノロジー",
-    "title": "Avalanche’s desktop fusion reactor delivers blistering-hot plasma",
-    "content": "Fusion power startup Avalanche Energy said its reactor prototype heated a plasma to over 10 million degrees C.",
-    "pubDate": "Wed, 10 Jun 2026 12:15:00 +0000"
+    "title": "Datadog veterans launch AI coding startup Niteshift on a bet against Big AI lock-in",
+    "content": "AI coding agent startup Niteshift has raised a $7 million seed round from a who's who of angels. It's betting companies will want power over, not lock-in with model makers.",
+    "pubDate": "Wed, 10 Jun 2026 15:00:00 +0000"
   },
   {
-    "url": "https://arstechnica.com/security/2026/06/locked-in-heated-rivalry-with-researcher-microsoft-fixes-0-day-they-disclosed/",
-    "name": "Ars Technica",
-    "category": "テクノロジー",
-    "title": "Locked in heated rivalry with researcher, Microsoft fixes 0-day they disclosed",
-    "content": "Microsoft on Tuesday released fixes for two high-severity zero-days that were disclosed by a researcher who has been locked in a testy beef with the software giant. Nightmare Eclipse, the pseudonym the researcher goes by, released a handful of high-severity vulnerabilities in recent months, making them zero-days that had the potential to be exploited in the wild. The researcher has said the disclosures, which included proof-of-concept code, came after Microsoft reneged on an arrangement the two made regarding vulnerabilities they had discussed. Disclosure drama “But someone violated our agreement and left me homeless with nothing,” Nightmare Eclipse wrote in March. “They knew this will happen and they still stabbed me in the back anyways, this is their decision not mine.” Read full article Comments",
-    "pubDate": "Tue, 09 Jun 2026 20:56:52 +0000"
-  },
-  {
-    "url": "https://www.nytimes.com/2026/06/09/technology/solvinity-kyndryl-blocked-deal-us-europe-rift.html",
+    "url": "https://www.nytimes.com/2026/06/10/technology/predator-catcher-vitaly-mistake.html",
     "name": "NY Times Tech",
     "category": "テクノロジー",
-    "title": "Dutch Authorities Block $115 Million Deal by a U.S. Tech Company",
-    "content": "The Netherlands blocked a U.S. company from buying a Dutch firm that handles its national ID system, saying it would create a “threat to the public interest.”",
-    "pubDate": "Tue, 09 Jun 2026 14:52:00 +0000"
-  },
-  {
-    "url": "https://venturebeat.com/infrastructure/railway-secures-usd100-million-to-challenge-aws-with-ai-native-cloud",
-    "name": "VentureBeat",
-    "category": "AI・機械学習",
-    "title": "Railway secures $100 million to challenge AWS with AI-native cloud infrastructure",
-    "content": "Railway , a San Francisco-based cloud platform that has quietly amassed two million developers without spending a dollar on marketing, announced Thursday that it raised $100 million in a Series B funding round, as surging demand for artificial intelligence applications exposes the limitations of legacy cloud infrastructure. TQ Ventures led the round, with participation from FPV Ventures , Redpoint , and Unusual Ventures . The investment values Railway as one of the most significant infrastructure startups to emerge during the AI boom, capitalizing on developer frustration with the complexity and cost of traditional platforms like Amazon Web Services and Google Cloud . \"As AI models get better at writing code, more and more people are asking the age-old question: where, and how, do I run my applications?\" said Jake Cooper, Railway&#x27;s 28-year-old founder and chief executive, in an exclusive interview with VentureBeat. \"The last generation of cloud primitives were slow and outdated, and now with AI moving everything faster, teams simply can&#x27;t keep up.\" The funding is a dramatic acceleration for a company that has charted an unconventional path through the cloud computing industry. Railway raised just $24 million in total before this round, including a $20 million Series A from Redpoint in 2022. The company now processes more than 10 million deployments monthly and handles over one trillion requests through its edge network — metrics that rival far larger and better-funded competitors. Why three-minute deploy times have become unacceptable in the age of AI coding assistants Railway&#x27;s pitch rests on a simple observation: the tools developers use to deploy and manage software were designed for a slower era. A standard build-and-deploy cycle using Terraform , the industry-standard infrastructure tool, takes two to three minutes. That delay, once tolerable, has become a critical bottleneck as AI coding assistants like Claude , ChatGPT , and Cursor can generate working code in seconds. \"When godly intelligence is on tap and can solve any problem in three seconds, those amalgamations of systems become bottlenecks,\" Cooper told VentureBeat. \"What was really cool for humans to deploy in 10 seconds or less is now table stakes for agents.\" The company claims its platform delivers deployments in under one second — fast enough to keep pace with AI-generated code. Customers report a tenfold increase in developer velocity and up to 65 percent cost savings compared to traditional cloud providers. These numbers come directly from enterprise clients, not internal benchmarks. Daniel Lobaton, chief technology officer at G2X, a platform serving 100,000 federal contractors, measured deployment speed improvements of seven times faster and an 87 percent cost reduction after migrating to Railway. His infrastructure bill dropped from $15,000 per month to approximately $1,000. \"The work that used to take me a week on our previous infrastructure, I can do in Rail",
-    "pubDate": "Thu, 22 Jan 2026 14:00:00 GMT"
-  },
-  {
-    "url": "https://venturebeat.com/infrastructure/claude-code-costs-up-to-usd200-a-month-goose-does-the-same-thing-for-free",
-    "name": "VentureBeat",
-    "category": "AI・機械学習",
-    "title": "Claude Code costs up to $200 a month. Goose does the same thing for free.",
-    "content": "The artificial intelligence coding revolution comes with a catch: it&#x27;s expensive. Claude Code , Anthropic&#x27;s terminal-based AI agent that can write, debug, and deploy code autonomously, has captured the imagination of software developers worldwide. But its pricing — ranging from $20 to $200 per month depending on usage — has sparked a growing rebellion among the very programmers it aims to serve. Now, a free alternative is gaining traction. Goose , an open-source AI agent developed by Block (the financial technology company formerly known as Square), offers nearly identical functionality to Claude Code but runs entirely on a user&#x27;s local machine. No subscription fees. No cloud dependency. No rate limits that reset every five hours. \"Your data stays with you, period,\" said Parth Sareen, a software engineer who demonstrated the tool during a recent livestream . The comment captures the core appeal: Goose gives developers complete control over their AI-powered workflow, including the ability to work offline — even on an airplane. The project has exploded in popularity. Goose now boasts more than 26,100 stars on GitHub , the code-sharing platform, with 362 contributors and 102 releases since its launch. The latest version, 1.20.1 , shipped on January 19, 2026, reflecting a development pace that rivals commercial products. For developers frustrated by Claude Code&#x27;s pricing structure and usage caps, Goose represents something increasingly rare in the AI industry: a genuinely free, no-strings-attached option for serious work. Anthropic&#x27;s new rate limits spark a developer revolt To understand why Goose matters, you need to understand the Claude Code pricing controversy . Anthropic, the San Francisco artificial intelligence company founded by former OpenAI executives, offers Claude Code as part of its subscription tiers. The free plan provides no access whatsoever. The Pro plan , at $17 per month with annual billing (or $20 monthly), limits users to just 10 to 40 prompts every five hours — a constraint that serious developers exhaust within minutes of intensive work. The Max plans , at $100 and $200 per month, offer more headroom: 50 to 200 prompts and 200 to 800 prompts respectively, plus access to Anthropic&#x27;s most powerful model, Claude 4.5 Opus . But even these premium tiers come with restrictions that have inflamed the developer community. In late July, Anthropic announced new weekly rate limits. Under the system, Pro users receive 40 to 80 hours of Sonnet 4 usage per week. Max users at the $200 tier get 240 to 480 hours of Sonnet 4, plus 24 to 40 hours of Opus 4. Nearly five months later, the frustration has not subsided. The problem? Those \"hours\" are not actual hours. They represent token-based limits that vary wildly depending on codebase size, conversation length, and the complexity of the code being processed. Independent analysis suggests the actual per-session limits translate to roughly 44,000 tokens for Pro users",
-    "pubDate": "Mon, 19 Jan 2026 14:00:00 GMT"
-  },
-  {
-    "url": "https://www.nytimes.com/2026/06/09/business/apple-siri-ai-europe.html",
-    "name": "NY Times Tech",
-    "category": "テクノロジー",
-    "title": "Why Apple’s A.I. Upgrade for Siri Won’t Be Available in Europe",
-    "content": "A regulatory dispute has indefinitely delayed the release of Siri AI.",
-    "pubDate": "Tue, 09 Jun 2026 18:29:08 +0000"
+    "title": "They Tried To Catch a Child Predator on a Livestream. They Trapped Themselves Instead.",
+    "content": "What happened when livestreaming vigilantes ambushed an innocent man.",
+    "pubDate": "Wed, 10 Jun 2026 15:43:24 +0000"
   },
   {
     "url": "https://arstechnica.com/security/2026/06/for-the-2nd-time-in-weeks-microsoft-packages-laced-with-credential-stealer/",
@@ -184,6 +88,62 @@
     "pubDate": "Mon, 08 Jun 2026 18:34:23 +0000"
   },
   {
+    "url": "https://www.wired.com/gallery/best-kindle/",
+    "name": "Wired",
+    "category": "テクノロジー・カルチャー",
+    "title": "What’s the Best Kindle of 2026? (So Far)",
+    "content": "I’ve tried every single Kindle. Here’s how Amazon’s ebook readers stack up.",
+    "pubDate": "Wed, 10 Jun 2026 13:02:00 +0000"
+  },
+  {
+    "url": "https://venturebeat.com/infrastructure/railway-secures-usd100-million-to-challenge-aws-with-ai-native-cloud",
+    "name": "VentureBeat",
+    "category": "AI・機械学習",
+    "title": "Railway secures $100 million to challenge AWS with AI-native cloud infrastructure",
+    "content": "Railway , a San Francisco-based cloud platform that has quietly amassed two million developers without spending a dollar on marketing, announced Thursday that it raised $100 million in a Series B funding round, as surging demand for artificial intelligence applications exposes the limitations of legacy cloud infrastructure. TQ Ventures led the round, with participation from FPV Ventures , Redpoint , and Unusual Ventures . The investment values Railway as one of the most significant infrastructure startups to emerge during the AI boom, capitalizing on developer frustration with the complexity and cost of traditional platforms like Amazon Web Services and Google Cloud . \"As AI models get better at writing code, more and more people are asking the age-old question: where, and how, do I run my applications?\" said Jake Cooper, Railway&#x27;s 28-year-old founder and chief executive, in an exclusive interview with VentureBeat. \"The last generation of cloud primitives were slow and outdated, and now with AI moving everything faster, teams simply can&#x27;t keep up.\" The funding is a dramatic acceleration for a company that has charted an unconventional path through the cloud computing industry. Railway raised just $24 million in total before this round, including a $20 million Series A from Redpoint in 2022. The company now processes more than 10 million deployments monthly and handles over one trillion requests through its edge network — metrics that rival far larger and better-funded competitors. Why three-minute deploy times have become unacceptable in the age of AI coding assistants Railway&#x27;s pitch rests on a simple observation: the tools developers use to deploy and manage software were designed for a slower era. A standard build-and-deploy cycle using Terraform , the industry-standard infrastructure tool, takes two to three minutes. That delay, once tolerable, has become a critical bottleneck as AI coding assistants like Claude , ChatGPT , and Cursor can generate working code in seconds. \"When godly intelligence is on tap and can solve any problem in three seconds, those amalgamations of systems become bottlenecks,\" Cooper told VentureBeat. \"What was really cool for humans to deploy in 10 seconds or less is now table stakes for agents.\" The company claims its platform delivers deployments in under one second — fast enough to keep pace with AI-generated code. Customers report a tenfold increase in developer velocity and up to 65 percent cost savings compared to traditional cloud providers. These numbers come directly from enterprise clients, not internal benchmarks. Daniel Lobaton, chief technology officer at G2X, a platform serving 100,000 federal contractors, measured deployment speed improvements of seven times faster and an 87 percent cost reduction after migrating to Railway. His infrastructure bill dropped from $15,000 per month to approximately $1,000. \"The work that used to take me a week on our previous infrastructure, I can do in Rail",
+    "pubDate": "Thu, 22 Jan 2026 14:00:00 GMT"
+  },
+  {
+    "url": "https://arstechnica.com/security/2026/06/a-single-errant-character-in-the-linux-kernel-allows-attacker-to-gain-root/",
+    "name": "Ars Technica",
+    "category": "テクノロジー",
+    "title": "High-severity vulnerability in Linux caused by a single faulty character",
+    "content": "Researchers have analyzed a high-severity vulnerability in Linux that’s able to escalate untrusted users to root by exploiting a bug you don't often see: a single errant character inside the kernel. The vulnerability, tracked as CVE-2026-23111 , is located in nf_tables, a subsystem of the Linux kernel that provides packet filtering capabilities. It’s used to manage firewall rules and replaces older subsystems such as iptables, ip6tables, arptables, and ebtables. !!!WTF!!! The presence of a single mis-issued exclamation point in code implementing nf_tables introduced a use-after-free, a class of vulnerability that corrupts memory by placing malicious code at memory addresses that haven’t been properly freed of their previous contents. CVE-2026-23111 can be exploited by an unprivileged user or process to elevate system rights to root. Read full article Comments",
+    "pubDate": "Tue, 09 Jun 2026 15:12:43 +0000"
+  },
+  {
+    "url": "https://venturebeat.com/technology/google-just-redesigned-the-search-box-for-the-first-time-in-25-years-heres-why-it-matters-more-than-you-think",
+    "name": "VentureBeat",
+    "category": "AI・機械学習",
+    "title": "Google just redesigned the search box for the first time in 25 years — here’s why it matters more than you think.",
+    "content": "For a quarter century, the Google search box has been one of the most recognizable interfaces in computing: a thin white rectangle, a blinking cursor, a few typed words, and a list of blue links. On Tuesday, Google will formally retire that paradigm. At its annual I/O developer conference , Google announced a sweeping redesign of the search box itself — the literal text field where billions of queries begin every day — transforming it from a simple keyword input into a dynamic, AI-driven conversation starter that can accept text, images, PDFs, videos, and even open Chrome tabs as inputs. The company is also merging its AI Overviews and AI Mode features into a single, seamless search flow, eliminating the friction that previously forced users to choose between a traditional results page and an AI-forward experience. Liz Reid, Google&#x27;s vice president and head of Search, called it \"the biggest upgrade to our iconic search box since its debut over 25 years ago\" during a press briefing on Monday. The announcement arrived alongside a blizzard of other news — new Gemini models , a personal AI agent called Spark , an intelligent shopping cart , a reimagined developer platform — but the search box redesign may prove to be the most consequential. It is the clearest signal yet that Google views the future of its flagship product not as a place where users type fragmented keywords, but as an interface where they hold open-ended, multimodal conversations with an AI system backed by the entire web. The new search box expands, accepts files, and coaches you on what to ask The changes show a fundamental shift in how Google expects people to interact with the product that generates the vast majority of Alphabet&#x27;s revenue. The box itself now dynamically expands to accommodate longer, more conversational queries. Where the old interface subtly encouraged brevity — a narrow field suited to two- or three-word keyword strings — the new design invites users to fully articulate complex questions in granular detail. It also now supports multimodal inputs directly. Users can upload images, PDFs, files, and videos, or drag in content from Chrome tabs, right from the main search interface. Previously, some of these capabilities existed in AI Mode, but reaching them required extra steps. Now they sit at the primary entry point. Google is also deploying what it describes as an AI-powered query suggestion system that \"goes beyond autocomplete.\" Rather than simply predicting the next word a user might type based on popular searches, the system helps users formulate complex, nuanced queries — essentially coaching them toward the kind of detailed questions that AI Mode handles best. The new search box is starting to roll out immediately in all countries and languages where AI Mode is available. Google is merging AI overviews and AI mode into one seamless experience Perhaps more significant than the box itself is the architectural change happening behind it. Google is un",
+    "pubDate": "Tue, 19 May 2026 17:45:00 GMT"
+  },
+  {
+    "url": "https://techcrunch.com/2026/06/10/how-memory-tools-can-make-ai-models-worse/",
+    "name": "TechCrunch",
+    "category": "テクノロジー",
+    "title": "How memory tools can make AI models worse",
+    "content": "New research suggests that AI memory systems can degrade model performance and encourage sycophantic tendencies.",
+    "pubDate": "Wed, 10 Jun 2026 16:11:08 +0000"
+  },
+  {
+    "url": "https://techcrunch.com/2026/06/10/zest-launches-a-restaurant-discovery-app-powered-by-where-people-actually-eat/",
+    "name": "TechCrunch",
+    "category": "テクノロジー",
+    "title": "Zest launches a restaurant discovery app powered by where people actually eat",
+    "content": "Backed by Alexis Ohanian’s 776 and Kindred Ventures, Zest uses transaction data and AI to generate restaurant recommendations based on users’ real dining habits and the places they frequent.",
+    "pubDate": "Wed, 10 Jun 2026 15:53:07 +0000"
+  },
+  {
+    "url": "https://venturebeat.com/technology/salesforce-rolls-out-new-slackbot-ai-agent-as-it-battles-microsoft-and",
+    "name": "VentureBeat",
+    "category": "AI・機械学習",
+    "title": "Salesforce rolls out new Slackbot AI agent as it battles Microsoft and Google in workplace AI",
+    "content": "Salesforce on Tuesday launched an entirely rebuilt version of Slackbot , the company&#x27;s workplace assistant, transforming it from a simple notification tool into what executives describe as a fully powered AI agent capable of searching enterprise data, drafting documents, and taking action on behalf of employees. The new Slackbot, now generally available to Business+ and Enterprise+ customers, is Salesforce&#x27;s most aggressive move yet to position Slack at the center of the emerging \"agentic AI\" movement — where software agents work alongside humans to complete complex tasks. The launch comes as Salesforce attempts to convince investors that artificial intelligence will bolster its products rather than render them obsolete. \"Slackbot isn&#x27;t just another copilot or AI assistant,\" said Parker Harris , Salesforce co-founder and Slack&#x27;s chief technology officer, in an exclusive interview with Salesforce. \"It&#x27;s the front door to the agentic enterprise, powered by Salesforce.\" From tricycle to Porsche: Salesforce rebuilt Slackbot from the ground up Harris was blunt about what distinguishes the new Slackbot from its predecessor: \"The old Slackbot was, you know, a little tricycle, and the new Slackbot is like, you know, a Porsche.\" The original Slackbot, which has existed since Slack&#x27;s early days, performed basic algorithmic tasks — reminding users to add colleagues to documents, suggesting channel archives, and delivering simple notifications. The new version runs on an entirely different architecture built around a large language model and sophisticated search capabilities that can access Salesforce records, Google Drive files, calendar data, and years of Slack conversations. \"It&#x27;s two different things,\" Harris explained. \"The old Slackbot was algorithmic and fairly simple. The new Slackbot is brand new — it&#x27;s based around an LLM and a very robust search engine, and connections to third-party search engines, third-party enterprise data.\" Salesforce chose to retain the Slackbot brand despite the fundamental technical overhaul. \"People know what Slackbot is, and so we wanted to carry that forward,\" Harris said. Why Anthropic&#x27;s Claude powers the new Slackbot — and which AI models could come next The new Slackbot runs on Claude , Anthropic&#x27;s large language model, a choice driven partly by compliance requirements. Slack&#x27;s commercial service operates under FedRAMP Moderate certification to serve U.S. federal government customers, and Harris said Anthropic was \"the only provider that could give us a compliant LLM\" when Slack began building the new system. But that exclusivity won&#x27;t last. \"We are, this year, going to support additional providers,\" Harris said. \"We have a great relationship with Google. Gemini is incredible — performance is great, cost is great. So we&#x27;re going to use Gemini for some things.\" He added that OpenAI remains a possibility as well. Harris echoed Salesforce CEO Marc Benioff&",
+    "pubDate": "Tue, 13 Jan 2026 13:00:00 GMT"
+  },
+  {
     "url": "https://venturebeat.com/technology/listen-labs-raises-usd69m-after-viral-billboard-hiring-stunt-to-scale-ai",
     "name": "VentureBeat",
     "category": "AI・機械学習",
@@ -192,11 +152,51 @@
     "pubDate": "Fri, 16 Jan 2026 14:01:00 GMT"
   },
   {
-    "url": "https://techcrunch.com/2026/06/10/meta-signs-first-ai-data-center-deal-in-india-with-reliance/",
-    "name": "TechCrunch",
+    "url": "https://arstechnica.com/security/2026/06/locked-in-heated-rivalry-with-researcher-microsoft-fixes-0-day-they-disclosed/",
+    "name": "Ars Technica",
     "category": "テクノロジー",
-    "title": "Meta signs first AI data center deal in India with Reliance",
-    "content": "The 168-megawatt facility will support Meta's global AI computing needs and can be expanded over time.",
-    "pubDate": "Wed, 10 Jun 2026 07:05:26 +0000"
+    "title": "Locked in heated rivalry with researcher, Microsoft fixes 0-day they disclosed",
+    "content": "Microsoft on Tuesday released fixes for two high-severity zero-days that were disclosed by a researcher who has been locked in a testy beef with the software giant. Nightmare Eclipse, the pseudonym the researcher goes by, released a handful of high-severity vulnerabilities in recent months, making them zero-days that had the potential to be exploited in the wild. The researcher has said the disclosures, which included proof-of-concept code, came after Microsoft reneged on an arrangement the two made regarding vulnerabilities they had discussed. Disclosure drama “But someone violated our agreement and left me homeless with nothing,” Nightmare Eclipse wrote in March. “They knew this will happen and they still stabbed me in the back anyways, this is their decision not mine.” Read full article Comments",
+    "pubDate": "Tue, 09 Jun 2026 20:56:52 +0000"
+  },
+  {
+    "url": "https://www.wired.com/story/wrongful-arrest-tests-one-of-the-oldest-police-face-recognition-tools-in-the-us/",
+    "name": "Wired",
+    "category": "テクノロジー・カルチャー",
+    "title": "Wrongful Arrest Exposes Failures in One of the Oldest Police Face-Recognition Tools in the US",
+    "content": "The ACLU is suing two Florida police departments over the arrest of a Fort Myers man in a child-abduction case, saying officers treated a flawed face-recognition match as a near-certain ID.",
+    "pubDate": "Wed, 10 Jun 2026 14:00:00 +0000"
+  },
+  {
+    "url": "https://www.wired.com/story/china-opens-worlds-first-wind-powered-underwater-data-center/",
+    "name": "Wired",
+    "category": "テクノロジー・カルチャー",
+    "title": "China Opens World’s First Wind-Powered Underwater Data Center",
+    "content": "With an initial capacity of 24 megawatts, the innovative data center uses seawater as a natural cooling system.",
+    "pubDate": "Wed, 10 Jun 2026 13:39:32 +0000"
+  },
+  {
+    "url": "https://www.nytimes.com/2026/06/10/technology/spacex-ipo-employee-millionaires.html",
+    "name": "NY Times Tech",
+    "category": "テクノロジー",
+    "title": "SpaceX’s IPO Will Turn 4,400 Employees Into Millionaires",
+    "content": "While Elon Musk may soon become a trillionaire, his rocket company’s market debut is set to the change the lives of its current and former employees, too.",
+    "pubDate": "Wed, 10 Jun 2026 14:57:11 +0000"
+  },
+  {
+    "url": "https://venturebeat.com/infrastructure/claude-code-costs-up-to-usd200-a-month-goose-does-the-same-thing-for-free",
+    "name": "VentureBeat",
+    "category": "AI・機械学習",
+    "title": "Claude Code costs up to $200 a month. Goose does the same thing for free.",
+    "content": "The artificial intelligence coding revolution comes with a catch: it&#x27;s expensive. Claude Code , Anthropic&#x27;s terminal-based AI agent that can write, debug, and deploy code autonomously, has captured the imagination of software developers worldwide. But its pricing — ranging from $20 to $200 per month depending on usage — has sparked a growing rebellion among the very programmers it aims to serve. Now, a free alternative is gaining traction. Goose , an open-source AI agent developed by Block (the financial technology company formerly known as Square), offers nearly identical functionality to Claude Code but runs entirely on a user&#x27;s local machine. No subscription fees. No cloud dependency. No rate limits that reset every five hours. \"Your data stays with you, period,\" said Parth Sareen, a software engineer who demonstrated the tool during a recent livestream . The comment captures the core appeal: Goose gives developers complete control over their AI-powered workflow, including the ability to work offline — even on an airplane. The project has exploded in popularity. Goose now boasts more than 26,100 stars on GitHub , the code-sharing platform, with 362 contributors and 102 releases since its launch. The latest version, 1.20.1 , shipped on January 19, 2026, reflecting a development pace that rivals commercial products. For developers frustrated by Claude Code&#x27;s pricing structure and usage caps, Goose represents something increasingly rare in the AI industry: a genuinely free, no-strings-attached option for serious work. Anthropic&#x27;s new rate limits spark a developer revolt To understand why Goose matters, you need to understand the Claude Code pricing controversy . Anthropic, the San Francisco artificial intelligence company founded by former OpenAI executives, offers Claude Code as part of its subscription tiers. The free plan provides no access whatsoever. The Pro plan , at $17 per month with annual billing (or $20 monthly), limits users to just 10 to 40 prompts every five hours — a constraint that serious developers exhaust within minutes of intensive work. The Max plans , at $100 and $200 per month, offer more headroom: 50 to 200 prompts and 200 to 800 prompts respectively, plus access to Anthropic&#x27;s most powerful model, Claude 4.5 Opus . But even these premium tiers come with restrictions that have inflamed the developer community. In late July, Anthropic announced new weekly rate limits. Under the system, Pro users receive 40 to 80 hours of Sonnet 4 usage per week. Max users at the $200 tier get 240 to 480 hours of Sonnet 4, plus 24 to 40 hours of Opus 4. Nearly five months later, the frustration has not subsided. The problem? Those \"hours\" are not actual hours. They represent token-based limits that vary wildly depending on codebase size, conversation length, and the complexity of the code being processed. Independent analysis suggests the actual per-session limits translate to roughly 44,000 tokens for Pro users",
+    "pubDate": "Mon, 19 Jan 2026 14:00:00 GMT"
+  },
+  {
+    "url": "https://arstechnica.com/security/2026/06/highly-reviewed-speaker-can-be-hacked-over-the-air-to-infect-connected-devices/",
+    "name": "Ars Technica",
+    "category": "テクノロジー",
+    "title": "How a USB-connected speaker can infect a PC without ever being touched",
+    "content": "Operating system makers take many steps to prevent their wares from accepting commands from remote devices. The safeguards, designed to thwart malicious attacks, typically require hackers to jump through all kinds of hoops to bypass the measures. But what if remote code execution were as simple as being within Bluetooth range of a speaker connected to the targeted device? It turns out it can, at least when the speaker is a Sound Blaster Katana V2X sold by Singapore-based Creative Technologies. The speaker, which sells for $283, is widely acclaimed with numerous reviews showering praise on the sound and performance of it and its predecessor, the Sound Blaster V2. A PC-pwning proxy Researcher Rasmus Moorats stumbled on the hack by accident, after he purchased a Katana V2X, a soundbar that connects to PCs, Macs, and Linux devices over USB or Bluetooth. Moorats was curious if he could create a Linux tool that communicated with his speaker. He discovered he could do so through CTP, a proprietary mechanism he guesses is short for Creative Transport Protocol. Read full article Comments",
+    "pubDate": "Fri, 05 Jun 2026 21:00:29 +0000"
   }
 ]
