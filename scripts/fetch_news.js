@@ -2,17 +2,42 @@ const Parser = require('rss-parser');
 const fs = require('fs');
 const path = require('path');
 
-const parser = new Parser();
+// content:encodedフィールドも取得するようにカスタムフィールドを追加
+const parser = new Parser({
+  customFields: {
+    item: [
+      ['content:encoded', 'contentEncoded'],
+      ['description', 'description'],
+    ]
+  }
+});
 
 // 信頼性の高い海外メディアのRSSフィード一覧
+// ※ The Verge は404になっているので削除。代わりにHacker News等を追加
 const FEEDS = [
-  { url: 'https://techcrunch.com/feed/', name: 'TechCrunch', category: 'Technology / Startups' },
-  { url: 'https://venturebeat.com/category/ai/feed/', name: 'VentureBeat', category: 'AI / Enterprise' },
-  { url: 'https://www.wired.com/feed/rss', name: 'Wired', category: 'Technology / Culture' },
-  { url: 'https://www.theverge.com/tech/rss/index.xml', name: 'The Verge', category: 'Consumer Tech' }
+  { url: 'https://techcrunch.com/feed/', name: 'TechCrunch', category: 'テクノロジー' },
+  { url: 'https://venturebeat.com/category/ai/feed/', name: 'VentureBeat', category: 'AI・機械学習' },
+  { url: 'https://www.wired.com/feed/rss', name: 'Wired', category: 'テクノロジー・カルチャー' },
+  { url: 'https://feeds.arstechnica.com/arstechnica/technology-lab', name: 'Ars Technica', category: 'テクノロジー' },
+  { url: 'https://rss.nytimes.com/services/xml/rss/nyt/Technology.xml', name: 'NY Times Tech', category: 'テクノロジー' },
 ];
 
 const MAX_ITEMS_PER_FEED = 5; // 各フィードから取得する最新記事の数
+
+// HTMLタグを除去してプレーンテキストにする
+function stripHtml(html) {
+  if (!html) return '';
+  return html
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/&nbsp;/g, ' ')
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/\s+/g, ' ')
+    .trim()
+    .substring(0, 3000); // 長すぎる場合は3000文字でカット（Difyのトークン節約）
+}
 
 async function fetchNews() {
   console.log('🔄 ニュースの自動収集を開始します...');
@@ -26,10 +51,18 @@ async function fetchNews() {
       // 最新の記事を取得
       const items = parsed.items.slice(0, MAX_ITEMS_PER_FEED);
       for (const item of items) {
+        // 記事本文の取得（優先順位: content:encoded > description > summary）
+        const rawContent = item.contentEncoded || item.description || item.summary || '';
+        const articleContent = stripHtml(rawContent);
+
         allArticles.push({
           url: item.link,
           name: feed.name,
-          category: feed.category
+          category: feed.category,
+          title: item.title || '',
+          // ★ RSSから取れた記事本文をそのまま保存（jina.aiいらず！）
+          content: articleContent,
+          pubDate: item.pubDate || item.isoDate || new Date().toISOString(),
         });
       }
       console.log(`✅ ${items.length}件の記事を取得しました: ${feed.name}`);

@@ -49,7 +49,10 @@ async function triggerDify(article, currentDate) {
         url: article.url,
         source_name: article.name,
         source_about: article.category,
-        current_date: currentDate
+        current_date: currentDate,
+        // RSSから取得した記事本文を渡す（Dify側でjina.aiの代わりに使える）
+        rss_content: article.content || '',
+        article_title: article.title || '',
       },
       response_mode: "blocking",
       user: "github-actions-bot"
