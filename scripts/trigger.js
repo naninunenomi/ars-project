@@ -89,14 +89,34 @@ async function triggerDify(article, currentDate) {
         
         if (articleContent) {
           const timestamp = new Date().toISOString().replace(/[-:T]/g, '').substring(0, 14); // YYYYMMDDHHMMSS
-          const filename = path.join(__dirname, `../blog/articles/article_${timestamp}.html`);
+          const filename = path.join(__dirname, `../blog/articles/article_${timestamp}.json`);
           
           // ディレクトリが存在しない場合は作成
           if (!fs.existsSync(path.dirname(filename))) {
             fs.mkdirSync(path.dirname(filename), { recursive: true });
           }
+
+          // HTMLから本文部分だけをざっくり抽出（<body>タグの中身）
+          let bodyContent = articleContent;
+          const bodyMatch = articleContent.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
+          if (bodyMatch && bodyMatch[1]) {
+            bodyContent = bodyMatch[1];
+          }
+
+          // Next.js用にメタデータ付きのJSONとして保存
+          const articleData = {
+            id: `article_${timestamp}`,
+            title: `${article.name} の最新ニュースと活用法`,
+            category: article.category || "ニュース",
+            source_url: article.url,
+            source_name: article.name,
+            date: new Date().toISOString(),
+            draft: true, // プレビュー用の下書きフラグ（最初は非公開）
+            content: bodyContent,
+            raw_html: articleContent // 元データも念のため保持
+          };
           
-          fs.writeFileSync(filename, articleContent, 'utf8');
+          fs.writeFileSync(filename, JSON.stringify(articleData, null, 2), 'utf8');
           console.log(`✅ Saved generated article to ${filename}`);
         } else {
           console.log("⚠️ No valid article text found in Dify response outputs.");
