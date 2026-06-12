@@ -1,4 +1,11 @@
 {
-  "pending_article": null,
+  "pending_article": {
+    "url": "https://www.wired.com/review/ed-sheeran-looper-x/",
+    "name": "Wired",
+    "category": "テクノロジー・カルチャー",
+    "title": "Sheeran Loopers Looper X Review: Create Your One-Person Tour",
+    "content": "The musician created his own line of loopers that record and layer riffs in a loop. The pricey Looper X does what it claims, but it isn’t without quirks.",
+    "pubDate": "Fri, 12 Jun 2026 10:31:00 +0000"
+  },
   "last_success_window_key": "2026-06-12-NONE"
 }
