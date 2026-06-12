@@ -1,27 +1,11 @@
 [
   {
-    "url": "https://www.wired.com/review/ed-sheeran-looper-x/",
-    "name": "Wired",
-    "category": "テクノロジー・カルチャー",
-    "title": "Sheeran Loopers Looper X Review: Create Your One-Person Tour",
-    "content": "The musician created his own line of loopers that record and layer riffs in a loop. The pricey Looper X does what it claims, but it isn’t without quirks.",
-    "pubDate": "Fri, 12 Jun 2026 10:31:00 +0000"
-  },
-  {
-    "url": "https://venturebeat.com/technology/salesforce-rolls-out-new-slackbot-ai-agent-as-it-battles-microsoft-and",
-    "name": "VentureBeat",
-    "category": "AI・機械学習",
-    "title": "Salesforce rolls out new Slackbot AI agent as it battles Microsoft and Google in workplace AI",
-    "content": "Salesforce on Tuesday launched an entirely rebuilt version of Slackbot , the company&#x27;s workplace assistant, transforming it from a simple notification tool into what executives describe as a fully powered AI agent capable of searching enterprise data, drafting documents, and taking action on behalf of employees. The new Slackbot, now generally available to Business+ and Enterprise+ customers, is Salesforce&#x27;s most aggressive move yet to position Slack at the center of the emerging \"agentic AI\" movement — where software agents work alongside humans to complete complex tasks. The launch comes as Salesforce attempts to convince investors that artificial intelligence will bolster its products rather than render them obsolete. \"Slackbot isn&#x27;t just another copilot or AI assistant,\" said Parker Harris , Salesforce co-founder and Slack&#x27;s chief technology officer, in an exclusive interview with Salesforce. \"It&#x27;s the front door to the agentic enterprise, powered by Salesforce.\" From tricycle to Porsche: Salesforce rebuilt Slackbot from the ground up Harris was blunt about what distinguishes the new Slackbot from its predecessor: \"The old Slackbot was, you know, a little tricycle, and the new Slackbot is like, you know, a Porsche.\" The original Slackbot, which has existed since Slack&#x27;s early days, performed basic algorithmic tasks — reminding users to add colleagues to documents, suggesting channel archives, and delivering simple notifications. The new version runs on an entirely different architecture built around a large language model and sophisticated search capabilities that can access Salesforce records, Google Drive files, calendar data, and years of Slack conversations. \"It&#x27;s two different things,\" Harris explained. \"The old Slackbot was algorithmic and fairly simple. The new Slackbot is brand new — it&#x27;s based around an LLM and a very robust search engine, and connections to third-party search engines, third-party enterprise data.\" Salesforce chose to retain the Slackbot brand despite the fundamental technical overhaul. \"People know what Slackbot is, and so we wanted to carry that forward,\" Harris said. Why Anthropic&#x27;s Claude powers the new Slackbot — and which AI models could come next The new Slackbot runs on Claude , Anthropic&#x27;s large language model, a choice driven partly by compliance requirements. Slack&#x27;s commercial service operates under FedRAMP Moderate certification to serve U.S. federal government customers, and Harris said Anthropic was \"the only provider that could give us a compliant LLM\" when Slack began building the new system. But that exclusivity won&#x27;t last. \"We are, this year, going to support additional providers,\" Harris said. \"We have a great relationship with Google. Gemini is incredible — performance is great, cost is great. So we&#x27;re going to use Gemini for some things.\" He added that OpenAI remains a possibility as well. Harris echoed Salesforce CEO Marc Benioff&",
-    "pubDate": "Tue, 13 Jan 2026 13:00:00 GMT"
-  },
-  {
-    "url": "https://arstechnica.com/security/2026/06/dashlane-explains-how-attackers-managed-to-download-encrypted-password-vaults/",
+    "url": "https://arstechnica.com/security/2026/06/highly-reviewed-speaker-can-be-hacked-over-the-air-to-infect-connected-devices/",
     "name": "Ars Technica",
     "category": "テクノロジー",
-    "title": "Dashlane explains how attackers managed to download encrypted password vaults",
-    "content": "Dashlane said that attackers mounted a coordinated hacking campaign against a large base of its users in an attempt to recover as many encrypted password vaults as possible. The password manager provider said fewer than 20 personal user vaults were downloaded before it shut down the operation. In a campaign that started Sunday, the unknown threat actor abused the mechanism that allows Dashlane users to add new devices, such as computers or phones, to their accounts. By abusing Dashlane's programming interfaces for device enrollment, the attackers sent requests to large numbers of existing users’ registered email addresses. In an update published Thursday, Dashlane wrote: The threat actor targeted the API endpoints for device registration and used a brute force attack to send a large volume of automated requests to those endpoints. In response, Dashlane’s automated security systems operated as intended, triggering an automatic lockout of the targeted accounts to protect those users. Before the attack was fully mitigated, the threat actor was able to brute force and generate valid tokens for fewer than 20 personal plan customers, allowing them to register a new device on those accounts and download copies of users’ encrypted vaults. The flow and strategy of the attack When a user installs the Dashlane app on a new device and attempts to enroll it in their existing account, Dashlane first verifies the account holder's identity. This verification is completed by sending a one-time six-digit token to the user’s registered email address (or, for users who have enabled two-factor authentication, by validating a six-digit code generated by their authentication app). Read full article Comments",
-    "pubDate": "Thu, 04 Jun 2026 20:02:04 +0000"
+    "title": "How a USB-connected speaker can infect a PC without ever being touched",
+    "content": "Operating system makers take many steps to prevent their wares from accepting commands from remote devices. The safeguards, designed to thwart malicious attacks, typically require hackers to jump through all kinds of hoops to bypass the measures. But what if remote code execution were as simple as being within Bluetooth range of a speaker connected to the targeted device? It turns out it can, at least when the speaker is a Sound Blaster Katana V2X sold by Singapore-based Creative Technologies. The speaker, which sells for $283, is widely acclaimed with numerous reviews showering praise on the sound and performance of it and its predecessor, the Sound Blaster V2. A PC-pwning proxy Researcher Rasmus Moorats stumbled on the hack by accident, after he purchased a Katana V2X, a soundbar that connects to PCs, Macs, and Linux devices over USB or Bluetooth. Moorats was curious if he could create a Linux tool that communicated with his speaker. He discovered he could do so through CTP, a proprietary mechanism he guesses is short for Creative Transport Protocol. Read full article Comments",
+    "pubDate": "Fri, 05 Jun 2026 21:00:29 +0000"
   },
   {
     "url": "https://venturebeat.com/infrastructure/claude-code-costs-up-to-usd200-a-month-goose-does-the-same-thing-for-free",
@@ -32,28 +16,44 @@
     "pubDate": "Mon, 19 Jan 2026 14:00:00 GMT"
   },
   {
-    "url": "https://techcrunch.com/2026/06/11/theker-just-raised-85m-to-build-the-factory-robot-that-doesnt-specialize-in-anything/",
-    "name": "TechCrunch",
-    "category": "テクノロジー",
-    "title": "Theker just raised $85M to build the factory robot that doesn’t specialize in anything",
-    "content": "Unlike humanoid robots designed around a fixed form — think Boston Dynamics — Theker's machines are built to be reconfigured.",
-    "pubDate": "Fri, 12 Jun 2026 01:48:07 +0000"
-  },
-  {
-    "url": "https://www.wired.com/gallery/best-floodlight-security-cameras/",
-    "name": "Wired",
-    "category": "テクノロジー・カルチャー",
-    "title": "4 Best Floodlight Security Cameras (2026) After Thorough Testing",
-    "content": "Light up and secure your driveway, backyard, or porch with a floodlight security camera.",
-    "pubDate": "Fri, 12 Jun 2026 11:30:00 +0000"
-  },
-  {
     "url": "https://arstechnica.com/security/2026/06/a-single-errant-character-in-the-linux-kernel-allows-attacker-to-gain-root/",
     "name": "Ars Technica",
     "category": "テクノロジー",
     "title": "High-severity vulnerability in Linux caused by a single faulty character",
     "content": "Researchers have analyzed a high-severity vulnerability in Linux that’s able to escalate untrusted users to root by exploiting a bug you don't often see: a single errant character inside the kernel. The vulnerability, tracked as CVE-2026-23111 , is located in nf_tables, a subsystem of the Linux kernel that provides packet filtering capabilities. It’s used to manage firewall rules and replaces older subsystems such as iptables, ip6tables, arptables, and ebtables. !!!WTF!!! The presence of a single mis-issued exclamation point in code implementing nf_tables introduced a use-after-free, a class of vulnerability that corrupts memory by placing malicious code at memory addresses that haven’t been properly freed of their previous contents. CVE-2026-23111 can be exploited by an unprivileged user or process to elevate system rights to root. Read full article Comments",
     "pubDate": "Tue, 09 Jun 2026 15:12:43 +0000"
+  },
+  {
+    "url": "https://venturebeat.com/technology/salesforce-rolls-out-new-slackbot-ai-agent-as-it-battles-microsoft-and",
+    "name": "VentureBeat",
+    "category": "AI・機械学習",
+    "title": "Salesforce rolls out new Slackbot AI agent as it battles Microsoft and Google in workplace AI",
+    "content": "Salesforce on Tuesday launched an entirely rebuilt version of Slackbot , the company&#x27;s workplace assistant, transforming it from a simple notification tool into what executives describe as a fully powered AI agent capable of searching enterprise data, drafting documents, and taking action on behalf of employees. The new Slackbot, now generally available to Business+ and Enterprise+ customers, is Salesforce&#x27;s most aggressive move yet to position Slack at the center of the emerging \"agentic AI\" movement — where software agents work alongside humans to complete complex tasks. The launch comes as Salesforce attempts to convince investors that artificial intelligence will bolster its products rather than render them obsolete. \"Slackbot isn&#x27;t just another copilot or AI assistant,\" said Parker Harris , Salesforce co-founder and Slack&#x27;s chief technology officer, in an exclusive interview with Salesforce. \"It&#x27;s the front door to the agentic enterprise, powered by Salesforce.\" From tricycle to Porsche: Salesforce rebuilt Slackbot from the ground up Harris was blunt about what distinguishes the new Slackbot from its predecessor: \"The old Slackbot was, you know, a little tricycle, and the new Slackbot is like, you know, a Porsche.\" The original Slackbot, which has existed since Slack&#x27;s early days, performed basic algorithmic tasks — reminding users to add colleagues to documents, suggesting channel archives, and delivering simple notifications. The new version runs on an entirely different architecture built around a large language model and sophisticated search capabilities that can access Salesforce records, Google Drive files, calendar data, and years of Slack conversations. \"It&#x27;s two different things,\" Harris explained. \"The old Slackbot was algorithmic and fairly simple. The new Slackbot is brand new — it&#x27;s based around an LLM and a very robust search engine, and connections to third-party search engines, third-party enterprise data.\" Salesforce chose to retain the Slackbot brand despite the fundamental technical overhaul. \"People know what Slackbot is, and so we wanted to carry that forward,\" Harris said. Why Anthropic&#x27;s Claude powers the new Slackbot — and which AI models could come next The new Slackbot runs on Claude , Anthropic&#x27;s large language model, a choice driven partly by compliance requirements. Slack&#x27;s commercial service operates under FedRAMP Moderate certification to serve U.S. federal government customers, and Harris said Anthropic was \"the only provider that could give us a compliant LLM\" when Slack began building the new system. But that exclusivity won&#x27;t last. \"We are, this year, going to support additional providers,\" Harris said. \"We have a great relationship with Google. Gemini is incredible — performance is great, cost is great. So we&#x27;re going to use Gemini for some things.\" He added that OpenAI remains a possibility as well. Harris echoed Salesforce CEO Marc Benioff&",
+    "pubDate": "Tue, 13 Jan 2026 13:00:00 GMT"
+  },
+  {
+    "url": "https://www.nytimes.com/2026/06/11/technology/bezos-prometheus-ai-engineer.html",
+    "name": "NY Times Tech",
+    "category": "テクノロジー",
+    "title": "Jeff Bezos Wants to Build an ‘Artificial General Engineer’",
+    "content": "As co-chief executive of the start-up Prometheus, the Amazon founder is using A.I. to improve how devices ranging from computers to jet engines are made.",
+    "pubDate": "Thu, 11 Jun 2026 14:00:06 +0000"
+  },
+  {
+    "url": "https://www.nytimes.com/2026/06/12/podcasts/hard-fork-live-part-1-satya-nadella.html",
+    "name": "NY Times Tech",
+    "category": "テクノロジー",
+    "title": "‘Hard Fork’ Live, Part 1: Satya Nadella and Cindy Cohn",
+    "content": "A tech titan, a digital rights defender and two menacing-looking robot dogs took the stage at our second-ever live show.",
+    "pubDate": "Fri, 12 Jun 2026 11:02:20 +0000"
+  },
+  {
+    "url": "https://www.wired.com/gallery/best-smart-notebooks-and-smart-pens/",
+    "name": "Wired",
+    "category": "テクノロジー・カルチャー",
+    "title": "6 Best Digital Notebooks (2026): ReMarkable, Kobo, Kindle",
+    "content": "These nifty tools combine the ease of jotting notes by hand with the power of saving them digitally.",
+    "pubDate": "Fri, 12 Jun 2026 12:07:00 +0000"
   },
   {
     "url": "https://venturebeat.com/technology/google-just-redesigned-the-search-box-for-the-first-time-in-25-years-heres-why-it-matters-more-than-you-think",
@@ -72,54 +72,6 @@
     "pubDate": "Thu, 22 Jan 2026 14:00:00 GMT"
   },
   {
-    "url": "https://www.nytimes.com/2026/06/11/technology/spacex-valuation-skeptics.html",
-    "name": "NY Times Tech",
-    "category": "テクノロジー",
-    "title": "Skeptics Question Whether SpaceX Is Worth $1.77 Trillion",
-    "content": "Elon Musk’s rocket company is spending big and losing money. That has raised questions about whether it can justify its valuation for its blockbuster initial public offering.",
-    "pubDate": "Thu, 11 Jun 2026 20:30:58 +0000"
-  },
-  {
-    "url": "https://www.nytimes.com/2026/06/12/podcasts/hard-fork-live-part-1-satya-nadella.html",
-    "name": "NY Times Tech",
-    "category": "テクノロジー",
-    "title": "‘Hard Fork’ Live, Part 1: Satya Nadella and Cindy Cohn",
-    "content": "A tech titan, a digital rights defender and two menacing-looking robot dogs took the stage at our second-ever live show.",
-    "pubDate": "Fri, 12 Jun 2026 11:02:20 +0000"
-  },
-  {
-    "url": "https://www.wired.com/story/real-life-disclosure-day-wont-look-like-steven-spielberg-movie/",
-    "name": "Wired",
-    "category": "テクノロジー・カルチャー",
-    "title": "Why Real-Life Disclosure Day Will Look Nothing Like Steven Spielberg’s New Movie",
-    "content": "Previous landmark scientific discoveries like the Higgs boson provide a better template for what it will take to confirm whether aliens have made contact with Earth.",
-    "pubDate": "Fri, 12 Jun 2026 11:00:00 +0000"
-  },
-  {
-    "url": "https://techcrunch.com/2026/06/12/us-spy-law-to-expire-for-first-time-after-lawmakers-reject-trumps-controversial-pick-to-lead-spy-agencies/",
-    "name": "TechCrunch",
-    "category": "テクノロジー",
-    "title": "US surveillance law to expire for first time after lawmakers reject Trump’s controversial pick to lead spy agencies",
-    "content": "The spy law known as Section 702, which authorizes the NSA and FBI's warrantless surveillance, will all but certainly expire on Friday for the first time.",
-    "pubDate": "Fri, 12 Jun 2026 11:43:32 +0000"
-  },
-  {
-    "url": "https://www.nytimes.com/2026/06/11/technology/bezos-prometheus-ai-engineer.html",
-    "name": "NY Times Tech",
-    "category": "テクノロジー",
-    "title": "Jeff Bezos Wants to Build an ‘Artificial General Engineer’",
-    "content": "As co-chief executive of the start-up Prometheus, the Amazon founder is using A.I. to improve how devices ranging from computers to jet engines are made.",
-    "pubDate": "Thu, 11 Jun 2026 14:00:06 +0000"
-  },
-  {
-    "url": "https://techcrunch.com/2026/06/11/jeff-bezoss-prometheus-raises-12b-to-build-an-artificial-general-engineer-for-the-physical-world/",
-    "name": "TechCrunch",
-    "category": "テクノロジー",
-    "title": "Jeff Bezos’s Prometheus raises $12B to build an ‘artificial general engineer’ for the physical world",
-    "content": "The new round values the physical AI startup that aims to automate heavy engineering and drug design at $41 billion.",
-    "pubDate": "Fri, 12 Jun 2026 01:04:38 +0000"
-  },
-  {
     "url": "https://venturebeat.com/technology/listen-labs-raises-usd69m-after-viral-billboard-hiring-stunt-to-scale-ai",
     "name": "VentureBeat",
     "category": "AI・機械学習",
@@ -128,20 +80,12 @@
     "pubDate": "Fri, 16 Jan 2026 14:01:00 GMT"
   },
   {
-    "url": "https://www.nytimes.com/2026/06/11/business/spacex-tesla-ipo-elon-musk.html",
-    "name": "NY Times Tech",
-    "category": "テクノロジー",
-    "title": "How Tesla’s Stock Listing in 2010 Enabled SpaceX’s I.P.O.",
-    "content": "Investors who bought the automaker’s shares in its initial public offering became rich. As a result, many have a deep faith in Elon Musk, the chief executive of Tesla and SpaceX.",
-    "pubDate": "Thu, 11 Jun 2026 15:15:44 +0000"
-  },
-  {
-    "url": "https://techcrunch.com/2026/06/11/cheaper-faster-and-culturally-aware-avataars-video-ai-is-built-for-indias-scale/",
-    "name": "TechCrunch",
-    "category": "テクノロジー",
-    "title": "Cheaper, faster, and culturally aware, Avataar’s video AI is built for India’s scale",
-    "content": "Avataar AI's distilled video model is priced at $0.005 for every second of generation",
-    "pubDate": "Fri, 12 Jun 2026 04:30:00 +0000"
+    "url": "https://www.wired.com/story/crypto-guys-bought-the-answer-to-the-cias-mysterious-kryptos-sculpture/",
+    "name": "Wired",
+    "category": "テクノロジー・カルチャー",
+    "title": "Crypto Guys Bought the Answer to the CIA’s Mysterious Kryptos Sculpture",
+    "content": "They swear they haven’t peeked at the closely guarded secret and that they’ll keep the cryptographic competition going.",
+    "pubDate": "Fri, 12 Jun 2026 14:00:00 +0000"
   },
   {
     "url": "https://arstechnica.com/security/2026/06/locked-in-heated-rivalry-with-researcher-microsoft-fixes-0-day-they-disclosed/",
@@ -150,38 +94,6 @@
     "title": "Locked in heated rivalry with researcher, Microsoft fixes 0-day they disclosed",
     "content": "Microsoft on Tuesday released fixes for two high-severity zero-days that were disclosed by a researcher who has been locked in a testy beef with the software giant. Nightmare Eclipse, the pseudonym the researcher goes by, released a handful of high-severity vulnerabilities in recent months, making them zero-days that had the potential to be exploited in the wild. The researcher has said the disclosures, which included proof-of-concept code, came after Microsoft reneged on an arrangement the two made regarding vulnerabilities they had discussed. Disclosure drama “But someone violated our agreement and left me homeless with nothing,” Nightmare Eclipse wrote in March. “They knew this will happen and they still stabbed me in the back anyways, this is their decision not mine.” Read full article Comments",
     "pubDate": "Tue, 09 Jun 2026 20:56:52 +0000"
-  },
-  {
-    "url": "https://arstechnica.com/security/2026/06/for-the-2nd-time-in-weeks-microsoft-packages-laced-with-credential-stealer/",
-    "name": "Ars Technica",
-    "category": "テクノロジー",
-    "title": "For the 2nd time in weeks, Microsoft packages laced with credential stealer",
-    "content": "Dozens of cryptographically verified open source packages from Microsoft were compromised late last week to add advanced credential-stealing code that was triggered when developers opened them in AI coding agents. In all, multiple researchers said , 73 packages were flagged as malicious when automated systems on GitHub blocked them on the platform. Rather than noting they are malicious—and that developers who used AI agents to work with them should assume their systems are compromised—the Microsoft-owned GitHub said it disabled the packages “due to a violation of GitHub's terms of service.” The text went on to encourage the package owner to contact GitHub. Devs: Assume compromise and proceed accordingly It wasn’t until Monday that Microsoft even raised the possibility the packages were infected. In an email, the company stated: “We have temporarily removed some repositories as we investigate potential malicious content.” Read full article Comments",
-    "pubDate": "Mon, 08 Jun 2026 18:34:23 +0000"
-  },
-  {
-    "url": "https://techcrunch.com/2026/06/11/equal-ai-raises-30m-to-screen-calls-so-indians-dont-have-to/",
-    "name": "TechCrunch",
-    "category": "テクノロジー",
-    "title": "Equal AI raises $30M to screen calls so Indians don’t have to",
-    "content": "Equal AI said that its AI-powered call assistant now has over a million monthly active users.",
-    "pubDate": "Fri, 12 Jun 2026 04:30:00 +0000"
-  },
-  {
-    "url": "https://www.wired.com/gallery/best-smart-notebooks-and-smart-pens/",
-    "name": "Wired",
-    "category": "テクノロジー・カルチャー",
-    "title": "6 Best Digital Notebooks (2026): ReMarkable, Kobo, Kindle",
-    "content": "These nifty tools combine the ease of jotting notes by hand with the power of saving them digitally.",
-    "pubDate": "Fri, 12 Jun 2026 12:07:00 +0000"
-  },
-  {
-    "url": "https://arstechnica.com/security/2026/06/highly-reviewed-speaker-can-be-hacked-over-the-air-to-infect-connected-devices/",
-    "name": "Ars Technica",
-    "category": "テクノロジー",
-    "title": "How a USB-connected speaker can infect a PC without ever being touched",
-    "content": "Operating system makers take many steps to prevent their wares from accepting commands from remote devices. The safeguards, designed to thwart malicious attacks, typically require hackers to jump through all kinds of hoops to bypass the measures. But what if remote code execution were as simple as being within Bluetooth range of a speaker connected to the targeted device? It turns out it can, at least when the speaker is a Sound Blaster Katana V2X sold by Singapore-based Creative Technologies. The speaker, which sells for $283, is widely acclaimed with numerous reviews showering praise on the sound and performance of it and its predecessor, the Sound Blaster V2. A PC-pwning proxy Researcher Rasmus Moorats stumbled on the hack by accident, after he purchased a Katana V2X, a soundbar that connects to PCs, Macs, and Linux devices over USB or Bluetooth. Moorats was curious if he could create a Linux tool that communicated with his speaker. He discovered he could do so through CTP, a proprietary mechanism he guesses is short for Creative Transport Protocol. Read full article Comments",
-    "pubDate": "Fri, 05 Jun 2026 21:00:29 +0000"
   },
   {
     "url": "https://www.nytimes.com/2026/06/10/technology/microsoft-satya-nadella-artificial-intelligence.html",
@@ -198,5 +110,93 @@
     "title": "Pedal Electric H/T Review: A Fast, Powerful, Stylish Ebike",
     "content": "The pedal-assist can be jerky, but the throttle offers smooth, powerful acceleration.",
     "pubDate": "Fri, 12 Jun 2026 11:02:00 +0000"
+  },
+  {
+    "url": "https://www.nytimes.com/2026/06/11/technology/spacex-valuation-skeptics.html",
+    "name": "NY Times Tech",
+    "category": "テクノロジー",
+    "title": "Skeptics Question Whether SpaceX Is Worth $1.77 Trillion",
+    "content": "Elon Musk’s rocket company is spending big and losing money. That has raised questions about whether it can justify its valuation for its blockbuster initial public offering.",
+    "pubDate": "Thu, 11 Jun 2026 20:30:58 +0000"
+  },
+  {
+    "url": "https://arstechnica.com/security/2026/06/dashlane-explains-how-attackers-managed-to-download-encrypted-password-vaults/",
+    "name": "Ars Technica",
+    "category": "テクノロジー",
+    "title": "Dashlane explains how attackers managed to download encrypted password vaults",
+    "content": "Dashlane said that attackers mounted a coordinated hacking campaign against a large base of its users in an attempt to recover as many encrypted password vaults as possible. The password manager provider said fewer than 20 personal user vaults were downloaded before it shut down the operation. In a campaign that started Sunday, the unknown threat actor abused the mechanism that allows Dashlane users to add new devices, such as computers or phones, to their accounts. By abusing Dashlane's programming interfaces for device enrollment, the attackers sent requests to large numbers of existing users’ registered email addresses. In an update published Thursday, Dashlane wrote: The threat actor targeted the API endpoints for device registration and used a brute force attack to send a large volume of automated requests to those endpoints. In response, Dashlane’s automated security systems operated as intended, triggering an automatic lockout of the targeted accounts to protect those users. Before the attack was fully mitigated, the threat actor was able to brute force and generate valid tokens for fewer than 20 personal plan customers, allowing them to register a new device on those accounts and download copies of users’ encrypted vaults. The flow and strategy of the attack When a user installs the Dashlane app on a new device and attempts to enroll it in their existing account, Dashlane first verifies the account holder's identity. This verification is completed by sending a one-time six-digit token to the user’s registered email address (or, for users who have enabled two-factor authentication, by validating a six-digit code generated by their authentication app). Read full article Comments",
+    "pubDate": "Thu, 04 Jun 2026 20:02:04 +0000"
+  },
+  {
+    "url": "https://techcrunch.com/2026/06/12/us-spy-law-to-expire-for-first-time-after-lawmakers-reject-trumps-controversial-pick-to-lead-spy-agencies/",
+    "name": "TechCrunch",
+    "category": "テクノロジー",
+    "title": "US surveillance law to expire for first time after lawmakers reject Trump’s controversial pick to lead spy agencies",
+    "content": "The spy law known as Section 702, which authorizes the NSA and FBI's warrantless surveillance, will all but certainly expire on Friday for the first time.",
+    "pubDate": "Fri, 12 Jun 2026 11:43:32 +0000"
+  },
+  {
+    "url": "https://techcrunch.com/2026/06/11/cheaper-faster-and-culturally-aware-avataars-video-ai-is-built-for-indias-scale/",
+    "name": "TechCrunch",
+    "category": "テクノロジー",
+    "title": "Cheaper, faster, and culturally aware, Avataar’s video AI is built for India’s scale",
+    "content": "Avataar AI's distilled video model is priced at $0.005 for every second of generation.",
+    "pubDate": "Fri, 12 Jun 2026 04:30:00 +0000"
+  },
+  {
+    "url": "https://techcrunch.com/2026/06/11/theker-just-raised-85m-to-build-the-factory-robot-that-doesnt-specialize-in-anything/",
+    "name": "TechCrunch",
+    "category": "テクノロジー",
+    "title": "Theker just raised $85M to build the factory robot that doesn’t specialize in anything",
+    "content": "Unlike humanoid robots designed around a fixed form — think Boston Dynamics — Theker's machines are built to be reconfigured.",
+    "pubDate": "Fri, 12 Jun 2026 01:48:07 +0000"
+  },
+  {
+    "url": "https://techcrunch.com/2026/06/11/equal-ai-raises-30m-to-screen-calls-so-indians-dont-have-to/",
+    "name": "TechCrunch",
+    "category": "テクノロジー",
+    "title": "Equal AI raises $30M to screen calls so Indians don’t have to",
+    "content": "Equal AI said that its AI-powered call assistant now has over a million monthly active users.",
+    "pubDate": "Fri, 12 Jun 2026 04:30:00 +0000"
+  },
+  {
+    "url": "https://www.nytimes.com/2026/06/11/business/spacex-tesla-ipo-elon-musk.html",
+    "name": "NY Times Tech",
+    "category": "テクノロジー",
+    "title": "How Tesla’s Stock Listing in 2010 Enabled SpaceX’s I.P.O.",
+    "content": "Investors who bought the automaker’s shares in its initial public offering became rich. As a result, many have a deep faith in Elon Musk, the chief executive of Tesla and SpaceX.",
+    "pubDate": "Thu, 11 Jun 2026 15:15:44 +0000"
+  },
+  {
+    "url": "https://techcrunch.com/2026/06/12/spacex-ipo-everything-you-need-to-know/",
+    "name": "TechCrunch",
+    "category": "テクノロジー",
+    "title": "SpaceX IPO: Everything you need to know",
+    "content": "TechCrunch has followed SpaceX's start, struggles, and successes from the early days. And we're here for what happens next too. This package of SpaceX IPO coverage includes who stands to win (and maybe some who won't), pre-IPO deals, and what's tucked inside its S-1 registration document.",
+    "pubDate": "Fri, 12 Jun 2026 14:08:54 +0000"
+  },
+  {
+    "url": "https://www.wired.com/story/a-white-supremacist-youth-group-helped-orchestrate-the-belfast-riots/",
+    "name": "Wired",
+    "category": "テクノロジー・カルチャー",
+    "title": "A White Supremacist Youth Group Helped Orchestrate the Belfast Riots",
+    "content": "After Elon Musk and Tommy Robinson stoked anger over a horrific knife attack in Belfast, a youth group linked to a global neo-Nazi movement quietly orchestrated anti-immigrant riots.",
+    "pubDate": "Fri, 12 Jun 2026 13:21:00 +0000"
+  },
+  {
+    "url": "https://arstechnica.com/security/2026/06/for-the-2nd-time-in-weeks-microsoft-packages-laced-with-credential-stealer/",
+    "name": "Ars Technica",
+    "category": "テクノロジー",
+    "title": "For the 2nd time in weeks, Microsoft packages laced with credential stealer",
+    "content": "Dozens of cryptographically verified open source packages from Microsoft were compromised late last week to add advanced credential-stealing code that was triggered when developers opened them in AI coding agents. In all, multiple researchers said , 73 packages were flagged as malicious when automated systems on GitHub blocked them on the platform. Rather than noting they are malicious—and that developers who used AI agents to work with them should assume their systems are compromised—the Microsoft-owned GitHub said it disabled the packages “due to a violation of GitHub's terms of service.” The text went on to encourage the package owner to contact GitHub. Devs: Assume compromise and proceed accordingly It wasn’t until Monday that Microsoft even raised the possibility the packages were infected. In an email, the company stated: “We have temporarily removed some repositories as we investigate potential malicious content.” Read full article Comments",
+    "pubDate": "Mon, 08 Jun 2026 18:34:23 +0000"
+  },
+  {
+    "url": "https://www.wired.com/gallery/best-floodlight-security-cameras/",
+    "name": "Wired",
+    "category": "テクノロジー・カルチャー",
+    "title": "4 Best Floodlight Security Cameras (2026) After Thorough Testing",
+    "content": "Light up and secure your driveway, backyard, or porch with a floodlight security camera.",
+    "pubDate": "Fri, 12 Jun 2026 11:30:00 +0000"
   }
 ]
