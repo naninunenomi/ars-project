@@ -1,5 +1,13 @@
 [
   {
+    "url": "https://www.nytimes.com/2026/06/12/technology/spacex-ipo-journey.html",
+    "name": "NY Times Tech",
+    "category": "テクノロジー",
+    "title": "SpaceX’s Unlikely Journey From Far-Out Idea to $2 Trillion Juggernaut",
+    "content": "Elon Musk said he had initially given SpaceX less than a 10 percent chance of succeeding. His rocket company has come a long way.",
+    "pubDate": "Fri, 12 Jun 2026 20:48:07 +0000"
+  },
+  {
     "url": "https://arstechnica.com/security/2026/06/highly-reviewed-speaker-can-be-hacked-over-the-air-to-infect-connected-devices/",
     "name": "Ars Technica",
     "category": "テクノロジー",
@@ -8,12 +16,20 @@
     "pubDate": "Fri, 05 Jun 2026 21:00:29 +0000"
   },
   {
-    "url": "https://venturebeat.com/infrastructure/claude-code-costs-up-to-usd200-a-month-goose-does-the-same-thing-for-free",
-    "name": "VentureBeat",
-    "category": "AI・機械学習",
-    "title": "Claude Code costs up to $200 a month. Goose does the same thing for free.",
-    "content": "The artificial intelligence coding revolution comes with a catch: it&#x27;s expensive. Claude Code , Anthropic&#x27;s terminal-based AI agent that can write, debug, and deploy code autonomously, has captured the imagination of software developers worldwide. But its pricing — ranging from $20 to $200 per month depending on usage — has sparked a growing rebellion among the very programmers it aims to serve. Now, a free alternative is gaining traction. Goose , an open-source AI agent developed by Block (the financial technology company formerly known as Square), offers nearly identical functionality to Claude Code but runs entirely on a user&#x27;s local machine. No subscription fees. No cloud dependency. No rate limits that reset every five hours. \"Your data stays with you, period,\" said Parth Sareen, a software engineer who demonstrated the tool during a recent livestream . The comment captures the core appeal: Goose gives developers complete control over their AI-powered workflow, including the ability to work offline — even on an airplane. The project has exploded in popularity. Goose now boasts more than 26,100 stars on GitHub , the code-sharing platform, with 362 contributors and 102 releases since its launch. The latest version, 1.20.1 , shipped on January 19, 2026, reflecting a development pace that rivals commercial products. For developers frustrated by Claude Code&#x27;s pricing structure and usage caps, Goose represents something increasingly rare in the AI industry: a genuinely free, no-strings-attached option for serious work. Anthropic&#x27;s new rate limits spark a developer revolt To understand why Goose matters, you need to understand the Claude Code pricing controversy . Anthropic, the San Francisco artificial intelligence company founded by former OpenAI executives, offers Claude Code as part of its subscription tiers. The free plan provides no access whatsoever. The Pro plan , at $17 per month with annual billing (or $20 monthly), limits users to just 10 to 40 prompts every five hours — a constraint that serious developers exhaust within minutes of intensive work. The Max plans , at $100 and $200 per month, offer more headroom: 50 to 200 prompts and 200 to 800 prompts respectively, plus access to Anthropic&#x27;s most powerful model, Claude 4.5 Opus . But even these premium tiers come with restrictions that have inflamed the developer community. In late July, Anthropic announced new weekly rate limits. Under the system, Pro users receive 40 to 80 hours of Sonnet 4 usage per week. Max users at the $200 tier get 240 to 480 hours of Sonnet 4, plus 24 to 40 hours of Opus 4. Nearly five months later, the frustration has not subsided. The problem? Those \"hours\" are not actual hours. They represent token-based limits that vary wildly depending on codebase size, conversation length, and the complexity of the code being processed. Independent analysis suggests the actual per-session limits translate to roughly 44,000 tokens for Pro users",
-    "pubDate": "Mon, 19 Jan 2026 14:00:00 GMT"
+    "url": "https://techcrunch.com/2026/06/12/chinese-cybercrime-operation-that-used-ai-to-scam-hundreds-of-thousands-of-victims-sued-by-google/",
+    "name": "TechCrunch",
+    "category": "テクノロジー",
+    "title": "Chinese cybercrime operation that used AI to scam ‘hundreds of thousands of victims’ sued by Google",
+    "content": "The tech giant said a group called \"Outsider Enterprise\" used AI to scam hundreds of thousands of victims, sending 2.5 million text messages over a span of two weeks.",
+    "pubDate": "Fri, 12 Jun 2026 20:38:09 +0000"
+  },
+  {
+    "url": "https://www.wired.com/story/donald-trumps-white-house-ufc-event-would-be-embarrassing-anywhere/",
+    "name": "Wired",
+    "category": "テクノロジー・カルチャー",
+    "title": "Donald Trump’s White House UFC Event Would Be Embarrassing Anywhere",
+    "content": "A Monster Energy–sponsored MMA show on the White House’s South Lawn was never going to be the height of dignity. But UFC Freedom 250 is failing to clear even the lowest bar.",
+    "pubDate": "Fri, 12 Jun 2026 18:03:25 +0000"
   },
   {
     "url": "https://arstechnica.com/security/2026/06/a-single-errant-character-in-the-linux-kernel-allows-attacker-to-gain-root/",
@@ -24,6 +40,30 @@
     "pubDate": "Tue, 09 Jun 2026 15:12:43 +0000"
   },
   {
+    "url": "https://arstechnica.com/security/2026/06/peoplesoft-0-day-affecting-hundreds-of-organizations-steals-gigabytes-of-data/",
+    "name": "Ars Technica",
+    "category": "テクノロジー",
+    "title": "PeopleSoft 0-day affecting hundreds of organizations steals gigabytes of data",
+    "content": "One of the world’s most active ransomware groups exploited a critical vulnerability in Oracle’s PeopleSoft software suite and used it to target about 100 customers and extort at least one of them to pay up in exchange for not leaking stolen data, researchers said. The group, tracked as ShinyHunters, had been exploiting the PeopleSoft vulnerability for more than two weeks before Oracle flagged it. CVE-2026-35273, as the vulnerability is tracked, carries a severity rating of 9.8 out of 10, making the former zero-day one of the year’s most critical vulnerabilities to be exploited. Google’s Mandiant security team said it’s an SSRF (server-side request forgery), a vulnerability that allows attackers to send requests from a susceptible server to systems used by the targeted organization. Oracle said the SSRF is remotely exploitable, and the company has issued a stopgap mitigation but has yet to fully patch the flaw. Google has confirmed that victims are receiving extortion demands. Read full article Comments",
+    "pubDate": "Fri, 12 Jun 2026 19:26:47 +0000"
+  },
+  {
+    "url": "https://techcrunch.com/2026/06/12/metas-months-old-ai-unit-is-a-soul-crushing-gulag-say-the-engineers-stuck-inside-it/",
+    "name": "TechCrunch",
+    "category": "テクノロジー",
+    "title": "Meta’s months-old AI unit is a soul-crushing gulag, say the engineers stuck inside it",
+    "content": "A new report suggests the unit, which employs 6,500 people, is on the verge of revolt.",
+    "pubDate": "Fri, 12 Jun 2026 23:00:54 +0000"
+  },
+  {
+    "url": "https://www.wired.com/story/meta-employees-absolutely-hate-mark-zuckerbergs-hackathon-idea/",
+    "name": "Wired",
+    "category": "テクノロジー・カルチャー",
+    "title": "Meta Employees Absolutely Hate Zuckerberg’s Plan for a Companywide AI Hackathon",
+    "content": "“I’m not sure that this company supports a hackathon culture anymore,” one employee posted in a forum open to the entire staff.",
+    "pubDate": "Fri, 12 Jun 2026 23:45:26 +0000"
+  },
+  {
     "url": "https://venturebeat.com/technology/salesforce-rolls-out-new-slackbot-ai-agent-as-it-battles-microsoft-and",
     "name": "VentureBeat",
     "category": "AI・機械学習",
@@ -32,44 +72,36 @@
     "pubDate": "Tue, 13 Jan 2026 13:00:00 GMT"
   },
   {
-    "url": "https://www.nytimes.com/2026/06/11/technology/bezos-prometheus-ai-engineer.html",
+    "url": "https://techcrunch.com/2026/06/12/spacex-president-gwynne-shotwell-just-gave-another-hint-at-a-tesla-merger/",
+    "name": "TechCrunch",
+    "category": "テクノロジー",
+    "title": "SpaceX president Gwynne Shotwell just gave another hint at a Tesla merger",
+    "content": "A SpaceX-Tesla merger seems inevitable.",
+    "pubDate": "Fri, 12 Jun 2026 19:28:31 +0000"
+  },
+  {
+    "url": "https://techcrunch.com/2026/06/12/spacex-ipo-live-updates-on-everything-you-need-to-know/",
+    "name": "TechCrunch",
+    "category": "テクノロジー",
+    "title": "SpaceX IPO: Live updates on everything you need to know",
+    "content": "TechCrunch has followed SpaceX's start, struggles, and successes from the early days. And we're here for what happens next too. This package of SpaceX IPO coverage includes who stands to win (and maybe some who won't), pre-IPO deals, and what's tucked inside its S-1 registration document.",
+    "pubDate": "Fri, 12 Jun 2026 23:15:14 +0000"
+  },
+  {
+    "url": "https://techcrunch.com/2026/06/12/spacex-ipo-closes-up-19-and-delivers-the-worlds-first-trillionaire/",
+    "name": "TechCrunch",
+    "category": "テクノロジー",
+    "title": "SpaceX IPO closes up 19% and delivers the world’s first trillionaire",
+    "content": "The company made its heavily anticipated debut on Friday, trading higher than its initial $135 IPO price.",
+    "pubDate": "Fri, 12 Jun 2026 20:20:00 +0000"
+  },
+  {
+    "url": "https://www.nytimes.com/2026/06/12/upshot/spacex-stock-ipo.html",
     "name": "NY Times Tech",
     "category": "テクノロジー",
-    "title": "Jeff Bezos Wants to Build an ‘Artificial General Engineer’",
-    "content": "As co-chief executive of the start-up Prometheus, the Amazon founder is using A.I. to improve how devices ranging from computers to jet engines are made.",
-    "pubDate": "Thu, 11 Jun 2026 14:00:06 +0000"
-  },
-  {
-    "url": "https://www.nytimes.com/2026/06/12/podcasts/hard-fork-live-part-1-satya-nadella.html",
-    "name": "NY Times Tech",
-    "category": "テクノロジー",
-    "title": "‘Hard Fork’ Live, Part 1: Satya Nadella and Cindy Cohn",
-    "content": "A tech titan, a digital rights defender and two menacing-looking robot dogs took the stage at our second-ever live show.",
-    "pubDate": "Fri, 12 Jun 2026 11:02:20 +0000"
-  },
-  {
-    "url": "https://www.wired.com/gallery/best-smart-notebooks-and-smart-pens/",
-    "name": "Wired",
-    "category": "テクノロジー・カルチャー",
-    "title": "6 Best Digital Notebooks (2026): ReMarkable, Kobo, Kindle",
-    "content": "These nifty tools combine the ease of jotting notes by hand with the power of saving them digitally.",
-    "pubDate": "Fri, 12 Jun 2026 12:07:00 +0000"
-  },
-  {
-    "url": "https://venturebeat.com/technology/google-just-redesigned-the-search-box-for-the-first-time-in-25-years-heres-why-it-matters-more-than-you-think",
-    "name": "VentureBeat",
-    "category": "AI・機械学習",
-    "title": "Google just redesigned the search box for the first time in 25 years — here’s why it matters more than you think.",
-    "content": "For a quarter century, the Google search box has been one of the most recognizable interfaces in computing: a thin white rectangle, a blinking cursor, a few typed words, and a list of blue links. On Tuesday, Google will formally retire that paradigm. At its annual I/O developer conference , Google announced a sweeping redesign of the search box itself — the literal text field where billions of queries begin every day — transforming it from a simple keyword input into a dynamic, AI-driven conversation starter that can accept text, images, PDFs, videos, and even open Chrome tabs as inputs. The company is also merging its AI Overviews and AI Mode features into a single, seamless search flow, eliminating the friction that previously forced users to choose between a traditional results page and an AI-forward experience. Liz Reid, Google&#x27;s vice president and head of Search, called it \"the biggest upgrade to our iconic search box since its debut over 25 years ago\" during a press briefing on Monday. The announcement arrived alongside a blizzard of other news — new Gemini models , a personal AI agent called Spark , an intelligent shopping cart , a reimagined developer platform — but the search box redesign may prove to be the most consequential. It is the clearest signal yet that Google views the future of its flagship product not as a place where users type fragmented keywords, but as an interface where they hold open-ended, multimodal conversations with an AI system backed by the entire web. The new search box expands, accepts files, and coaches you on what to ask The changes show a fundamental shift in how Google expects people to interact with the product that generates the vast majority of Alphabet&#x27;s revenue. The box itself now dynamically expands to accommodate longer, more conversational queries. Where the old interface subtly encouraged brevity — a narrow field suited to two- or three-word keyword strings — the new design invites users to fully articulate complex questions in granular detail. It also now supports multimodal inputs directly. Users can upload images, PDFs, files, and videos, or drag in content from Chrome tabs, right from the main search interface. Previously, some of these capabilities existed in AI Mode, but reaching them required extra steps. Now they sit at the primary entry point. Google is also deploying what it describes as an AI-powered query suggestion system that \"goes beyond autocomplete.\" Rather than simply predicting the next word a user might type based on popular searches, the system helps users formulate complex, nuanced queries — essentially coaching them toward the kind of detailed questions that AI Mode handles best. The new search box is starting to roll out immediately in all countries and languages where AI Mode is available. Google is merging AI overviews and AI mode into one seamless experience Perhaps more significant than the box itself is the architectural change happening behind it. Google is un",
-    "pubDate": "Tue, 19 May 2026 17:45:00 GMT"
-  },
-  {
-    "url": "https://venturebeat.com/infrastructure/railway-secures-usd100-million-to-challenge-aws-with-ai-native-cloud",
-    "name": "VentureBeat",
-    "category": "AI・機械学習",
-    "title": "Railway secures $100 million to challenge AWS with AI-native cloud infrastructure",
-    "content": "Railway , a San Francisco-based cloud platform that has quietly amassed two million developers without spending a dollar on marketing, announced Thursday that it raised $100 million in a Series B funding round, as surging demand for artificial intelligence applications exposes the limitations of legacy cloud infrastructure. TQ Ventures led the round, with participation from FPV Ventures , Redpoint , and Unusual Ventures . The investment values Railway as one of the most significant infrastructure startups to emerge during the AI boom, capitalizing on developer frustration with the complexity and cost of traditional platforms like Amazon Web Services and Google Cloud . \"As AI models get better at writing code, more and more people are asking the age-old question: where, and how, do I run my applications?\" said Jake Cooper, Railway&#x27;s 28-year-old founder and chief executive, in an exclusive interview with VentureBeat. \"The last generation of cloud primitives were slow and outdated, and now with AI moving everything faster, teams simply can&#x27;t keep up.\" The funding is a dramatic acceleration for a company that has charted an unconventional path through the cloud computing industry. Railway raised just $24 million in total before this round, including a $20 million Series A from Redpoint in 2022. The company now processes more than 10 million deployments monthly and handles over one trillion requests through its edge network — metrics that rival far larger and better-funded competitors. Why three-minute deploy times have become unacceptable in the age of AI coding assistants Railway&#x27;s pitch rests on a simple observation: the tools developers use to deploy and manage software were designed for a slower era. A standard build-and-deploy cycle using Terraform , the industry-standard infrastructure tool, takes two to three minutes. That delay, once tolerable, has become a critical bottleneck as AI coding assistants like Claude , ChatGPT , and Cursor can generate working code in seconds. \"When godly intelligence is on tap and can solve any problem in three seconds, those amalgamations of systems become bottlenecks,\" Cooper told VentureBeat. \"What was really cool for humans to deploy in 10 seconds or less is now table stakes for agents.\" The company claims its platform delivers deployments in under one second — fast enough to keep pace with AI-generated code. Customers report a tenfold increase in developer velocity and up to 65 percent cost savings compared to traditional cloud providers. These numbers come directly from enterprise clients, not internal benchmarks. Daniel Lobaton, chief technology officer at G2X, a platform serving 100,000 federal contractors, measured deployment speed improvements of seven times faster and an 87 percent cost reduction after migrating to Railway. His infrastructure bill dropped from $15,000 per month to approximately $1,000. \"The work that used to take me a week on our previous infrastructure, I can do in Rail",
-    "pubDate": "Thu, 22 Jan 2026 14:00:00 GMT"
+    "title": "If You Have a 401(k), How Much SpaceX Stock Will You Own?",
+    "content": "If you have index funds — such as in a 401(k) — they may soon include shares of the mega company. Here’s a rough calculation.",
+    "pubDate": "Fri, 12 Jun 2026 20:18:27 +0000"
   },
   {
     "url": "https://venturebeat.com/technology/listen-labs-raises-usd69m-after-viral-billboard-hiring-stunt-to-scale-ai",
@@ -80,12 +112,36 @@
     "pubDate": "Fri, 16 Jan 2026 14:01:00 GMT"
   },
   {
-    "url": "https://www.wired.com/story/crypto-guys-bought-the-answer-to-the-cias-mysterious-kryptos-sculpture/",
+    "url": "https://venturebeat.com/technology/google-just-redesigned-the-search-box-for-the-first-time-in-25-years-heres-why-it-matters-more-than-you-think",
+    "name": "VentureBeat",
+    "category": "AI・機械学習",
+    "title": "Google just redesigned the search box for the first time in 25 years — here’s why it matters more than you think.",
+    "content": "For a quarter century, the Google search box has been one of the most recognizable interfaces in computing: a thin white rectangle, a blinking cursor, a few typed words, and a list of blue links. On Tuesday, Google will formally retire that paradigm. At its annual I/O developer conference , Google announced a sweeping redesign of the search box itself — the literal text field where billions of queries begin every day — transforming it from a simple keyword input into a dynamic, AI-driven conversation starter that can accept text, images, PDFs, videos, and even open Chrome tabs as inputs. The company is also merging its AI Overviews and AI Mode features into a single, seamless search flow, eliminating the friction that previously forced users to choose between a traditional results page and an AI-forward experience. Liz Reid, Google&#x27;s vice president and head of Search, called it \"the biggest upgrade to our iconic search box since its debut over 25 years ago\" during a press briefing on Monday. The announcement arrived alongside a blizzard of other news — new Gemini models , a personal AI agent called Spark , an intelligent shopping cart , a reimagined developer platform — but the search box redesign may prove to be the most consequential. It is the clearest signal yet that Google views the future of its flagship product not as a place where users type fragmented keywords, but as an interface where they hold open-ended, multimodal conversations with an AI system backed by the entire web. The new search box expands, accepts files, and coaches you on what to ask The changes show a fundamental shift in how Google expects people to interact with the product that generates the vast majority of Alphabet&#x27;s revenue. The box itself now dynamically expands to accommodate longer, more conversational queries. Where the old interface subtly encouraged brevity — a narrow field suited to two- or three-word keyword strings — the new design invites users to fully articulate complex questions in granular detail. It also now supports multimodal inputs directly. Users can upload images, PDFs, files, and videos, or drag in content from Chrome tabs, right from the main search interface. Previously, some of these capabilities existed in AI Mode, but reaching them required extra steps. Now they sit at the primary entry point. Google is also deploying what it describes as an AI-powered query suggestion system that \"goes beyond autocomplete.\" Rather than simply predicting the next word a user might type based on popular searches, the system helps users formulate complex, nuanced queries — essentially coaching them toward the kind of detailed questions that AI Mode handles best. The new search box is starting to roll out immediately in all countries and languages where AI Mode is available. Google is merging AI overviews and AI mode into one seamless experience Perhaps more significant than the box itself is the architectural change happening behind it. Google is un",
+    "pubDate": "Tue, 19 May 2026 17:45:00 GMT"
+  },
+  {
+    "url": "https://www.wired.com/story/mark-zuckerberg-meta-employee-meeting-interrupt-ai/",
     "name": "Wired",
     "category": "テクノロジー・カルチャー",
-    "title": "Crypto Guys Bought the Answer to the CIA’s Mysterious Kryptos Sculpture",
-    "content": "They swear they haven’t peeked at the closely guarded secret and that they’ll keep the cryptographic competition going.",
-    "pubDate": "Fri, 12 Jun 2026 14:00:00 +0000"
+    "title": "‘Tell Him He’s a Piece of Shit’: Meta’s New AI Unit Is a Total Mess",
+    "content": "Executives and employees alike are struggling with Meta’s chaotic AI strategy, according to sources and internal discussions reviewed by WIRED.",
+    "pubDate": "Fri, 12 Jun 2026 21:16:25 +0000"
+  },
+  {
+    "url": "https://www.nytimes.com/2026/06/12/technology/elon-musk-trillionaire.html",
+    "name": "NY Times Tech",
+    "category": "テクノロジー",
+    "title": "Elon Musk Becomes World’s First Trillionaire as SpaceX Stock Begins Trading",
+    "content": "With SpaceX shares soaring 20 percent on their first day of trading, the world’s richest person crossed another milestone — one with 13 digits.",
+    "pubDate": "Fri, 12 Jun 2026 20:38:47 +0000"
+  },
+  {
+    "url": "https://venturebeat.com/infrastructure/railway-secures-usd100-million-to-challenge-aws-with-ai-native-cloud",
+    "name": "VentureBeat",
+    "category": "AI・機械学習",
+    "title": "Railway secures $100 million to challenge AWS with AI-native cloud infrastructure",
+    "content": "Railway , a San Francisco-based cloud platform that has quietly amassed two million developers without spending a dollar on marketing, announced Thursday that it raised $100 million in a Series B funding round, as surging demand for artificial intelligence applications exposes the limitations of legacy cloud infrastructure. TQ Ventures led the round, with participation from FPV Ventures , Redpoint , and Unusual Ventures . The investment values Railway as one of the most significant infrastructure startups to emerge during the AI boom, capitalizing on developer frustration with the complexity and cost of traditional platforms like Amazon Web Services and Google Cloud . \"As AI models get better at writing code, more and more people are asking the age-old question: where, and how, do I run my applications?\" said Jake Cooper, Railway&#x27;s 28-year-old founder and chief executive, in an exclusive interview with VentureBeat. \"The last generation of cloud primitives were slow and outdated, and now with AI moving everything faster, teams simply can&#x27;t keep up.\" The funding is a dramatic acceleration for a company that has charted an unconventional path through the cloud computing industry. Railway raised just $24 million in total before this round, including a $20 million Series A from Redpoint in 2022. The company now processes more than 10 million deployments monthly and handles over one trillion requests through its edge network — metrics that rival far larger and better-funded competitors. Why three-minute deploy times have become unacceptable in the age of AI coding assistants Railway&#x27;s pitch rests on a simple observation: the tools developers use to deploy and manage software were designed for a slower era. A standard build-and-deploy cycle using Terraform , the industry-standard infrastructure tool, takes two to three minutes. That delay, once tolerable, has become a critical bottleneck as AI coding assistants like Claude , ChatGPT , and Cursor can generate working code in seconds. \"When godly intelligence is on tap and can solve any problem in three seconds, those amalgamations of systems become bottlenecks,\" Cooper told VentureBeat. \"What was really cool for humans to deploy in 10 seconds or less is now table stakes for agents.\" The company claims its platform delivers deployments in under one second — fast enough to keep pace with AI-generated code. Customers report a tenfold increase in developer velocity and up to 65 percent cost savings compared to traditional cloud providers. These numbers come directly from enterprise clients, not internal benchmarks. Daniel Lobaton, chief technology officer at G2X, a platform serving 100,000 federal contractors, measured deployment speed improvements of seven times faster and an 87 percent cost reduction after migrating to Railway. His infrastructure bill dropped from $15,000 per month to approximately $1,000. \"The work that used to take me a week on our previous infrastructure, I can do in Rail",
+    "pubDate": "Thu, 22 Jan 2026 14:00:00 GMT"
   },
   {
     "url": "https://arstechnica.com/security/2026/06/locked-in-heated-rivalry-with-researcher-microsoft-fixes-0-day-they-disclosed/",
@@ -96,92 +152,12 @@
     "pubDate": "Tue, 09 Jun 2026 20:56:52 +0000"
   },
   {
-    "url": "https://www.nytimes.com/2026/06/10/technology/microsoft-satya-nadella-artificial-intelligence.html",
-    "name": "NY Times Tech",
-    "category": "テクノロジー",
-    "title": "Microsoft C.E.O. Satya Nadella Says ‘Everyone Is a Stakeholder’ in A.I.",
-    "content": "At The New York Times’s Hard Fork Live event, Mr. Nadella addressed the backlash against artificial intelligence and President Trump’s comments about Americans sharing in the wealth of A.I. companies",
-    "pubDate": "Thu, 11 Jun 2026 10:48:05 +0000"
-  },
-  {
-    "url": "https://www.wired.com/review/pedal-electric-h-t/",
+    "url": "https://www.wired.com/story/elon-musk-is-the-worlds-first-trillionaire-wow/",
     "name": "Wired",
     "category": "テクノロジー・カルチャー",
-    "title": "Pedal Electric H/T Review: A Fast, Powerful, Stylish Ebike",
-    "content": "The pedal-assist can be jerky, but the throttle offers smooth, powerful acceleration.",
-    "pubDate": "Fri, 12 Jun 2026 11:02:00 +0000"
-  },
-  {
-    "url": "https://www.nytimes.com/2026/06/11/technology/spacex-valuation-skeptics.html",
-    "name": "NY Times Tech",
-    "category": "テクノロジー",
-    "title": "Skeptics Question Whether SpaceX Is Worth $1.77 Trillion",
-    "content": "Elon Musk’s rocket company is spending big and losing money. That has raised questions about whether it can justify its valuation for its blockbuster initial public offering.",
-    "pubDate": "Thu, 11 Jun 2026 20:30:58 +0000"
-  },
-  {
-    "url": "https://arstechnica.com/security/2026/06/dashlane-explains-how-attackers-managed-to-download-encrypted-password-vaults/",
-    "name": "Ars Technica",
-    "category": "テクノロジー",
-    "title": "Dashlane explains how attackers managed to download encrypted password vaults",
-    "content": "Dashlane said that attackers mounted a coordinated hacking campaign against a large base of its users in an attempt to recover as many encrypted password vaults as possible. The password manager provider said fewer than 20 personal user vaults were downloaded before it shut down the operation. In a campaign that started Sunday, the unknown threat actor abused the mechanism that allows Dashlane users to add new devices, such as computers or phones, to their accounts. By abusing Dashlane's programming interfaces for device enrollment, the attackers sent requests to large numbers of existing users’ registered email addresses. In an update published Thursday, Dashlane wrote: The threat actor targeted the API endpoints for device registration and used a brute force attack to send a large volume of automated requests to those endpoints. In response, Dashlane’s automated security systems operated as intended, triggering an automatic lockout of the targeted accounts to protect those users. Before the attack was fully mitigated, the threat actor was able to brute force and generate valid tokens for fewer than 20 personal plan customers, allowing them to register a new device on those accounts and download copies of users’ encrypted vaults. The flow and strategy of the attack When a user installs the Dashlane app on a new device and attempts to enroll it in their existing account, Dashlane first verifies the account holder's identity. This verification is completed by sending a one-time six-digit token to the user’s registered email address (or, for users who have enabled two-factor authentication, by validating a six-digit code generated by their authentication app). Read full article Comments",
-    "pubDate": "Thu, 04 Jun 2026 20:02:04 +0000"
-  },
-  {
-    "url": "https://techcrunch.com/2026/06/12/us-spy-law-to-expire-for-first-time-after-lawmakers-reject-trumps-controversial-pick-to-lead-spy-agencies/",
-    "name": "TechCrunch",
-    "category": "テクノロジー",
-    "title": "US surveillance law to expire for first time after lawmakers reject Trump’s controversial pick to lead spy agencies",
-    "content": "The spy law known as Section 702, which authorizes the NSA and FBI's warrantless surveillance, will all but certainly expire on Friday for the first time.",
-    "pubDate": "Fri, 12 Jun 2026 11:43:32 +0000"
-  },
-  {
-    "url": "https://techcrunch.com/2026/06/11/cheaper-faster-and-culturally-aware-avataars-video-ai-is-built-for-indias-scale/",
-    "name": "TechCrunch",
-    "category": "テクノロジー",
-    "title": "Cheaper, faster, and culturally aware, Avataar’s video AI is built for India’s scale",
-    "content": "Avataar AI's distilled video model is priced at $0.005 for every second of generation.",
-    "pubDate": "Fri, 12 Jun 2026 04:30:00 +0000"
-  },
-  {
-    "url": "https://techcrunch.com/2026/06/11/theker-just-raised-85m-to-build-the-factory-robot-that-doesnt-specialize-in-anything/",
-    "name": "TechCrunch",
-    "category": "テクノロジー",
-    "title": "Theker just raised $85M to build the factory robot that doesn’t specialize in anything",
-    "content": "Unlike humanoid robots designed around a fixed form — think Boston Dynamics — Theker's machines are built to be reconfigured.",
-    "pubDate": "Fri, 12 Jun 2026 01:48:07 +0000"
-  },
-  {
-    "url": "https://techcrunch.com/2026/06/11/equal-ai-raises-30m-to-screen-calls-so-indians-dont-have-to/",
-    "name": "TechCrunch",
-    "category": "テクノロジー",
-    "title": "Equal AI raises $30M to screen calls so Indians don’t have to",
-    "content": "Equal AI said that its AI-powered call assistant now has over a million monthly active users.",
-    "pubDate": "Fri, 12 Jun 2026 04:30:00 +0000"
-  },
-  {
-    "url": "https://www.nytimes.com/2026/06/11/business/spacex-tesla-ipo-elon-musk.html",
-    "name": "NY Times Tech",
-    "category": "テクノロジー",
-    "title": "How Tesla’s Stock Listing in 2010 Enabled SpaceX’s I.P.O.",
-    "content": "Investors who bought the automaker’s shares in its initial public offering became rich. As a result, many have a deep faith in Elon Musk, the chief executive of Tesla and SpaceX.",
-    "pubDate": "Thu, 11 Jun 2026 15:15:44 +0000"
-  },
-  {
-    "url": "https://techcrunch.com/2026/06/12/spacex-ipo-everything-you-need-to-know/",
-    "name": "TechCrunch",
-    "category": "テクノロジー",
-    "title": "SpaceX IPO: Everything you need to know",
-    "content": "TechCrunch has followed SpaceX's start, struggles, and successes from the early days. And we're here for what happens next too. This package of SpaceX IPO coverage includes who stands to win (and maybe some who won't), pre-IPO deals, and what's tucked inside its S-1 registration document.",
-    "pubDate": "Fri, 12 Jun 2026 14:08:54 +0000"
-  },
-  {
-    "url": "https://www.wired.com/story/a-white-supremacist-youth-group-helped-orchestrate-the-belfast-riots/",
-    "name": "Wired",
-    "category": "テクノロジー・カルチャー",
-    "title": "A White Supremacist Youth Group Helped Orchestrate the Belfast Riots",
-    "content": "After Elon Musk and Tommy Robinson stoked anger over a horrific knife attack in Belfast, a youth group linked to a global neo-Nazi movement quietly orchestrated anti-immigrant riots.",
-    "pubDate": "Fri, 12 Jun 2026 13:21:00 +0000"
+    "title": "Elon Musk Is the World’s First Trillionaire",
+    "content": "SpaceX’s stock market debut has thrust the richest man in the universe into an unexplored frontier of wealth.",
+    "pubDate": "Fri, 12 Jun 2026 17:54:45 +0000"
   },
   {
     "url": "https://arstechnica.com/security/2026/06/for-the-2nd-time-in-weeks-microsoft-packages-laced-with-credential-stealer/",
@@ -192,11 +168,35 @@
     "pubDate": "Mon, 08 Jun 2026 18:34:23 +0000"
   },
   {
-    "url": "https://www.wired.com/gallery/best-floodlight-security-cameras/",
+    "url": "https://www.nytimes.com/2026/06/12/technology/spacex-ipo-elon-musk.html",
+    "name": "NY Times Tech",
+    "category": "テクノロジー",
+    "title": "SpaceX Stock Rises 11% in Largest IPO Ever",
+    "content": "The blockbuster stock market debut of Elon Musk’s rocket company paves the way for a wave of enormous offerings that are coming from OpenAI and Anthropic.",
+    "pubDate": "Fri, 12 Jun 2026 20:52:00 +0000"
+  },
+  {
+    "url": "https://www.nytimes.com/2026/06/12/technology/spacex-ipo-openai-anthropic.html",
+    "name": "NY Times Tech",
+    "category": "テクノロジー",
+    "title": "What the SpaceX I.P.O. Means for OpenAI and Anthropic",
+    "content": "Strong investor interest in SpaceX could be good news for the A.I. rivals, which have signaled that they, too, intend to go public this year.",
+    "pubDate": "Fri, 12 Jun 2026 22:40:05 +0000"
+  },
+  {
+    "url": "https://venturebeat.com/infrastructure/claude-code-costs-up-to-usd200-a-month-goose-does-the-same-thing-for-free",
+    "name": "VentureBeat",
+    "category": "AI・機械学習",
+    "title": "Claude Code costs up to $200 a month. Goose does the same thing for free.",
+    "content": "The artificial intelligence coding revolution comes with a catch: it&#x27;s expensive. Claude Code , Anthropic&#x27;s terminal-based AI agent that can write, debug, and deploy code autonomously, has captured the imagination of software developers worldwide. But its pricing — ranging from $20 to $200 per month depending on usage — has sparked a growing rebellion among the very programmers it aims to serve. Now, a free alternative is gaining traction. Goose , an open-source AI agent developed by Block (the financial technology company formerly known as Square), offers nearly identical functionality to Claude Code but runs entirely on a user&#x27;s local machine. No subscription fees. No cloud dependency. No rate limits that reset every five hours. \"Your data stays with you, period,\" said Parth Sareen, a software engineer who demonstrated the tool during a recent livestream . The comment captures the core appeal: Goose gives developers complete control over their AI-powered workflow, including the ability to work offline — even on an airplane. The project has exploded in popularity. Goose now boasts more than 26,100 stars on GitHub , the code-sharing platform, with 362 contributors and 102 releases since its launch. The latest version, 1.20.1 , shipped on January 19, 2026, reflecting a development pace that rivals commercial products. For developers frustrated by Claude Code&#x27;s pricing structure and usage caps, Goose represents something increasingly rare in the AI industry: a genuinely free, no-strings-attached option for serious work. Anthropic&#x27;s new rate limits spark a developer revolt To understand why Goose matters, you need to understand the Claude Code pricing controversy . Anthropic, the San Francisco artificial intelligence company founded by former OpenAI executives, offers Claude Code as part of its subscription tiers. The free plan provides no access whatsoever. The Pro plan , at $17 per month with annual billing (or $20 monthly), limits users to just 10 to 40 prompts every five hours — a constraint that serious developers exhaust within minutes of intensive work. The Max plans , at $100 and $200 per month, offer more headroom: 50 to 200 prompts and 200 to 800 prompts respectively, plus access to Anthropic&#x27;s most powerful model, Claude 4.5 Opus . But even these premium tiers come with restrictions that have inflamed the developer community. In late July, Anthropic announced new weekly rate limits. Under the system, Pro users receive 40 to 80 hours of Sonnet 4 usage per week. Max users at the $200 tier get 240 to 480 hours of Sonnet 4, plus 24 to 40 hours of Opus 4. Nearly five months later, the frustration has not subsided. The problem? Those \"hours\" are not actual hours. They represent token-based limits that vary wildly depending on codebase size, conversation length, and the complexity of the code being processed. Independent analysis suggests the actual per-session limits translate to roughly 44,000 tokens for Pro users",
+    "pubDate": "Mon, 19 Jan 2026 14:00:00 GMT"
+  },
+  {
+    "url": "https://www.wired.com/story/chinese-drivers-are-using-tiny-plastic-heads-to-fool-teslas-autopilot-safeguards/",
     "name": "Wired",
     "category": "テクノロジー・カルチャー",
-    "title": "4 Best Floodlight Security Cameras (2026) After Thorough Testing",
-    "content": "Light up and secure your driveway, backyard, or porch with a floodlight security camera.",
-    "pubDate": "Fri, 12 Jun 2026 11:30:00 +0000"
+    "title": "Chinese Drivers Are Using Tiny Plastic Heads to Fool Tesla’s Autopilot Safeguards",
+    "content": "A cottage industry of celebrity figurines, blinking screens, and other DIY gadgets is helping drivers bypass Tesla's distracted-driving controls.",
+    "pubDate": "Fri, 12 Jun 2026 17:57:34 +0000"
   }
 ]
