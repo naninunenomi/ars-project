@@ -2,10 +2,9 @@ name: Trigger Dify Workflow (Auto-Blogger)
 
 on:
   schedule:
-    # 朝の部: JST 8:00〜11:30 の間で30分おきに予備枠を敷き詰める (UTC 23, 0, 1, 2)
-    - cron: '0,30 23,0,1,2 * * *'
-    # 夜の部: JST 18:00〜21:30 の間で30分おきに予備枠を敷き詰める (UTC 9, 10, 11, 12)
-    - cron: '0,30 9,10,11,12 * * *'
+    # 30分おきに24時間実行（1日48回）
+    # pendingなし・2記事達成済みの場合は数秒で即終了するため無料枠に影響なし
+    - cron: '0,30 * * * *'
   workflow_dispatch: # 手動実行用
 
 permissions:
