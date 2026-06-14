@@ -162,13 +162,13 @@ async function main() {
     state.last_count_date = todayJST;
   }
 
+  const isManualRun = process.env.GITHUB_EVENT_NAME === 'workflow_dispatch';
+
   // --- Dify呼び出し上限チェック（Gemini無料枠保護）---
   if (!isManualRun && (state.dify_calls_today || 0) >= MAX_DIFY_CALLS_PER_DAY) {
     console.log(`🛑 Daily Dify call limit reached (${state.dify_calls_today}/${MAX_DIFY_CALLS_PER_DAY}). Skipping to protect Gemini quota.`);
     process.exit(0);
   }
-
-  const isManualRun = process.env.GITHUB_EVENT_NAME === 'workflow_dispatch';
 
   // --- 判定① pendingな記事がある？ ---
   if (state.pending_article) {
