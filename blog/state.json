@@ -1,6 +1,14 @@
 {
-  "pending_article": null,
+  "pending_article": {
+    "url": "https://www.wired.com/gallery/best-gifts-for-men-2026/",
+    "name": "Wired",
+    "category": "テクノロジー・カルチャー",
+    "title": "20 Best Gifts for Men, Manly Men, and Menly Man Men (2026)",
+    "content": "When you need something that’s as mannishly masculinized as you can get for the Man™ in your life, we have you covered.",
+    "pubDate": "Sun, 14 Jun 2026 11:36:00 +0000"
+  },
   "last_success_window_key": "2026-06-12-NONE",
   "articles_today": 0,
-  "last_count_date": "2026-06-14"
+  "last_count_date": "2026-06-14",
+  "dify_calls_today": 1
 }
