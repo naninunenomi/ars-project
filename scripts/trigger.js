@@ -9,6 +9,7 @@ const DIFY_API_URL = process.env.DIFY_API_URL || 'https://api.dify.ai/v1/workflo
 const DIFY_API_KEY = process.env.DIFY_API_KEY;
 
 const MAX_ARTICLES_PER_DAY = 2; // 1日に生成する記事の最大数
+const MAX_DIFY_CALLS_PER_DAY = 5; // 1日のDify呼び出し上限（Gemini無料枠保護）
 
 if (!DIFY_API_KEY) {
   console.error("🚨 DIFY_API_KEY is not set.");
@@ -24,7 +25,7 @@ function loadState() {
       console.error("Failed to parse state.json", e);
     }
   }
-  return { pending_article: null, articles_today: 0, last_count_date: null };
+  return { pending_article: null, articles_today: 0, dify_calls_today: 0, last_count_date: null };
 }
 
 // 状態を保存する
@@ -145,11 +146,18 @@ async function main() {
 
   console.log(`🕒 Current Time (JST): ${todayJST} ${jstTime.getUTCHours()}:${String(jstTime.getUTCMinutes()).padStart(2,'0')}`);
 
-  // 日付が変わっていたら記事カウントをリセット
+  // 日付が変わっていたら記事カウントとDify呼び出しカウントをリセット
   if (state.last_count_date !== todayJST) {
-    console.log(`📅 New day detected (${todayJST}). Resetting article count.`);
+    console.log(`📅 New day detected (${todayJST}). Resetting counters.`);
     state.articles_today = 0;
+    state.dify_calls_today = 0;
     state.last_count_date = todayJST;
+  }
+
+  // --- Dify呼び出し上限チェック（Gemini無料枠保護）---
+  if (!isManualRun && (state.dify_calls_today || 0) >= MAX_DIFY_CALLS_PER_DAY) {
+    console.log(`🛑 Daily Dify call limit reached (${state.dify_calls_today}/${MAX_DIFY_CALLS_PER_DAY}). Skipping to protect Gemini quota.`);
+    process.exit(0);
   }
 
   const isManualRun = process.env.GITHUB_EVENT_NAME === 'workflow_dispatch';
@@ -157,6 +165,7 @@ async function main() {
   // --- 判定① pendingな記事がある？ ---
   if (state.pending_article) {
     console.log("⚠️ Found a pending article from a previous STUDYING/error state. Retrying...");
+    state.dify_calls_today = (state.dify_calls_today || 0) + 1;
     const result = await triggerDify(state.pending_article, `${jstTime.getFullYear()}年${jstTime.getMonth() + 1}月${jstTime.getDate()}日`);
 
     if (result === "SUCCESS") {
@@ -166,14 +175,12 @@ async function main() {
     } else if (result === "STALE" || result === "ERROR") {
       console.log("⚠️ Pending article was STALE or ERROR. Discarding and freeing slot.");
       state.pending_article = null;
-      // STALEやERRORは「失敗」なのでカウントしない。次のループで新記事を選ぶ
     } else {
-      // STUDYING → また次回リトライ
       console.log("⏳ Still STUDYING. Will retry at next 30-min slot.");
     }
 
     saveState(state);
-    console.log("💾 State saved.");
+    console.log(`💾 State saved. (Dify calls today: ${state.dify_calls_today}/${MAX_DIFY_CALLS_PER_DAY})`);
     return;
   }
 
@@ -192,6 +199,7 @@ async function main() {
   }
 
   const dateStringReadable = `${jstTime.getFullYear()}年${jstTime.getMonth() + 1}月${jstTime.getDate()}日`;
+  state.dify_calls_today = (state.dify_calls_today || 0) + 1;
   const result = await triggerDify(article, dateStringReadable);
 
   if (result === "SUCCESS") {
@@ -200,17 +208,15 @@ async function main() {
     state.pending_article = null;
   } else if (result === "STALE") {
     console.log("⚠️ Article was STALE. Skipping (not counted, next run will try again).");
-    // STALEはカウントしない（次のスロットで別の記事を引く）
   } else if (result === "ERROR") {
     console.log("⚠️ Internal Dify error. Discarding to avoid infinite loop.");
   } else {
-    // STUDYING → pending に保存して次回リトライ
     console.log("⏳ STUDYING. Saving article as pending for next 30-min retry.");
     state.pending_article = article;
   }
 
   saveState(state);
-  console.log("💾 State saved.");
+  console.log(`💾 State saved. (Dify calls today: ${state.dify_calls_today}/${MAX_DIFY_CALLS_PER_DAY})`);
 }
 
 main();
