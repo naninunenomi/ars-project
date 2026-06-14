@@ -16,8 +16,8 @@ export interface Article {
 const JSON_ARTICLES_DIR = path.join(process.cwd(), 'src/data/articles');
 
 // DifyがGitHub API経由で直接保存するHTMLファイルのディレクトリ
-// Vercelでは "Include files outside root directory" が有効なので ../blog/articles/ を参照できる
-const HTML_ARTICLES_DIR = path.join(process.cwd(), '../blog/articles');
+// Vercelビルド時に prebuild スクリプトで src/data/articles/ にコピーされるため、同じディレクトリを読む
+const HTML_ARTICLES_DIR = path.join(process.cwd(), 'src/data/articles');
 
 /** HTMLファイルからメタデータと本文を抽出する */
 function parseHtmlArticle(fileName: string, fileContents: string): Article | null {

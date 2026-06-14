@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "prebuild": "mkdir -p src/data/articles && cp -r ../blog/articles/*.html src/data/articles/ 2>/dev/null || true",
     "build": "next build",
     "start": "next start",
     "lint": "eslint"
