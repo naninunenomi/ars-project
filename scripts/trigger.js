@@ -25,7 +25,7 @@ function loadState() {
       console.error("Failed to parse state.json", e);
     }
   }
-  return { pending_article: null, articles_today: 0, dify_calls_today: 0, last_count_date: null };
+  return { pending_article: null, articles_today: 0, dify_calls_today: 0, last_count_date: null, processed_urls: [] };
 }
 
 // 状態を保存する
@@ -33,15 +33,23 @@ function saveState(state) {
   fs.writeFileSync(STATE_FILE, JSON.stringify(state, null, 2), 'utf8');
 }
 
-// ランダムな記事をsources.jsonから選ぶ
-function pickRandomArticle() {
+// ランダムな記事をsources.jsonから選ぶ（処理済みのものを除く）
+function pickRandomArticle(state) {
   if (!fs.existsSync(SOURCES_FILE)) {
     console.error("🚨 sources.json not found!");
     return null;
   }
   const sources = JSON.parse(fs.readFileSync(SOURCES_FILE, 'utf8'));
-  if (sources.length === 0) return null;
-  return sources[Math.floor(Math.random() * sources.length)];
+  
+  // 処理済みURLを除外
+  const processedUrls = state.processed_urls || [];
+  const availableSources = sources.filter(article => !processedUrls.includes(article.url));
+
+  if (availableSources.length === 0) {
+    console.log("⚠️ All articles in sources.json have already been processed.");
+    return null;
+  }
+  return availableSources[Math.floor(Math.random() * availableSources.length)];
 }
 
 async function triggerDify(article, currentDate) {
@@ -172,8 +180,12 @@ async function main() {
       console.log("✅ Retry succeeded! Article published.");
       state.articles_today += 1;
       state.pending_article = null;
+      if (!state.processed_urls) state.processed_urls = [];
+      state.processed_urls.push(state.pending_article?.url || '');
     } else if (result === "STALE" || result === "ERROR") {
       console.log("⚠️ Pending article was STALE or ERROR. Discarding and freeing slot.");
+      if (!state.processed_urls) state.processed_urls = [];
+      state.processed_urls.push(state.pending_article?.url || '');
       state.pending_article = null;
     } else {
       console.log("⏳ Still STUDYING. Will retry at next 30-min slot.");
@@ -192,9 +204,9 @@ async function main() {
 
   // --- 新規記事の処理 ---
   console.log(`📰 Starting new article (today: ${state.articles_today}/${MAX_ARTICLES_PER_DAY})...`);
-  const article = pickRandomArticle();
+  const article = pickRandomArticle(state);
   if (!article) {
-    console.error("No articles found in sources.json. Exiting.");
+    console.error("No unprocessed articles found in sources.json. Exiting.");
     process.exit(0);
   }
 
@@ -206,10 +218,16 @@ async function main() {
     console.log("✅ Article published successfully!");
     state.articles_today += 1;
     state.pending_article = null;
+    if (!state.processed_urls) state.processed_urls = [];
+    state.processed_urls.push(article.url);
   } else if (result === "STALE") {
     console.log("⚠️ Article was STALE. Skipping (not counted, next run will try again).");
+    if (!state.processed_urls) state.processed_urls = [];
+    state.processed_urls.push(article.url);
   } else if (result === "ERROR") {
     console.log("⚠️ Internal Dify error. Discarding to avoid infinite loop.");
+    if (!state.processed_urls) state.processed_urls = [];
+    state.processed_urls.push(article.url);
   } else {
     console.log("⏳ STUDYING. Saving article as pending for next 30-min retry.");
     state.pending_article = article;
