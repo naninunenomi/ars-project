@@ -1,17 +1,11 @@
 {
-  "pending_article": {
-    "url": "https://techcrunch.com/2026/06/14/uk-may-ban-social-media-for-children-under-16/",
-    "name": "TechCrunch",
-    "category": "テクノロジー",
-    "title": "UK may ban social media for children under 16",
-    "content": "The U.K. seems to be following Australia's lead in banning a wide swath of social media for teens.",
-    "pubDate": "Sun, 14 Jun 2026 20:17:00 +0000"
-  },
+  "pending_article": null,
   "last_success_window_key": "2026-06-12-NONE",
   "articles_today": 0,
-  "last_count_date": "2026-06-16",
-  "dify_calls_today": 5,
+  "last_count_date": "2026-06-17",
+  "dify_calls_today": 1,
   "processed_urls": [
-    "https://www.wired.com/gallery/best-gifts-for-men-2026/"
+    "https://www.wired.com/gallery/best-gifts-for-men-2026/",
+    "https://techcrunch.com/2026/06/14/uk-may-ban-social-media-for-children-under-16/"
   ]
 }
