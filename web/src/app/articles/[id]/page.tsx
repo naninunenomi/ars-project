@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import styles from "./article.module.css";
 import MermaidInit from "../../../components/MermaidInit";
+import AmazonAffiliateBox from "../../../components/AmazonAffiliateBox";
 
 // Generate static parameters for build time
 export function generateStaticParams() {
@@ -45,6 +46,9 @@ export default async function ArticlePage({ params }: { params: Promise<{ id: st
           className={styles.articleContent}
           dangerouslySetInnerHTML={{ __html: article.content }} 
         />
+
+        {/* Amazonアフィリエイトボックス（カテゴリ・タイトルから自動キーワード生成） */}
+        <AmazonAffiliateBox title={article.title} category={article.category} />
       </article>
     </div>
   );
