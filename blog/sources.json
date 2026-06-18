@@ -1,69 +1,5 @@
 [
   {
-    "url": "https://venturebeat.com/technology/salesforce-rolls-out-new-slackbot-ai-agent-as-it-battles-microsoft-and",
-    "name": "VentureBeat",
-    "category": "AI・機械学習",
-    "title": "Salesforce rolls out new Slackbot AI agent as it battles Microsoft and Google in workplace AI",
-    "content": "Salesforce on Tuesday launched an entirely rebuilt version of Slackbot , the company&#x27;s workplace assistant, transforming it from a simple notification tool into what executives describe as a fully powered AI agent capable of searching enterprise data, drafting documents, and taking action on behalf of employees. The new Slackbot, now generally available to Business+ and Enterprise+ customers, is Salesforce&#x27;s most aggressive move yet to position Slack at the center of the emerging \"agentic AI\" movement — where software agents work alongside humans to complete complex tasks. The launch comes as Salesforce attempts to convince investors that artificial intelligence will bolster its products rather than render them obsolete. \"Slackbot isn&#x27;t just another copilot or AI assistant,\" said Parker Harris , Salesforce co-founder and Slack&#x27;s chief technology officer, in an exclusive interview with Salesforce. \"It&#x27;s the front door to the agentic enterprise, powered by Salesforce.\" From tricycle to Porsche: Salesforce rebuilt Slackbot from the ground up Harris was blunt about what distinguishes the new Slackbot from its predecessor: \"The old Slackbot was, you know, a little tricycle, and the new Slackbot is like, you know, a Porsche.\" The original Slackbot, which has existed since Slack&#x27;s early days, performed basic algorithmic tasks — reminding users to add colleagues to documents, suggesting channel archives, and delivering simple notifications. The new version runs on an entirely different architecture built around a large language model and sophisticated search capabilities that can access Salesforce records, Google Drive files, calendar data, and years of Slack conversations. \"It&#x27;s two different things,\" Harris explained. \"The old Slackbot was algorithmic and fairly simple. The new Slackbot is brand new — it&#x27;s based around an LLM and a very robust search engine, and connections to third-party search engines, third-party enterprise data.\" Salesforce chose to retain the Slackbot brand despite the fundamental technical overhaul. \"People know what Slackbot is, and so we wanted to carry that forward,\" Harris said. Why Anthropic&#x27;s Claude powers the new Slackbot — and which AI models could come next The new Slackbot runs on Claude , Anthropic&#x27;s large language model, a choice driven partly by compliance requirements. Slack&#x27;s commercial service operates under FedRAMP Moderate certification to serve U.S. federal government customers, and Harris said Anthropic was \"the only provider that could give us a compliant LLM\" when Slack began building the new system. But that exclusivity won&#x27;t last. \"We are, this year, going to support additional providers,\" Harris said. \"We have a great relationship with Google. Gemini is incredible — performance is great, cost is great. So we&#x27;re going to use Gemini for some things.\" He added that OpenAI remains a possibility as well. Harris echoed Salesforce CEO Marc Benioff&",
-    "pubDate": "Tue, 13 Jan 2026 13:00:00 GMT"
-  },
-  {
-    "url": "https://venturebeat.com/infrastructure/claude-code-costs-up-to-usd200-a-month-goose-does-the-same-thing-for-free",
-    "name": "VentureBeat",
-    "category": "AI・機械学習",
-    "title": "Claude Code costs up to $200 a month. Goose does the same thing for free.",
-    "content": "The artificial intelligence coding revolution comes with a catch: it&#x27;s expensive. Claude Code , Anthropic&#x27;s terminal-based AI agent that can write, debug, and deploy code autonomously, has captured the imagination of software developers worldwide. But its pricing — ranging from $20 to $200 per month depending on usage — has sparked a growing rebellion among the very programmers it aims to serve. Now, a free alternative is gaining traction. Goose , an open-source AI agent developed by Block (the financial technology company formerly known as Square), offers nearly identical functionality to Claude Code but runs entirely on a user&#x27;s local machine. No subscription fees. No cloud dependency. No rate limits that reset every five hours. \"Your data stays with you, period,\" said Parth Sareen, a software engineer who demonstrated the tool during a recent livestream . The comment captures the core appeal: Goose gives developers complete control over their AI-powered workflow, including the ability to work offline — even on an airplane. The project has exploded in popularity. Goose now boasts more than 26,100 stars on GitHub , the code-sharing platform, with 362 contributors and 102 releases since its launch. The latest version, 1.20.1 , shipped on January 19, 2026, reflecting a development pace that rivals commercial products. For developers frustrated by Claude Code&#x27;s pricing structure and usage caps, Goose represents something increasingly rare in the AI industry: a genuinely free, no-strings-attached option for serious work. Anthropic&#x27;s new rate limits spark a developer revolt To understand why Goose matters, you need to understand the Claude Code pricing controversy . Anthropic, the San Francisco artificial intelligence company founded by former OpenAI executives, offers Claude Code as part of its subscription tiers. The free plan provides no access whatsoever. The Pro plan , at $17 per month with annual billing (or $20 monthly), limits users to just 10 to 40 prompts every five hours — a constraint that serious developers exhaust within minutes of intensive work. The Max plans , at $100 and $200 per month, offer more headroom: 50 to 200 prompts and 200 to 800 prompts respectively, plus access to Anthropic&#x27;s most powerful model, Claude 4.5 Opus . But even these premium tiers come with restrictions that have inflamed the developer community. In late July, Anthropic announced new weekly rate limits. Under the system, Pro users receive 40 to 80 hours of Sonnet 4 usage per week. Max users at the $200 tier get 240 to 480 hours of Sonnet 4, plus 24 to 40 hours of Opus 4. Nearly five months later, the frustration has not subsided. The problem? Those \"hours\" are not actual hours. They represent token-based limits that vary wildly depending on codebase size, conversation length, and the complexity of the code being processed. Independent analysis suggests the actual per-session limits translate to roughly 44,000 tokens for Pro users",
-    "pubDate": "Mon, 19 Jan 2026 14:00:00 GMT"
-  },
-  {
-    "url": "https://www.nytimes.com/2026/06/17/insider/hard-fork-podcast-live-audience-san-francisco.html",
-    "name": "NY Times Tech",
-    "category": "テクノロジー",
-    "title": "How the ‘Hard Fork’ Hosts Bring Their Tech Podcast to a Live Audience",
-    "content": "Kevin Roose and Casey Newton explain why they try to include “a little chaos” when they record their New York Times tech podcast in front of a crowd in San Francisco.",
-    "pubDate": "Wed, 17 Jun 2026 15:25:24 +0000"
-  },
-  {
-    "url": "https://arstechnica.com/security/2026/06/massive-breach-spills-credentials-for-thousands-of-sensitive-networks/",
-    "name": "Ars Technica",
-    "category": "テクノロジー",
-    "title": "Massive breach spills credentials for thousands of sensitive networks",
-    "content": "Researchers have uncovered a massive breach of Fortinet firewalls that has given Russian-speaking attackers near-unrestricted access to some of the world’s largest and most powerful organizations, including Oracle, Chevron, Lenovo, Federal Express, a NATO defense contractor, and Fortinet itself. Nearly 74,000 Fortinet devices from more than 21,000 IP addresses in 194 countries have been compromised and their plaintext credentials exposed online, Bob Diachenko, a security researcher and head of SecurityDiscovery.com, said online and in an interview. He said he found the data after gaining access to the attackers’ command-and-control server and other infrastructure. The exposed data also included the industry, revenue, and employee count for each compromised organization. Exceptional scale, poor opsec Independent researcher Kevin Beaumont reported that “almost all” of the compromised devices remained online as of Wednesday morning. He went on to say that he has confirmed with multiple organizations found in the attackers’ logs that the credentials are real and current. In many cases, once the threat actors compromised the devices, they went on to access affected organizations’ centralized authentication systems, such as Radius servers and Microsoft Active Directory. The number of compromised devices comprises roughly half of all Internet-facing Fortinet firewalls, based on polling from Shodan. Read full article Comments",
-    "pubDate": "Wed, 17 Jun 2026 19:54:31 +0000"
-  },
-  {
-    "url": "https://techcrunch.com/2026/06/17/how-to-turn-off-ai-in-your-google-docs/",
-    "name": "TechCrunch",
-    "category": "テクノロジー",
-    "title": "How to turn off AI in your Google Docs",
-    "content": "Here's what you need to do to get those pesky \"write with Gemini\" pop-ups to go away.",
-    "pubDate": "Thu, 18 Jun 2026 01:23:51 +0000"
-  },
-  {
-    "url": "https://www.wired.com/story/home-depot-promo-code/",
-    "name": "Wired",
-    "category": "テクノロジー・カルチャー",
-    "title": "Home Depot Promo Codes: 50% Off in June 2026",
-    "content": "Save up to 50% today with the latest Home Depot promo codes for appliances, power tools, and more this June.",
-    "pubDate": "Thu, 18 Jun 2026 05:00:00 +0000"
-  },
-  {
-    "url": "https://www.nytimes.com/2026/06/17/business/spacex-tesla-merger-elon-musk.html",
-    "name": "NY Times Tech",
-    "category": "テクノロジー",
-    "title": "Elon Musk’s Next Move May Be a Mega-Merger of SpaceX and Tesla",
-    "content": "Some shareholders might object, but there is little they could do, legal experts say.",
-    "pubDate": "Thu, 18 Jun 2026 00:56:43 +0000"
-  },
-  {
-    "url": "https://www.nytimes.com/2026/06/17/technology/waymo-driverless-taxis-politics.html",
-    "name": "NY Times Tech",
-    "category": "テクノロジー",
-    "title": "Why Waymo’s Driverless Taxis Won’t Be on Your Streets Anytime Soon",
-    "content": "The Silicon Valley company’s ambitions to roll out autonomous cars nationwide have hit political roadblocks in some of the country’s biggest markets.",
-    "pubDate": "Wed, 17 Jun 2026 18:44:22 +0000"
-  },
-  {
     "url": "https://arstechnica.com/security/2026/06/windows-and-linux-users-the-deadline-to-update-secure-boot-keys-is-near/",
     "name": "Ars Technica",
     "category": "テクノロジー",
@@ -72,12 +8,12 @@
     "pubDate": "Wed, 17 Jun 2026 11:15:17 +0000"
   },
   {
-    "url": "https://www.wired.com/story/nordvpn-coupon/",
-    "name": "Wired",
-    "category": "テクノロジー・カルチャー",
-    "title": "NordVPN Coupons: 75% Off, Plus 3 Months Free in June 2026",
-    "content": "Save up to 77% on 2-year plans and get 3 free months with our NordVPN discount codes.",
-    "pubDate": "Thu, 18 Jun 2026 05:00:00 +0000"
+    "url": "https://techcrunch.com/2026/06/17/roelof-botha-joins-spacexs-board-of-directors/",
+    "name": "TechCrunch",
+    "category": "テクノロジー",
+    "title": "Roelof Botha joins SpaceX’s board of directors",
+    "content": "The former Sequoia Capital leader is filling an \"existing vacancy\" on SpaceX's board, days after the company went public in the largest IPO ever.",
+    "pubDate": "Wed, 17 Jun 2026 20:32:52 +0000"
   },
   {
     "url": "https://www.nytimes.com/2026/06/16/technology/taiwan-south-korea-ai-chips.html",
@@ -88,36 +24,20 @@
     "pubDate": "Tue, 16 Jun 2026 09:00:52 +0000"
   },
   {
-    "url": "https://www.nytimes.com/2026/06/17/technology/anthropic-trump-administration-fable.html",
-    "name": "NY Times Tech",
-    "category": "テクノロジー",
-    "title": "Anthropic Employees Accuse Trump Administration of Targeting Them",
-    "content": "Workers at the artificial intelligence company have been puzzled and increasingly concerned by the administration’s move to limit their latest A.I. models.",
-    "pubDate": "Wed, 17 Jun 2026 17:56:09 +0000"
+    "url": "https://www.wired.com/story/chewy-promo-code/",
+    "name": "Wired",
+    "category": "テクノロジー・カルチャー",
+    "title": "Chewy Promo Codes: $20 Off June 2026",
+    "content": "Explore Chewy coupon codes for $30 off, $20 off your first order $49, 50% off pet food, and more June 2026 discounts.",
+    "pubDate": "Thu, 18 Jun 2026 05:00:00 +0000"
   },
   {
-    "url": "https://arstechnica.com/information-technology/2026/06/hpe-tempts-vmware-users-partners-with-year-of-free-virtualization-software/",
-    "name": "Ars Technica",
-    "category": "テクノロジー",
-    "title": "Year of free HPE software a “step in the correct direction” in VMware rivalry",
-    "content": "Hewlett Packard Enterprise’s (HPE) new virtualization software promotion will likely pique the interest of end users and resellers who are unhappy with Broadcom's pricing of VMware. During its HPE Discover event in Las Vegas this week, HPE announced that customers could use its “HPE Morpheus Software—VM Essentials” offering for free for “up to one year,” per a press release. HPE’s website describes its virtualization platform as a “VMware alternative.” It includes a hardware virtual machine (HVM) hypervisor and unified management and lets users \"manage VMware ESXi and HVM clusters from one console and migrate when you’re ready,” HPE’s website says. “New VM Essentials customers can receive up to one free year of licenses for VM Essentials, a year of HPE Zerto for $1 to support non-disruptive migration to HPE virtual machines, and 0 percent interest on software through HPE Financial Services,” HPE’s announcement reads, referring to HPE’s group for helping IT teams manage funding. Read full article Comments",
-    "pubDate": "Tue, 16 Jun 2026 22:11:15 +0000"
-  },
-  {
-    "url": "https://arstechnica.com/ai/2026/06/dangerous-ai-models-are-coming-no-matter-what/",
-    "name": "Ars Technica",
-    "category": "テクノロジー",
-    "title": "\"Dangerous\" AI models are coming no matter what",
-    "content": "Late last week, Anthropic took its new Claude Fable 5 and Mythos 5 AI models offline following a United States government export-control directive barring “any foreign national” from using the services. The company has been in talks with the White House since Friday but has yet to secure an agreement that would allow it to reinstate the offerings. Since Mythos debuted in April , Anthropic has claimed—and warned—that the model has advanced capabilities for not only finding software vulnerabilities to help defenders patch them, but also figuring out ways to exploit them that could be used by bad actors. Anthropic itself noted this double-edged sword in its launch of Mythos 5 and Claude Fable 5. “A great deal of advanced usage of AI models is dual use: the same queries that are beneficial in the hands of cybersecurity professionals and biology researchers could be dangerous if available to malicious actors,” the company wrote in a blog post last week. With this in mind, the company initially released a version called Mythos Preview to a select consortium as part of a working group known as Project Glasswing. Mythos 5 was also privately released to this group last week, while Claude Fable 5, which is a Mythos-grade model, was released to the general public with specific blocks on its ability to give responses to questions about biology and cybersecurity. Read full article Comments",
-    "pubDate": "Wed, 17 Jun 2026 17:50:46 +0000"
-  },
-  {
-    "url": "https://venturebeat.com/technology/listen-labs-raises-usd69m-after-viral-billboard-hiring-stunt-to-scale-ai",
-    "name": "VentureBeat",
-    "category": "AI・機械学習",
-    "title": "Listen Labs raises $69M after viral billboard hiring stunt to scale AI customer interviews",
-    "content": "Alfred Wahlforss was running out of options. His startup, Listen Labs , needed to hire over 100 engineers, but competing against Mark Zuckerberg&#x27;s $100 million offers seemed impossible. So he spent $5,000 — a fifth of his marketing budget — on a billboard in San Francisco displaying what looked like gibberish: five strings of random numbers. The numbers were actually AI tokens. Decoded, they led to a coding challenge: build an algorithm to act as a digital bouncer at Berghain, the Berlin nightclub famous for rejecting nearly everyone at the door. Within days, thousands attempted the puzzle. 430 cracked it. Some got hired. The winner flew to Berlin, all expenses paid. That unconventional approach has now attracted $69 million in Series B funding, led by Ribbit Capital with participation from Evantic and existing investors Sequoia Capital , Conviction , and Pear VC . The round values Listen Labs at $500 million and brings its total capital to $100 million. In nine months since launch, the company has grown annualized revenue by 15x to eight figures and conducted over one million AI-powered interviews. \"When you obsess over customers, everything else follows,\" Wahlforss said in an interview with VentureBeat. \"Teams that use Listen bring the customer into every decision, from marketing to product, and when the customer is delighted, everyone is.\" Why traditional market research is broken, and what Listen Labs is building to fix it Listen&#x27;s AI researcher finds participants, conducts in-depth interviews, and delivers actionable insights in hours, not weeks. The platform replaces the traditional choice between quantitative surveys — which provide statistical precision but miss nuance—and qualitative interviews, which deliver depth but cannot scale. Wahlforss explained the limitation of existing approaches: \"Essentially surveys give you false precision because people end up answering the same question... You can&#x27;t get the outliers. People are actually not honest on surveys.\" The alternative, one-on-one human interviews, \"gives you a lot of depth. You can ask follow up questions. You can kind of double check if they actually know what they&#x27;re talking about. And the problem is you can&#x27;t scale that.\" The platform works in four steps: users create a study with AI assistance, Listen recruits participants from its global network of 30 million people, an AI moderator conducts in-depth interviews with follow-up questions, and results are packaged into executive-ready reports including key themes, highlight reels, and slide decks. What distinguishes Listen&#x27;s approach is its use of open-ended video conversations rather than multiple-choice forms. \"In a survey, you can kind of guess what you should answer, and you have four options,\" Wahlforss said. \"Oh, they probably want me to buy high income. Let me click on that button versus an open ended response. It just generates much more honesty.\" The dirty secret of the $140 billion market r",
-    "pubDate": "Fri, 16 Jan 2026 14:01:00 GMT"
+    "url": "https://www.wired.com/story/sperm-maxxing-wellness-bros-mens-health/",
+    "name": "Wired",
+    "category": "テクノロジー・カルチャー",
+    "title": "The Sperm-Maxxing Bros Are Actually Onto Something",
+    "content": "Wellness influencers have stumbled onto a huge issue when it comes male fertility, though not every solution they're pitching is good advice.",
+    "pubDate": "Thu, 18 Jun 2026 09:00:00 +0000"
   },
   {
     "url": "https://venturebeat.com/technology/google-just-redesigned-the-search-box-for-the-first-time-in-25-years-heres-why-it-matters-more-than-you-think",
@@ -128,12 +48,60 @@
     "pubDate": "Tue, 19 May 2026 17:45:00 GMT"
   },
   {
-    "url": "https://www.wired.com/story/ulta-coupon/",
-    "name": "Wired",
-    "category": "テクノロジー・カルチャー",
-    "title": "Ulta Promo Codes: Up to 50% Off in June 2026",
-    "content": "Shop the latest beauty trends and save big using an Ulta promo code for beauty tech, makeup, and more.",
-    "pubDate": "Thu, 18 Jun 2026 05:00:00 +0000"
+    "url": "https://techcrunch.com/2026/06/17/ai-is-hurting-apple-in-more-ways-than-one-it-may-force-iphone-price-increases/",
+    "name": "TechCrunch",
+    "category": "テクノロジー",
+    "title": "AI is hurting Apple in more ways than one: it may force iPhone price increases",
+    "content": "CEO Tim Cook said in a recent interview that the situation is \"unsustainable.\"",
+    "pubDate": "Wed, 17 Jun 2026 23:28:21 +0000"
+  },
+  {
+    "url": "https://arstechnica.com/security/2026/06/massive-breach-spills-credentials-for-thousands-of-sensitive-networks/",
+    "name": "Ars Technica",
+    "category": "テクノロジー",
+    "title": "Massive breach spills credentials for thousands of sensitive networks",
+    "content": "Researchers have uncovered a massive breach of Fortinet firewalls that has given Russian-speaking attackers near-unrestricted access to some of the world’s largest and most powerful organizations, including Oracle, Chevron, Lenovo, Federal Express, a NATO defense contractor, and Fortinet itself. Nearly 74,000 Fortinet devices from more than 21,000 IP addresses in 194 countries have been compromised and their plaintext credentials exposed online, Bob Diachenko, a security researcher and head of SecurityDiscovery.com, said online and in an interview. He said he found the data after gaining access to the attackers’ command-and-control server and other infrastructure. The exposed data also included the industry, revenue, and employee count for each compromised organization. Exceptional scale, poor opsec Independent researcher Kevin Beaumont reported that “almost all” of the compromised devices remained online as of Wednesday morning. He went on to say that he has confirmed with multiple organizations found in the attackers’ logs that the credentials are real and current. In many cases, once the threat actors compromised the devices, they went on to access affected organizations’ centralized authentication systems, such as Radius servers and Microsoft Active Directory. The number of compromised devices comprises roughly half of all Internet-facing Fortinet firewalls, based on polling from Shodan. Read full article Comments",
+    "pubDate": "Wed, 17 Jun 2026 19:54:31 +0000"
+  },
+  {
+    "url": "https://www.nytimes.com/2026/06/18/technology/ai-super-pac-guardrails-alliance.html",
+    "name": "NY Times Tech",
+    "category": "テクノロジー",
+    "title": "New Super PAC, the Guardrails Alliance, Aims to Rally Tech Workers to Help Limit A.I.",
+    "content": "The Guardrails Alliance, which has raised $5 million, is positioning itself as a populist effort that will take on the pro-A.I. interests trying to influence this year’s elections.",
+    "pubDate": "Thu, 18 Jun 2026 09:02:31 +0000"
+  },
+  {
+    "url": "https://www.nytimes.com/2026/06/17/business/spacex-tesla-merger-elon-musk.html",
+    "name": "NY Times Tech",
+    "category": "テクノロジー",
+    "title": "Elon Musk’s Next Move May Be a Mega-Merger of SpaceX and Tesla",
+    "content": "Some shareholders might object, but there is little they could do, legal experts say.",
+    "pubDate": "Thu, 18 Jun 2026 00:56:43 +0000"
+  },
+  {
+    "url": "https://arstechnica.com/ai/2026/06/dangerous-ai-models-are-coming-no-matter-what/",
+    "name": "Ars Technica",
+    "category": "テクノロジー",
+    "title": "\"Dangerous\" AI models are coming no matter what",
+    "content": "Late last week, Anthropic took its new Claude Fable 5 and Mythos 5 AI models offline following a United States government export-control directive barring “any foreign national” from using the services. The company has been in talks with the White House since Friday but has yet to secure an agreement that would allow it to reinstate the offerings. Since Mythos debuted in April , Anthropic has claimed—and warned—that the model has advanced capabilities for not only finding software vulnerabilities to help defenders patch them, but also figuring out ways to exploit them that could be used by bad actors. Anthropic itself noted this double-edged sword in its launch of Mythos 5 and Claude Fable 5. “A great deal of advanced usage of AI models is dual use: the same queries that are beneficial in the hands of cybersecurity professionals and biology researchers could be dangerous if available to malicious actors,” the company wrote in a blog post last week. With this in mind, the company initially released a version called Mythos Preview to a select consortium as part of a working group known as Project Glasswing. Mythos 5 was also privately released to this group last week, while Claude Fable 5, which is a Mythos-grade model, was released to the general public with specific blocks on its ability to give responses to questions about biology and cybersecurity. Read full article Comments",
+    "pubDate": "Wed, 17 Jun 2026 17:50:46 +0000"
+  },
+  {
+    "url": "https://arstechnica.com/information-technology/2026/06/hpe-tempts-vmware-users-partners-with-year-of-free-virtualization-software/",
+    "name": "Ars Technica",
+    "category": "テクノロジー",
+    "title": "Year of free HPE software a “step in the correct direction” in VMware rivalry",
+    "content": "Hewlett Packard Enterprise’s (HPE) new virtualization software promotion will likely pique the interest of end users and resellers who are unhappy with Broadcom's pricing of VMware. During its HPE Discover event in Las Vegas this week, HPE announced that customers could use its “HPE Morpheus Software—VM Essentials” offering for free for “up to one year,” per a press release. HPE’s website describes its virtualization platform as a “VMware alternative.” It includes a hardware virtual machine (HVM) hypervisor and unified management and lets users \"manage VMware ESXi and HVM clusters from one console and migrate when you’re ready,” HPE’s website says. “New VM Essentials customers can receive up to one free year of licenses for VM Essentials, a year of HPE Zerto for $1 to support non-disruptive migration to HPE virtual machines, and 0 percent interest on software through HPE Financial Services,” HPE’s announcement reads, referring to HPE’s group for helping IT teams manage funding. Read full article Comments",
+    "pubDate": "Tue, 16 Jun 2026 22:11:15 +0000"
+  },
+  {
+    "url": "https://venturebeat.com/technology/salesforce-rolls-out-new-slackbot-ai-agent-as-it-battles-microsoft-and",
+    "name": "VentureBeat",
+    "category": "AI・機械学習",
+    "title": "Salesforce rolls out new Slackbot AI agent as it battles Microsoft and Google in workplace AI",
+    "content": "Salesforce on Tuesday launched an entirely rebuilt version of Slackbot , the company&#x27;s workplace assistant, transforming it from a simple notification tool into what executives describe as a fully powered AI agent capable of searching enterprise data, drafting documents, and taking action on behalf of employees. The new Slackbot, now generally available to Business+ and Enterprise+ customers, is Salesforce&#x27;s most aggressive move yet to position Slack at the center of the emerging \"agentic AI\" movement — where software agents work alongside humans to complete complex tasks. The launch comes as Salesforce attempts to convince investors that artificial intelligence will bolster its products rather than render them obsolete. \"Slackbot isn&#x27;t just another copilot or AI assistant,\" said Parker Harris , Salesforce co-founder and Slack&#x27;s chief technology officer, in an exclusive interview with Salesforce. \"It&#x27;s the front door to the agentic enterprise, powered by Salesforce.\" From tricycle to Porsche: Salesforce rebuilt Slackbot from the ground up Harris was blunt about what distinguishes the new Slackbot from its predecessor: \"The old Slackbot was, you know, a little tricycle, and the new Slackbot is like, you know, a Porsche.\" The original Slackbot, which has existed since Slack&#x27;s early days, performed basic algorithmic tasks — reminding users to add colleagues to documents, suggesting channel archives, and delivering simple notifications. The new version runs on an entirely different architecture built around a large language model and sophisticated search capabilities that can access Salesforce records, Google Drive files, calendar data, and years of Slack conversations. \"It&#x27;s two different things,\" Harris explained. \"The old Slackbot was algorithmic and fairly simple. The new Slackbot is brand new — it&#x27;s based around an LLM and a very robust search engine, and connections to third-party search engines, third-party enterprise data.\" Salesforce chose to retain the Slackbot brand despite the fundamental technical overhaul. \"People know what Slackbot is, and so we wanted to carry that forward,\" Harris said. Why Anthropic&#x27;s Claude powers the new Slackbot — and which AI models could come next The new Slackbot runs on Claude , Anthropic&#x27;s large language model, a choice driven partly by compliance requirements. Slack&#x27;s commercial service operates under FedRAMP Moderate certification to serve U.S. federal government customers, and Harris said Anthropic was \"the only provider that could give us a compliant LLM\" when Slack began building the new system. But that exclusivity won&#x27;t last. \"We are, this year, going to support additional providers,\" Harris said. \"We have a great relationship with Google. Gemini is incredible — performance is great, cost is great. So we&#x27;re going to use Gemini for some things.\" He added that OpenAI remains a possibility as well. Harris echoed Salesforce CEO Marc Benioff&",
+    "pubDate": "Tue, 13 Jan 2026 13:00:00 GMT"
   },
   {
     "url": "https://techcrunch.com/2026/06/17/chi-hua-chien-saw-facebook-coming-now-he-says-the-real-ai-winners-wont-be-selling-ai/",
@@ -144,12 +112,36 @@
     "pubDate": "Wed, 17 Jun 2026 21:30:50 +0000"
   },
   {
-    "url": "https://www.wired.com/story/chewy-promo-code/",
+    "url": "https://arstechnica.com/information-technology/2026/06/tesco-moving-40000-server-workloads-off-vmware-amid-broadcoms-abusive-conduct/",
+    "name": "Ars Technica",
+    "category": "テクノロジー",
+    "title": "Tesco moving 40,000 server workloads off VMware amid Broadcom's “abusive conduct”",
+    "content": "Tesco, a retail conglomerate headquartered in the United Kingdom, is moving 40,000 server workloads off of VMware amid \"abusive conduct\" from Broadcom, recent legal filings claim. Tesco filed a lawsuit in the UK’s High Court against Broadcom alleging breach of contract last year. According to a September report from The Register , the lawsuit claimed that in January 2021, Tesco bought perpetual licenses for VMware’s vSphere Foundation and Cloud Foundation, a subscription to VMware Tanzu, plus support services until 2026, with the option to extend support for four additional years. But when Broadcom took over VMware in November 2023, it would not honor the deal and instead tried to get Tesco to pay “excessive and inflated prices for virtualization software for which Tesco has already paid” and would not allow it to buy support services for its perpetually licensed software without buying “duplicative subscription-based licenses for those same Software products,\" the initial complaint read, The Register reported at the time. Read full article Comments",
+    "pubDate": "Wed, 17 Jun 2026 19:43:13 +0000"
+  },
+  {
+    "url": "https://venturebeat.com/infrastructure/claude-code-costs-up-to-usd200-a-month-goose-does-the-same-thing-for-free",
+    "name": "VentureBeat",
+    "category": "AI・機械学習",
+    "title": "Claude Code costs up to $200 a month. Goose does the same thing for free.",
+    "content": "The artificial intelligence coding revolution comes with a catch: it&#x27;s expensive. Claude Code , Anthropic&#x27;s terminal-based AI agent that can write, debug, and deploy code autonomously, has captured the imagination of software developers worldwide. But its pricing — ranging from $20 to $200 per month depending on usage — has sparked a growing rebellion among the very programmers it aims to serve. Now, a free alternative is gaining traction. Goose , an open-source AI agent developed by Block (the financial technology company formerly known as Square), offers nearly identical functionality to Claude Code but runs entirely on a user&#x27;s local machine. No subscription fees. No cloud dependency. No rate limits that reset every five hours. \"Your data stays with you, period,\" said Parth Sareen, a software engineer who demonstrated the tool during a recent livestream . The comment captures the core appeal: Goose gives developers complete control over their AI-powered workflow, including the ability to work offline — even on an airplane. The project has exploded in popularity. Goose now boasts more than 26,100 stars on GitHub , the code-sharing platform, with 362 contributors and 102 releases since its launch. The latest version, 1.20.1 , shipped on January 19, 2026, reflecting a development pace that rivals commercial products. For developers frustrated by Claude Code&#x27;s pricing structure and usage caps, Goose represents something increasingly rare in the AI industry: a genuinely free, no-strings-attached option for serious work. Anthropic&#x27;s new rate limits spark a developer revolt To understand why Goose matters, you need to understand the Claude Code pricing controversy . Anthropic, the San Francisco artificial intelligence company founded by former OpenAI executives, offers Claude Code as part of its subscription tiers. The free plan provides no access whatsoever. The Pro plan , at $17 per month with annual billing (or $20 monthly), limits users to just 10 to 40 prompts every five hours — a constraint that serious developers exhaust within minutes of intensive work. The Max plans , at $100 and $200 per month, offer more headroom: 50 to 200 prompts and 200 to 800 prompts respectively, plus access to Anthropic&#x27;s most powerful model, Claude 4.5 Opus . But even these premium tiers come with restrictions that have inflamed the developer community. In late July, Anthropic announced new weekly rate limits. Under the system, Pro users receive 40 to 80 hours of Sonnet 4 usage per week. Max users at the $200 tier get 240 to 480 hours of Sonnet 4, plus 24 to 40 hours of Opus 4. Nearly five months later, the frustration has not subsided. The problem? Those \"hours\" are not actual hours. They represent token-based limits that vary wildly depending on codebase size, conversation length, and the complexity of the code being processed. Independent analysis suggests the actual per-session limits translate to roughly 44,000 tokens for Pro users",
+    "pubDate": "Mon, 19 Jan 2026 14:00:00 GMT"
+  },
+  {
+    "url": "https://techcrunch.com/2026/06/17/how-to-turn-off-ai-in-your-google-docs/",
+    "name": "TechCrunch",
+    "category": "テクノロジー",
+    "title": "How to turn off AI in your Google Docs",
+    "content": "Here's what you need to do to get those pesky \"write with Gemini\" pop-ups to go away.",
+    "pubDate": "Thu, 18 Jun 2026 01:23:51 +0000"
+  },
+  {
+    "url": "https://www.wired.com/story/facial-age-estimate-uk-asylum-seekers/",
     "name": "Wired",
     "category": "テクノロジー・カルチャー",
-    "title": "Chewy Promo Codes: $20 Off June 2026",
-    "content": "Explore Chewy coupon codes for $30 off, $20 off your first order $49, 50% off pet food, and more June 2026 discounts.",
-    "pubDate": "Thu, 18 Jun 2026 05:00:00 +0000"
+    "title": "The UK Will Scan Asylum-Seekers’ Faces for Age Checks—Despite Knowing the Tech Is Flawed",
+    "content": "Internal Home Office tests of age-verification technology show the risks of life-altering errors. It’s moving forward anyway.",
+    "pubDate": "Thu, 18 Jun 2026 06:00:00 +0000"
   },
   {
     "url": "https://venturebeat.com/infrastructure/railway-secures-usd100-million-to-challenge-aws-with-ai-native-cloud",
@@ -160,43 +152,51 @@
     "pubDate": "Thu, 22 Jan 2026 14:00:00 GMT"
   },
   {
-    "url": "https://techcrunch.com/2026/06/17/after-unveiling-ridiculously-expensive-ar-glasses-snaps-stock-takes-a-dive/",
-    "name": "TechCrunch",
+    "url": "https://www.nytimes.com/2026/06/17/technology/waymo-driverless-taxis-politics.html",
+    "name": "NY Times Tech",
     "category": "テクノロジー",
-    "title": "After unveiling ridiculously expensive AR glasses, Snap’s stock takes a dive",
-    "content": "Snap's long-awaited smart glasses debut hasn't exactly done wonders for the company's stock.",
-    "pubDate": "Wed, 17 Jun 2026 20:24:28 +0000"
+    "title": "Why Waymo’s Driverless Taxis Won’t Be on Your Streets Anytime Soon",
+    "content": "The Silicon Valley company’s ambitions to roll out autonomous cars nationwide have hit political roadblocks in some of the country’s biggest markets.",
+    "pubDate": "Wed, 17 Jun 2026 18:44:22 +0000"
   },
   {
-    "url": "https://techcrunch.com/2026/06/17/ai-is-hurting-apple-in-more-ways-than-one-it-may-force-iphone-price-increases/",
-    "name": "TechCrunch",
+    "url": "https://www.nytimes.com/2026/06/17/technology/anthropic-trump-administration-fable.html",
+    "name": "NY Times Tech",
     "category": "テクノロジー",
-    "title": "AI is hurting Apple in more ways than one: it may force iPhone price increases",
-    "content": "CEO Tim Cook said in a recent interview that the situation is \"unsustainable.\"",
-    "pubDate": "Wed, 17 Jun 2026 23:28:21 +0000"
+    "title": "Anthropic Employees Accuse Trump Administration of Targeting Them",
+    "content": "Workers at the artificial intelligence company have been puzzled and increasingly concerned by the administration’s move to limit their latest A.I. models.",
+    "pubDate": "Wed, 17 Jun 2026 17:56:09 +0000"
   },
   {
-    "url": "https://arstechnica.com/information-technology/2026/06/tesco-moving-40000-server-workloads-off-vmware-amid-broadcoms-abusive-conduct/",
-    "name": "Ars Technica",
-    "category": "テクノロジー",
-    "title": "Tesco moving 40,000 server workloads off VMware amid Broadcom's “abusive conduct”",
-    "content": "Tesco, a retail conglomerate headquartered in the United Kingdom, is moving 40,000 server workloads off of VMware amid \"abusive conduct\" from Broadcom, recent legal filings claim. Tesco filed a lawsuit in the UK’s High Court against Broadcom alleging breach of contract last year. According to a September report from The Register , the lawsuit claimed that in January 2021, Tesco bought perpetual licenses for VMware’s vSphere Foundation and Cloud Foundation, a subscription to VMware Tanzu, plus support services until 2026, with the option to extend support for four additional years. But when Broadcom took over VMware in November 2023, it would not honor the deal and instead tried to get Tesco to pay “excessive and inflated prices for virtualization software for which Tesco has already paid” and would not allow it to buy support services for its perpetually licensed software without buying “duplicative subscription-based licenses for those same Software products,\" the initial complaint read, The Register reported at the time. Read full article Comments",
-    "pubDate": "Wed, 17 Jun 2026 19:43:13 +0000"
-  },
-  {
-    "url": "https://www.wired.com/story/peacock-promo-code/",
+    "url": "https://www.wired.com/story/home-depot-promo-code/",
     "name": "Wired",
     "category": "テクノロジー・カルチャー",
-    "title": "Peacock Promo Codes: 40% Off June 2026",
-    "content": "Stream your favorite shows for up to $80 off this month, and save on subscription plans with the latest Peacock TV coupons from WIRED.",
+    "title": "Home Depot Promo Codes: 50% Off in June 2026",
+    "content": "Save up to 50% today with the latest Home Depot promo codes for appliances, power tools, and more this June.",
     "pubDate": "Thu, 18 Jun 2026 05:00:00 +0000"
   },
   {
-    "url": "https://techcrunch.com/2026/06/17/roelof-botha-joins-spacexs-board-of-directors/",
+    "url": "https://www.wired.com/story/ulta-coupon/",
+    "name": "Wired",
+    "category": "テクノロジー・カルチャー",
+    "title": "Ulta Promo Codes: Up to 50% Off in June 2026",
+    "content": "Shop the latest beauty trends and save big using an Ulta promo code for beauty tech, makeup, and more.",
+    "pubDate": "Thu, 18 Jun 2026 05:00:00 +0000"
+  },
+  {
+    "url": "https://techcrunch.com/2026/06/17/nasa-picks-eric-schmidts-rocket-company-for-mars-mission-setting-up-a-race-with-spacex/",
     "name": "TechCrunch",
     "category": "テクノロジー",
-    "title": "Roelof Botha joins SpaceX’s board of directors",
-    "content": "The former Sequoia Capital leader is filling an \"existing vacancy\" on SpaceX's board, days after the company went public in the largest IPO ever.",
-    "pubDate": "Wed, 17 Jun 2026 20:32:52 +0000"
+    "title": "NASA picks Eric Schmidt’s rocket company for Mars mission, setting up a race with SpaceX",
+    "content": "Relativity Space—a rocket maker acquired by former Google executive chair Eric Schmidt last year after stumbling on the path to orbit—might just beat SpaceX to Mars.",
+    "pubDate": "Thu, 18 Jun 2026 06:26:24 +0000"
+  },
+  {
+    "url": "https://venturebeat.com/technology/listen-labs-raises-usd69m-after-viral-billboard-hiring-stunt-to-scale-ai",
+    "name": "VentureBeat",
+    "category": "AI・機械学習",
+    "title": "Listen Labs raises $69M after viral billboard hiring stunt to scale AI customer interviews",
+    "content": "Alfred Wahlforss was running out of options. His startup, Listen Labs , needed to hire over 100 engineers, but competing against Mark Zuckerberg&#x27;s $100 million offers seemed impossible. So he spent $5,000 — a fifth of his marketing budget — on a billboard in San Francisco displaying what looked like gibberish: five strings of random numbers. The numbers were actually AI tokens. Decoded, they led to a coding challenge: build an algorithm to act as a digital bouncer at Berghain, the Berlin nightclub famous for rejecting nearly everyone at the door. Within days, thousands attempted the puzzle. 430 cracked it. Some got hired. The winner flew to Berlin, all expenses paid. That unconventional approach has now attracted $69 million in Series B funding, led by Ribbit Capital with participation from Evantic and existing investors Sequoia Capital , Conviction , and Pear VC . The round values Listen Labs at $500 million and brings its total capital to $100 million. In nine months since launch, the company has grown annualized revenue by 15x to eight figures and conducted over one million AI-powered interviews. \"When you obsess over customers, everything else follows,\" Wahlforss said in an interview with VentureBeat. \"Teams that use Listen bring the customer into every decision, from marketing to product, and when the customer is delighted, everyone is.\" Why traditional market research is broken, and what Listen Labs is building to fix it Listen&#x27;s AI researcher finds participants, conducts in-depth interviews, and delivers actionable insights in hours, not weeks. The platform replaces the traditional choice between quantitative surveys — which provide statistical precision but miss nuance—and qualitative interviews, which deliver depth but cannot scale. Wahlforss explained the limitation of existing approaches: \"Essentially surveys give you false precision because people end up answering the same question... You can&#x27;t get the outliers. People are actually not honest on surveys.\" The alternative, one-on-one human interviews, \"gives you a lot of depth. You can ask follow up questions. You can kind of double check if they actually know what they&#x27;re talking about. And the problem is you can&#x27;t scale that.\" The platform works in four steps: users create a study with AI assistance, Listen recruits participants from its global network of 30 million people, an AI moderator conducts in-depth interviews with follow-up questions, and results are packaged into executive-ready reports including key themes, highlight reels, and slide decks. What distinguishes Listen&#x27;s approach is its use of open-ended video conversations rather than multiple-choice forms. \"In a survey, you can kind of guess what you should answer, and you have four options,\" Wahlforss said. \"Oh, they probably want me to buy high income. Let me click on that button versus an open ended response. It just generates much more honesty.\" The dirty secret of the $140 billion market r",
+    "pubDate": "Fri, 16 Jan 2026 14:01:00 GMT"
   }
 ]
