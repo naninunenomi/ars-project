@@ -1,9 +1,16 @@
 {
-  "pending_article": null,
+  "pending_article": {
+    "url": "https://tester.army",
+    "name": "Hacker News",
+    "category": "スタートアップ・開発",
+    "title": "Launch HN: TesterArmy (YC P26) – Agents that test web and mobile apps",
+    "content": "Hey HN - we’re Oskar, Szymon, and Piotr, and we’re building TesterArmy ( https://tester.army ). TesterArmy is an agentic testing platform that runs end-to-end checks before deployment and in production. Instead of wasting hours on manual testing or maintaining static scripts, we let you specify your tests in natural language and handle everything in between. We've built the platform fully around agents. Our agent will reliably execute the tests, but your coding agent can manage everything in our platform, from defining tests in natural language to running them on your behalf. Check out our demo video: https://www.youtube.com/watch?v=291IkUbPrlk . We started TesterArmy because testing is still far too painful. AI coding tools have made it dramatically faster to write and ship code, but testing is still a bottleneck. Traditional E2E tests are slow to set up and expensive to maintain. Managing auth and test users is painful. Setting up staging environments is painful. Running tests reliably is painful. We think most teams do not actually want to spend their time writing selectors or maintaining test infrastructure. They just want confidence that their core flows work. With TesterArmy, an engineer can sign up, give an agent our CLI, and let it handle creating tests and running them on schedule or on GitHub. When something breaks, TesterArmy alerts your team through Slack or Discord. Over the past few months, we scaled from 0 to 30+ teams using our product every day. We caught bugs in critical flows, including onboarding, checkout, and AI chat. We've got many of our customers migrating from already established competitors to us because of the quality and reliability of our agents. Here are a few of the recent bugs that our agent found (there were quite a lot of them!): 1) Timezone bug that affected the booking flow in one of our clients' apps, the dashboard was very complex and hard to catch by a human. 2) Regression in agent orchestration that caused a sandboxed environment to be stuck on loading, thanks to TesterArmy, the team was able to resolve it before it hit production. 3) Incorrectly counting the order amount in a complex dashboard flow with checkout, thanks to TesterArmy, the team was able to resolve it before it affected revenue 4) Catching a regression in an AI chat flow that would result in a user not being able to retrieve their data due to broken tool calling. And many more, mostly related to some incorrect API calls, 404s, unhandled errors, etc. If this sounds useful, we would love your feedback at https://tester.army . We have a bunch of free test runs for you to try. And don’t worry, we won’t make you do sales calls, and we don’t have long onboarding or annoying setup. Our goal is an it-just-works experience. If you're looking for an end-to-end testing solution, we'd love to hear your feedback! Comments URL: https://news.ycombinator.com/item?id=48586299 Points: 23 # Comments: 10",
+    "pubDate": "Thu, 18 Jun 2026 14:49:44 +0000"
+  },
   "last_success_window_key": "2026-06-12-NONE",
   "articles_today": 0,
-  "last_count_date": "2026-06-18",
-  "dify_calls_today": 5,
+  "last_count_date": "2026-06-19",
+  "dify_calls_today": 1,
   "processed_urls": [
     "https://www.wired.com/gallery/best-gifts-for-men-2026/",
     "https://techcrunch.com/2026/06/14/uk-may-ban-social-media-for-children-under-16/",
