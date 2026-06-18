@@ -12,14 +12,14 @@ const parser = new Parser({
   }
 });
 
-// 信頼性の高い海外メディアのRSSフィード一覧
-// ※ The Verge は404になっているので削除。代わりにHacker News等を追加
+// 情報源：大手テックメディア ＋ スタートアップ・個人開発系をミックス
 const FEEDS = [
+  // 🏢 王道のテック・AIトレンド枠
   { url: 'https://techcrunch.com/feed/', name: 'TechCrunch', category: 'テクノロジー' },
   { url: 'https://venturebeat.com/category/ai/feed/', name: 'VentureBeat', category: 'AI・機械学習' },
-  { url: 'https://www.wired.com/feed/rss', name: 'Wired', category: 'テクノロジー・カルチャー' },
-  { url: 'https://feeds.arstechnica.com/arstechnica/technology-lab', name: 'Ars Technica', category: 'テクノロジー' },
-  { url: 'https://rss.nytimes.com/services/xml/rss/nyt/Technology.xml', name: 'NY Times Tech', category: 'テクノロジー' },
+  // 💡 スタートアップ・個人開発・新サービス枠
+  { url: 'https://hnrss.org/frontpage', name: 'Hacker News', category: 'スタートアップ・開発' },
+  { url: 'https://www.producthunt.com/feed', name: 'Product Hunt', category: '新サービス・ガジェット' },
 ];
 
 const MAX_ITEMS_PER_FEED = 5; // 各フィードから取得する最新記事の数

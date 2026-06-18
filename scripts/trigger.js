@@ -109,9 +109,15 @@ async function triggerDify(article, currentDate) {
             bodyContent = bodyMatch[1];
           }
 
+          // タイトルをDifyが生成したHTML内の<h1>から抽出する（より魅力的なタイトルになる）
+          const h1Match = articleContent.match(/<h1[^>]*>([\s\S]*?)<\/h1>/i);
+          const extractedTitle = h1Match
+            ? h1Match[1].replace(/<[^>]+>/g, '').trim()
+            : `${article.name} の最新ニュースと活用法`;
+
           const articleData = {
             id: `article_${timestamp}`,
-            title: `${article.name} の最新ニュースと活用法`,
+            title: extractedTitle,
             category: article.category || "ニュース",
             source_url: article.url,
             source_name: article.name,
@@ -179,13 +185,13 @@ async function main() {
     if (result === "SUCCESS") {
       console.log("✅ Retry succeeded! Article published.");
       state.articles_today += 1;
-      state.pending_article = null;
       if (!state.processed_urls) state.processed_urls = [];
-      state.processed_urls.push(state.pending_article?.url || '');
+      state.processed_urls.push(state.pending_article.url); // ★ nullにする前にURLを記録
+      state.pending_article = null;
     } else if (result === "STALE" || result === "ERROR") {
       console.log("⚠️ Pending article was STALE or ERROR. Discarding and freeing slot.");
       if (!state.processed_urls) state.processed_urls = [];
-      state.processed_urls.push(state.pending_article?.url || '');
+      state.processed_urls.push(state.pending_article.url); // ★ nullにする前にURLを記録
       state.pending_article = null;
     } else {
       console.log("⏳ Still STUDYING. Will retry at next 30-min slot.");
