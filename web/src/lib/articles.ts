@@ -48,7 +48,13 @@ function parseHtmlArticle(fileName: string, fileContents: string): Article | nul
 
     // 本文: <body> タグ全体（なければファイル全体）
     const bodyMatch = fileContents.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
-    const content = bodyMatch ? bodyMatch[1] : fileContents;
+    let content = bodyMatch ? bodyMatch[1] : fileContents;
+
+    // ダミーの広告セクション（<div class="ad-section">等）とフッターを正規表現で削除
+    content = content.replace(/<div class="ad-section"[\s\S]*?<\/div>/gi, '');
+    content = content.replace(/この記事を読んで自動化を始めたくなった方へ[\s\S]*?ConoHa/gi, '');
+    content = content.replace(/© 202[0-9] Automation News\. All rights reserved\./gi, '');
+    content = content.replace(/<hr\s*\/?>\s*$/i, ''); // 最後の余分な水平線を削除
 
     return {
       id: fileName.replace('.html', ''),
