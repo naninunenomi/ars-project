@@ -3,7 +3,7 @@
   "last_success_window_key": "2026-06-12-NONE",
   "articles_today": 1,
   "last_count_date": "2026-06-20",
-  "dify_calls_today": 2,
+  "dify_calls_today": 3,
   "processed_urls": [
     "https://www.wired.com/gallery/best-gifts-for-men-2026/",
     "https://techcrunch.com/2026/06/14/uk-may-ban-social-media-for-children-under-16/",
@@ -13,6 +13,7 @@
     "https://techcrunch.com/2026/06/17/ai-is-hurting-apple-in-more-ways-than-one-it-may-force-iphone-price-increases/",
     "https://tester.army",
     "https://venturebeat.com/infrastructure/claude-code-costs-up-to-usd200-a-month-goose-does-the-same-thing-for-free",
-    "https://overreacted.io/there-are-no-instances-in-atproto/"
+    "https://overreacted.io/there-are-no-instances-in-atproto/",
+    "https://www.producthunt.com/products/narration-room"
   ]
 }
