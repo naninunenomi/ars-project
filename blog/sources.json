@@ -1,5 +1,21 @@
 [
   {
+    "url": "https://techcrunch.com/2026/06/19/billionaire-ambani-wants-ai-in-every-call-app-and-home/",
+    "name": "TechCrunch",
+    "category": "テクノロジー",
+    "title": "Billionaire Ambani wants AI in every call, app, and home",
+    "content": "Reliance is weaving AI into telecom services used by more than 500 million people.",
+    "pubDate": "Fri, 19 Jun 2026 15:23:28 +0000"
+  },
+  {
+    "url": "https://tales.fromprod.com/2026/169/google-workspace-threatening-to-block-firefox.html",
+    "name": "Hacker News",
+    "category": "スタートアップ・開発",
+    "title": "Google workspace threatening to block Firefox access",
+    "content": "Article URL: https://tales.fromprod.com/2026/169/google-workspace-threatening-to-block-firefox.html Comments URL: https://news.ycombinator.com/item?id=48600345 Points: 44 # Comments: 19",
+    "pubDate": "Fri, 19 Jun 2026 16:30:49 +0000"
+  },
+  {
     "url": "https://techcrunch.com/2026/06/19/the-us-says-asmls-top-chip-tool-may-be-in-china-asml-says-it-isnt/",
     "name": "TechCrunch",
     "category": "テクノロジー",
@@ -8,44 +24,20 @@
     "pubDate": "Fri, 19 Jun 2026 07:59:12 +0000"
   },
   {
-    "url": "https://www.jvm-weekly.com/p/project-valhalla-explained-how-a",
-    "name": "Hacker News",
-    "category": "スタートアップ・開発",
-    "title": "Project Valhalla, Explained: How a Decade of Work Arrives in JDK 28",
-    "content": "Article URL: https://www.jvm-weekly.com/p/project-valhalla-explained-how-a Comments URL: https://news.ycombinator.com/item?id=48595511 Points: 190 # Comments: 83",
-    "pubDate": "Fri, 19 Jun 2026 06:35:57 +0000"
-  },
-  {
-    "url": "https://venturebeat.com/technology/salesforce-rolls-out-new-slackbot-ai-agent-as-it-battles-microsoft-and",
-    "name": "VentureBeat",
-    "category": "AI・機械学習",
-    "title": "Salesforce rolls out new Slackbot AI agent as it battles Microsoft and Google in workplace AI",
-    "content": "Salesforce on Tuesday launched an entirely rebuilt version of Slackbot , the company&#x27;s workplace assistant, transforming it from a simple notification tool into what executives describe as a fully powered AI agent capable of searching enterprise data, drafting documents, and taking action on behalf of employees. The new Slackbot, now generally available to Business+ and Enterprise+ customers, is Salesforce&#x27;s most aggressive move yet to position Slack at the center of the emerging \"agentic AI\" movement — where software agents work alongside humans to complete complex tasks. The launch comes as Salesforce attempts to convince investors that artificial intelligence will bolster its products rather than render them obsolete. \"Slackbot isn&#x27;t just another copilot or AI assistant,\" said Parker Harris , Salesforce co-founder and Slack&#x27;s chief technology officer, in an exclusive interview with Salesforce. \"It&#x27;s the front door to the agentic enterprise, powered by Salesforce.\" From tricycle to Porsche: Salesforce rebuilt Slackbot from the ground up Harris was blunt about what distinguishes the new Slackbot from its predecessor: \"The old Slackbot was, you know, a little tricycle, and the new Slackbot is like, you know, a Porsche.\" The original Slackbot, which has existed since Slack&#x27;s early days, performed basic algorithmic tasks — reminding users to add colleagues to documents, suggesting channel archives, and delivering simple notifications. The new version runs on an entirely different architecture built around a large language model and sophisticated search capabilities that can access Salesforce records, Google Drive files, calendar data, and years of Slack conversations. \"It&#x27;s two different things,\" Harris explained. \"The old Slackbot was algorithmic and fairly simple. The new Slackbot is brand new — it&#x27;s based around an LLM and a very robust search engine, and connections to third-party search engines, third-party enterprise data.\" Salesforce chose to retain the Slackbot brand despite the fundamental technical overhaul. \"People know what Slackbot is, and so we wanted to carry that forward,\" Harris said. Why Anthropic&#x27;s Claude powers the new Slackbot — and which AI models could come next The new Slackbot runs on Claude , Anthropic&#x27;s large language model, a choice driven partly by compliance requirements. Slack&#x27;s commercial service operates under FedRAMP Moderate certification to serve U.S. federal government customers, and Harris said Anthropic was \"the only provider that could give us a compliant LLM\" when Slack began building the new system. But that exclusivity won&#x27;t last. \"We are, this year, going to support additional providers,\" Harris said. \"We have a great relationship with Google. Gemini is incredible — performance is great, cost is great. So we&#x27;re going to use Gemini for some things.\" He added that OpenAI remains a possibility as well. Harris echoed Salesforce CEO Marc Benioff&",
-    "pubDate": "Tue, 13 Jan 2026 13:00:00 GMT"
-  },
-  {
-    "url": "https://www.producthunt.com/products/claude-redesigned",
+    "url": "https://www.producthunt.com/products/upsolve-ai",
     "name": "Product Hunt",
     "category": "新サービス・ガジェット",
-    "title": "Claude Code Artifacts",
+    "title": "Upsolve AI",
     "content": "",
-    "pubDate": "2026-06-18T18:14:11.000Z"
+    "pubDate": "2026-06-17T21:46:10.000Z"
   },
   {
-    "url": "https://venturebeat.com/technology/listen-labs-raises-usd69m-after-viral-billboard-hiring-stunt-to-scale-ai",
-    "name": "VentureBeat",
-    "category": "AI・機械学習",
-    "title": "Listen Labs raises $69M after viral billboard hiring stunt to scale AI customer interviews",
-    "content": "Alfred Wahlforss was running out of options. His startup, Listen Labs , needed to hire over 100 engineers, but competing against Mark Zuckerberg&#x27;s $100 million offers seemed impossible. So he spent $5,000 — a fifth of his marketing budget — on a billboard in San Francisco displaying what looked like gibberish: five strings of random numbers. The numbers were actually AI tokens. Decoded, they led to a coding challenge: build an algorithm to act as a digital bouncer at Berghain, the Berlin nightclub famous for rejecting nearly everyone at the door. Within days, thousands attempted the puzzle. 430 cracked it. Some got hired. The winner flew to Berlin, all expenses paid. That unconventional approach has now attracted $69 million in Series B funding, led by Ribbit Capital with participation from Evantic and existing investors Sequoia Capital , Conviction , and Pear VC . The round values Listen Labs at $500 million and brings its total capital to $100 million. In nine months since launch, the company has grown annualized revenue by 15x to eight figures and conducted over one million AI-powered interviews. \"When you obsess over customers, everything else follows,\" Wahlforss said in an interview with VentureBeat. \"Teams that use Listen bring the customer into every decision, from marketing to product, and when the customer is delighted, everyone is.\" Why traditional market research is broken, and what Listen Labs is building to fix it Listen&#x27;s AI researcher finds participants, conducts in-depth interviews, and delivers actionable insights in hours, not weeks. The platform replaces the traditional choice between quantitative surveys — which provide statistical precision but miss nuance—and qualitative interviews, which deliver depth but cannot scale. Wahlforss explained the limitation of existing approaches: \"Essentially surveys give you false precision because people end up answering the same question... You can&#x27;t get the outliers. People are actually not honest on surveys.\" The alternative, one-on-one human interviews, \"gives you a lot of depth. You can ask follow up questions. You can kind of double check if they actually know what they&#x27;re talking about. And the problem is you can&#x27;t scale that.\" The platform works in four steps: users create a study with AI assistance, Listen recruits participants from its global network of 30 million people, an AI moderator conducts in-depth interviews with follow-up questions, and results are packaged into executive-ready reports including key themes, highlight reels, and slide decks. What distinguishes Listen&#x27;s approach is its use of open-ended video conversations rather than multiple-choice forms. \"In a survey, you can kind of guess what you should answer, and you have four options,\" Wahlforss said. \"Oh, they probably want me to buy high income. Let me click on that button versus an open ended response. It just generates much more honesty.\" The dirty secret of the $140 billion market r",
-    "pubDate": "Fri, 16 Jan 2026 14:01:00 GMT"
-  },
-  {
-    "url": "https://mnot.net/blog/2026/well_known_uris",
+    "url": "https://aiclambake.com/clamtakes/linear-a/",
     "name": "Hacker News",
     "category": "スタートアップ・開発",
-    "title": "So You Want to Define a Well-Known URI",
-    "content": "Article URL: https://mnot.net/blog/2026/well_known_uris Comments URL: https://news.ycombinator.com/item?id=48595331 Points: 81 # Comments: 41",
-    "pubDate": "Fri, 19 Jun 2026 06:05:01 +0000"
+    "title": "Amateur may have cracked Linear A, a 120-year-old puzzle",
+    "content": "Article URL: https://aiclambake.com/clamtakes/linear-a/ Comments URL: https://news.ycombinator.com/item?id=48600107 Points: 111 # Comments: 31",
+    "pubDate": "Fri, 19 Jun 2026 16:04:42 +0000"
   },
   {
     "url": "https://venturebeat.com/infrastructure/claude-code-costs-up-to-usd200-a-month-goose-does-the-same-thing-for-free",
@@ -56,36 +48,60 @@
     "pubDate": "Mon, 19 Jan 2026 14:00:00 GMT"
   },
   {
-    "url": "https://eandt.theiet.org/2026/06/18/norway-greenlights-world-s-first-full-scale-ship-tunnel",
-    "name": "Hacker News",
-    "category": "スタートアップ・開発",
-    "title": "Norway greenlights first full-scale ship tunnel",
-    "content": "Article URL: https://eandt.theiet.org/2026/06/18/norway-greenlights-world-s-first-full-scale-ship-tunnel Comments URL: https://news.ycombinator.com/item?id=48596910 Points: 23 # Comments: 5",
-    "pubDate": "Fri, 19 Jun 2026 10:16:10 +0000"
-  },
-  {
-    "url": "https://techcrunch.com/2026/06/18/source-elastic-agrees-to-buy-crv-backed-deductiveai-for-up-to-85m/",
+    "url": "https://techcrunch.com/video/is-the-us-governments-anthropic-ban-accidentally-helping-the-brand/",
     "name": "TechCrunch",
     "category": "テクノロジー",
-    "title": "Source: Elastic agrees to buy CRV-backed DeductiveAI for up to $85M",
-    "content": "DeductiveAI, a startup that uses AI to catch and resolve bugs in software, was founded just three years ago.",
-    "pubDate": "Fri, 19 Jun 2026 00:51:11 +0000"
+    "title": "Is the US government’s Anthropic ban accidentally helping the brand?",
+    "content": "Just as last week&#160;was ending,&#160;the US government&#160;forced Anthropic to pull its two newest models, Fable 5 and Mythos 5, citing national security concerns after Amazon researchers allegedly found a way to bypass Fable 5&#8217;s guardrails.&#160; Cybersecurity researchers have&#160;since signed an open letter&#160;calling&#160;the move dangerous, and Anthropic itself noted the same jailbreaks exist in other models.&#160;So&#160;is [&#8230;]",
+    "pubDate": "Fri, 19 Jun 2026 16:08:17 +0000"
   },
   {
-    "url": "https://www.producthunt.com/products/snap-deck-hq",
-    "name": "Product Hunt",
-    "category": "新サービス・ガジェット",
-    "title": "Snap Deck HQ",
-    "content": "",
-    "pubDate": "2026-06-18T12:40:23.000Z"
-  },
-  {
-    "url": "https://simonwillison.net/2026/Jun/18/datasette-apps/",
+    "url": "https://erildrun.bearblog.dev/spotify-killed-the-thrill-of-the-hunt/",
     "name": "Hacker News",
     "category": "スタートアップ・開発",
-    "title": "Datasette Apps: Host custom HTML applications inside Datasette",
-    "content": "Article URL: https://simonwillison.net/2026/Jun/18/datasette-apps/ Comments URL: https://news.ycombinator.com/item?id=48593731 Points: 90 # Comments: 34",
-    "pubDate": "Fri, 19 Jun 2026 01:06:27 +0000"
+    "title": "Spotify Killed the Thrill of the Hunt",
+    "content": "Article URL: https://erildrun.bearblog.dev/spotify-killed-the-thrill-of-the-hunt/ Comments URL: https://news.ycombinator.com/item?id=48600236 Points: 4 # Comments: 2",
+    "pubDate": "Fri, 19 Jun 2026 16:19:55 +0000"
+  },
+  {
+    "url": "https://www.producthunt.com/products/zernio",
+    "name": "Product Hunt",
+    "category": "新サービス・ガジェット",
+    "title": "Zernio WhatsApp API",
+    "content": "",
+    "pubDate": "2026-06-11T14:18:43.000Z"
+  },
+  {
+    "url": "https://venturebeat.com/technology/listen-labs-raises-usd69m-after-viral-billboard-hiring-stunt-to-scale-ai",
+    "name": "VentureBeat",
+    "category": "AI・機械学習",
+    "title": "Listen Labs raises $69M after viral billboard hiring stunt to scale AI customer interviews",
+    "content": "Alfred Wahlforss was running out of options. His startup, Listen Labs , needed to hire over 100 engineers, but competing against Mark Zuckerberg&#x27;s $100 million offers seemed impossible. So he spent $5,000 — a fifth of his marketing budget — on a billboard in San Francisco displaying what looked like gibberish: five strings of random numbers. The numbers were actually AI tokens. Decoded, they led to a coding challenge: build an algorithm to act as a digital bouncer at Berghain, the Berlin nightclub famous for rejecting nearly everyone at the door. Within days, thousands attempted the puzzle. 430 cracked it. Some got hired. The winner flew to Berlin, all expenses paid. That unconventional approach has now attracted $69 million in Series B funding, led by Ribbit Capital with participation from Evantic and existing investors Sequoia Capital , Conviction , and Pear VC . The round values Listen Labs at $500 million and brings its total capital to $100 million. In nine months since launch, the company has grown annualized revenue by 15x to eight figures and conducted over one million AI-powered interviews. \"When you obsess over customers, everything else follows,\" Wahlforss said in an interview with VentureBeat. \"Teams that use Listen bring the customer into every decision, from marketing to product, and when the customer is delighted, everyone is.\" Why traditional market research is broken, and what Listen Labs is building to fix it Listen&#x27;s AI researcher finds participants, conducts in-depth interviews, and delivers actionable insights in hours, not weeks. The platform replaces the traditional choice between quantitative surveys — which provide statistical precision but miss nuance—and qualitative interviews, which deliver depth but cannot scale. Wahlforss explained the limitation of existing approaches: \"Essentially surveys give you false precision because people end up answering the same question... You can&#x27;t get the outliers. People are actually not honest on surveys.\" The alternative, one-on-one human interviews, \"gives you a lot of depth. You can ask follow up questions. You can kind of double check if they actually know what they&#x27;re talking about. And the problem is you can&#x27;t scale that.\" The platform works in four steps: users create a study with AI assistance, Listen recruits participants from its global network of 30 million people, an AI moderator conducts in-depth interviews with follow-up questions, and results are packaged into executive-ready reports including key themes, highlight reels, and slide decks. What distinguishes Listen&#x27;s approach is its use of open-ended video conversations rather than multiple-choice forms. \"In a survey, you can kind of guess what you should answer, and you have four options,\" Wahlforss said. \"Oh, they probably want me to buy high income. Let me click on that button versus an open ended response. It just generates much more honesty.\" The dirty secret of the $140 billion market r",
+    "pubDate": "Fri, 16 Jan 2026 14:01:00 GMT"
+  },
+  {
+    "url": "https://startupfortune.com/hyundai-takes-full-control-of-boston-dynamics-as-softbank-exits-for-325-million/",
+    "name": "Hacker News",
+    "category": "スタートアップ・開発",
+    "title": "Hyundai buys Boston Dynamics, Atlas humanoid to be used at vehicle plant by 2028",
+    "content": "Article URL: https://startupfortune.com/hyundai-takes-full-control-of-boston-dynamics-as-softbank-exits-for-325-million/ Comments URL: https://news.ycombinator.com/item?id=48600312 Points: 57 # Comments: 25",
+    "pubDate": "Fri, 19 Jun 2026 16:28:20 +0000"
+  },
+  {
+    "url": "https://www.producthunt.com/products/portia-2",
+    "name": "Product Hunt",
+    "category": "新サービス・ガジェット",
+    "title": "Portia",
+    "content": "",
+    "pubDate": "2026-06-10T10:27:16.000Z"
+  },
+  {
+    "url": "https://techcrunch.com/2026/06/19/the-ceo-of-allbirds-new-ai-biz-has-a-plan-but-no-employees/",
+    "name": "TechCrunch",
+    "category": "テクノロジー",
+    "title": "The CEO of Allbirds’ new AI biz has a plan, but no employees",
+    "content": "Call it a startup with a sole founder and a very large seed round, but what's next is less clear.",
+    "pubDate": "Fri, 19 Jun 2026 13:00:00 +0000"
   },
   {
     "url": "https://www.producthunt.com/products/blazly-backlinker",
@@ -96,28 +112,12 @@
     "pubDate": "2026-06-18T14:58:24.000Z"
   },
   {
-    "url": "https://www.producthunt.com/products/ask-ad-manager",
-    "name": "Product Hunt",
-    "category": "新サービス・ガジェット",
-    "title": "Ask Ad Manager by Google Ads",
-    "content": "",
-    "pubDate": "2026-06-18T18:48:23.000Z"
-  },
-  {
-    "url": "https://www.producthunt.com/products/midjourney",
-    "name": "Product Hunt",
-    "category": "新サービス・ガジェット",
-    "title": "Midjourney Scanner",
-    "content": "",
-    "pubDate": "2026-06-19T03:18:43.000Z"
-  },
-  {
-    "url": "https://techcrunch.com/2026/06/18/ai-inference-startup-baseten-reportedly-raising-1-5b-months-after-its-last-mega-round/",
-    "name": "TechCrunch",
-    "category": "テクノロジー",
-    "title": "AI inference startup Baseten reportedly raising $1.5B months after its last mega-round",
-    "content": "Startup Baseten is reportedly close to finalizing a $1.5 billion round at a $13 billion as the “inference gold rush\" marches on.",
-    "pubDate": "Thu, 18 Jun 2026 21:20:13 +0000"
+    "url": "https://venturebeat.com/technology/salesforce-rolls-out-new-slackbot-ai-agent-as-it-battles-microsoft-and",
+    "name": "VentureBeat",
+    "category": "AI・機械学習",
+    "title": "Salesforce rolls out new Slackbot AI agent as it battles Microsoft and Google in workplace AI",
+    "content": "Salesforce on Tuesday launched an entirely rebuilt version of Slackbot , the company&#x27;s workplace assistant, transforming it from a simple notification tool into what executives describe as a fully powered AI agent capable of searching enterprise data, drafting documents, and taking action on behalf of employees. The new Slackbot, now generally available to Business+ and Enterprise+ customers, is Salesforce&#x27;s most aggressive move yet to position Slack at the center of the emerging \"agentic AI\" movement — where software agents work alongside humans to complete complex tasks. The launch comes as Salesforce attempts to convince investors that artificial intelligence will bolster its products rather than render them obsolete. \"Slackbot isn&#x27;t just another copilot or AI assistant,\" said Parker Harris , Salesforce co-founder and Slack&#x27;s chief technology officer, in an exclusive interview with Salesforce. \"It&#x27;s the front door to the agentic enterprise, powered by Salesforce.\" From tricycle to Porsche: Salesforce rebuilt Slackbot from the ground up Harris was blunt about what distinguishes the new Slackbot from its predecessor: \"The old Slackbot was, you know, a little tricycle, and the new Slackbot is like, you know, a Porsche.\" The original Slackbot, which has existed since Slack&#x27;s early days, performed basic algorithmic tasks — reminding users to add colleagues to documents, suggesting channel archives, and delivering simple notifications. The new version runs on an entirely different architecture built around a large language model and sophisticated search capabilities that can access Salesforce records, Google Drive files, calendar data, and years of Slack conversations. \"It&#x27;s two different things,\" Harris explained. \"The old Slackbot was algorithmic and fairly simple. The new Slackbot is brand new — it&#x27;s based around an LLM and a very robust search engine, and connections to third-party search engines, third-party enterprise data.\" Salesforce chose to retain the Slackbot brand despite the fundamental technical overhaul. \"People know what Slackbot is, and so we wanted to carry that forward,\" Harris said. Why Anthropic&#x27;s Claude powers the new Slackbot — and which AI models could come next The new Slackbot runs on Claude , Anthropic&#x27;s large language model, a choice driven partly by compliance requirements. Slack&#x27;s commercial service operates under FedRAMP Moderate certification to serve U.S. federal government customers, and Harris said Anthropic was \"the only provider that could give us a compliant LLM\" when Slack began building the new system. But that exclusivity won&#x27;t last. \"We are, this year, going to support additional providers,\" Harris said. \"We have a great relationship with Google. Gemini is incredible — performance is great, cost is great. So we&#x27;re going to use Gemini for some things.\" He added that OpenAI remains a possibility as well. Harris echoed Salesforce CEO Marc Benioff&",
+    "pubDate": "Tue, 13 Jan 2026 13:00:00 GMT"
   },
   {
     "url": "https://venturebeat.com/infrastructure/railway-secures-usd100-million-to-challenge-aws-with-ai-native-cloud",
@@ -128,12 +128,12 @@
     "pubDate": "Thu, 22 Jan 2026 14:00:00 GMT"
   },
   {
-    "url": "https://techcrunch.com/2026/06/18/snap-spins-off-ai-video-team-into-new-company-dotmo-due-to-costs/",
-    "name": "TechCrunch",
-    "category": "テクノロジー",
-    "title": "Snap spins off AI video team into new company, Dotmo, due to costs",
-    "content": "The Snapchat maker is spinning off yet another internal unit. Dotmo will be composed of current Snap staff who are leaving the social media company to focus on AI video development.",
-    "pubDate": "Thu, 18 Jun 2026 20:30:00 +0000"
+    "url": "https://www.producthunt.com/products/midjourney",
+    "name": "Product Hunt",
+    "category": "新サービス・ガジェット",
+    "title": "Midjourney Scanner",
+    "content": "",
+    "pubDate": "2026-06-19T03:18:43.000Z"
   },
   {
     "url": "https://venturebeat.com/technology/google-just-redesigned-the-search-box-for-the-first-time-in-25-years-heres-why-it-matters-more-than-you-think",
@@ -144,19 +144,19 @@
     "pubDate": "Tue, 19 May 2026 17:45:00 GMT"
   },
   {
-    "url": "https://www.jacc.org/doi/10.1016/j.jaccas.2025.104885",
-    "name": "Hacker News",
-    "category": "スタートアップ・開発",
-    "title": "Ice water drowning survival of young patient (2025)",
-    "content": "Article URL: https://www.jacc.org/doi/10.1016/j.jaccas.2025.104885 Comments URL: https://news.ycombinator.com/item?id=48594592 Points: 163 # Comments: 104",
-    "pubDate": "Fri, 19 Jun 2026 03:50:25 +0000"
-  },
-  {
-    "url": "https://techcrunch.com/2026/06/18/telegram-ban-in-india-sparks-a-rush-to-vpns-rival-apps/",
+    "url": "https://techcrunch.com/2026/06/19/every-fusion-startup-that-has-raised-over-100m/",
     "name": "TechCrunch",
     "category": "テクノロジー",
-    "title": "Telegram ban in India sparks a rush to VPNs, rival apps",
-    "content": "Telegram argues India should block specific content, not an entire platform used by millions.",
-    "pubDate": "Fri, 19 Jun 2026 01:01:00 +0000"
+    "title": "Every fusion startup that has raised over $100M",
+    "content": "Fusion startups have raised $7.1 billion to date, with the majority of it going to a handful of companies.",
+    "pubDate": "Fri, 19 Jun 2026 16:50:58 +0000"
+  },
+  {
+    "url": "https://overreacted.io/there-are-no-instances-in-atproto/",
+    "name": "Hacker News",
+    "category": "スタートアップ・開発",
+    "title": "There Are No Instances in ATProto",
+    "content": "Article URL: https://overreacted.io/there-are-no-instances-in-atproto/ Comments URL: https://news.ycombinator.com/item?id=48599515 Points: 41 # Comments: 19",
+    "pubDate": "Fri, 19 Jun 2026 15:10:02 +0000"
   }
 ]
