@@ -3,7 +3,7 @@
   "last_success_window_key": "2026-06-12-NONE",
   "articles_today": 0,
   "last_count_date": "2026-06-21",
-  "dify_calls_today": 4,
+  "dify_calls_today": 5,
   "processed_urls": [
     "https://www.wired.com/gallery/best-gifts-for-men-2026/",
     "https://techcrunch.com/2026/06/14/uk-may-ban-social-media-for-children-under-16/",
@@ -16,6 +16,7 @@
     "https://overreacted.io/there-are-no-instances-in-atproto/",
     "https://www.producthunt.com/products/narration-room",
     "https://www.producthunt.com/products/api-to-mcp",
-    "https://venturebeat.com/technology/salesforce-rolls-out-new-slackbot-ai-agent-as-it-battles-microsoft-and"
+    "https://venturebeat.com/technology/salesforce-rolls-out-new-slackbot-ai-agent-as-it-battles-microsoft-and",
+    "https://www.producthunt.com/products/pixlie"
   ]
 }
