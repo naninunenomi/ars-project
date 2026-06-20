@@ -192,9 +192,55 @@
         tr:last-child td { border-bottom: none; }
         tr:hover td { background: var(--glass); }
 
+        .lib-search {
+            width: 100%; padding: 10px 16px; background: #0d1117;
+            border: 1px solid var(--border); border-radius: 8px;
+            color: #fff; font-size: 13px; font-family: inherit;
+            box-sizing: border-box; margin-bottom: 0;
+            transition: border-color 0.2s;
+        }
+        .lib-search:focus { outline: none; border-color: var(--bg-accent); }
+        .lib-search::placeholder { color: #475569; }
+
+        .lib-category {
+            border-bottom: 1px solid var(--border);
+        }
+        .lib-category:last-child { border-bottom: none; }
+        .lib-category-header {
+            padding: 14px 24px; cursor: pointer;
+            display: flex; justify-content: space-between; align-items: center;
+            transition: background 0.2s ease;
+            user-select: none;
+        }
+        .lib-category-header:hover { background: rgba(56, 189, 248, 0.04); }
+        .lib-category-title {
+            font-weight: 800; font-size: 13px; color: #e2e8f0;
+            display: flex; align-items: center; gap: 10px;
+        }
+        .lib-category-icon {
+            display: inline-flex; align-items: center; justify-content: center;
+            width: 28px; height: 28px; border-radius: 8px;
+            background: rgba(56, 189, 248, 0.1); font-size: 14px;
+        }
+        .lib-category-count {
+            background: rgba(56, 189, 248, 0.15); color: var(--bg-accent);
+            font-size: 10px; font-weight: 700; padding: 3px 8px;
+            border-radius: 100px; min-width: 20px; text-align: center;
+        }
+        .lib-category-chevron {
+            color: var(--text-dim); font-size: 12px;
+            transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .lib-category.open .lib-category-chevron { transform: rotate(90deg); }
+        .lib-category-body {
+            max-height: 0; overflow: hidden;
+            transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .lib-category.open .lib-category-body { max-height: 2000px; }
+
         .lib-item { 
-            padding: 18px 24px; 
-            border-bottom: 1px solid var(--border); 
+            padding: 12px 24px 12px 56px; 
+            border-top: 1px solid rgba(56, 139, 253, 0.08); 
             cursor: pointer; 
             transition: all 0.2s ease; 
             display: flex; 
@@ -205,18 +251,18 @@
         .lib-item:hover { 
             background: rgba(56, 189, 248, 0.04); 
         }
-        .lib-item:last-child { border-bottom: none; }
-        .lib-theme { color: var(--bg-accent); font-weight: 700; font-size: 14px; letter-spacing: 0.2px; }
+        .lib-theme { color: var(--bg-accent); font-weight: 600; font-size: 13px; letter-spacing: 0.2px; }
         .lib-btn { 
             background: transparent; 
             color: var(--bg-accent); 
             border: 1px solid var(--border); 
-            padding: 6px 14px; 
+            padding: 5px 12px; 
             border-radius: 8px; 
-            font-size: 11px; 
+            font-size: 10px; 
             font-weight: 600;
             cursor: pointer; 
             transition: all 0.2s ease;
+            white-space: nowrap;
         }
         .lib-item:hover .lib-btn {
             background: var(--bg-accent);
@@ -384,8 +430,14 @@
             </div>
 
             <div class="panel">
-                <div class="panel-header">KNOWLEDGE LIBRARY (Click to view details)</div>
-                <div id="library-list">
+                <div class="panel-header" style="display:flex; justify-content:space-between; align-items:center; flex-wrap: wrap; gap: 10px;">
+                    <span>KNOWLEDGE LIBRARY</span>
+                    <span id="lib-total-count" style="font-size:11px; color:var(--bg-accent); font-weight:400; letter-spacing:0;"></span>
+                </div>
+                <div style="padding: 12px 16px 0 16px;">
+                    <input type="text" class="lib-search" id="lib-search" placeholder="🔍 テーマを検索..." oninput="filterLibrary()">
+                </div>
+                <div id="library-list" style="padding-top: 8px;">
                     <div style="padding:20px; text-align:center; color:var(--text-dim)">Loading library...</div>
                 </div>
             </div>
@@ -506,16 +558,9 @@
                 </tr>
             `).join('') || '<tr><td colspan="3" style="text-align:center">No records.</td></tr>';
 
-            // Library
-            const libList = document.getElementById('library-list');
+            // Library (Hierarchical)
             window.arsLibrary = d.library || {};
-            
-            libList.innerHTML = Object.keys(window.arsLibrary).map(theme => `
-                <div class="lib-item" onclick="showVaultDetails('${theme.replace(/'/g, "\\'")}')">
-                    <span class="lib-theme">> ${theme}</span>
-                    <button class="lib-btn">詳細表示</button>
-                </div>
-            `).join('') || '<div style="padding:20px; text-align:center">Library is empty.</div>';
+            renderLibrary(window.arsLibrary);
 
             // Learning
             const learning = d.learning || { queue: [] };
@@ -595,6 +640,112 @@
         } finally {
             btn.innerText = "最新の情報に更新";
         }
+    }
+
+    // === Knowledge Library: Hierarchical Categorization ===
+    const CATEGORY_RULES = [
+        { key: '景品表示法', label: '景品表示法（景表法）', icon: '🏷️' },
+        { key: '薬機法', label: '薬機法・医療広告', icon: '💊' },
+        { key: '医療', label: '薬機法・医療広告', icon: '💊' },
+        { key: '個人情報保護', label: '個人情報保護法・プライバシー', icon: '🔒' },
+        { key: 'プライバシー', label: '個人情報保護法・プライバシー', icon: '🔒' },
+        { key: 'Cookie', label: '個人情報保護法・プライバシー', icon: '🔒' },
+        { key: '生体', label: '個人情報保護法・プライバシー', icon: '🔒' },
+        { key: 'オプトアウト', label: '個人情報保護法・プライバシー', icon: '🔒' },
+        { key: 'ダークパターン', label: '個人情報保護法・プライバシー', icon: '🔒' },
+        { key: '暗号資産', label: '暗号資産・金融規制', icon: '🪙' },
+        { key: '金融商品', label: '暗号資産・金融規制', icon: '🪙' },
+        { key: '投資', label: '暗号資産・金融規制', icon: '🪙' },
+        { key: 'HFT', label: '暗号資産・金融規制', icon: '🪙' },
+        { key: 'ステーキング', label: '暗号資産・金融規制', icon: '🪙' },
+        { key: '不公正取引', label: '暗号資産・金融規制', icon: '🪙' },
+        { key: '大量保有', label: '暗号資産・金融規制', icon: '🪙' },
+        { key: '消費者契約法', label: '消費者保護法', icon: '🛡️' },
+        { key: '消費者安全法', label: '消費者保護法', icon: '🛡️' },
+        { key: '特定商取引', label: '消費者保護法', icon: '🛡️' },
+        { key: '不正競争防止', label: '不正競争防止法', icon: '⚖️' },
+        { key: '不当条項', label: '消費者保護法', icon: '🛡️' },
+        { key: '食品', label: '食品表示・健康増進法', icon: '🍽️' },
+        { key: '健康増進', label: '食品表示・健康増進法', icon: '🍽️' },
+        { key: 'サプリ', label: '食品表示・健康増進法', icon: '🍽️' },
+        { key: '宅建', label: '業種別広告規制', icon: '🏠' },
+        { key: '不動産', label: '業種別広告規制', icon: '🏠' },
+        { key: '求人', label: '業種別広告規制', icon: '🏠' },
+        { key: '職業安定', label: '業種別広告規制', icon: '🏠' },
+        { key: '古物', label: '業種別広告規制', icon: '🏠' },
+        { key: '弁護士', label: '業種別広告規制', icon: '🏠' },
+        { key: '経済安全保障', label: 'AI・テクノロジー規制', icon: '🤖' },
+        { key: 'AI', label: 'AI・テクノロジー規制', icon: '🤖' },
+        { key: 'デジタルサービス', label: 'AI・テクノロジー規制', icon: '🤖' },
+        { key: 'ソフトウェア競争', label: 'AI・テクノロジー規制', icon: '🤖' },
+        { key: 'ニューラル', label: 'AI・テクノロジー規制', icon: '🤖' },
+        { key: 'サステナビリティ', label: 'ESG・サステナビリティ', icon: '🌱' },
+        { key: 'SSBJ', label: 'ESG・サステナビリティ', icon: '🌱' },
+        { key: '犯罪収益', label: '刑事法・マネロン', icon: '🚨' },
+        { key: '闇バイト', label: '刑事法・マネロン', icon: '🚨' },
+    ];
+
+    function categorizeTheme(theme) {
+        for (const rule of CATEGORY_RULES) {
+            if (theme.includes(rule.key)) return { label: rule.label, icon: rule.icon };
+        }
+        return { label: 'その他の法規制', icon: '📋' };
+    }
+
+    function renderLibrary(library, filter = '') {
+        const libList = document.getElementById('library-list');
+        const themes = Object.keys(library);
+        const lowerFilter = filter.toLowerCase();
+        const filtered = lowerFilter
+            ? themes.filter(t => t.toLowerCase().includes(lowerFilter))
+            : themes;
+
+        document.getElementById('lib-total-count').textContent = `${filtered.length} / ${themes.length} テーマ`;
+
+        if (filtered.length === 0) {
+            libList.innerHTML = '<div style="padding:20px; text-align:center; color:var(--text-dim)">該当するテーマがありません。</div>';
+            return;
+        }
+
+        // Group by category
+        const groups = {};
+        for (const theme of filtered) {
+            const cat = categorizeTheme(theme);
+            if (!groups[cat.label]) groups[cat.label] = { icon: cat.icon, themes: [] };
+            groups[cat.label].themes.push(theme);
+        }
+
+        // Sort categories by count (descending)
+        const sortedGroups = Object.entries(groups).sort((a, b) => b[1].themes.length - a[1].themes.length);
+
+        libList.innerHTML = sortedGroups.map(([catLabel, catData]) => {
+            const items = catData.themes.sort().map(theme => `
+                <div class="lib-item" onclick="showVaultDetails('${theme.replace(/'/g, "\\\'")}')">
+                    <span class="lib-theme">${theme}</span>
+                    <button class="lib-btn">詳細</button>
+                </div>
+            `).join('');
+            return `
+                <div class="lib-category" onclick="this.classList.toggle('open')">
+                    <div class="lib-category-header">
+                        <span class="lib-category-title">
+                            <span class="lib-category-icon">${catData.icon}</span>
+                            ${catLabel}
+                            <span class="lib-category-count">${catData.themes.length}</span>
+                        </span>
+                        <span class="lib-category-chevron">▶</span>
+                    </div>
+                    <div class="lib-category-body" onclick="event.stopPropagation()">
+                        ${items}
+                    </div>
+                </div>
+            `;
+        }).join('');
+    }
+
+    function filterLibrary() {
+        const q = document.getElementById('lib-search').value.trim();
+        renderLibrary(window.arsLibrary, q);
     }
 
     function showVaultDetails(theme) {
