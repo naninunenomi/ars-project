@@ -1,19 +1,19 @@
 const TRACKING_ID = 'automationnew-22';
 
 // カテゴリ・タイトルに応じてAmazonのベストセラーランキングページへ誘導する
-// 検索結果よりも「実際に売れているもの」が並ぶためコンバージョン率が高い
+// 確実に商品が存在するトップレベルカテゴリのURLを使用
 
 interface RankingConfig {
-  url: string;       // AmazonランキングページのURL（タグ付き）
-  label: string;     // ボタンに表示するラベル
-  description: string; // 説明文
-  emoji: string;     // アイコン絵文字
+  url: string;
+  label: string;
+  description: string;
+  emoji: string;
 }
 
 function getRankingConfig(title: string, category: string): RankingConfig {
   const text = `${title} ${category}`.toLowerCase();
 
-  // AI・機械学習・ChatGPT系 → コンピュータ・ITカテゴリのベストセラー
+  // AI・機械学習・ChatGPT系 → コンピュータ・IT書籍
   if (
     text.includes('ai') || text.includes('人工知能') ||
     text.includes('chatgpt') || text.includes('gemini') ||
@@ -28,7 +28,7 @@ function getRankingConfig(title: string, category: string): RankingConfig {
     };
   }
 
-  // スタートアップ・起業・副業・個人開発 → 起業・独立カテゴリ
+  // スタートアップ・起業・副業・個人開発 → ビジネス書全般（確実に商品あり）
   if (
     text.includes('スタートアップ') || text.includes('startup') ||
     text.includes('起業') || text.includes('独立') ||
@@ -37,14 +37,14 @@ function getRankingConfig(title: string, category: string): RankingConfig {
     text.includes('product hunt') || text.includes('hacker news')
   ) {
     return {
-      url: `https://www.amazon.co.jp/gp/bestsellers/books/2193047051/?tag=${TRACKING_ID}`,
-      label: '起業・独立・副業 売れ筋ランキングを見る',
+      url: `https://www.amazon.co.jp/gp/bestsellers/books/466284/?tag=${TRACKING_ID}`,
+      label: '副業・起業 ビジネス書 売れ筋ランキングを見る',
       description: '副業・起業を始めたい方へ。今最も読まれているビジネス書のランキングです。',
       emoji: '🚀',
     };
   }
 
-  // プログラミング・開発系 → コンピュータ・IT
+  // プログラミング・開発系 → コンピュータ・IT書籍
   if (
     text.includes('プログラミング') || text.includes('python') ||
     text.includes('javascript') || text.includes('コード') ||
@@ -58,21 +58,21 @@ function getRankingConfig(title: string, category: string): RankingConfig {
     };
   }
 
-  // マーケティング・SNS・集客系 → マーケティング・セールス
+  // マーケティング・SNS・集客系 → ビジネス書全般
   if (
     text.includes('マーケティング') || text.includes('sns') ||
     text.includes('twitter') || text.includes('instagram') ||
     text.includes('集客') || text.includes('ブランド')
   ) {
     return {
-      url: `https://www.amazon.co.jp/gp/bestsellers/books/466286/?tag=${TRACKING_ID}`,
-      label: 'マーケティング書籍 売れ筋ランキングを見る',
-      description: 'ビジネスをもっと伸ばしたい方へ。今最も読まれているマーケティング書籍です。',
+      url: `https://www.amazon.co.jp/gp/bestsellers/books/466284/?tag=${TRACKING_ID}`,
+      label: 'マーケティング・ビジネス書 売れ筋ランキングを見る',
+      description: 'ビジネスをもっと伸ばしたい方へ。今最も読まれているビジネス書のランキングです。',
       emoji: '📣',
     };
   }
 
-  // セキュリティ・プライバシー系 → コンピュータ・IT
+  // セキュリティ・プライバシー系 → コンピュータ・IT書籍
   if (
     text.includes('セキュリティ') || text.includes('security') ||
     text.includes('ハッキング') || text.includes('プライバシー')
@@ -80,12 +80,12 @@ function getRankingConfig(title: string, category: string): RankingConfig {
     return {
       url: `https://www.amazon.co.jp/gp/bestsellers/books/466282/?tag=${TRACKING_ID}`,
       label: 'IT・セキュリティ書籍 売れ筋ランキングを見る',
-      description: 'デジタル時代のリスク管理を学びたい方へ。今最も読まれているセキュリティ書籍です。',
+      description: 'デジタル時代のリスク管理を学びたい方へ。今最も読まれているIT書籍のランキングです。',
       emoji: '🔐',
     };
   }
 
-  // 自動化・業務効率化系 → ビジネス実務
+  // 自動化・業務効率化系 → ビジネス書全般
   if (
     text.includes('自動化') || text.includes('automation') ||
     text.includes('効率化') || text.includes('業務') ||
@@ -99,7 +99,7 @@ function getRankingConfig(title: string, category: string): RankingConfig {
     };
   }
 
-  // ガジェット・デバイス・ハードウェア系 → 家電・カメラ
+  // ガジェット・デバイス・ハードウェア系 → 家電ベストセラー（確実に商品あり）
   if (
     text.includes('ガジェット') || text.includes('デバイス') ||
     text.includes('iphone') || text.includes('android') ||
@@ -114,11 +114,11 @@ function getRankingConfig(title: string, category: string): RankingConfig {
     };
   }
 
-  // デフォルト → ビジネス書全般のベストセラー
+  // デフォルト → 和書全体のベストセラー（必ず商品あり）
   return {
-    url: `https://www.amazon.co.jp/gp/bestsellers/books/466284/?tag=${TRACKING_ID}`,
-    label: 'ビジネス書 売れ筋ランキングを見る',
-    description: 'ビジネスパーソンに今最も読まれている書籍のランキングです。',
+    url: `https://www.amazon.co.jp/gp/bestsellers/books/?tag=${TRACKING_ID}`,
+    label: 'ビジネス・IT書籍 売れ筋ランキングを見る',
+    description: '今最も読まれているビジネス・テクノロジー書籍のランキングです。',
     emoji: '📚',
   };
 }

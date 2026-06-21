@@ -19,6 +19,28 @@ const JSON_ARTICLES_DIR = path.join(process.cwd(), 'src/data/articles');
 // Vercelビルド時に prebuild スクリプトで src/data/articles/ にコピーされるため、同じディレクトリを読む
 const HTML_ARTICLES_DIR = path.join(process.cwd(), 'src/data/articles');
 
+/** 記事本文の共通クリーンアップ処理 */
+function cleanArticleContent(content: string): string {
+  // ダミー広告・フッターを削除
+  content = content.replace(/<div class="ad-section"[\s\S]*?<\/div>/gi, '');
+  content = content.replace(/この記事を読んで自動化を始めたくなった方へ[\s\S]*?ConoHa/gi, '');
+  content = content.replace(/© 202[0-9] Automation News\. All rights reserved\./gi, '');
+  content = content.replace(/<hr\s*\/?>\s*$/i, '');
+
+  // 長いURLのテキストを「引用元を見る」に置換（スマホでの横はみ出し対策）
+  // <a href="...">https://long-url...</a> → <a href="...">引用元を見る</a>
+  content = content.replace(
+    /<a(\s[^>]*)?>https?:\/\/[^<]{20,}<\/a>/gi,
+    (match) => {
+      const hrefMatch = match.match(/href="([^"]+)"/);
+      const href = hrefMatch ? hrefMatch[1] : '#';
+      return `<a href="${href}" target="_blank" rel="noopener noreferrer">引用元を見る</a>`;
+    }
+  );
+
+  return content;
+}
+
 /** HTMLファイルからメタデータと本文を抽出する */
 function parseHtmlArticle(fileName: string, fileContents: string): Article | null {
   try {
@@ -48,13 +70,8 @@ function parseHtmlArticle(fileName: string, fileContents: string): Article | nul
 
     // 本文: <body> タグ全体（なければファイル全体）
     const bodyMatch = fileContents.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
-    let content = bodyMatch ? bodyMatch[1] : fileContents;
-
-    // ダミーの広告セクション（<div class="ad-section">等）とフッターを正規表現で削除
-    content = content.replace(/<div class="ad-section"[\s\S]*?<\/div>/gi, '');
-    content = content.replace(/この記事を読んで自動化を始めたくなった方へ[\s\S]*?ConoHa/gi, '');
-    content = content.replace(/© 202[0-9] Automation News\. All rights reserved\./gi, '');
-    content = content.replace(/<hr\s*\/?>\s*$/i, ''); // 最後の余分な水平線を削除
+    const rawContent = bodyMatch ? bodyMatch[1] : fileContents;
+    const content = cleanArticleContent(rawContent);
 
     return {
       id: fileName.replace('.html', ''),
@@ -63,7 +80,7 @@ function parseHtmlArticle(fileName: string, fileContents: string): Article | nul
       source_url,
       source_name,
       date,
-      draft: false, // DifyがGitHubに直接保存したものは公開済みとして扱う
+      draft: false,
       content,
     };
   } catch (e) {
@@ -81,7 +98,24 @@ function loadJsonArticles(includeDrafts: boolean): Article[] {
     .map(fileName => {
       try {
         const data = JSON.parse(fs.readFileSync(path.join(JSON_ARTICLES_DIR, fileName), 'utf8'));
-        return data as Article;
+        const article = data as Article;
+
+        // 古い記事のタイトルが「〇〇 の最新ニュースと活用法」形式なら、本文のh1から再取得を試みる
+        const isGenericTitle = article.title && /の最新ニュースと活用法$/.test(article.title);
+        if (isGenericTitle && article.content) {
+          const h1Match = article.content.match(/<h1[^>]*>([\/\s\S]*?)<\/h1>/i);
+          if (h1Match) {
+            const extracted = h1Match[1].replace(/<[^>]+>/g, '').trim();
+            if (extracted && extracted.length > 5) article.title = extracted;
+          }
+        }
+
+        // 本文のURLも長さ修正を適用
+        if (article.content) {
+          article.content = cleanArticleContent(article.content);
+        }
+
+        return article;
       } catch {
         return null;
       }
