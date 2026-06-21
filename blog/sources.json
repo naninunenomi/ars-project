@@ -1,11 +1,67 @@
 [
   {
-    "url": "https://old.reddit.com/r/ClaudeAI/comments/1ubm53n/official_anthropic_to_require_identity/",
+    "url": "https://www.producthunt.com/products/poolside",
+    "name": "Product Hunt",
+    "category": "新サービス・ガジェット",
+    "title": "Laguna by Poolside",
+    "content": "",
+    "pubDate": "2026-06-20T15:00:44.000Z"
+  },
+  {
+    "url": "https://kevinak.se/blog/who-actually-owns-your-atproto-identity-hint-its-probably-not-you",
     "name": "Hacker News",
     "category": "スタートアップ・開発",
-    "title": "Anthropic to Require ID Verification for Certain Capabilities Starting July 8",
-    "content": "Article URL: https://old.reddit.com/r/ClaudeAI/comments/1ubm53n/official_anthropic_to_require_identity/ Comments URL: https://news.ycombinator.com/item?id=48618455 Points: 34 # Comments: 21",
-    "pubDate": "Sun, 21 Jun 2026 12:44:13 +0000"
+    "title": "Who Owns Your ATProto Identity? Hint: It's Probably Not You",
+    "content": "Article URL: https://kevinak.se/blog/who-actually-owns-your-atproto-identity-hint-its-probably-not-you Comments URL: https://news.ycombinator.com/item?id=48619140 Points: 45 # Comments: 29",
+    "pubDate": "Sun, 21 Jun 2026 14:09:07 +0000"
+  },
+  {
+    "url": "https://techcrunch.com/2026/06/21/beyond-siri-here-are-the-practical-ai-features-coming-to-your-iphone-in-ios-27/",
+    "name": "TechCrunch",
+    "category": "テクノロジー",
+    "title": "Beyond Siri: Here are the practical AI features coming to your iPhone in iOS 27",
+    "content": "Siri’s AI overhaul may have grabbed the headlines at WWDC, but some of Apple’s most useful AI features are arriving elsewhere in iOS 27.",
+    "pubDate": "Sun, 21 Jun 2026 14:40:28 +0000"
+  },
+  {
+    "url": "https://techcrunch.com/2026/06/20/in-the-weights-is-your-new-ai-centric-vanity-search/",
+    "name": "TechCrunch",
+    "category": "テクノロジー",
+    "title": "In the Weights is your new AI-centric vanity search",
+    "content": "So ... what's your In the Weights score?",
+    "pubDate": "Sat, 20 Jun 2026 19:41:11 +0000"
+  },
+  {
+    "url": "https://www.producthunt.com/products/oioi",
+    "name": "Product Hunt",
+    "category": "新サービス・ガジェット",
+    "title": "oioi ",
+    "content": "",
+    "pubDate": "2026-06-20T15:05:27.000Z"
+  },
+  {
+    "url": "https://www.producthunt.com/products/cloudback",
+    "name": "Product Hunt",
+    "category": "新サービス・ガジェット",
+    "title": "Cloudback MCP Server",
+    "content": "",
+    "pubDate": "2026-06-20T20:46:39.000Z"
+  },
+  {
+    "url": "https://github.com/proteanthread/bcg",
+    "name": "Hacker News",
+    "category": "スタートアップ・開発",
+    "title": "David Ahl's Basic Computer Games Ported to C",
+    "content": "Article URL: https://github.com/proteanthread/bcg Comments URL: https://news.ycombinator.com/item?id=48618226 Points: 31 # Comments: 12",
+    "pubDate": "Sun, 21 Jun 2026 12:11:29 +0000"
+  },
+  {
+    "url": "https://techcrunch.com/2026/06/20/signals-meredith-whittaker-wants-you-to-remember-that-ai-chatbots-are-not-your-friends/",
+    "name": "TechCrunch",
+    "category": "テクノロジー",
+    "title": "Signal’s Meredith Whittaker wants you to remember that AI chatbots ‘are not your friends’",
+    "content": "\"These are not your friends. These are not conscious beings. These are not sentient interlocutors.”",
+    "pubDate": "Sat, 20 Jun 2026 20:32:29 +0000"
   },
   {
     "url": "https://techcrunch.com/2026/06/20/nobel-laureate-john-jumper-is-leaving-deepmind-for-rival-anthropic/",
@@ -16,20 +72,12 @@
     "pubDate": "Sat, 20 Jun 2026 16:39:57 +0000"
   },
   {
-    "url": "https://www.producthunt.com/products/backgrind",
-    "name": "Product Hunt",
-    "category": "新サービス・ガジェット",
-    "title": "Backgrind",
-    "content": "",
-    "pubDate": "2026-06-16T16:36:06.000Z"
-  },
-  {
-    "url": "https://venturebeat.com/technology/listen-labs-raises-usd69m-after-viral-billboard-hiring-stunt-to-scale-ai",
-    "name": "VentureBeat",
-    "category": "AI・機械学習",
-    "title": "Listen Labs raises $69M after viral billboard hiring stunt to scale AI customer interviews",
-    "content": "Alfred Wahlforss was running out of options. His startup, Listen Labs , needed to hire over 100 engineers, but competing against Mark Zuckerberg&#x27;s $100 million offers seemed impossible. So he spent $5,000 — a fifth of his marketing budget — on a billboard in San Francisco displaying what looked like gibberish: five strings of random numbers. The numbers were actually AI tokens. Decoded, they led to a coding challenge: build an algorithm to act as a digital bouncer at Berghain, the Berlin nightclub famous for rejecting nearly everyone at the door. Within days, thousands attempted the puzzle. 430 cracked it. Some got hired. The winner flew to Berlin, all expenses paid. That unconventional approach has now attracted $69 million in Series B funding, led by Ribbit Capital with participation from Evantic and existing investors Sequoia Capital , Conviction , and Pear VC . The round values Listen Labs at $500 million and brings its total capital to $100 million. In nine months since launch, the company has grown annualized revenue by 15x to eight figures and conducted over one million AI-powered interviews. \"When you obsess over customers, everything else follows,\" Wahlforss said in an interview with VentureBeat. \"Teams that use Listen bring the customer into every decision, from marketing to product, and when the customer is delighted, everyone is.\" Why traditional market research is broken, and what Listen Labs is building to fix it Listen&#x27;s AI researcher finds participants, conducts in-depth interviews, and delivers actionable insights in hours, not weeks. The platform replaces the traditional choice between quantitative surveys — which provide statistical precision but miss nuance—and qualitative interviews, which deliver depth but cannot scale. Wahlforss explained the limitation of existing approaches: \"Essentially surveys give you false precision because people end up answering the same question... You can&#x27;t get the outliers. People are actually not honest on surveys.\" The alternative, one-on-one human interviews, \"gives you a lot of depth. You can ask follow up questions. You can kind of double check if they actually know what they&#x27;re talking about. And the problem is you can&#x27;t scale that.\" The platform works in four steps: users create a study with AI assistance, Listen recruits participants from its global network of 30 million people, an AI moderator conducts in-depth interviews with follow-up questions, and results are packaged into executive-ready reports including key themes, highlight reels, and slide decks. What distinguishes Listen&#x27;s approach is its use of open-ended video conversations rather than multiple-choice forms. \"In a survey, you can kind of guess what you should answer, and you have four options,\" Wahlforss said. \"Oh, they probably want me to buy high income. Let me click on that button versus an open ended response. It just generates much more honesty.\" The dirty secret of the $140 billion market r",
-    "pubDate": "Fri, 16 Jan 2026 14:01:00 GMT"
+    "url": "https://alexkritchevsky.com/2024/02/28/geometric-algebra.html",
+    "name": "Hacker News",
+    "category": "スタートアップ・開発",
+    "title": "The case against geometric algebra (2024)",
+    "content": "Article URL: https://alexkritchevsky.com/2024/02/28/geometric-algebra.html Comments URL: https://news.ycombinator.com/item?id=48617782 Points: 86 # Comments: 60",
+    "pubDate": "Sun, 21 Jun 2026 11:06:55 +0000"
   },
   {
     "url": "https://venturebeat.com/infrastructure/claude-code-costs-up-to-usd200-a-month-goose-does-the-same-thing-for-free",
@@ -38,14 +86,6 @@
     "title": "Claude Code costs up to $200 a month. Goose does the same thing for free.",
     "content": "The artificial intelligence coding revolution comes with a catch: it&#x27;s expensive. Claude Code , Anthropic&#x27;s terminal-based AI agent that can write, debug, and deploy code autonomously, has captured the imagination of software developers worldwide. But its pricing — ranging from $20 to $200 per month depending on usage — has sparked a growing rebellion among the very programmers it aims to serve. Now, a free alternative is gaining traction. Goose , an open-source AI agent developed by Block (the financial technology company formerly known as Square), offers nearly identical functionality to Claude Code but runs entirely on a user&#x27;s local machine. No subscription fees. No cloud dependency. No rate limits that reset every five hours. \"Your data stays with you, period,\" said Parth Sareen, a software engineer who demonstrated the tool during a recent livestream . The comment captures the core appeal: Goose gives developers complete control over their AI-powered workflow, including the ability to work offline — even on an airplane. The project has exploded in popularity. Goose now boasts more than 26,100 stars on GitHub , the code-sharing platform, with 362 contributors and 102 releases since its launch. The latest version, 1.20.1 , shipped on January 19, 2026, reflecting a development pace that rivals commercial products. For developers frustrated by Claude Code&#x27;s pricing structure and usage caps, Goose represents something increasingly rare in the AI industry: a genuinely free, no-strings-attached option for serious work. Anthropic&#x27;s new rate limits spark a developer revolt To understand why Goose matters, you need to understand the Claude Code pricing controversy . Anthropic, the San Francisco artificial intelligence company founded by former OpenAI executives, offers Claude Code as part of its subscription tiers. The free plan provides no access whatsoever. The Pro plan , at $17 per month with annual billing (or $20 monthly), limits users to just 10 to 40 prompts every five hours — a constraint that serious developers exhaust within minutes of intensive work. The Max plans , at $100 and $200 per month, offer more headroom: 50 to 200 prompts and 200 to 800 prompts respectively, plus access to Anthropic&#x27;s most powerful model, Claude 4.5 Opus . But even these premium tiers come with restrictions that have inflamed the developer community. In late July, Anthropic announced new weekly rate limits. Under the system, Pro users receive 40 to 80 hours of Sonnet 4 usage per week. Max users at the $200 tier get 240 to 480 hours of Sonnet 4, plus 24 to 40 hours of Opus 4. Nearly five months later, the frustration has not subsided. The problem? Those \"hours\" are not actual hours. They represent token-based limits that vary wildly depending on codebase size, conversation length, and the complexity of the code being processed. Independent analysis suggests the actual per-session limits translate to roughly 44,000 tokens for Pro users",
     "pubDate": "Mon, 19 Jan 2026 14:00:00 GMT"
-  },
-  {
-    "url": "https://www.producthunt.com/products/poolside",
-    "name": "Product Hunt",
-    "category": "新サービス・ガジェット",
-    "title": "Laguna by Poolside",
-    "content": "",
-    "pubDate": "2026-06-20T15:00:44.000Z"
   },
   {
     "url": "https://venturebeat.com/technology/salesforce-rolls-out-new-slackbot-ai-agent-as-it-battles-microsoft-and",
@@ -64,20 +104,44 @@
     "pubDate": "Thu, 22 Jan 2026 14:00:00 GMT"
   },
   {
-    "url": "https://techcrunch.com/2026/06/20/signals-meredith-whittaker-wants-you-to-remember-that-ai-chatbots-are-not-your-friends/",
-    "name": "TechCrunch",
-    "category": "テクノロジー",
-    "title": "Signal’s Meredith Whittaker wants you to remember that AI chatbots ‘are not your friends’",
-    "content": "\"These are not your friends. These are not conscious beings. These are not sentient interlocutors.”",
-    "pubDate": "Sat, 20 Jun 2026 20:32:29 +0000"
+    "url": "https://www.producthunt.com/products/notchkin",
+    "name": "Product Hunt",
+    "category": "新サービス・ガジェット",
+    "title": "Notchkin",
+    "content": "",
+    "pubDate": "2026-06-20T23:28:02.000Z"
   },
   {
-    "url": "https://alexkritchevsky.com/2024/02/28/geometric-algebra.html",
+    "url": "https://www.producthunt.com/products/backgrind",
+    "name": "Product Hunt",
+    "category": "新サービス・ガジェット",
+    "title": "Backgrind",
+    "content": "",
+    "pubDate": "2026-06-16T16:36:06.000Z"
+  },
+  {
+    "url": "https://www.beyondallreason.info",
     "name": "Hacker News",
     "category": "スタートアップ・開発",
-    "title": "The case against geometric algebra (2024)",
-    "content": "Article URL: https://alexkritchevsky.com/2024/02/28/geometric-algebra.html Comments URL: https://news.ycombinator.com/item?id=48617782 Points: 46 # Comments: 15",
-    "pubDate": "Sun, 21 Jun 2026 11:06:55 +0000"
+    "title": "Beyond All Reason (Free Total Annihilation Inspired RTS)",
+    "content": "Article URL: https://www.beyondallreason.info Comments URL: https://news.ycombinator.com/item?id=48617990 Points: 190 # Comments: 86",
+    "pubDate": "Sun, 21 Jun 2026 11:38:01 +0000"
+  },
+  {
+    "url": "https://worksinprogress.co/issue/how-abolishing-the-stakeholder-state-caused-the-industrial-revolution/",
+    "name": "Hacker News",
+    "category": "スタートアップ・開発",
+    "title": "Smashing the NIMBYs created modern capitalism",
+    "content": "Article URL: https://worksinprogress.co/issue/how-abolishing-the-stakeholder-state-caused-the-industrial-revolution/ Comments URL: https://news.ycombinator.com/item?id=48618442 Points: 11 # Comments: 1",
+    "pubDate": "Sun, 21 Jun 2026 12:42:24 +0000"
+  },
+  {
+    "url": "https://techcrunch.com/2026/06/20/founders-funds-outlier-bet-on-humanely-killed-fish/",
+    "name": "TechCrunch",
+    "category": "テクノロジー",
+    "title": "Founders Fund’s outlier bet on humanely killed fish",
+    "content": "Shinkei makes a refrigerator-sized robot called Poseidon to kill fish quickly and humanely.",
+    "pubDate": "Sat, 20 Jun 2026 18:26:02 +0000"
   },
   {
     "url": "https://venturebeat.com/technology/google-just-redesigned-the-search-box-for-the-first-time-in-25-years-heres-why-it-matters-more-than-you-think",
@@ -88,75 +152,11 @@
     "pubDate": "Tue, 19 May 2026 17:45:00 GMT"
   },
   {
-    "url": "https://news.crunchbase.com/venture/foreign-born-entrepreneurs-drive-americas-unicorn-boom-strebulaev-stanford/",
-    "name": "Hacker News",
-    "category": "スタートアップ・開発",
-    "title": "Foreign-Born Entrepreneurs Drive America's Unicorn Boom",
-    "content": "Article URL: https://news.crunchbase.com/venture/foreign-born-entrepreneurs-drive-americas-unicorn-boom-strebulaev-stanford/ Comments URL: https://news.ycombinator.com/item?id=48617991 Points: 10 # Comments: 3",
-    "pubDate": "Sun, 21 Jun 2026 11:38:09 +0000"
-  },
-  {
-    "url": "https://techcrunch.com/2026/06/20/every-new-ios-27-feature-thats-worth-knowing-about/",
-    "name": "TechCrunch",
-    "category": "テクノロジー",
-    "title": "Every new iOS 27 feature that’s worth knowing about",
-    "content": "While it's not flashy like Apple’s new Siri AI and Apple Intelligence upgrades, there are still a number of additions to iOS 27 worth looking at.",
-    "pubDate": "Sat, 20 Jun 2026 15:00:00 +0000"
-  },
-  {
-    "url": "https://techcrunch.com/2026/06/20/in-the-weights-is-your-new-ai-centric-vanity-search/",
-    "name": "TechCrunch",
-    "category": "テクノロジー",
-    "title": "In the Weights is your new AI-centric vanity search",
-    "content": "So ... what's your In the Weights score?",
-    "pubDate": "Sat, 20 Jun 2026 19:41:11 +0000"
-  },
-  {
-    "url": "https://github.com/proteanthread/bcg",
-    "name": "Hacker News",
-    "category": "スタートアップ・開発",
-    "title": "David Ahl's Basic Computer Games Ported to C",
-    "content": "Article URL: https://github.com/proteanthread/bcg Comments URL: https://news.ycombinator.com/item?id=48618226 Points: 8 # Comments: 2",
-    "pubDate": "Sun, 21 Jun 2026 12:11:29 +0000"
-  },
-  {
-    "url": "https://www.beyondallreason.info",
-    "name": "Hacker News",
-    "category": "スタートアップ・開発",
-    "title": "Beyond All Reason (Free Total Annihilation Inspired RTS)",
-    "content": "Article URL: https://www.beyondallreason.info Comments URL: https://news.ycombinator.com/item?id=48617990 Points: 45 # Comments: 17",
-    "pubDate": "Sun, 21 Jun 2026 11:38:01 +0000"
-  },
-  {
-    "url": "https://www.producthunt.com/products/grok-by-spacexai-for-word",
-    "name": "Product Hunt",
-    "category": "新サービス・ガジェット",
-    "title": "Grok by SpaceXAI for Word",
-    "content": "",
-    "pubDate": "2026-06-18T20:55:25.000Z"
-  },
-  {
-    "url": "https://www.producthunt.com/products/cloudback",
-    "name": "Product Hunt",
-    "category": "新サービス・ガジェット",
-    "title": "Cloudback MCP Server",
-    "content": "",
-    "pubDate": "2026-06-20T20:46:39.000Z"
-  },
-  {
-    "url": "https://www.producthunt.com/products/plansera-ai",
-    "name": "Product Hunt",
-    "category": "新サービス・ガジェット",
-    "title": "Plansera AI",
-    "content": "",
-    "pubDate": "2026-06-19T05:33:37.000Z"
-  },
-  {
-    "url": "https://techcrunch.com/2026/06/20/founders-funds-outlier-bet-on-humanely-killed-fish/",
-    "name": "TechCrunch",
-    "category": "テクノロジー",
-    "title": "Founders Fund’s outlier bet on humanely killed fish",
-    "content": "Shinkei makes a refrigerator-sized robot called Poseidon to kill fish quickly and humanely.",
-    "pubDate": "Sat, 20 Jun 2026 18:26:02 +0000"
+    "url": "https://venturebeat.com/technology/listen-labs-raises-usd69m-after-viral-billboard-hiring-stunt-to-scale-ai",
+    "name": "VentureBeat",
+    "category": "AI・機械学習",
+    "title": "Listen Labs raises $69M after viral billboard hiring stunt to scale AI customer interviews",
+    "content": "Alfred Wahlforss was running out of options. His startup, Listen Labs , needed to hire over 100 engineers, but competing against Mark Zuckerberg&#x27;s $100 million offers seemed impossible. So he spent $5,000 — a fifth of his marketing budget — on a billboard in San Francisco displaying what looked like gibberish: five strings of random numbers. The numbers were actually AI tokens. Decoded, they led to a coding challenge: build an algorithm to act as a digital bouncer at Berghain, the Berlin nightclub famous for rejecting nearly everyone at the door. Within days, thousands attempted the puzzle. 430 cracked it. Some got hired. The winner flew to Berlin, all expenses paid. That unconventional approach has now attracted $69 million in Series B funding, led by Ribbit Capital with participation from Evantic and existing investors Sequoia Capital , Conviction , and Pear VC . The round values Listen Labs at $500 million and brings its total capital to $100 million. In nine months since launch, the company has grown annualized revenue by 15x to eight figures and conducted over one million AI-powered interviews. \"When you obsess over customers, everything else follows,\" Wahlforss said in an interview with VentureBeat. \"Teams that use Listen bring the customer into every decision, from marketing to product, and when the customer is delighted, everyone is.\" Why traditional market research is broken, and what Listen Labs is building to fix it Listen&#x27;s AI researcher finds participants, conducts in-depth interviews, and delivers actionable insights in hours, not weeks. The platform replaces the traditional choice between quantitative surveys — which provide statistical precision but miss nuance—and qualitative interviews, which deliver depth but cannot scale. Wahlforss explained the limitation of existing approaches: \"Essentially surveys give you false precision because people end up answering the same question... You can&#x27;t get the outliers. People are actually not honest on surveys.\" The alternative, one-on-one human interviews, \"gives you a lot of depth. You can ask follow up questions. You can kind of double check if they actually know what they&#x27;re talking about. And the problem is you can&#x27;t scale that.\" The platform works in four steps: users create a study with AI assistance, Listen recruits participants from its global network of 30 million people, an AI moderator conducts in-depth interviews with follow-up questions, and results are packaged into executive-ready reports including key themes, highlight reels, and slide decks. What distinguishes Listen&#x27;s approach is its use of open-ended video conversations rather than multiple-choice forms. \"In a survey, you can kind of guess what you should answer, and you have four options,\" Wahlforss said. \"Oh, they probably want me to buy high income. Let me click on that button versus an open ended response. It just generates much more honesty.\" The dirty secret of the $140 billion market r",
+    "pubDate": "Fri, 16 Jan 2026 14:01:00 GMT"
   }
 ]

@@ -1,9 +1,16 @@
 {
-  "pending_article": null,
+  "pending_article": {
+    "url": "https://techcrunch.com/2026/06/20/signals-meredith-whittaker-wants-you-to-remember-that-ai-chatbots-are-not-your-friends/",
+    "name": "TechCrunch",
+    "category": "テクノロジー",
+    "title": "Signal’s Meredith Whittaker wants you to remember that AI chatbots ‘are not your friends’",
+    "content": "\"These are not your friends. These are not conscious beings. These are not sentient interlocutors.”",
+    "pubDate": "Sat, 20 Jun 2026 20:32:29 +0000"
+  },
   "last_success_window_key": "2026-06-12-NONE",
   "articles_today": 0,
-  "last_count_date": "2026-06-21",
-  "dify_calls_today": 5,
+  "last_count_date": "2026-06-22",
+  "dify_calls_today": 1,
   "processed_urls": [
     "https://www.wired.com/gallery/best-gifts-for-men-2026/",
     "https://techcrunch.com/2026/06/14/uk-may-ban-social-media-for-children-under-16/",
