@@ -29,9 +29,6 @@ export default function RootLayout({
         <footer className="site-footer">
           <div className="container">
             <p>&copy; {new Date().getFullYear()} Automation News. This site is fully automated by AI.</p>
-            <p style={{ marginTop: "10px" }}>
-              <a href="/preview" style={{ color: "var(--text-light)", fontSize: "0.8rem", textDecoration: "underline" }}>管理者用プレビュー画面</a>
-            </p>
           </div>
         </footer>
       </body>
