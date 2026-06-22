@@ -76,17 +76,20 @@ async function triggerDify(article, currentDate) {
 
     const output = response.data;
     const responseText = JSON.stringify(output);
-    console.log("📥 Response received from Dify.");
+    console.log("📥 Response received from Dify:", responseText.substring(0, 1000));
 
     if (output.data && (output.data.status === "failed" || output.data.status === "error")) {
       console.error("❌ Dify Workflow failed internally:", output.data.error || output.data);
       return "ERROR";
     }
 
-    if (responseText.includes("STALE")) {
-      return "STALE";
-    } else if (responseText.includes("STUDYING")) {
-      return "STUDYING";
+    if (output.code && output.code !== "success") {
+      console.error("❌ Dify API returned an error code:", output);
+      return "ERROR";
+    }
+
+    if (responseText.includes('"status":"failed"')) {
+       return "ERROR";
     } else {
       // 成功した場合、Difyの出力を抜き出してファイルとして保存する
       const outputs = output.data && output.data.outputs;
@@ -137,11 +140,13 @@ async function triggerDify(article, currentDate) {
           fs.writeFileSync(webDataFilename, JSON.stringify(articleData, null, 2), 'utf8');
           console.log(`✅ Saved generated article to ${jsonFilename}`);
           console.log(`✅ Also saved to web/src/data/articles for Vercel`);
+          return "SUCCESS";
         } else {
           console.log("⚠️ No valid article text found in Dify response outputs.");
+          return "ERROR";
         }
       }
-      return "SUCCESS";
+      return "ERROR";
     }
   } catch (error) {
     console.error("❌ Dify API Error:", error.message);
