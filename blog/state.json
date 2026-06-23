@@ -1,9 +1,9 @@
 {
   "pending_article": null,
   "last_success_window_key": "2026-06-12-NONE",
-  "articles_today": 2,
-  "last_count_date": "2026-06-23",
-  "dify_calls_today": 3,
+  "articles_today": 0,
+  "last_count_date": "2026-06-24",
+  "dify_calls_today": 1,
   "processed_urls": [
     "https://www.wired.com/gallery/best-gifts-for-men-2026/",
     "https://techcrunch.com/2026/06/14/uk-may-ban-social-media-for-children-under-16/",
@@ -22,6 +22,7 @@
     "https://www.fca.org.uk/news/press-releases/investors-get-real-time-view-uk-bond-market-activity-first-time",
     "https://techcrunch.com/2026/06/22/whatsapp-gets-new-chief-as-meta-taps-indias-cred-founder-kunal-shah-and-invests-900m-in-startup/",
     "https://www.ycombinator.com/companies/kyber/jobs/FGmI8mx-head-of-engineering",
-    "https://techcrunch.com/2026/06/22/shareholders-sue-ubers-board-over-sexual-assaults-other-incidents/"
+    "https://techcrunch.com/2026/06/22/shareholders-sue-ubers-board-over-sexual-assaults-other-incidents/",
+    "https://www.producthunt.com/products/sakana-fugu"
   ]
 }
