@@ -1,9 +1,16 @@
 {
-  "pending_article": null,
+  "pending_article": {
+    "url": "https://techcrunch.com/2026/06/23/mark-zuckerberg-wants-meta-to-launch-its-own-prediction-market/",
+    "name": "TechCrunch",
+    "category": "テクノロジー",
+    "title": "Mark Zuckerberg wants Meta to launch its own prediction market",
+    "content": "Mark Zuckerberg reportedly wants Meta to have its own prediction market app.",
+    "pubDate": "Tue, 23 Jun 2026 19:19:44 +0000"
+  },
   "last_success_window_key": "2026-06-12-NONE",
   "articles_today": 0,
   "last_count_date": "2026-06-24",
-  "dify_calls_today": 1,
+  "dify_calls_today": 2,
   "processed_urls": [
     "https://www.wired.com/gallery/best-gifts-for-men-2026/",
     "https://techcrunch.com/2026/06/14/uk-may-ban-social-media-for-children-under-16/",

@@ -1,107 +1,27 @@
 [
   {
-    "url": "https://techcrunch.com/2026/06/23/password-manager-maker-lastpass-says-hackers-stole-customer-support-case-data-during-klue-breach/",
-    "name": "TechCrunch",
-    "category": "テクノロジー",
-    "title": "Password manager maker LastPass says hackers stole customer support case data during Klue breach",
-    "content": "This is the second data breach to affect LastPass customers in recent years, after one of the password manager's tech partners was recently breached.",
-    "pubDate": "Tue, 23 Jun 2026 15:12:37 +0000"
-  },
-  {
-    "url": "https://www.producthunt.com/products/sakana-fugu",
-    "name": "Product Hunt",
-    "category": "新サービス・ガジェット",
-    "title": "Sakana Fugu",
-    "content": "",
-    "pubDate": "2026-06-22T09:47:17.000Z"
-  },
-  {
-    "url": "https://www.producthunt.com/products/prepros-7",
-    "name": "Product Hunt",
-    "category": "新サービス・ガジェット",
-    "title": "prepros",
-    "content": "",
-    "pubDate": "2026-06-16T02:38:06.000Z"
-  },
-  {
-    "url": "https://www.producthunt.com/products/bestdefense-io",
-    "name": "Product Hunt",
-    "category": "新サービス・ガジェット",
-    "title": "BestDefense.io",
-    "content": "",
-    "pubDate": "2026-06-19T17:15:23.000Z"
-  },
-  {
-    "url": "https://hacks.mozilla.org/2026/06/pact-anonymous-credentials-for-the-web/",
+    "url": "http://www.jerrysmap.com/the-map",
     "name": "Hacker News",
     "category": "スタートアップ・開発",
-    "title": "Pact: Anonymous Credentials for the Web",
-    "content": "Article URL: https://hacks.mozilla.org/2026/06/pact-anonymous-credentials-for-the-web/ Comments URL: https://news.ycombinator.com/item?id=48647360 Points: 11 # Comments: 0",
-    "pubDate": "Tue, 23 Jun 2026 16:21:49 +0000"
+    "title": "Jerry's Map",
+    "content": "https://www.openculture.com/2026/06/this-man-has-been-drawin... Comments URL: https://news.ycombinator.com/item?id=48649435 Points: 44 # Comments: 7",
+    "pubDate": "Tue, 23 Jun 2026 18:40:22 +0000"
   },
   {
-    "url": "https://venturebeat.com/infrastructure/claude-code-costs-up-to-usd200-a-month-goose-does-the-same-thing-for-free",
-    "name": "VentureBeat",
-    "category": "AI・機械学習",
-    "title": "Claude Code costs up to $200 a month. Goose does the same thing for free.",
-    "content": "The artificial intelligence coding revolution comes with a catch: it&#x27;s expensive. Claude Code , Anthropic&#x27;s terminal-based AI agent that can write, debug, and deploy code autonomously, has captured the imagination of software developers worldwide. But its pricing — ranging from $20 to $200 per month depending on usage — has sparked a growing rebellion among the very programmers it aims to serve. Now, a free alternative is gaining traction. Goose , an open-source AI agent developed by Block (the financial technology company formerly known as Square), offers nearly identical functionality to Claude Code but runs entirely on a user&#x27;s local machine. No subscription fees. No cloud dependency. No rate limits that reset every five hours. \"Your data stays with you, period,\" said Parth Sareen, a software engineer who demonstrated the tool during a recent livestream . The comment captures the core appeal: Goose gives developers complete control over their AI-powered workflow, including the ability to work offline — even on an airplane. The project has exploded in popularity. Goose now boasts more than 26,100 stars on GitHub , the code-sharing platform, with 362 contributors and 102 releases since its launch. The latest version, 1.20.1 , shipped on January 19, 2026, reflecting a development pace that rivals commercial products. For developers frustrated by Claude Code&#x27;s pricing structure and usage caps, Goose represents something increasingly rare in the AI industry: a genuinely free, no-strings-attached option for serious work. Anthropic&#x27;s new rate limits spark a developer revolt To understand why Goose matters, you need to understand the Claude Code pricing controversy . Anthropic, the San Francisco artificial intelligence company founded by former OpenAI executives, offers Claude Code as part of its subscription tiers. The free plan provides no access whatsoever. The Pro plan , at $17 per month with annual billing (or $20 monthly), limits users to just 10 to 40 prompts every five hours — a constraint that serious developers exhaust within minutes of intensive work. The Max plans , at $100 and $200 per month, offer more headroom: 50 to 200 prompts and 200 to 800 prompts respectively, plus access to Anthropic&#x27;s most powerful model, Claude 4.5 Opus . But even these premium tiers come with restrictions that have inflamed the developer community. In late July, Anthropic announced new weekly rate limits. Under the system, Pro users receive 40 to 80 hours of Sonnet 4 usage per week. Max users at the $200 tier get 240 to 480 hours of Sonnet 4, plus 24 to 40 hours of Opus 4. Nearly five months later, the frustration has not subsided. The problem? Those \"hours\" are not actual hours. They represent token-based limits that vary wildly depending on codebase size, conversation length, and the complexity of the code being processed. Independent analysis suggests the actual per-session limits translate to roughly 44,000 tokens for Pro users",
-    "pubDate": "Mon, 19 Jan 2026 14:00:00 GMT"
-  },
-  {
-    "url": "https://techcrunch.com/2026/06/23/anthropics-claude-tag-is-learning-your-company-one-slack-message-at-a-time/",
-    "name": "TechCrunch",
-    "category": "テクノロジー",
-    "title": "Anthropic’s Claude Tag is learning your company, one Slack message at a time",
-    "content": "Anthropic’s new Claude Tag brings an always-on AI teammate to Slack. But beyond productivity, the feature is a strategic play to capture organizational context, institutional knowledge, and enterprise workflows.",
-    "pubDate": "Tue, 23 Jun 2026 17:00:00 +0000"
-  },
-  {
-    "url": "https://www.producthunt.com/products/buddy-ai-note",
+    "url": "https://www.producthunt.com/products/openart",
     "name": "Product Hunt",
     "category": "新サービス・ガジェット",
-    "title": "Buddy AI Note",
+    "title": "OpenArt Director",
     "content": "",
-    "pubDate": "2026-06-18T15:02:50.000Z"
+    "pubDate": "2026-06-09T13:04:12.000Z"
   },
   {
-    "url": "https://venturebeat.com/technology/listen-labs-raises-usd69m-after-viral-billboard-hiring-stunt-to-scale-ai",
-    "name": "VentureBeat",
-    "category": "AI・機械学習",
-    "title": "Listen Labs raises $69M after viral billboard hiring stunt to scale AI customer interviews",
-    "content": "Alfred Wahlforss was running out of options. His startup, Listen Labs , needed to hire over 100 engineers, but competing against Mark Zuckerberg&#x27;s $100 million offers seemed impossible. So he spent $5,000 — a fifth of his marketing budget — on a billboard in San Francisco displaying what looked like gibberish: five strings of random numbers. The numbers were actually AI tokens. Decoded, they led to a coding challenge: build an algorithm to act as a digital bouncer at Berghain, the Berlin nightclub famous for rejecting nearly everyone at the door. Within days, thousands attempted the puzzle. 430 cracked it. Some got hired. The winner flew to Berlin, all expenses paid. That unconventional approach has now attracted $69 million in Series B funding, led by Ribbit Capital with participation from Evantic and existing investors Sequoia Capital , Conviction , and Pear VC . The round values Listen Labs at $500 million and brings its total capital to $100 million. In nine months since launch, the company has grown annualized revenue by 15x to eight figures and conducted over one million AI-powered interviews. \"When you obsess over customers, everything else follows,\" Wahlforss said in an interview with VentureBeat. \"Teams that use Listen bring the customer into every decision, from marketing to product, and when the customer is delighted, everyone is.\" Why traditional market research is broken, and what Listen Labs is building to fix it Listen&#x27;s AI researcher finds participants, conducts in-depth interviews, and delivers actionable insights in hours, not weeks. The platform replaces the traditional choice between quantitative surveys — which provide statistical precision but miss nuance—and qualitative interviews, which deliver depth but cannot scale. Wahlforss explained the limitation of existing approaches: \"Essentially surveys give you false precision because people end up answering the same question... You can&#x27;t get the outliers. People are actually not honest on surveys.\" The alternative, one-on-one human interviews, \"gives you a lot of depth. You can ask follow up questions. You can kind of double check if they actually know what they&#x27;re talking about. And the problem is you can&#x27;t scale that.\" The platform works in four steps: users create a study with AI assistance, Listen recruits participants from its global network of 30 million people, an AI moderator conducts in-depth interviews with follow-up questions, and results are packaged into executive-ready reports including key themes, highlight reels, and slide decks. What distinguishes Listen&#x27;s approach is its use of open-ended video conversations rather than multiple-choice forms. \"In a survey, you can kind of guess what you should answer, and you have four options,\" Wahlforss said. \"Oh, they probably want me to buy high income. Let me click on that button versus an open ended response. It just generates much more honesty.\" The dirty secret of the $140 billion market r",
-    "pubDate": "Fri, 16 Jan 2026 14:01:00 GMT"
-  },
-  {
-    "url": "https://techcrunch.com/2026/06/23/4-days-left-to-save-up-to-190-on-techcrunch-founder-summit-2026/",
-    "name": "TechCrunch",
-    "category": "テクノロジー",
-    "title": "4 days left to save up to $190 on TechCrunch Founder Summit 2026",
-    "content": "Four days left to save up to $190 on your pass to TechCrunch Founder Summit 2026 — the ultimate founder bootcamp — before Early Bird rates end on June 26 at 11:59 p.m. PT. Register today.",
-    "pubDate": "Tue, 23 Jun 2026 14:00:00 +0000"
-  },
-  {
-    "url": "https://finance.yahoo.com/markets/currencies/articles/ecb-secures-key-parliamentary-backing-102718449.html",
-    "name": "Hacker News",
-    "category": "スタートアップ・開発",
-    "title": "Digital euro clears key hurdle as EU seeks to break free from U.S. credit cards",
-    "content": "Article URL: https://finance.yahoo.com/markets/currencies/articles/ecb-secures-key-parliamentary-backing-102718449.html Comments URL: https://news.ycombinator.com/item?id=48647444 Points: 29 # Comments: 9",
-    "pubDate": "Tue, 23 Jun 2026 16:27:49 +0000"
-  },
-  {
-    "url": "https://www.businesswire.com/news/home/20260622788628/en/Backblaze-Announces-Five-Year-Multi-Exabyte-Data-Storage-Agreement-with-CoreWeave",
-    "name": "Hacker News",
-    "category": "スタートアップ・開発",
-    "title": "Backblaze Announces Five-Year Multi-Exabyte Agreement with CoreWeave",
-    "content": "Article URL: https://www.businesswire.com/news/home/20260622788628/en/Backblaze-Announces-Five-Year-Multi-Exabyte-Data-Storage-Agreement-with-CoreWeave Comments URL: https://news.ycombinator.com/item?id=48647696 Points: 5 # Comments: 0",
-    "pubDate": "Tue, 23 Jun 2026 16:45:50 +0000"
-  },
-  {
-    "url": "https://techcrunch.com/2026/06/23/halobraid-raises-7m-from-seven-seven-six-to-end-the-six-hour-hair-salon-appointment/",
-    "name": "TechCrunch",
-    "category": "テクノロジー",
-    "title": "HaloBraid raises $7M from Seven Seven Six to end the six-hour hair salon appointment",
-    "content": "HaloBraid aims to help salons speed up braiding with its first device, slated to launch later this year, that acts as a braiding assistant for professional stylists.",
-    "pubDate": "Tue, 23 Jun 2026 15:09:38 +0000"
+    "url": "https://www.producthunt.com/products/bluerails-discovery",
+    "name": "Product Hunt",
+    "category": "新サービス・ガジェット",
+    "title": "Bluerails Discovery ",
+    "content": "",
+    "pubDate": "2026-06-22T14:12:05.000Z"
   },
   {
     "url": "https://venturebeat.com/technology/google-just-redesigned-the-search-box-for-the-first-time-in-25-years-heres-why-it-matters-more-than-you-think",
@@ -112,14 +32,6 @@
     "pubDate": "Tue, 19 May 2026 17:45:00 GMT"
   },
   {
-    "url": "https://www.producthunt.com/products/thumbmagic-3",
-    "name": "Product Hunt",
-    "category": "新サービス・ガジェット",
-    "title": "Thumbmagic",
-    "content": "",
-    "pubDate": "2026-06-20T12:18:24.000Z"
-  },
-  {
     "url": "https://venturebeat.com/technology/salesforce-rolls-out-new-slackbot-ai-agent-as-it-battles-microsoft-and",
     "name": "VentureBeat",
     "category": "AI・機械学習",
@@ -128,12 +40,28 @@
     "pubDate": "Tue, 13 Jan 2026 13:00:00 GMT"
   },
   {
-    "url": "https://dandylyons.github.io/treedocs/",
+    "url": "https://www.producthunt.com/products/jotform",
+    "name": "Product Hunt",
+    "category": "新サービス・ガジェット",
+    "title": "Jotform AI App Builder",
+    "content": "",
+    "pubDate": "2026-06-16T13:27:06.000Z"
+  },
+  {
+    "url": "https://swiftpackageindex.com/blog/swift-package-index-joins-apple",
     "name": "Hacker News",
     "category": "スタートアップ・開発",
-    "title": "Show HN: Treedocs: Documentation that automatically checks for staleness",
-    "content": "Article URL: https://dandylyons.github.io/treedocs/ Comments URL: https://news.ycombinator.com/item?id=48646209 Points: 15 # Comments: 8",
-    "pubDate": "Tue, 23 Jun 2026 15:07:30 +0000"
+    "title": "Swift Package Index joins Apple",
+    "content": "Article URL: https://swiftpackageindex.com/blog/swift-package-index-joins-apple Comments URL: https://news.ycombinator.com/item?id=48648779 Points: 57 # Comments: 11",
+    "pubDate": "Tue, 23 Jun 2026 18:00:58 +0000"
+  },
+  {
+    "url": "https://techcrunch.com/2026/06/23/password-manager-maker-lastpass-says-hackers-stole-customer-support-case-data-during-klue-breach/",
+    "name": "TechCrunch",
+    "category": "テクノロジー",
+    "title": "Password manager maker LastPass says hackers stole customer support case data during Klue breach",
+    "content": "This is the second data breach to affect LastPass customers in recent years, after one of the password manager's tech partners was recently breached.",
+    "pubDate": "Tue, 23 Jun 2026 15:12:37 +0000"
   },
   {
     "url": "https://techcrunch.com/2026/06/23/meta-debuts-new-cheaper-smart-glasses-under-its-own-brand/",
@@ -152,11 +80,83 @@
     "pubDate": "Thu, 22 Jan 2026 14:00:00 GMT"
   },
   {
-    "url": "https://blog.dshr.org/2026/06/ais-affordability-crisis.html",
+    "url": "https://www.producthunt.com/products/nanocorp",
+    "name": "Product Hunt",
+    "category": "新サービス・ガジェット",
+    "title": "NanoCorp",
+    "content": "",
+    "pubDate": "2026-06-22T21:59:38.000Z"
+  },
+  {
+    "url": "https://modal.com/blog/introducing-auto-endpoints",
     "name": "Hacker News",
     "category": "スタートアップ・開発",
-    "title": "AI's Affordability Crisis",
-    "content": "Article URL: https://blog.dshr.org/2026/06/ais-affordability-crisis.html Comments URL: https://news.ycombinator.com/item?id=48646276 Points: 131 # Comments: 159",
-    "pubDate": "Tue, 23 Jun 2026 15:11:17 +0000"
+    "title": "Modal Auto Endpoints: Optimized inference you own",
+    "content": "Article URL: https://modal.com/blog/introducing-auto-endpoints Comments URL: https://news.ycombinator.com/item?id=48649358 Points: 10 # Comments: 0",
+    "pubDate": "Tue, 23 Jun 2026 18:35:50 +0000"
+  },
+  {
+    "url": "https://twitter.com/JPoehnelt/status/2069482265953087602",
+    "name": "Hacker News",
+    "category": "スタートアップ・開発",
+    "title": "Fired by Google for creating the Google workspace CLI",
+    "content": "https://xcancel.com/JPoehnelt/status/2069482265953087602 Comments URL: https://news.ycombinator.com/item?id=48649011 Points: 55 # Comments: 22",
+    "pubDate": "Tue, 23 Jun 2026 18:13:40 +0000"
+  },
+  {
+    "url": "https://techcrunch.com/2026/06/23/mark-zuckerberg-wants-meta-to-launch-its-own-prediction-market/",
+    "name": "TechCrunch",
+    "category": "テクノロジー",
+    "title": "Mark Zuckerberg wants Meta to launch its own prediction market",
+    "content": "Mark Zuckerberg reportedly wants Meta to have its own prediction market app.",
+    "pubDate": "Tue, 23 Jun 2026 19:19:44 +0000"
+  },
+  {
+    "url": "https://venturebeat.com/infrastructure/claude-code-costs-up-to-usd200-a-month-goose-does-the-same-thing-for-free",
+    "name": "VentureBeat",
+    "category": "AI・機械学習",
+    "title": "Claude Code costs up to $200 a month. Goose does the same thing for free.",
+    "content": "The artificial intelligence coding revolution comes with a catch: it&#x27;s expensive. Claude Code , Anthropic&#x27;s terminal-based AI agent that can write, debug, and deploy code autonomously, has captured the imagination of software developers worldwide. But its pricing — ranging from $20 to $200 per month depending on usage — has sparked a growing rebellion among the very programmers it aims to serve. Now, a free alternative is gaining traction. Goose , an open-source AI agent developed by Block (the financial technology company formerly known as Square), offers nearly identical functionality to Claude Code but runs entirely on a user&#x27;s local machine. No subscription fees. No cloud dependency. No rate limits that reset every five hours. \"Your data stays with you, period,\" said Parth Sareen, a software engineer who demonstrated the tool during a recent livestream . The comment captures the core appeal: Goose gives developers complete control over their AI-powered workflow, including the ability to work offline — even on an airplane. The project has exploded in popularity. Goose now boasts more than 26,100 stars on GitHub , the code-sharing platform, with 362 contributors and 102 releases since its launch. The latest version, 1.20.1 , shipped on January 19, 2026, reflecting a development pace that rivals commercial products. For developers frustrated by Claude Code&#x27;s pricing structure and usage caps, Goose represents something increasingly rare in the AI industry: a genuinely free, no-strings-attached option for serious work. Anthropic&#x27;s new rate limits spark a developer revolt To understand why Goose matters, you need to understand the Claude Code pricing controversy . Anthropic, the San Francisco artificial intelligence company founded by former OpenAI executives, offers Claude Code as part of its subscription tiers. The free plan provides no access whatsoever. The Pro plan , at $17 per month with annual billing (or $20 monthly), limits users to just 10 to 40 prompts every five hours — a constraint that serious developers exhaust within minutes of intensive work. The Max plans , at $100 and $200 per month, offer more headroom: 50 to 200 prompts and 200 to 800 prompts respectively, plus access to Anthropic&#x27;s most powerful model, Claude 4.5 Opus . But even these premium tiers come with restrictions that have inflamed the developer community. In late July, Anthropic announced new weekly rate limits. Under the system, Pro users receive 40 to 80 hours of Sonnet 4 usage per week. Max users at the $200 tier get 240 to 480 hours of Sonnet 4, plus 24 to 40 hours of Opus 4. Nearly five months later, the frustration has not subsided. The problem? Those \"hours\" are not actual hours. They represent token-based limits that vary wildly depending on codebase size, conversation length, and the complexity of the code being processed. Independent analysis suggests the actual per-session limits translate to roughly 44,000 tokens for Pro users",
+    "pubDate": "Mon, 19 Jan 2026 14:00:00 GMT"
+  },
+  {
+    "url": "https://arxiv.org/abs/2606.13175",
+    "name": "Hacker News",
+    "category": "スタートアップ・開発",
+    "title": "The End of Code Review: Coding Agents Supersede Human Inspection",
+    "content": "Article URL: https://arxiv.org/abs/2606.13175 Comments URL: https://news.ycombinator.com/item?id=48649183 Points: 5 # Comments: 0",
+    "pubDate": "Tue, 23 Jun 2026 18:24:16 +0000"
+  },
+  {
+    "url": "https://techcrunch.com/2026/06/23/halobraid-raises-7m-from-seven-seven-six-to-end-the-six-hour-hair-salon-appointment/",
+    "name": "TechCrunch",
+    "category": "テクノロジー",
+    "title": "HaloBraid raises $7M from Seven Seven Six to end the six-hour hair salon appointment",
+    "content": "HaloBraid aims to help salons speed up braiding with its first device, slated to launch later this year, that acts as a braiding assistant for professional stylists.",
+    "pubDate": "Tue, 23 Jun 2026 15:09:38 +0000"
+  },
+  {
+    "url": "https://venturebeat.com/technology/listen-labs-raises-usd69m-after-viral-billboard-hiring-stunt-to-scale-ai",
+    "name": "VentureBeat",
+    "category": "AI・機械学習",
+    "title": "Listen Labs raises $69M after viral billboard hiring stunt to scale AI customer interviews",
+    "content": "Alfred Wahlforss was running out of options. His startup, Listen Labs , needed to hire over 100 engineers, but competing against Mark Zuckerberg&#x27;s $100 million offers seemed impossible. So he spent $5,000 — a fifth of his marketing budget — on a billboard in San Francisco displaying what looked like gibberish: five strings of random numbers. The numbers were actually AI tokens. Decoded, they led to a coding challenge: build an algorithm to act as a digital bouncer at Berghain, the Berlin nightclub famous for rejecting nearly everyone at the door. Within days, thousands attempted the puzzle. 430 cracked it. Some got hired. The winner flew to Berlin, all expenses paid. That unconventional approach has now attracted $69 million in Series B funding, led by Ribbit Capital with participation from Evantic and existing investors Sequoia Capital , Conviction , and Pear VC . The round values Listen Labs at $500 million and brings its total capital to $100 million. In nine months since launch, the company has grown annualized revenue by 15x to eight figures and conducted over one million AI-powered interviews. \"When you obsess over customers, everything else follows,\" Wahlforss said in an interview with VentureBeat. \"Teams that use Listen bring the customer into every decision, from marketing to product, and when the customer is delighted, everyone is.\" Why traditional market research is broken, and what Listen Labs is building to fix it Listen&#x27;s AI researcher finds participants, conducts in-depth interviews, and delivers actionable insights in hours, not weeks. The platform replaces the traditional choice between quantitative surveys — which provide statistical precision but miss nuance—and qualitative interviews, which deliver depth but cannot scale. Wahlforss explained the limitation of existing approaches: \"Essentially surveys give you false precision because people end up answering the same question... You can&#x27;t get the outliers. People are actually not honest on surveys.\" The alternative, one-on-one human interviews, \"gives you a lot of depth. You can ask follow up questions. You can kind of double check if they actually know what they&#x27;re talking about. And the problem is you can&#x27;t scale that.\" The platform works in four steps: users create a study with AI assistance, Listen recruits participants from its global network of 30 million people, an AI moderator conducts in-depth interviews with follow-up questions, and results are packaged into executive-ready reports including key themes, highlight reels, and slide decks. What distinguishes Listen&#x27;s approach is its use of open-ended video conversations rather than multiple-choice forms. \"In a survey, you can kind of guess what you should answer, and you have four options,\" Wahlforss said. \"Oh, they probably want me to buy high income. Let me click on that button versus an open ended response. It just generates much more honesty.\" The dirty secret of the $140 billion market r",
+    "pubDate": "Fri, 16 Jan 2026 14:01:00 GMT"
+  },
+  {
+    "url": "https://www.producthunt.com/products/sakana-fugu",
+    "name": "Product Hunt",
+    "category": "新サービス・ガジェット",
+    "title": "Sakana Fugu",
+    "content": "",
+    "pubDate": "2026-06-22T09:47:17.000Z"
+  },
+  {
+    "url": "https://techcrunch.com/2026/06/23/anthropics-claude-tag-is-learning-your-company-one-slack-message-at-a-time/",
+    "name": "TechCrunch",
+    "category": "テクノロジー",
+    "title": "Anthropic’s Claude Tag is learning your company, one Slack message at a time",
+    "content": "Anthropic’s new Claude Tag brings an always-on AI teammate to Slack. But beyond productivity, the feature is a strategic play to capture organizational context, institutional knowledge, and enterprise workflows.",
+    "pubDate": "Tue, 23 Jun 2026 17:00:00 +0000"
   }
 ]
