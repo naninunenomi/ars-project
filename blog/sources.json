@@ -1,123 +1,19 @@
 [
   {
-    "url": "https://techcrunch.com/2026/06/25/patronus-ai-lands-50m-to-build-digital-worlds-that-stress-test-ai-agents/",
-    "name": "TechCrunch",
-    "category": "テクノロジー",
-    "title": "Patronus AI lands $50M to build ‘digital worlds’ that stress-test AI agents",
-    "content": "Agent-testing startup Patronus AI, founded by former Meta AI researchers, is experiencing nearly insatiable demand, its investor says.",
-    "pubDate": "Thu, 25 Jun 2026 20:19:25 +0000"
-  },
-  {
-    "url": "https://venturebeat.com/technology/salesforce-rolls-out-new-slackbot-ai-agent-as-it-battles-microsoft-and",
-    "name": "VentureBeat",
-    "category": "AI・機械学習",
-    "title": "Salesforce rolls out new Slackbot AI agent as it battles Microsoft and Google in workplace AI",
-    "content": "Salesforce on Tuesday launched an entirely rebuilt version of Slackbot , the company&#x27;s workplace assistant, transforming it from a simple notification tool into what executives describe as a fully powered AI agent capable of searching enterprise data, drafting documents, and taking action on behalf of employees. The new Slackbot, now generally available to Business+ and Enterprise+ customers, is Salesforce&#x27;s most aggressive move yet to position Slack at the center of the emerging \"agentic AI\" movement — where software agents work alongside humans to complete complex tasks. The launch comes as Salesforce attempts to convince investors that artificial intelligence will bolster its products rather than render them obsolete. \"Slackbot isn&#x27;t just another copilot or AI assistant,\" said Parker Harris , Salesforce co-founder and Slack&#x27;s chief technology officer, in an exclusive interview with Salesforce. \"It&#x27;s the front door to the agentic enterprise, powered by Salesforce.\" From tricycle to Porsche: Salesforce rebuilt Slackbot from the ground up Harris was blunt about what distinguishes the new Slackbot from its predecessor: \"The old Slackbot was, you know, a little tricycle, and the new Slackbot is like, you know, a Porsche.\" The original Slackbot, which has existed since Slack&#x27;s early days, performed basic algorithmic tasks — reminding users to add colleagues to documents, suggesting channel archives, and delivering simple notifications. The new version runs on an entirely different architecture built around a large language model and sophisticated search capabilities that can access Salesforce records, Google Drive files, calendar data, and years of Slack conversations. \"It&#x27;s two different things,\" Harris explained. \"The old Slackbot was algorithmic and fairly simple. The new Slackbot is brand new — it&#x27;s based around an LLM and a very robust search engine, and connections to third-party search engines, third-party enterprise data.\" Salesforce chose to retain the Slackbot brand despite the fundamental technical overhaul. \"People know what Slackbot is, and so we wanted to carry that forward,\" Harris said. Why Anthropic&#x27;s Claude powers the new Slackbot — and which AI models could come next The new Slackbot runs on Claude , Anthropic&#x27;s large language model, a choice driven partly by compliance requirements. Slack&#x27;s commercial service operates under FedRAMP Moderate certification to serve U.S. federal government customers, and Harris said Anthropic was \"the only provider that could give us a compliant LLM\" when Slack began building the new system. But that exclusivity won&#x27;t last. \"We are, this year, going to support additional providers,\" Harris said. \"We have a great relationship with Google. Gemini is incredible — performance is great, cost is great. So we&#x27;re going to use Gemini for some things.\" He added that OpenAI remains a possibility as well. Harris echoed Salesforce CEO Marc Benioff&",
-    "pubDate": "Tue, 13 Jan 2026 13:00:00 GMT"
-  },
-  {
-    "url": "https://rozumem.xyz/posts/17",
-    "name": "Hacker News",
-    "category": "スタートアップ・開発",
-    "title": "The Doorman's Fallacy in Action",
-    "content": "Article URL: https://rozumem.xyz/posts/17 Comments URL: https://news.ycombinator.com/item?id=48678495 Points: 7 # Comments: 3",
-    "pubDate": "Thu, 25 Jun 2026 20:00:35 +0000"
-  },
-  {
-    "url": "https://www.producthunt.com/products/paybond",
+    "url": "https://www.producthunt.com/products/zaro",
     "name": "Product Hunt",
     "category": "新サービス・ガジェット",
-    "title": "Paybond CLI",
+    "title": "Zaro",
     "content": "",
-    "pubDate": "2026-06-25T01:23:19.000Z"
+    "pubDate": "2026-06-24T13:54:51.000Z"
   },
   {
-    "url": "https://techcrunch.com/2026/06/25/a16z-backed-base-power-is-offering-cheaper-electricity-to-the-power-grid-that-needs-it-most/",
-    "name": "TechCrunch",
-    "category": "テクノロジー",
-    "title": "a16z-backed Base Power is offering cheaper electricity to the power grid that needs it most",
-    "content": "Base Power is skipping the PJM's troubled interconnection queue by placing its batteries at people's homes, offering backup services in exchange.",
-    "pubDate": "Thu, 25 Jun 2026 17:52:05 +0000"
-  },
-  {
-    "url": "https://www.producthunt.com/products/browserbash",
+    "url": "https://www.producthunt.com/products/nashra-turn-followers-into-clients",
     "name": "Product Hunt",
     "category": "新サービス・ガジェット",
-    "title": "BrowserBash",
+    "title": "Nashra",
     "content": "",
-    "pubDate": "2026-06-23T07:54:57.000Z"
-  },
-  {
-    "url": "https://www.producthunt.com/products/browseract",
-    "name": "Product Hunt",
-    "category": "新サービス・ガジェット",
-    "title": "BrowserAct",
-    "content": "",
-    "pubDate": "2026-06-16T10:15:38.000Z"
-  },
-  {
-    "url": "https://techcrunch.com/2026/06/25/xbox-follows-apple-with-price-increases/",
-    "name": "TechCrunch",
-    "category": "テクノロジー",
-    "title": "Xbox follows Apple with price increases ",
-    "content": "The company says the increases are being driven by rising memory and console storage prices, with costs more than 2.5x higher than previous levels.",
-    "pubDate": "Thu, 25 Jun 2026 19:39:55 +0000"
-  },
-  {
-    "url": "https://venturebeat.com/infrastructure/claude-code-costs-up-to-usd200-a-month-goose-does-the-same-thing-for-free",
-    "name": "VentureBeat",
-    "category": "AI・機械学習",
-    "title": "Claude Code costs up to $200 a month. Goose does the same thing for free.",
-    "content": "The artificial intelligence coding revolution comes with a catch: it&#x27;s expensive. Claude Code , Anthropic&#x27;s terminal-based AI agent that can write, debug, and deploy code autonomously, has captured the imagination of software developers worldwide. But its pricing — ranging from $20 to $200 per month depending on usage — has sparked a growing rebellion among the very programmers it aims to serve. Now, a free alternative is gaining traction. Goose , an open-source AI agent developed by Block (the financial technology company formerly known as Square), offers nearly identical functionality to Claude Code but runs entirely on a user&#x27;s local machine. No subscription fees. No cloud dependency. No rate limits that reset every five hours. \"Your data stays with you, period,\" said Parth Sareen, a software engineer who demonstrated the tool during a recent livestream . The comment captures the core appeal: Goose gives developers complete control over their AI-powered workflow, including the ability to work offline — even on an airplane. The project has exploded in popularity. Goose now boasts more than 26,100 stars on GitHub , the code-sharing platform, with 362 contributors and 102 releases since its launch. The latest version, 1.20.1 , shipped on January 19, 2026, reflecting a development pace that rivals commercial products. For developers frustrated by Claude Code&#x27;s pricing structure and usage caps, Goose represents something increasingly rare in the AI industry: a genuinely free, no-strings-attached option for serious work. Anthropic&#x27;s new rate limits spark a developer revolt To understand why Goose matters, you need to understand the Claude Code pricing controversy . Anthropic, the San Francisco artificial intelligence company founded by former OpenAI executives, offers Claude Code as part of its subscription tiers. The free plan provides no access whatsoever. The Pro plan , at $17 per month with annual billing (or $20 monthly), limits users to just 10 to 40 prompts every five hours — a constraint that serious developers exhaust within minutes of intensive work. The Max plans , at $100 and $200 per month, offer more headroom: 50 to 200 prompts and 200 to 800 prompts respectively, plus access to Anthropic&#x27;s most powerful model, Claude 4.5 Opus . But even these premium tiers come with restrictions that have inflamed the developer community. In late July, Anthropic announced new weekly rate limits. Under the system, Pro users receive 40 to 80 hours of Sonnet 4 usage per week. Max users at the $200 tier get 240 to 480 hours of Sonnet 4, plus 24 to 40 hours of Opus 4. Nearly five months later, the frustration has not subsided. The problem? Those \"hours\" are not actual hours. They represent token-based limits that vary wildly depending on codebase size, conversation length, and the complexity of the code being processed. Independent analysis suggests the actual per-session limits translate to roughly 44,000 tokens for Pro users",
-    "pubDate": "Mon, 19 Jan 2026 14:00:00 GMT"
-  },
-  {
-    "url": "https://techcrunch.com/2026/06/25/polymarket-says-hackers-stole-users-funds/",
-    "name": "TechCrunch",
-    "category": "テクノロジー",
-    "title": "Polymarket says hackers stole users’ funds",
-    "content": "The prediction market giant Polymarket said it's refunding users who had funds stolen due to a third-party breach.",
-    "pubDate": "Thu, 25 Jun 2026 19:58:46 +0000"
-  },
-  {
-    "url": "https://siliconopera.com/the-customer-who-almost-killed-slack-stripe-and-airbnb/",
-    "name": "Hacker News",
-    "category": "スタートアップ・開発",
-    "title": "The Customer Who Almost Killed Slack, Stripe, and Airbnb",
-    "content": "Article URL: https://siliconopera.com/the-customer-who-almost-killed-slack-stripe-and-airbnb/ Comments URL: https://news.ycombinator.com/item?id=48678820 Points: 4 # Comments: 0",
-    "pubDate": "Thu, 25 Jun 2026 20:30:47 +0000"
-  },
-  {
-    "url": "https://www.neowin.net/news/windows-10-quietly-gets-one-more-year-of-support-and-updates/",
-    "name": "Hacker News",
-    "category": "スタートアップ・開発",
-    "title": "Windows 10 quietly gets one more year of support and updates",
-    "content": "Article URL: https://www.neowin.net/news/windows-10-quietly-gets-one-more-year-of-support-and-updates/ Comments URL: https://news.ycombinator.com/item?id=48675369 Points: 184 # Comments: 147",
-    "pubDate": "Thu, 25 Jun 2026 15:59:54 +0000"
-  },
-  {
-    "url": "https://www.producthunt.com/products/quickmaker",
-    "name": "Product Hunt",
-    "category": "新サービス・ガジェット",
-    "title": "QuickMaker",
-    "content": "",
-    "pubDate": "2026-06-24T21:20:55.000Z"
-  },
-  {
-    "url": "https://venturebeat.com/infrastructure/railway-secures-usd100-million-to-challenge-aws-with-ai-native-cloud",
-    "name": "VentureBeat",
-    "category": "AI・機械学習",
-    "title": "Railway secures $100 million to challenge AWS with AI-native cloud infrastructure",
-    "content": "Railway , a San Francisco-based cloud platform that has quietly amassed two million developers without spending a dollar on marketing, announced Thursday that it raised $100 million in a Series B funding round, as surging demand for artificial intelligence applications exposes the limitations of legacy cloud infrastructure. TQ Ventures led the round, with participation from FPV Ventures , Redpoint , and Unusual Ventures . The investment values Railway as one of the most significant infrastructure startups to emerge during the AI boom, capitalizing on developer frustration with the complexity and cost of traditional platforms like Amazon Web Services and Google Cloud . \"As AI models get better at writing code, more and more people are asking the age-old question: where, and how, do I run my applications?\" said Jake Cooper, Railway&#x27;s 28-year-old founder and chief executive, in an exclusive interview with VentureBeat. \"The last generation of cloud primitives were slow and outdated, and now with AI moving everything faster, teams simply can&#x27;t keep up.\" The funding is a dramatic acceleration for a company that has charted an unconventional path through the cloud computing industry. Railway raised just $24 million in total before this round, including a $20 million Series A from Redpoint in 2022. The company now processes more than 10 million deployments monthly and handles over one trillion requests through its edge network — metrics that rival far larger and better-funded competitors. Why three-minute deploy times have become unacceptable in the age of AI coding assistants Railway&#x27;s pitch rests on a simple observation: the tools developers use to deploy and manage software were designed for a slower era. A standard build-and-deploy cycle using Terraform , the industry-standard infrastructure tool, takes two to three minutes. That delay, once tolerable, has become a critical bottleneck as AI coding assistants like Claude , ChatGPT , and Cursor can generate working code in seconds. \"When godly intelligence is on tap and can solve any problem in three seconds, those amalgamations of systems become bottlenecks,\" Cooper told VentureBeat. \"What was really cool for humans to deploy in 10 seconds or less is now table stakes for agents.\" The company claims its platform delivers deployments in under one second — fast enough to keep pace with AI-generated code. Customers report a tenfold increase in developer velocity and up to 65 percent cost savings compared to traditional cloud providers. These numbers come directly from enterprise clients, not internal benchmarks. Daniel Lobaton, chief technology officer at G2X, a platform serving 100,000 federal contractors, measured deployment speed improvements of seven times faster and an 87 percent cost reduction after migrating to Railway. His infrastructure bill dropped from $15,000 per month to approximately $1,000. \"The work that used to take me a week on our previous infrastructure, I can do in Rail",
-    "pubDate": "Thu, 22 Jan 2026 14:00:00 GMT"
-  },
-  {
-    "url": "https://venturebeat.com/technology/google-just-redesigned-the-search-box-for-the-first-time-in-25-years-heres-why-it-matters-more-than-you-think",
-    "name": "VentureBeat",
-    "category": "AI・機械学習",
-    "title": "Google just redesigned the search box for the first time in 25 years — here’s why it matters more than you think.",
-    "content": "For a quarter century, the Google search box has been one of the most recognizable interfaces in computing: a thin white rectangle, a blinking cursor, a few typed words, and a list of blue links. On Tuesday, Google will formally retire that paradigm. At its annual I/O developer conference , Google announced a sweeping redesign of the search box itself — the literal text field where billions of queries begin every day — transforming it from a simple keyword input into a dynamic, AI-driven conversation starter that can accept text, images, PDFs, videos, and even open Chrome tabs as inputs. The company is also merging its AI Overviews and AI Mode features into a single, seamless search flow, eliminating the friction that previously forced users to choose between a traditional results page and an AI-forward experience. Liz Reid, Google&#x27;s vice president and head of Search, called it \"the biggest upgrade to our iconic search box since its debut over 25 years ago\" during a press briefing on Monday. The announcement arrived alongside a blizzard of other news — new Gemini models , a personal AI agent called Spark , an intelligent shopping cart , a reimagined developer platform — but the search box redesign may prove to be the most consequential. It is the clearest signal yet that Google views the future of its flagship product not as a place where users type fragmented keywords, but as an interface where they hold open-ended, multimodal conversations with an AI system backed by the entire web. The new search box expands, accepts files, and coaches you on what to ask The changes show a fundamental shift in how Google expects people to interact with the product that generates the vast majority of Alphabet&#x27;s revenue. The box itself now dynamically expands to accommodate longer, more conversational queries. Where the old interface subtly encouraged brevity — a narrow field suited to two- or three-word keyword strings — the new design invites users to fully articulate complex questions in granular detail. It also now supports multimodal inputs directly. Users can upload images, PDFs, files, and videos, or drag in content from Chrome tabs, right from the main search interface. Previously, some of these capabilities existed in AI Mode, but reaching them required extra steps. Now they sit at the primary entry point. Google is also deploying what it describes as an AI-powered query suggestion system that \"goes beyond autocomplete.\" Rather than simply predicting the next word a user might type based on popular searches, the system helps users formulate complex, nuanced queries — essentially coaching them toward the kind of detailed questions that AI Mode handles best. The new search box is starting to roll out immediately in all countries and languages where AI Mode is available. Google is merging AI overviews and AI mode into one seamless experience Perhaps more significant than the box itself is the architectural change happening behind it. Google is un",
-    "pubDate": "Tue, 19 May 2026 17:45:00 GMT"
+    "pubDate": "2026-06-24T06:23:42.000Z"
   },
   {
     "url": "https://techcrunch.com/2026/06/25/notion-mail-shuts-down-amid-agent-takeover/",
@@ -128,12 +24,12 @@
     "pubDate": "Thu, 25 Jun 2026 19:14:46 +0000"
   },
   {
-    "url": "https://www.producthunt.com/products/zaro",
-    "name": "Product Hunt",
-    "category": "新サービス・ガジェット",
-    "title": "Zaro",
-    "content": "",
-    "pubDate": "2026-06-24T13:54:51.000Z"
+    "url": "https://unconv.ai/blog/introducing-un-0-generating-images-with-coupled-oscillators/",
+    "name": "Hacker News",
+    "category": "スタートアップ・開発",
+    "title": "Un-0: Generating Images with Coupled Oscillators",
+    "content": "Article URL: https://unconv.ai/blog/introducing-un-0-generating-images-with-coupled-oscillators/ Comments URL: https://news.ycombinator.com/item?id=48679007 Points: 38 # Comments: 2",
+    "pubDate": "Thu, 25 Jun 2026 20:50:02 +0000"
   },
   {
     "url": "https://venturebeat.com/technology/listen-labs-raises-usd69m-after-viral-billboard-hiring-stunt-to-scale-ai",
@@ -144,19 +40,123 @@
     "pubDate": "Fri, 16 Jan 2026 14:01:00 GMT"
   },
   {
-    "url": "https://www.ycombinator.com/companies/besimple-ai/jobs/yWfhhOR-strategic-projects-lead-audio-data",
-    "name": "Hacker News",
-    "category": "スタートアップ・開発",
-    "title": "Besimple AI (YC P25) Is Hiring",
-    "content": "Article URL: https://www.ycombinator.com/companies/besimple-ai/jobs/yWfhhOR-strategic-projects-lead-audio-data Comments URL: https://news.ycombinator.com/item?id=48676256 Points: 0 # Comments: 0",
-    "pubDate": "Thu, 25 Jun 2026 17:00:00 +0000"
+    "url": "https://venturebeat.com/technology/google-just-redesigned-the-search-box-for-the-first-time-in-25-years-heres-why-it-matters-more-than-you-think",
+    "name": "VentureBeat",
+    "category": "AI・機械学習",
+    "title": "Google just redesigned the search box for the first time in 25 years — here’s why it matters more than you think.",
+    "content": "For a quarter century, the Google search box has been one of the most recognizable interfaces in computing: a thin white rectangle, a blinking cursor, a few typed words, and a list of blue links. On Tuesday, Google will formally retire that paradigm. At its annual I/O developer conference , Google announced a sweeping redesign of the search box itself — the literal text field where billions of queries begin every day — transforming it from a simple keyword input into a dynamic, AI-driven conversation starter that can accept text, images, PDFs, videos, and even open Chrome tabs as inputs. The company is also merging its AI Overviews and AI Mode features into a single, seamless search flow, eliminating the friction that previously forced users to choose between a traditional results page and an AI-forward experience. Liz Reid, Google&#x27;s vice president and head of Search, called it \"the biggest upgrade to our iconic search box since its debut over 25 years ago\" during a press briefing on Monday. The announcement arrived alongside a blizzard of other news — new Gemini models , a personal AI agent called Spark , an intelligent shopping cart , a reimagined developer platform — but the search box redesign may prove to be the most consequential. It is the clearest signal yet that Google views the future of its flagship product not as a place where users type fragmented keywords, but as an interface where they hold open-ended, multimodal conversations with an AI system backed by the entire web. The new search box expands, accepts files, and coaches you on what to ask The changes show a fundamental shift in how Google expects people to interact with the product that generates the vast majority of Alphabet&#x27;s revenue. The box itself now dynamically expands to accommodate longer, more conversational queries. Where the old interface subtly encouraged brevity — a narrow field suited to two- or three-word keyword strings — the new design invites users to fully articulate complex questions in granular detail. It also now supports multimodal inputs directly. Users can upload images, PDFs, files, and videos, or drag in content from Chrome tabs, right from the main search interface. Previously, some of these capabilities existed in AI Mode, but reaching them required extra steps. Now they sit at the primary entry point. Google is also deploying what it describes as an AI-powered query suggestion system that \"goes beyond autocomplete.\" Rather than simply predicting the next word a user might type based on popular searches, the system helps users formulate complex, nuanced queries — essentially coaching them toward the kind of detailed questions that AI Mode handles best. The new search box is starting to roll out immediately in all countries and languages where AI Mode is available. Google is merging AI overviews and AI mode into one seamless experience Perhaps more significant than the box itself is the architectural change happening behind it. Google is un",
+    "pubDate": "Tue, 19 May 2026 17:45:00 GMT"
   },
   {
-    "url": "https://github.com/inkeep/open-knowledge",
+    "url": "https://www.nytimes.com/2026/06/25/technology/openai-ipo-artificial-intelligence.html",
     "name": "Hacker News",
     "category": "スタートアップ・開発",
-    "title": "Show HN: OpenKnowledge – open source AI-first alternative to Obsidian/Notion",
-    "content": "Hi HN, Nick here. We’re launching OpenKnowledge ( https://openknowledge.ai/ ), a “what you see is what you get” markdown editor that has direct integrations with Claude, Codex, and Cursor. Available as MacOS app or CLI. Fully free/local and OSS ( https://github.com/inkeep/open-knowledge ). We built this because we wanted a “Google docs” like experience for writing and sharing markdown files across our team. Obsidian is the best alternative we tried, but found it doesn’t have a true “what you see is what you get” UI and it didn’t integrate well with Claude/Codex outside of community plugins. So we built OpenKnowledge. It takes shape as: 1. A MacOS app with a file navigator, the WYSIWYG editor, and link explorer. 2. Integrations with the Claude, Codex, and Cursor desktop apps. The agents can open an OpenKnowledge editor within their embedded web browsers for a side-by-side experience. 3. Built-in mcps, skills, and RAG for LLM-wiki and “AI Second Brain” scenarios + spec writing 4. An embedded terminal and CLI for TUI-first users OSS stack includes: Tiptap/prosemirror, CodeMirror, yjs (CRDT), Electron (MacOS app), Orama, remark/rehype/micromark/mdast, @pierre/trees On the architecture side, the interesting eng. challenges included: 1. A pipeline to convert ProseMirror to markdown in a bidirectional lossless way. ProseMirror uses ASTs, which are not designed to have byte-fidelity. 2. A dual-observer CRDT to keep the ProseMirror and markdown state in-sync. The CRDT + git also power a collaborative experience that shows what Agents are doing in the markdown, have undo/redo, and version history. The “Share” and cloud-sync functionality are geared for team collaboration. They feel “no-code” but leverage git/GitHub under the hood, which also means data stays fully private. In that spirit, we made OpenKnowledge open source for anybody who’s curious or who’d like to contribute. We’re actively thinking about plugins/extensibility and what’s next. If you have suggestions or feedback, would love to hear it. Comments URL: https://news.ycombinator.com/item?id=48675435 Points: 77 # Comments: 33",
-    "pubDate": "Thu, 25 Jun 2026 16:04:46 +0000"
+    "title": "OpenAI Leans Toward Waiting Until Next Year for IPO",
+    "content": "Article URL: https://www.nytimes.com/2026/06/25/technology/openai-ipo-artificial-intelligence.html Comments URL: https://news.ycombinator.com/item?id=48678873 Points: 30 # Comments: 13",
+    "pubDate": "Thu, 25 Jun 2026 20:36:05 +0000"
+  },
+  {
+    "url": "https://venturebeat.com/infrastructure/railway-secures-usd100-million-to-challenge-aws-with-ai-native-cloud",
+    "name": "VentureBeat",
+    "category": "AI・機械学習",
+    "title": "Railway secures $100 million to challenge AWS with AI-native cloud infrastructure",
+    "content": "Railway , a San Francisco-based cloud platform that has quietly amassed two million developers without spending a dollar on marketing, announced Thursday that it raised $100 million in a Series B funding round, as surging demand for artificial intelligence applications exposes the limitations of legacy cloud infrastructure. TQ Ventures led the round, with participation from FPV Ventures , Redpoint , and Unusual Ventures . The investment values Railway as one of the most significant infrastructure startups to emerge during the AI boom, capitalizing on developer frustration with the complexity and cost of traditional platforms like Amazon Web Services and Google Cloud . \"As AI models get better at writing code, more and more people are asking the age-old question: where, and how, do I run my applications?\" said Jake Cooper, Railway&#x27;s 28-year-old founder and chief executive, in an exclusive interview with VentureBeat. \"The last generation of cloud primitives were slow and outdated, and now with AI moving everything faster, teams simply can&#x27;t keep up.\" The funding is a dramatic acceleration for a company that has charted an unconventional path through the cloud computing industry. Railway raised just $24 million in total before this round, including a $20 million Series A from Redpoint in 2022. The company now processes more than 10 million deployments monthly and handles over one trillion requests through its edge network — metrics that rival far larger and better-funded competitors. Why three-minute deploy times have become unacceptable in the age of AI coding assistants Railway&#x27;s pitch rests on a simple observation: the tools developers use to deploy and manage software were designed for a slower era. A standard build-and-deploy cycle using Terraform , the industry-standard infrastructure tool, takes two to three minutes. That delay, once tolerable, has become a critical bottleneck as AI coding assistants like Claude , ChatGPT , and Cursor can generate working code in seconds. \"When godly intelligence is on tap and can solve any problem in three seconds, those amalgamations of systems become bottlenecks,\" Cooper told VentureBeat. \"What was really cool for humans to deploy in 10 seconds or less is now table stakes for agents.\" The company claims its platform delivers deployments in under one second — fast enough to keep pace with AI-generated code. Customers report a tenfold increase in developer velocity and up to 65 percent cost savings compared to traditional cloud providers. These numbers come directly from enterprise clients, not internal benchmarks. Daniel Lobaton, chief technology officer at G2X, a platform serving 100,000 federal contractors, measured deployment speed improvements of seven times faster and an 87 percent cost reduction after migrating to Railway. His infrastructure bill dropped from $15,000 per month to approximately $1,000. \"The work that used to take me a week on our previous infrastructure, I can do in Rail",
+    "pubDate": "Thu, 22 Jan 2026 14:00:00 GMT"
+  },
+  {
+    "url": "https://techcrunch.com/2026/06/25/xbox-follows-apple-with-price-increases/",
+    "name": "TechCrunch",
+    "category": "テクノロジー",
+    "title": "Xbox follows Apple with price increases ",
+    "content": "The company says the increases are being driven by rising memory and console storage prices, with costs more than 2.5x higher than previous levels.",
+    "pubDate": "Thu, 25 Jun 2026 19:39:55 +0000"
+  },
+  {
+    "url": "https://om.co/2026/06/24/1966-2026/",
+    "name": "Hacker News",
+    "category": "スタートアップ・開発",
+    "title": "Om Malik, 1966-2026",
+    "content": "Article URL: https://om.co/2026/06/24/1966-2026/ Comments URL: https://news.ycombinator.com/item?id=48678852 Points: 126 # Comments: 11",
+    "pubDate": "Thu, 25 Jun 2026 20:33:37 +0000"
+  },
+  {
+    "url": "https://www.producthunt.com/products/postproxy",
+    "name": "Product Hunt",
+    "category": "新サービス・ガジェット",
+    "title": "Postproxy - Engagement API",
+    "content": "",
+    "pubDate": "2026-06-23T08:32:19.000Z"
+  },
+  {
+    "url": "https://venturebeat.com/technology/salesforce-rolls-out-new-slackbot-ai-agent-as-it-battles-microsoft-and",
+    "name": "VentureBeat",
+    "category": "AI・機械学習",
+    "title": "Salesforce rolls out new Slackbot AI agent as it battles Microsoft and Google in workplace AI",
+    "content": "Salesforce on Tuesday launched an entirely rebuilt version of Slackbot , the company&#x27;s workplace assistant, transforming it from a simple notification tool into what executives describe as a fully powered AI agent capable of searching enterprise data, drafting documents, and taking action on behalf of employees. The new Slackbot, now generally available to Business+ and Enterprise+ customers, is Salesforce&#x27;s most aggressive move yet to position Slack at the center of the emerging \"agentic AI\" movement — where software agents work alongside humans to complete complex tasks. The launch comes as Salesforce attempts to convince investors that artificial intelligence will bolster its products rather than render them obsolete. \"Slackbot isn&#x27;t just another copilot or AI assistant,\" said Parker Harris , Salesforce co-founder and Slack&#x27;s chief technology officer, in an exclusive interview with Salesforce. \"It&#x27;s the front door to the agentic enterprise, powered by Salesforce.\" From tricycle to Porsche: Salesforce rebuilt Slackbot from the ground up Harris was blunt about what distinguishes the new Slackbot from its predecessor: \"The old Slackbot was, you know, a little tricycle, and the new Slackbot is like, you know, a Porsche.\" The original Slackbot, which has existed since Slack&#x27;s early days, performed basic algorithmic tasks — reminding users to add colleagues to documents, suggesting channel archives, and delivering simple notifications. The new version runs on an entirely different architecture built around a large language model and sophisticated search capabilities that can access Salesforce records, Google Drive files, calendar data, and years of Slack conversations. \"It&#x27;s two different things,\" Harris explained. \"The old Slackbot was algorithmic and fairly simple. The new Slackbot is brand new — it&#x27;s based around an LLM and a very robust search engine, and connections to third-party search engines, third-party enterprise data.\" Salesforce chose to retain the Slackbot brand despite the fundamental technical overhaul. \"People know what Slackbot is, and so we wanted to carry that forward,\" Harris said. Why Anthropic&#x27;s Claude powers the new Slackbot — and which AI models could come next The new Slackbot runs on Claude , Anthropic&#x27;s large language model, a choice driven partly by compliance requirements. Slack&#x27;s commercial service operates under FedRAMP Moderate certification to serve U.S. federal government customers, and Harris said Anthropic was \"the only provider that could give us a compliant LLM\" when Slack began building the new system. But that exclusivity won&#x27;t last. \"We are, this year, going to support additional providers,\" Harris said. \"We have a great relationship with Google. Gemini is incredible — performance is great, cost is great. So we&#x27;re going to use Gemini for some things.\" He added that OpenAI remains a possibility as well. Harris echoed Salesforce CEO Marc Benioff&",
+    "pubDate": "Tue, 13 Jan 2026 13:00:00 GMT"
+  },
+  {
+    "url": "https://techcrunch.com/2026/06/25/polymarket-says-hackers-stole-users-funds/",
+    "name": "TechCrunch",
+    "category": "テクノロジー",
+    "title": "Polymarket says hackers stole users’ funds",
+    "content": "The prediction market giant Polymarket said it's refunding users who had funds stolen due to a third-party breach.",
+    "pubDate": "Thu, 25 Jun 2026 19:58:46 +0000"
+  },
+  {
+    "url": "https://venturebeat.com/infrastructure/claude-code-costs-up-to-usd200-a-month-goose-does-the-same-thing-for-free",
+    "name": "VentureBeat",
+    "category": "AI・機械学習",
+    "title": "Claude Code costs up to $200 a month. Goose does the same thing for free.",
+    "content": "The artificial intelligence coding revolution comes with a catch: it&#x27;s expensive. Claude Code , Anthropic&#x27;s terminal-based AI agent that can write, debug, and deploy code autonomously, has captured the imagination of software developers worldwide. But its pricing — ranging from $20 to $200 per month depending on usage — has sparked a growing rebellion among the very programmers it aims to serve. Now, a free alternative is gaining traction. Goose , an open-source AI agent developed by Block (the financial technology company formerly known as Square), offers nearly identical functionality to Claude Code but runs entirely on a user&#x27;s local machine. No subscription fees. No cloud dependency. No rate limits that reset every five hours. \"Your data stays with you, period,\" said Parth Sareen, a software engineer who demonstrated the tool during a recent livestream . The comment captures the core appeal: Goose gives developers complete control over their AI-powered workflow, including the ability to work offline — even on an airplane. The project has exploded in popularity. Goose now boasts more than 26,100 stars on GitHub , the code-sharing platform, with 362 contributors and 102 releases since its launch. The latest version, 1.20.1 , shipped on January 19, 2026, reflecting a development pace that rivals commercial products. For developers frustrated by Claude Code&#x27;s pricing structure and usage caps, Goose represents something increasingly rare in the AI industry: a genuinely free, no-strings-attached option for serious work. Anthropic&#x27;s new rate limits spark a developer revolt To understand why Goose matters, you need to understand the Claude Code pricing controversy . Anthropic, the San Francisco artificial intelligence company founded by former OpenAI executives, offers Claude Code as part of its subscription tiers. The free plan provides no access whatsoever. The Pro plan , at $17 per month with annual billing (or $20 monthly), limits users to just 10 to 40 prompts every five hours — a constraint that serious developers exhaust within minutes of intensive work. The Max plans , at $100 and $200 per month, offer more headroom: 50 to 200 prompts and 200 to 800 prompts respectively, plus access to Anthropic&#x27;s most powerful model, Claude 4.5 Opus . But even these premium tiers come with restrictions that have inflamed the developer community. In late July, Anthropic announced new weekly rate limits. Under the system, Pro users receive 40 to 80 hours of Sonnet 4 usage per week. Max users at the $200 tier get 240 to 480 hours of Sonnet 4, plus 24 to 40 hours of Opus 4. Nearly five months later, the frustration has not subsided. The problem? Those \"hours\" are not actual hours. They represent token-based limits that vary wildly depending on codebase size, conversation length, and the complexity of the code being processed. Independent analysis suggests the actual per-session limits translate to roughly 44,000 tokens for Pro users",
+    "pubDate": "Mon, 19 Jan 2026 14:00:00 GMT"
+  },
+  {
+    "url": "https://techcrunch.com/2026/06/25/youtube-shorts-are-getting-even-shorter-with-an-update-that-lets-you-double-the-playback-speed/",
+    "name": "TechCrunch",
+    "category": "テクノロジー",
+    "title": "YouTube Shorts are getting even shorter with an update that lets you double the playback speed",
+    "content": "YouTube Shorts is getting a makeover.",
+    "pubDate": "Thu, 25 Jun 2026 22:02:12 +0000"
+  },
+  {
+    "url": "https://www.producthunt.com/products/polygraph",
+    "name": "Product Hunt",
+    "category": "新サービス・ガジェット",
+    "title": "Polygraph",
+    "content": "",
+    "pubDate": "2026-06-24T07:52:07.000Z"
+  },
+  {
+    "url": "https://williamdue.github.io/blog/parallel-parentheses-matching",
+    "name": "Hacker News",
+    "category": "スタートアップ・開発",
+    "title": "Parallel Parentheses Matching",
+    "content": "Article URL: https://williamdue.github.io/blog/parallel-parentheses-matching Comments URL: https://news.ycombinator.com/item?id=48678623 Points: 17 # Comments: 3",
+    "pubDate": "Thu, 25 Jun 2026 20:12:24 +0000"
+  },
+  {
+    "url": "https://calpaterson.com/bank-python.html",
+    "name": "Hacker News",
+    "category": "スタートアップ・開発",
+    "title": "An oral history of Bank Python (2021)",
+    "content": "Article URL: https://calpaterson.com/bank-python.html Comments URL: https://news.ycombinator.com/item?id=48678645 Points: 17 # Comments: 6",
+    "pubDate": "Thu, 25 Jun 2026 20:14:35 +0000"
+  },
+  {
+    "url": "https://www.producthunt.com/products/signspell",
+    "name": "Product Hunt",
+    "category": "新サービス・ガジェット",
+    "title": "Signspell",
+    "content": "",
+    "pubDate": "2026-06-24T13:43:37.000Z"
+  },
+  {
+    "url": "https://techcrunch.com/2026/06/25/patronus-ai-lands-50m-to-build-digital-worlds-that-stress-test-ai-agents/",
+    "name": "TechCrunch",
+    "category": "テクノロジー",
+    "title": "Patronus AI lands $50M to build ‘digital worlds’ that stress-test AI agents",
+    "content": "Agent-testing startup Patronus AI, founded by former Meta AI researchers, is experiencing nearly insatiable demand, its investor says.",
+    "pubDate": "Thu, 25 Jun 2026 20:19:25 +0000"
   }
 ]
