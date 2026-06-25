@@ -1,59 +1,11 @@
 [
   {
-    "url": "https://www.producthunt.com/products/swimio",
-    "name": "Product Hunt",
-    "category": "新サービス・ガジェット",
-    "title": "Swimio",
-    "content": "",
-    "pubDate": "2026-06-24T05:16:39.000Z"
-  },
-  {
-    "url": "https://www.producthunt.com/products/tencent-edgeone-2",
-    "name": "Product Hunt",
-    "category": "新サービス・ガジェット",
-    "title": "Tencent EdgeOne Makers",
-    "content": "",
-    "pubDate": "2026-06-16T09:38:23.000Z"
-  },
-  {
-    "url": "https://techcrunch.com/2026/06/24/ai-researchers-continue-to-leave-google-for-its-rivals/",
+    "url": "https://techcrunch.com/2026/06/24/europe-is-pushing-back-on-washingtons-chip-war/",
     "name": "TechCrunch",
     "category": "テクノロジー",
-    "title": "AI researchers continue to leave Google for its rivals",
-    "content": "Top AI researchers Jonas Adler and Alexander Pritzel are leaving Google for Anthropic, following departures from top scientists Noam Shazeer and John Jumper.",
-    "pubDate": "Wed, 24 Jun 2026 21:42:07 +0000"
-  },
-  {
-    "url": "https://venturebeat.com/infrastructure/claude-code-costs-up-to-usd200-a-month-goose-does-the-same-thing-for-free",
-    "name": "VentureBeat",
-    "category": "AI・機械学習",
-    "title": "Claude Code costs up to $200 a month. Goose does the same thing for free.",
-    "content": "The artificial intelligence coding revolution comes with a catch: it&#x27;s expensive. Claude Code , Anthropic&#x27;s terminal-based AI agent that can write, debug, and deploy code autonomously, has captured the imagination of software developers worldwide. But its pricing — ranging from $20 to $200 per month depending on usage — has sparked a growing rebellion among the very programmers it aims to serve. Now, a free alternative is gaining traction. Goose , an open-source AI agent developed by Block (the financial technology company formerly known as Square), offers nearly identical functionality to Claude Code but runs entirely on a user&#x27;s local machine. No subscription fees. No cloud dependency. No rate limits that reset every five hours. \"Your data stays with you, period,\" said Parth Sareen, a software engineer who demonstrated the tool during a recent livestream . The comment captures the core appeal: Goose gives developers complete control over their AI-powered workflow, including the ability to work offline — even on an airplane. The project has exploded in popularity. Goose now boasts more than 26,100 stars on GitHub , the code-sharing platform, with 362 contributors and 102 releases since its launch. The latest version, 1.20.1 , shipped on January 19, 2026, reflecting a development pace that rivals commercial products. For developers frustrated by Claude Code&#x27;s pricing structure and usage caps, Goose represents something increasingly rare in the AI industry: a genuinely free, no-strings-attached option for serious work. Anthropic&#x27;s new rate limits spark a developer revolt To understand why Goose matters, you need to understand the Claude Code pricing controversy . Anthropic, the San Francisco artificial intelligence company founded by former OpenAI executives, offers Claude Code as part of its subscription tiers. The free plan provides no access whatsoever. The Pro plan , at $17 per month with annual billing (or $20 monthly), limits users to just 10 to 40 prompts every five hours — a constraint that serious developers exhaust within minutes of intensive work. The Max plans , at $100 and $200 per month, offer more headroom: 50 to 200 prompts and 200 to 800 prompts respectively, plus access to Anthropic&#x27;s most powerful model, Claude 4.5 Opus . But even these premium tiers come with restrictions that have inflamed the developer community. In late July, Anthropic announced new weekly rate limits. Under the system, Pro users receive 40 to 80 hours of Sonnet 4 usage per week. Max users at the $200 tier get 240 to 480 hours of Sonnet 4, plus 24 to 40 hours of Opus 4. Nearly five months later, the frustration has not subsided. The problem? Those \"hours\" are not actual hours. They represent token-based limits that vary wildly depending on codebase size, conversation length, and the complexity of the code being processed. Independent analysis suggests the actual per-session limits translate to roughly 44,000 tokens for Pro users",
-    "pubDate": "Mon, 19 Jan 2026 14:00:00 GMT"
-  },
-  {
-    "url": "https://venturebeat.com/technology/google-just-redesigned-the-search-box-for-the-first-time-in-25-years-heres-why-it-matters-more-than-you-think",
-    "name": "VentureBeat",
-    "category": "AI・機械学習",
-    "title": "Google just redesigned the search box for the first time in 25 years — here’s why it matters more than you think.",
-    "content": "For a quarter century, the Google search box has been one of the most recognizable interfaces in computing: a thin white rectangle, a blinking cursor, a few typed words, and a list of blue links. On Tuesday, Google will formally retire that paradigm. At its annual I/O developer conference , Google announced a sweeping redesign of the search box itself — the literal text field where billions of queries begin every day — transforming it from a simple keyword input into a dynamic, AI-driven conversation starter that can accept text, images, PDFs, videos, and even open Chrome tabs as inputs. The company is also merging its AI Overviews and AI Mode features into a single, seamless search flow, eliminating the friction that previously forced users to choose between a traditional results page and an AI-forward experience. Liz Reid, Google&#x27;s vice president and head of Search, called it \"the biggest upgrade to our iconic search box since its debut over 25 years ago\" during a press briefing on Monday. The announcement arrived alongside a blizzard of other news — new Gemini models , a personal AI agent called Spark , an intelligent shopping cart , a reimagined developer platform — but the search box redesign may prove to be the most consequential. It is the clearest signal yet that Google views the future of its flagship product not as a place where users type fragmented keywords, but as an interface where they hold open-ended, multimodal conversations with an AI system backed by the entire web. The new search box expands, accepts files, and coaches you on what to ask The changes show a fundamental shift in how Google expects people to interact with the product that generates the vast majority of Alphabet&#x27;s revenue. The box itself now dynamically expands to accommodate longer, more conversational queries. Where the old interface subtly encouraged brevity — a narrow field suited to two- or three-word keyword strings — the new design invites users to fully articulate complex questions in granular detail. It also now supports multimodal inputs directly. Users can upload images, PDFs, files, and videos, or drag in content from Chrome tabs, right from the main search interface. Previously, some of these capabilities existed in AI Mode, but reaching them required extra steps. Now they sit at the primary entry point. Google is also deploying what it describes as an AI-powered query suggestion system that \"goes beyond autocomplete.\" Rather than simply predicting the next word a user might type based on popular searches, the system helps users formulate complex, nuanced queries — essentially coaching them toward the kind of detailed questions that AI Mode handles best. The new search box is starting to roll out immediately in all countries and languages where AI Mode is available. Google is merging AI overviews and AI mode into one seamless experience Perhaps more significant than the box itself is the architectural change happening behind it. Google is un",
-    "pubDate": "Tue, 19 May 2026 17:45:00 GMT"
-  },
-  {
-    "url": "https://www.producthunt.com/products/production-ready-ui-kits-by-cometchat",
-    "name": "Product Hunt",
-    "category": "新サービス・ガジェット",
-    "title": "React UI Kit V7",
-    "content": "",
-    "pubDate": "2026-06-23T10:35:25.000Z"
-  },
-  {
-    "url": "https://techcrunch.com/2026/06/24/cerebras-stock-plunges-after-earnings-as-ceo-says-margin-outlook-was-misunderstood/",
-    "name": "TechCrunch",
-    "category": "テクノロジー",
-    "title": "Cerebras stock plunges after earnings as CEO says margin outlook was misunderstood",
-    "content": "In its first earnings report since going public, the AI chipmaker forecast a narrower gross margin in its core business, scaring investors.",
-    "pubDate": "Wed, 24 Jun 2026 22:41:41 +0000"
+    "title": "Europe is pushing back on Washington’s chip war",
+    "content": "As ASML CEO Christophe Fouquet told TechCrunch in May, what China can currently buy are older-generation deep ultraviolet tools — gear first shipped about a decade ago — the same machines the MATCH Act would now put off-limits.",
+    "pubDate": "Thu, 25 Jun 2026 00:08:36 +0000"
   },
   {
     "url": "https://venturebeat.com/technology/salesforce-rolls-out-new-slackbot-ai-agent-as-it-battles-microsoft-and",
@@ -64,76 +16,60 @@
     "pubDate": "Tue, 13 Jan 2026 13:00:00 GMT"
   },
   {
-    "url": "https://www.producthunt.com/products/stalemate-pr",
+    "url": "https://www.producthunt.com/products/tencent-edgeone-2",
     "name": "Product Hunt",
     "category": "新サービス・ガジェット",
-    "title": "StaleMate PR",
+    "title": "Tencent EdgeOne Makers",
     "content": "",
-    "pubDate": "2026-06-23T09:01:07.000Z"
+    "pubDate": "2026-06-16T09:38:23.000Z"
   },
   {
-    "url": "https://www.elastic.co/blog/ceo-ash-kulkarni-announcement-to-elastic-employees",
+    "url": "https://www.economist.com/business/2026/06/21/zombie-unicorns-are-haunting-silicon-valley",
     "name": "Hacker News",
     "category": "スタートアップ・開発",
-    "title": "Elastic lays off 7% of employees",
-    "content": "Article URL: https://www.elastic.co/blog/ceo-ash-kulkarni-announcement-to-elastic-employees Comments URL: https://news.ycombinator.com/item?id=48666100 Points: 91 # Comments: 72",
-    "pubDate": "Wed, 24 Jun 2026 21:57:30 +0000"
+    "title": "Zombie unicorns are haunting Silicon Valley",
+    "content": "Article URL: https://www.economist.com/business/2026/06/21/zombie-unicorns-are-haunting-silicon-valley Comments URL: https://news.ycombinator.com/item?id=48668020 Points: 20 # Comments: 4",
+    "pubDate": "Thu, 25 Jun 2026 02:16:15 +0000"
   },
   {
-    "url": "https://infosec.exchange/@mttaggart/116806641273303255",
-    "name": "Hacker News",
-    "category": "スタートアップ・開発",
-    "title": "GitHub shouldn't be a dependency for publishing Rust on crates.io",
-    "content": "Article URL: https://infosec.exchange/@mttaggart/116806641273303255 Comments URL: https://news.ycombinator.com/item?id=48664733 Points: 132 # Comments: 42",
-    "pubDate": "Wed, 24 Jun 2026 19:40:11 +0000"
-  },
-  {
-    "url": "https://venturebeat.com/infrastructure/railway-secures-usd100-million-to-challenge-aws-with-ai-native-cloud",
-    "name": "VentureBeat",
-    "category": "AI・機械学習",
-    "title": "Railway secures $100 million to challenge AWS with AI-native cloud infrastructure",
-    "content": "Railway , a San Francisco-based cloud platform that has quietly amassed two million developers without spending a dollar on marketing, announced Thursday that it raised $100 million in a Series B funding round, as surging demand for artificial intelligence applications exposes the limitations of legacy cloud infrastructure. TQ Ventures led the round, with participation from FPV Ventures , Redpoint , and Unusual Ventures . The investment values Railway as one of the most significant infrastructure startups to emerge during the AI boom, capitalizing on developer frustration with the complexity and cost of traditional platforms like Amazon Web Services and Google Cloud . \"As AI models get better at writing code, more and more people are asking the age-old question: where, and how, do I run my applications?\" said Jake Cooper, Railway&#x27;s 28-year-old founder and chief executive, in an exclusive interview with VentureBeat. \"The last generation of cloud primitives were slow and outdated, and now with AI moving everything faster, teams simply can&#x27;t keep up.\" The funding is a dramatic acceleration for a company that has charted an unconventional path through the cloud computing industry. Railway raised just $24 million in total before this round, including a $20 million Series A from Redpoint in 2022. The company now processes more than 10 million deployments monthly and handles over one trillion requests through its edge network — metrics that rival far larger and better-funded competitors. Why three-minute deploy times have become unacceptable in the age of AI coding assistants Railway&#x27;s pitch rests on a simple observation: the tools developers use to deploy and manage software were designed for a slower era. A standard build-and-deploy cycle using Terraform , the industry-standard infrastructure tool, takes two to three minutes. That delay, once tolerable, has become a critical bottleneck as AI coding assistants like Claude , ChatGPT , and Cursor can generate working code in seconds. \"When godly intelligence is on tap and can solve any problem in three seconds, those amalgamations of systems become bottlenecks,\" Cooper told VentureBeat. \"What was really cool for humans to deploy in 10 seconds or less is now table stakes for agents.\" The company claims its platform delivers deployments in under one second — fast enough to keep pace with AI-generated code. Customers report a tenfold increase in developer velocity and up to 65 percent cost savings compared to traditional cloud providers. These numbers come directly from enterprise clients, not internal benchmarks. Daniel Lobaton, chief technology officer at G2X, a platform serving 100,000 federal contractors, measured deployment speed improvements of seven times faster and an 87 percent cost reduction after migrating to Railway. His infrastructure bill dropped from $15,000 per month to approximately $1,000. \"The work that used to take me a week on our previous infrastructure, I can do in Rail",
-    "pubDate": "Thu, 22 Jan 2026 14:00:00 GMT"
-  },
-  {
-    "url": "https://gist.github.com/cpursley/c8fb81fe8a7e5df038158bdfe0f06dbb",
-    "name": "Hacker News",
-    "category": "スタートアップ・開発",
-    "title": "PostgreSQL Is Enough",
-    "content": "Article URL: https://gist.github.com/cpursley/c8fb81fe8a7e5df038158bdfe0f06dbb Comments URL: https://news.ycombinator.com/item?id=48666433 Points: 60 # Comments: 28",
-    "pubDate": "Wed, 24 Jun 2026 22:39:37 +0000"
-  },
-  {
-    "url": "https://www.producthunt.com/products/futo-swipe",
+    "url": "https://www.producthunt.com/products/swimio",
     "name": "Product Hunt",
     "category": "新サービス・ガジェット",
-    "title": "FUTO Swipe",
+    "title": "Swimio",
     "content": "",
-    "pubDate": "2026-06-24T03:19:25.000Z"
+    "pubDate": "2026-06-24T05:16:39.000Z"
   },
   {
-    "url": "https://venturebeat.com/technology/listen-labs-raises-usd69m-after-viral-billboard-hiring-stunt-to-scale-ai",
+    "url": "https://venturebeat.com/technology/google-just-redesigned-the-search-box-for-the-first-time-in-25-years-heres-why-it-matters-more-than-you-think",
     "name": "VentureBeat",
     "category": "AI・機械学習",
-    "title": "Listen Labs raises $69M after viral billboard hiring stunt to scale AI customer interviews",
-    "content": "Alfred Wahlforss was running out of options. His startup, Listen Labs , needed to hire over 100 engineers, but competing against Mark Zuckerberg&#x27;s $100 million offers seemed impossible. So he spent $5,000 — a fifth of his marketing budget — on a billboard in San Francisco displaying what looked like gibberish: five strings of random numbers. The numbers were actually AI tokens. Decoded, they led to a coding challenge: build an algorithm to act as a digital bouncer at Berghain, the Berlin nightclub famous for rejecting nearly everyone at the door. Within days, thousands attempted the puzzle. 430 cracked it. Some got hired. The winner flew to Berlin, all expenses paid. That unconventional approach has now attracted $69 million in Series B funding, led by Ribbit Capital with participation from Evantic and existing investors Sequoia Capital , Conviction , and Pear VC . The round values Listen Labs at $500 million and brings its total capital to $100 million. In nine months since launch, the company has grown annualized revenue by 15x to eight figures and conducted over one million AI-powered interviews. \"When you obsess over customers, everything else follows,\" Wahlforss said in an interview with VentureBeat. \"Teams that use Listen bring the customer into every decision, from marketing to product, and when the customer is delighted, everyone is.\" Why traditional market research is broken, and what Listen Labs is building to fix it Listen&#x27;s AI researcher finds participants, conducts in-depth interviews, and delivers actionable insights in hours, not weeks. The platform replaces the traditional choice between quantitative surveys — which provide statistical precision but miss nuance—and qualitative interviews, which deliver depth but cannot scale. Wahlforss explained the limitation of existing approaches: \"Essentially surveys give you false precision because people end up answering the same question... You can&#x27;t get the outliers. People are actually not honest on surveys.\" The alternative, one-on-one human interviews, \"gives you a lot of depth. You can ask follow up questions. You can kind of double check if they actually know what they&#x27;re talking about. And the problem is you can&#x27;t scale that.\" The platform works in four steps: users create a study with AI assistance, Listen recruits participants from its global network of 30 million people, an AI moderator conducts in-depth interviews with follow-up questions, and results are packaged into executive-ready reports including key themes, highlight reels, and slide decks. What distinguishes Listen&#x27;s approach is its use of open-ended video conversations rather than multiple-choice forms. \"In a survey, you can kind of guess what you should answer, and you have four options,\" Wahlforss said. \"Oh, they probably want me to buy high income. Let me click on that button versus an open ended response. It just generates much more honesty.\" The dirty secret of the $140 billion market r",
-    "pubDate": "Fri, 16 Jan 2026 14:01:00 GMT"
+    "title": "Google just redesigned the search box for the first time in 25 years — here’s why it matters more than you think.",
+    "content": "For a quarter century, the Google search box has been one of the most recognizable interfaces in computing: a thin white rectangle, a blinking cursor, a few typed words, and a list of blue links. On Tuesday, Google will formally retire that paradigm. At its annual I/O developer conference , Google announced a sweeping redesign of the search box itself — the literal text field where billions of queries begin every day — transforming it from a simple keyword input into a dynamic, AI-driven conversation starter that can accept text, images, PDFs, videos, and even open Chrome tabs as inputs. The company is also merging its AI Overviews and AI Mode features into a single, seamless search flow, eliminating the friction that previously forced users to choose between a traditional results page and an AI-forward experience. Liz Reid, Google&#x27;s vice president and head of Search, called it \"the biggest upgrade to our iconic search box since its debut over 25 years ago\" during a press briefing on Monday. The announcement arrived alongside a blizzard of other news — new Gemini models , a personal AI agent called Spark , an intelligent shopping cart , a reimagined developer platform — but the search box redesign may prove to be the most consequential. It is the clearest signal yet that Google views the future of its flagship product not as a place where users type fragmented keywords, but as an interface where they hold open-ended, multimodal conversations with an AI system backed by the entire web. The new search box expands, accepts files, and coaches you on what to ask The changes show a fundamental shift in how Google expects people to interact with the product that generates the vast majority of Alphabet&#x27;s revenue. The box itself now dynamically expands to accommodate longer, more conversational queries. Where the old interface subtly encouraged brevity — a narrow field suited to two- or three-word keyword strings — the new design invites users to fully articulate complex questions in granular detail. It also now supports multimodal inputs directly. Users can upload images, PDFs, files, and videos, or drag in content from Chrome tabs, right from the main search interface. Previously, some of these capabilities existed in AI Mode, but reaching them required extra steps. Now they sit at the primary entry point. Google is also deploying what it describes as an AI-powered query suggestion system that \"goes beyond autocomplete.\" Rather than simply predicting the next word a user might type based on popular searches, the system helps users formulate complex, nuanced queries — essentially coaching them toward the kind of detailed questions that AI Mode handles best. The new search box is starting to roll out immediately in all countries and languages where AI Mode is available. Google is merging AI overviews and AI mode into one seamless experience Perhaps more significant than the box itself is the architectural change happening behind it. Google is un",
+    "pubDate": "Tue, 19 May 2026 17:45:00 GMT"
   },
   {
-    "url": "https://techcrunch.com/2026/06/24/openai-unveils-its-first-custom-chip-built-by-broadcom/",
+    "url": "https://www.science.org/content/article/medical-students-are-using-popular-research-tool-pump-out-misleading-studies",
     "name": "Hacker News",
     "category": "スタートアップ・開発",
-    "title": "OpenAI unveils its first custom chip, built by Broadcom",
-    "content": "Announcement: https://openai.com/index/openai-broadcom-jalapeno-inference-... https://decrypt.co/371971/openai-broadcom-jalapeno-first-cus... https://www.cnn.com/2026/06/24/tech/openai-broadcom-jalapeno... Comments URL: https://news.ycombinator.com/item?id=48663324 Points: 462 # Comments: 296",
-    "pubDate": "Wed, 24 Jun 2026 17:47:00 +0000"
+    "title": "Medical students are using popular research tool to pump out misleading studies",
+    "content": "Article URL: https://www.science.org/content/article/medical-students-are-using-popular-research-tool-pump-out-misleading-studies Comments URL: https://news.ycombinator.com/item?id=48668119 Points: 6 # Comments: 1",
+    "pubDate": "Thu, 25 Jun 2026 02:30:18 +0000"
   },
   {
-    "url": "https://www.thomann.de/blog/en/inside/thomann-takes-legal-action-against-fender/",
-    "name": "Hacker News",
-    "category": "スタートアップ・開発",
-    "title": "Thomann takes legal action against Fender",
-    "content": "Article URL: https://www.thomann.de/blog/en/inside/thomann-takes-legal-action-against-fender/ Comments URL: https://news.ycombinator.com/item?id=48664384 Points: 171 # Comments: 107",
-    "pubDate": "Wed, 24 Jun 2026 19:08:22 +0000"
+    "url": "https://www.producthunt.com/products/crewdle",
+    "name": "Product Hunt",
+    "category": "新サービス・ガジェット",
+    "title": "Crewdle AI",
+    "content": "",
+    "pubDate": "2026-06-22T15:45:08.000Z"
+  },
+  {
+    "url": "https://www.producthunt.com/products/clarify-6",
+    "name": "Product Hunt",
+    "category": "新サービス・ガジェット",
+    "title": "Customer Relationship Agents by Clarify",
+    "content": "",
+    "pubDate": "2026-06-22T19:26:30.000Z"
   },
   {
     "url": "https://techcrunch.com/2026/06/24/elon-suffers-another-day-short-of-trillionaire-status/",
@@ -144,12 +80,12 @@
     "pubDate": "Wed, 24 Jun 2026 23:09:39 +0000"
   },
   {
-    "url": "https://techcrunch.com/2026/06/24/former-infosys-chief-has-a-new-startup-that-wants-to-challenge-the-it-services-world/",
-    "name": "TechCrunch",
-    "category": "テクノロジー",
-    "title": "Former Infosys chief has a new startup that wants to challenge the IT services world",
-    "content": "Backed by Mayfield and Aramco Ventures, Vishal Sikka’s new venture brings together veterans from SAP, Infosys, and VianAI.",
-    "pubDate": "Wed, 24 Jun 2026 23:26:52 +0000"
+    "url": "https://news.ycombinator.com/item?id=48668199",
+    "name": "Hacker News",
+    "category": "スタートアップ・開発",
+    "title": "Ask HN: Where is our profession (programmer) going?",
+    "content": "I had been running a small (3 people) software company for about 4 years. Since closing down, I recently hung out at a friend's company to see what they were working on (15 ppl). To preface: I'm a heavy user of Claude (rarely write code by hand), but what I'm seeing in person has been rather shocking to me, and I wanted to calibrate with others. In particular: - the code is not the source of truth anymore; it's ask claude to write, and ask claude to explain - LoC, abstractions, and all those \"software development principles\" does not seem to matter to people - Code review is not done by humans - Actually understanding the problem deeply seems to be offloaded to claude - Some developers are running like 5+ simultaneous claude sessions, and no code is being looked at - Explosion of llm-generated tests First off, is this similar to what's going on at your company? If this company is representative, it feels like software development is going from a precise occupation that requires high degree of understanding to something probabilistic and offloaded understanding (to eventually not an occupation at all honestly). I'm interested to hear other folks' perspectives. Comments URL: https://news.ycombinator.com/item?id=48668199 Points: 29 # Comments: 21",
+    "pubDate": "Thu, 25 Jun 2026 02:41:47 +0000"
   },
   {
     "url": "https://techcrunch.com/2026/06/24/ai-was-supposed-to-kill-engineering-jobs-but-new-data-suggests-theyre-the-most-resilient/",
@@ -158,5 +94,69 @@
     "title": "AI was supposed to kill engineering jobs, but new data suggests they’re the most resilient",
     "content": "While AI dominates the layoff narrative, engineers are actually making up a larger share of new hires, according to SignalFire data.",
     "pubDate": "Wed, 24 Jun 2026 21:56:41 +0000"
+  },
+  {
+    "url": "https://www.ign.com/articles/grand-theft-auto-6-physical-copies-wont-include-a-disc-will-just-be-a-code-in-a-box",
+    "name": "Hacker News",
+    "category": "スタートアップ・開発",
+    "title": "GTA 6 Physical Copies Won't Include a Disc, Will Just Be a Code in a Box",
+    "content": "Article URL: https://www.ign.com/articles/grand-theft-auto-6-physical-copies-wont-include-a-disc-will-just-be-a-code-in-a-box Comments URL: https://news.ycombinator.com/item?id=48668662 Points: 16 # Comments: 3",
+    "pubDate": "Thu, 25 Jun 2026 03:54:50 +0000"
+  },
+  {
+    "url": "https://blog.cloudflare.com/oauth-for-all/",
+    "name": "Hacker News",
+    "category": "スタートアップ・開発",
+    "title": "Cloudflare launched self-managed OAuth for all",
+    "content": "Article URL: https://blog.cloudflare.com/oauth-for-all/ Comments URL: https://news.ycombinator.com/item?id=48668033 Points: 48 # Comments: 10",
+    "pubDate": "Thu, 25 Jun 2026 02:18:10 +0000"
+  },
+  {
+    "url": "https://www.producthunt.com/products/ruby-7",
+    "name": "Product Hunt",
+    "category": "新サービス・ガジェット",
+    "title": "Ruby",
+    "content": "",
+    "pubDate": "2026-06-24T05:43:46.000Z"
+  },
+  {
+    "url": "https://venturebeat.com/technology/listen-labs-raises-usd69m-after-viral-billboard-hiring-stunt-to-scale-ai",
+    "name": "VentureBeat",
+    "category": "AI・機械学習",
+    "title": "Listen Labs raises $69M after viral billboard hiring stunt to scale AI customer interviews",
+    "content": "Alfred Wahlforss was running out of options. His startup, Listen Labs , needed to hire over 100 engineers, but competing against Mark Zuckerberg&#x27;s $100 million offers seemed impossible. So he spent $5,000 — a fifth of his marketing budget — on a billboard in San Francisco displaying what looked like gibberish: five strings of random numbers. The numbers were actually AI tokens. Decoded, they led to a coding challenge: build an algorithm to act as a digital bouncer at Berghain, the Berlin nightclub famous for rejecting nearly everyone at the door. Within days, thousands attempted the puzzle. 430 cracked it. Some got hired. The winner flew to Berlin, all expenses paid. That unconventional approach has now attracted $69 million in Series B funding, led by Ribbit Capital with participation from Evantic and existing investors Sequoia Capital , Conviction , and Pear VC . The round values Listen Labs at $500 million and brings its total capital to $100 million. In nine months since launch, the company has grown annualized revenue by 15x to eight figures and conducted over one million AI-powered interviews. \"When you obsess over customers, everything else follows,\" Wahlforss said in an interview with VentureBeat. \"Teams that use Listen bring the customer into every decision, from marketing to product, and when the customer is delighted, everyone is.\" Why traditional market research is broken, and what Listen Labs is building to fix it Listen&#x27;s AI researcher finds participants, conducts in-depth interviews, and delivers actionable insights in hours, not weeks. The platform replaces the traditional choice between quantitative surveys — which provide statistical precision but miss nuance—and qualitative interviews, which deliver depth but cannot scale. Wahlforss explained the limitation of existing approaches: \"Essentially surveys give you false precision because people end up answering the same question... You can&#x27;t get the outliers. People are actually not honest on surveys.\" The alternative, one-on-one human interviews, \"gives you a lot of depth. You can ask follow up questions. You can kind of double check if they actually know what they&#x27;re talking about. And the problem is you can&#x27;t scale that.\" The platform works in four steps: users create a study with AI assistance, Listen recruits participants from its global network of 30 million people, an AI moderator conducts in-depth interviews with follow-up questions, and results are packaged into executive-ready reports including key themes, highlight reels, and slide decks. What distinguishes Listen&#x27;s approach is its use of open-ended video conversations rather than multiple-choice forms. \"In a survey, you can kind of guess what you should answer, and you have four options,\" Wahlforss said. \"Oh, they probably want me to buy high income. Let me click on that button versus an open ended response. It just generates much more honesty.\" The dirty secret of the $140 billion market r",
+    "pubDate": "Fri, 16 Jan 2026 14:01:00 GMT"
+  },
+  {
+    "url": "https://techcrunch.com/2026/06/24/cerebras-stock-plunges-after-earnings-as-ceo-says-margin-outlook-was-misunderstood/",
+    "name": "TechCrunch",
+    "category": "テクノロジー",
+    "title": "Cerebras stock plunges after earnings as CEO says margin outlook was misunderstood",
+    "content": "In its first earnings report since going public, the AI chipmaker forecast a narrower gross margin in its core business, scaring investors.",
+    "pubDate": "Wed, 24 Jun 2026 22:41:41 +0000"
+  },
+  {
+    "url": "https://venturebeat.com/infrastructure/claude-code-costs-up-to-usd200-a-month-goose-does-the-same-thing-for-free",
+    "name": "VentureBeat",
+    "category": "AI・機械学習",
+    "title": "Claude Code costs up to $200 a month. Goose does the same thing for free.",
+    "content": "The artificial intelligence coding revolution comes with a catch: it&#x27;s expensive. Claude Code , Anthropic&#x27;s terminal-based AI agent that can write, debug, and deploy code autonomously, has captured the imagination of software developers worldwide. But its pricing — ranging from $20 to $200 per month depending on usage — has sparked a growing rebellion among the very programmers it aims to serve. Now, a free alternative is gaining traction. Goose , an open-source AI agent developed by Block (the financial technology company formerly known as Square), offers nearly identical functionality to Claude Code but runs entirely on a user&#x27;s local machine. No subscription fees. No cloud dependency. No rate limits that reset every five hours. \"Your data stays with you, period,\" said Parth Sareen, a software engineer who demonstrated the tool during a recent livestream . The comment captures the core appeal: Goose gives developers complete control over their AI-powered workflow, including the ability to work offline — even on an airplane. The project has exploded in popularity. Goose now boasts more than 26,100 stars on GitHub , the code-sharing platform, with 362 contributors and 102 releases since its launch. The latest version, 1.20.1 , shipped on January 19, 2026, reflecting a development pace that rivals commercial products. For developers frustrated by Claude Code&#x27;s pricing structure and usage caps, Goose represents something increasingly rare in the AI industry: a genuinely free, no-strings-attached option for serious work. Anthropic&#x27;s new rate limits spark a developer revolt To understand why Goose matters, you need to understand the Claude Code pricing controversy . Anthropic, the San Francisco artificial intelligence company founded by former OpenAI executives, offers Claude Code as part of its subscription tiers. The free plan provides no access whatsoever. The Pro plan , at $17 per month with annual billing (or $20 monthly), limits users to just 10 to 40 prompts every five hours — a constraint that serious developers exhaust within minutes of intensive work. The Max plans , at $100 and $200 per month, offer more headroom: 50 to 200 prompts and 200 to 800 prompts respectively, plus access to Anthropic&#x27;s most powerful model, Claude 4.5 Opus . But even these premium tiers come with restrictions that have inflamed the developer community. In late July, Anthropic announced new weekly rate limits. Under the system, Pro users receive 40 to 80 hours of Sonnet 4 usage per week. Max users at the $200 tier get 240 to 480 hours of Sonnet 4, plus 24 to 40 hours of Opus 4. Nearly five months later, the frustration has not subsided. The problem? Those \"hours\" are not actual hours. They represent token-based limits that vary wildly depending on codebase size, conversation length, and the complexity of the code being processed. Independent analysis suggests the actual per-session limits translate to roughly 44,000 tokens for Pro users",
+    "pubDate": "Mon, 19 Jan 2026 14:00:00 GMT"
+  },
+  {
+    "url": "https://venturebeat.com/infrastructure/railway-secures-usd100-million-to-challenge-aws-with-ai-native-cloud",
+    "name": "VentureBeat",
+    "category": "AI・機械学習",
+    "title": "Railway secures $100 million to challenge AWS with AI-native cloud infrastructure",
+    "content": "Railway , a San Francisco-based cloud platform that has quietly amassed two million developers without spending a dollar on marketing, announced Thursday that it raised $100 million in a Series B funding round, as surging demand for artificial intelligence applications exposes the limitations of legacy cloud infrastructure. TQ Ventures led the round, with participation from FPV Ventures , Redpoint , and Unusual Ventures . The investment values Railway as one of the most significant infrastructure startups to emerge during the AI boom, capitalizing on developer frustration with the complexity and cost of traditional platforms like Amazon Web Services and Google Cloud . \"As AI models get better at writing code, more and more people are asking the age-old question: where, and how, do I run my applications?\" said Jake Cooper, Railway&#x27;s 28-year-old founder and chief executive, in an exclusive interview with VentureBeat. \"The last generation of cloud primitives were slow and outdated, and now with AI moving everything faster, teams simply can&#x27;t keep up.\" The funding is a dramatic acceleration for a company that has charted an unconventional path through the cloud computing industry. Railway raised just $24 million in total before this round, including a $20 million Series A from Redpoint in 2022. The company now processes more than 10 million deployments monthly and handles over one trillion requests through its edge network — metrics that rival far larger and better-funded competitors. Why three-minute deploy times have become unacceptable in the age of AI coding assistants Railway&#x27;s pitch rests on a simple observation: the tools developers use to deploy and manage software were designed for a slower era. A standard build-and-deploy cycle using Terraform , the industry-standard infrastructure tool, takes two to three minutes. That delay, once tolerable, has become a critical bottleneck as AI coding assistants like Claude , ChatGPT , and Cursor can generate working code in seconds. \"When godly intelligence is on tap and can solve any problem in three seconds, those amalgamations of systems become bottlenecks,\" Cooper told VentureBeat. \"What was really cool for humans to deploy in 10 seconds or less is now table stakes for agents.\" The company claims its platform delivers deployments in under one second — fast enough to keep pace with AI-generated code. Customers report a tenfold increase in developer velocity and up to 65 percent cost savings compared to traditional cloud providers. These numbers come directly from enterprise clients, not internal benchmarks. Daniel Lobaton, chief technology officer at G2X, a platform serving 100,000 federal contractors, measured deployment speed improvements of seven times faster and an 87 percent cost reduction after migrating to Railway. His infrastructure bill dropped from $15,000 per month to approximately $1,000. \"The work that used to take me a week on our previous infrastructure, I can do in Rail",
+    "pubDate": "Thu, 22 Jan 2026 14:00:00 GMT"
+  },
+  {
+    "url": "https://techcrunch.com/2026/06/24/former-infosys-chief-has-a-new-startup-that-wants-to-challenge-the-it-services-world/",
+    "name": "TechCrunch",
+    "category": "テクノロジー",
+    "title": "Former Infosys chief has a new startup that wants to challenge the IT services world",
+    "content": "Backed by Mayfield and Aramco Ventures, Vishal Sikka’s new venture brings together veterans from SAP, Infosys, and VianAI.",
+    "pubDate": "Wed, 24 Jun 2026 23:26:52 +0000"
   }
 ]
