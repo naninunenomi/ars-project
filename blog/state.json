@@ -2,8 +2,8 @@
   "pending_article": null,
   "last_success_window_key": "2026-06-12-NONE",
   "articles_today": 0,
-  "last_count_date": "2026-06-26",
-  "dify_calls_today": 5,
+  "last_count_date": "2026-06-27",
+  "dify_calls_today": 1,
   "processed_urls": [
     "https://www.wired.com/gallery/best-gifts-for-men-2026/",
     "https://techcrunch.com/2026/06/14/uk-may-ban-social-media-for-children-under-16/",
@@ -36,6 +36,7 @@
     "https://techcrunch.com/2026/06/25/hacked-klue-says-criminals-are-deleting-stolen-customer-data-but-now-other-hackers-are-making-threats/",
     "https://www.producthunt.com/products/quickmaker",
     "https://www.producthunt.com/products/zaro",
-    "https://techcrunch.com/2026/06/25/patronus-ai-lands-50m-to-build-digital-worlds-that-stress-test-ai-agents/"
+    "https://techcrunch.com/2026/06/25/patronus-ai-lands-50m-to-build-digital-worlds-that-stress-test-ai-agents/",
+    "https://techcrunch.com/2026/06/26/this-silicon-valley-startup-has-raised-10m-to-build-pitstops-to-clean-and-charge-robotaxis/"
   ]
 }
