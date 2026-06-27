@@ -2,8 +2,8 @@
   "pending_article": null,
   "last_success_window_key": "2026-06-12-NONE",
   "articles_today": 0,
-  "last_count_date": "2026-06-27",
-  "dify_calls_today": 5,
+  "last_count_date": "2026-06-28",
+  "dify_calls_today": 1,
   "processed_urls": [
     "https://www.wired.com/gallery/best-gifts-for-men-2026/",
     "https://techcrunch.com/2026/06/14/uk-may-ban-social-media-for-children-under-16/",
@@ -41,6 +41,7 @@
     "https://techcrunch.com/2026/06/26/its-not-about-anthropic-vs-openai-anymore/",
     "https://www.producthunt.com/products/sleek-analytics",
     "https://acoup.blog/2026/06/26/collections-pre-modern-armies-for-worldbuilders-part-iii-paying-for-it/",
-    "https://www.producthunt.com/products/squidhub"
+    "https://www.producthunt.com/products/squidhub",
+    "https://techcrunch.com/2026/06/27/the-fittest-founder-in-the-room-got-cancer-heres-how-he-used-ai-to-fight-back/"
   ]
 }
