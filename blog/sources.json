@@ -1,115 +1,11 @@
 [
   {
-    "url": "https://www.beercss.com",
-    "name": "Hacker News",
-    "category": "スタートアップ・開発",
-    "title": "Beer CSS – Build material design in record time",
-    "content": "Article URL: https://www.beercss.com Comments URL: https://news.ycombinator.com/item?id=48696510 Points: 15 # Comments: 2",
-    "pubDate": "Sat, 27 Jun 2026 09:06:11 +0000"
-  },
-  {
-    "url": "https://www.producthunt.com/products/cloud-world-model",
-    "name": "Product Hunt",
-    "category": "新サービス・ガジェット",
-    "title": "Cloud World Model",
-    "content": "",
-    "pubDate": "2026-06-21T13:48:25.000Z"
-  },
-  {
-    "url": "https://www.openttd.org/news/2026/06/25/openttd-16-0-beta1",
-    "name": "Hacker News",
-    "category": "スタートアップ・開発",
-    "title": "OpenTTD 16.0-Beta1",
-    "content": "Article URL: https://www.openttd.org/news/2026/06/25/openttd-16-0-beta1 Comments URL: https://news.ycombinator.com/item?id=48695149 Points: 172 # Comments: 31",
-    "pubDate": "Sat, 27 Jun 2026 04:31:06 +0000"
-  },
-  {
     "url": "https://venturebeat.com/technology/salesforce-rolls-out-new-slackbot-ai-agent-as-it-battles-microsoft-and",
     "name": "VentureBeat",
     "category": "AI・機械学習",
     "title": "Salesforce rolls out new Slackbot AI agent as it battles Microsoft and Google in workplace AI",
     "content": "Salesforce on Tuesday launched an entirely rebuilt version of Slackbot , the company&#x27;s workplace assistant, transforming it from a simple notification tool into what executives describe as a fully powered AI agent capable of searching enterprise data, drafting documents, and taking action on behalf of employees. The new Slackbot, now generally available to Business+ and Enterprise+ customers, is Salesforce&#x27;s most aggressive move yet to position Slack at the center of the emerging \"agentic AI\" movement — where software agents work alongside humans to complete complex tasks. The launch comes as Salesforce attempts to convince investors that artificial intelligence will bolster its products rather than render them obsolete. \"Slackbot isn&#x27;t just another copilot or AI assistant,\" said Parker Harris , Salesforce co-founder and Slack&#x27;s chief technology officer, in an exclusive interview with Salesforce. \"It&#x27;s the front door to the agentic enterprise, powered by Salesforce.\" From tricycle to Porsche: Salesforce rebuilt Slackbot from the ground up Harris was blunt about what distinguishes the new Slackbot from its predecessor: \"The old Slackbot was, you know, a little tricycle, and the new Slackbot is like, you know, a Porsche.\" The original Slackbot, which has existed since Slack&#x27;s early days, performed basic algorithmic tasks — reminding users to add colleagues to documents, suggesting channel archives, and delivering simple notifications. The new version runs on an entirely different architecture built around a large language model and sophisticated search capabilities that can access Salesforce records, Google Drive files, calendar data, and years of Slack conversations. \"It&#x27;s two different things,\" Harris explained. \"The old Slackbot was algorithmic and fairly simple. The new Slackbot is brand new — it&#x27;s based around an LLM and a very robust search engine, and connections to third-party search engines, third-party enterprise data.\" Salesforce chose to retain the Slackbot brand despite the fundamental technical overhaul. \"People know what Slackbot is, and so we wanted to carry that forward,\" Harris said. Why Anthropic&#x27;s Claude powers the new Slackbot — and which AI models could come next The new Slackbot runs on Claude , Anthropic&#x27;s large language model, a choice driven partly by compliance requirements. Slack&#x27;s commercial service operates under FedRAMP Moderate certification to serve U.S. federal government customers, and Harris said Anthropic was \"the only provider that could give us a compliant LLM\" when Slack began building the new system. But that exclusivity won&#x27;t last. \"We are, this year, going to support additional providers,\" Harris said. \"We have a great relationship with Google. Gemini is incredible — performance is great, cost is great. So we&#x27;re going to use Gemini for some things.\" He added that OpenAI remains a possibility as well. Harris echoed Salesforce CEO Marc Benioff&",
     "pubDate": "Tue, 13 Jan 2026 13:00:00 GMT"
-  },
-  {
-    "url": "https://techcrunch.com/2026/06/26/trump-admin-releases-anthropic-mythos-to-be-used-by-more-than-100-us-companies-agencies/",
-    "name": "TechCrunch",
-    "category": "テクノロジー",
-    "title": "Trump Admin releases Anthropic  Mythos to be used by more than 100 US companies, agencies",
-    "content": "Over 100 companies and government agencies are reportedly authorized to use Mythos 5, including their non-American employees.",
-    "pubDate": "Sat, 27 Jun 2026 01:01:37 +0000"
-  },
-  {
-    "url": "https://www.producthunt.com/products/supra-player",
-    "name": "Product Hunt",
-    "category": "新サービス・ガジェット",
-    "title": "Supra Player",
-    "content": "",
-    "pubDate": "2026-06-26T21:19:41.000Z"
-  },
-  {
-    "url": "https://techcrunch.com/2026/06/26/corgi-the-buzzy-y-combinator-backed-insurance-tech-startup-says-it-didnt-steal-an-open-source-product/",
-    "name": "TechCrunch",
-    "category": "テクノロジー",
-    "title": "Corgi, the buzzy Y Combinator-backed insurance tech startup, says it didn’t steal an open source product",
-    "content": "Corgi became embroiled in controversy when Papermark accused it of stealing its software. Corgi says it did not, raising new questions about vibe coding.",
-    "pubDate": "Fri, 26 Jun 2026 22:00:37 +0000"
-  },
-  {
-    "url": "https://github.com/deepseek-ai/DeepSpec/blob/main/DSpark_paper.pdf",
-    "name": "Hacker News",
-    "category": "スタートアップ・開発",
-    "title": "DeepSeek open-sources inference optimizations with 60–85% faster generation [pdf]",
-    "content": "Article URL: https://github.com/deepseek-ai/DeepSpec/blob/main/DSpark_paper.pdf Comments URL: https://news.ycombinator.com/item?id=48696585 Points: 234 # Comments: 49",
-    "pubDate": "Sat, 27 Jun 2026 09:18:52 +0000"
-  },
-  {
-    "url": "https://w.pitula.me/fintech-engineering-handbook/",
-    "name": "Hacker News",
-    "category": "スタートアップ・開発",
-    "title": "Fintech Engineering Handbook",
-    "content": "Article URL: https://w.pitula.me/fintech-engineering-handbook/ Comments URL: https://news.ycombinator.com/item?id=48696982 Points: 25 # Comments: 2",
-    "pubDate": "Sat, 27 Jun 2026 10:28:53 +0000"
-  },
-  {
-    "url": "https://www.producthunt.com/products/epilogue-book-writing-app",
-    "name": "Product Hunt",
-    "category": "新サービス・ガジェット",
-    "title": "Epilogue. Write novels, scripts & poetry",
-    "content": "",
-    "pubDate": "2026-05-26T12:25:59.000Z"
-  },
-  {
-    "url": "https://techcrunch.com/2026/06/26/openai-limits-gpt-5-6-rollout-after-government-request-says-restrictions-shouldnt-be-the-norm/",
-    "name": "TechCrunch",
-    "category": "テクノロジー",
-    "title": "OpenAI limits GPT-5.6 rollout after government request, says restrictions shouldn’t be the norm",
-    "content": "“We don’t believe this kind of government access process should become the long-term default,” says OpenAI. “It keeps the best tools from users, developers, enterprises, cyber defenders, and global partners who need them.”",
-    "pubDate": "Fri, 26 Jun 2026 18:32:14 +0000"
-  },
-  {
-    "url": "https://techcrunch.com/2026/06/26/ftc-gives-musk-the-ok-to-acquire-spacex-alumni-startup-mesh/",
-    "name": "TechCrunch",
-    "category": "テクノロジー",
-    "title": "FTC gives Musk the OK to acquire SpaceX alumni startup Mesh",
-    "content": "Mesh came out of stealth in February with a $50 million Series A.",
-    "pubDate": "Sat, 27 Jun 2026 00:38:34 +0000"
-  },
-  {
-    "url": "https://venturebeat.com/technology/google-just-redesigned-the-search-box-for-the-first-time-in-25-years-heres-why-it-matters-more-than-you-think",
-    "name": "VentureBeat",
-    "category": "AI・機械学習",
-    "title": "Google just redesigned the search box for the first time in 25 years — here’s why it matters more than you think.",
-    "content": "For a quarter century, the Google search box has been one of the most recognizable interfaces in computing: a thin white rectangle, a blinking cursor, a few typed words, and a list of blue links. On Tuesday, Google will formally retire that paradigm. At its annual I/O developer conference , Google announced a sweeping redesign of the search box itself — the literal text field where billions of queries begin every day — transforming it from a simple keyword input into a dynamic, AI-driven conversation starter that can accept text, images, PDFs, videos, and even open Chrome tabs as inputs. The company is also merging its AI Overviews and AI Mode features into a single, seamless search flow, eliminating the friction that previously forced users to choose between a traditional results page and an AI-forward experience. Liz Reid, Google&#x27;s vice president and head of Search, called it \"the biggest upgrade to our iconic search box since its debut over 25 years ago\" during a press briefing on Monday. The announcement arrived alongside a blizzard of other news — new Gemini models , a personal AI agent called Spark , an intelligent shopping cart , a reimagined developer platform — but the search box redesign may prove to be the most consequential. It is the clearest signal yet that Google views the future of its flagship product not as a place where users type fragmented keywords, but as an interface where they hold open-ended, multimodal conversations with an AI system backed by the entire web. The new search box expands, accepts files, and coaches you on what to ask The changes show a fundamental shift in how Google expects people to interact with the product that generates the vast majority of Alphabet&#x27;s revenue. The box itself now dynamically expands to accommodate longer, more conversational queries. Where the old interface subtly encouraged brevity — a narrow field suited to two- or three-word keyword strings — the new design invites users to fully articulate complex questions in granular detail. It also now supports multimodal inputs directly. Users can upload images, PDFs, files, and videos, or drag in content from Chrome tabs, right from the main search interface. Previously, some of these capabilities existed in AI Mode, but reaching them required extra steps. Now they sit at the primary entry point. Google is also deploying what it describes as an AI-powered query suggestion system that \"goes beyond autocomplete.\" Rather than simply predicting the next word a user might type based on popular searches, the system helps users formulate complex, nuanced queries — essentially coaching them toward the kind of detailed questions that AI Mode handles best. The new search box is starting to roll out immediately in all countries and languages where AI Mode is available. Google is merging AI overviews and AI mode into one seamless experience Perhaps more significant than the box itself is the architectural change happening behind it. Google is un",
-    "pubDate": "Tue, 19 May 2026 17:45:00 GMT"
-  },
-  {
-    "url": "https://venturebeat.com/technology/listen-labs-raises-usd69m-after-viral-billboard-hiring-stunt-to-scale-ai",
-    "name": "VentureBeat",
-    "category": "AI・機械学習",
-    "title": "Listen Labs raises $69M after viral billboard hiring stunt to scale AI customer interviews",
-    "content": "Alfred Wahlforss was running out of options. His startup, Listen Labs , needed to hire over 100 engineers, but competing against Mark Zuckerberg&#x27;s $100 million offers seemed impossible. So he spent $5,000 — a fifth of his marketing budget — on a billboard in San Francisco displaying what looked like gibberish: five strings of random numbers. The numbers were actually AI tokens. Decoded, they led to a coding challenge: build an algorithm to act as a digital bouncer at Berghain, the Berlin nightclub famous for rejecting nearly everyone at the door. Within days, thousands attempted the puzzle. 430 cracked it. Some got hired. The winner flew to Berlin, all expenses paid. That unconventional approach has now attracted $69 million in Series B funding, led by Ribbit Capital with participation from Evantic and existing investors Sequoia Capital , Conviction , and Pear VC . The round values Listen Labs at $500 million and brings its total capital to $100 million. In nine months since launch, the company has grown annualized revenue by 15x to eight figures and conducted over one million AI-powered interviews. \"When you obsess over customers, everything else follows,\" Wahlforss said in an interview with VentureBeat. \"Teams that use Listen bring the customer into every decision, from marketing to product, and when the customer is delighted, everyone is.\" Why traditional market research is broken, and what Listen Labs is building to fix it Listen&#x27;s AI researcher finds participants, conducts in-depth interviews, and delivers actionable insights in hours, not weeks. The platform replaces the traditional choice between quantitative surveys — which provide statistical precision but miss nuance—and qualitative interviews, which deliver depth but cannot scale. Wahlforss explained the limitation of existing approaches: \"Essentially surveys give you false precision because people end up answering the same question... You can&#x27;t get the outliers. People are actually not honest on surveys.\" The alternative, one-on-one human interviews, \"gives you a lot of depth. You can ask follow up questions. You can kind of double check if they actually know what they&#x27;re talking about. And the problem is you can&#x27;t scale that.\" The platform works in four steps: users create a study with AI assistance, Listen recruits participants from its global network of 30 million people, an AI moderator conducts in-depth interviews with follow-up questions, and results are packaged into executive-ready reports including key themes, highlight reels, and slide decks. What distinguishes Listen&#x27;s approach is its use of open-ended video conversations rather than multiple-choice forms. \"In a survey, you can kind of guess what you should answer, and you have four options,\" Wahlforss said. \"Oh, they probably want me to buy high income. Let me click on that button versus an open ended response. It just generates much more honesty.\" The dirty secret of the $140 billion market r",
-    "pubDate": "Fri, 16 Jan 2026 14:01:00 GMT"
   },
   {
     "url": "https://venturebeat.com/infrastructure/railway-secures-usd100-million-to-challenge-aws-with-ai-native-cloud",
@@ -120,20 +16,60 @@
     "pubDate": "Thu, 22 Jan 2026 14:00:00 GMT"
   },
   {
-    "url": "https://venturebeat.com/infrastructure/claude-code-costs-up-to-usd200-a-month-goose-does-the-same-thing-for-free",
-    "name": "VentureBeat",
-    "category": "AI・機械学習",
-    "title": "Claude Code costs up to $200 a month. Goose does the same thing for free.",
-    "content": "The artificial intelligence coding revolution comes with a catch: it&#x27;s expensive. Claude Code , Anthropic&#x27;s terminal-based AI agent that can write, debug, and deploy code autonomously, has captured the imagination of software developers worldwide. But its pricing — ranging from $20 to $200 per month depending on usage — has sparked a growing rebellion among the very programmers it aims to serve. Now, a free alternative is gaining traction. Goose , an open-source AI agent developed by Block (the financial technology company formerly known as Square), offers nearly identical functionality to Claude Code but runs entirely on a user&#x27;s local machine. No subscription fees. No cloud dependency. No rate limits that reset every five hours. \"Your data stays with you, period,\" said Parth Sareen, a software engineer who demonstrated the tool during a recent livestream . The comment captures the core appeal: Goose gives developers complete control over their AI-powered workflow, including the ability to work offline — even on an airplane. The project has exploded in popularity. Goose now boasts more than 26,100 stars on GitHub , the code-sharing platform, with 362 contributors and 102 releases since its launch. The latest version, 1.20.1 , shipped on January 19, 2026, reflecting a development pace that rivals commercial products. For developers frustrated by Claude Code&#x27;s pricing structure and usage caps, Goose represents something increasingly rare in the AI industry: a genuinely free, no-strings-attached option for serious work. Anthropic&#x27;s new rate limits spark a developer revolt To understand why Goose matters, you need to understand the Claude Code pricing controversy . Anthropic, the San Francisco artificial intelligence company founded by former OpenAI executives, offers Claude Code as part of its subscription tiers. The free plan provides no access whatsoever. The Pro plan , at $17 per month with annual billing (or $20 monthly), limits users to just 10 to 40 prompts every five hours — a constraint that serious developers exhaust within minutes of intensive work. The Max plans , at $100 and $200 per month, offer more headroom: 50 to 200 prompts and 200 to 800 prompts respectively, plus access to Anthropic&#x27;s most powerful model, Claude 4.5 Opus . But even these premium tiers come with restrictions that have inflamed the developer community. In late July, Anthropic announced new weekly rate limits. Under the system, Pro users receive 40 to 80 hours of Sonnet 4 usage per week. Max users at the $200 tier get 240 to 480 hours of Sonnet 4, plus 24 to 40 hours of Opus 4. Nearly five months later, the frustration has not subsided. The problem? Those \"hours\" are not actual hours. They represent token-based limits that vary wildly depending on codebase size, conversation length, and the complexity of the code being processed. Independent analysis suggests the actual per-session limits translate to roughly 44,000 tokens for Pro users",
-    "pubDate": "Mon, 19 Jan 2026 14:00:00 GMT"
+    "url": "https://w.pitula.me/fintech-engineering-handbook/",
+    "name": "Hacker News",
+    "category": "スタートアップ・開発",
+    "title": "Fintech Engineering Handbook",
+    "content": "Article URL: https://w.pitula.me/fintech-engineering-handbook/ Comments URL: https://news.ycombinator.com/item?id=48696982 Points: 116 # Comments: 35",
+    "pubDate": "Sat, 27 Jun 2026 10:28:53 +0000"
   },
   {
-    "url": "https://www.producthunt.com/products/folio-ai",
+    "url": "https://venturebeat.com/technology/listen-labs-raises-usd69m-after-viral-billboard-hiring-stunt-to-scale-ai",
+    "name": "VentureBeat",
+    "category": "AI・機械学習",
+    "title": "Listen Labs raises $69M after viral billboard hiring stunt to scale AI customer interviews",
+    "content": "Alfred Wahlforss was running out of options. His startup, Listen Labs , needed to hire over 100 engineers, but competing against Mark Zuckerberg&#x27;s $100 million offers seemed impossible. So he spent $5,000 — a fifth of his marketing budget — on a billboard in San Francisco displaying what looked like gibberish: five strings of random numbers. The numbers were actually AI tokens. Decoded, they led to a coding challenge: build an algorithm to act as a digital bouncer at Berghain, the Berlin nightclub famous for rejecting nearly everyone at the door. Within days, thousands attempted the puzzle. 430 cracked it. Some got hired. The winner flew to Berlin, all expenses paid. That unconventional approach has now attracted $69 million in Series B funding, led by Ribbit Capital with participation from Evantic and existing investors Sequoia Capital , Conviction , and Pear VC . The round values Listen Labs at $500 million and brings its total capital to $100 million. In nine months since launch, the company has grown annualized revenue by 15x to eight figures and conducted over one million AI-powered interviews. \"When you obsess over customers, everything else follows,\" Wahlforss said in an interview with VentureBeat. \"Teams that use Listen bring the customer into every decision, from marketing to product, and when the customer is delighted, everyone is.\" Why traditional market research is broken, and what Listen Labs is building to fix it Listen&#x27;s AI researcher finds participants, conducts in-depth interviews, and delivers actionable insights in hours, not weeks. The platform replaces the traditional choice between quantitative surveys — which provide statistical precision but miss nuance—and qualitative interviews, which deliver depth but cannot scale. Wahlforss explained the limitation of existing approaches: \"Essentially surveys give you false precision because people end up answering the same question... You can&#x27;t get the outliers. People are actually not honest on surveys.\" The alternative, one-on-one human interviews, \"gives you a lot of depth. You can ask follow up questions. You can kind of double check if they actually know what they&#x27;re talking about. And the problem is you can&#x27;t scale that.\" The platform works in four steps: users create a study with AI assistance, Listen recruits participants from its global network of 30 million people, an AI moderator conducts in-depth interviews with follow-up questions, and results are packaged into executive-ready reports including key themes, highlight reels, and slide decks. What distinguishes Listen&#x27;s approach is its use of open-ended video conversations rather than multiple-choice forms. \"In a survey, you can kind of guess what you should answer, and you have four options,\" Wahlforss said. \"Oh, they probably want me to buy high income. Let me click on that button versus an open ended response. It just generates much more honesty.\" The dirty secret of the $140 billion market r",
+    "pubDate": "Fri, 16 Jan 2026 14:01:00 GMT"
+  },
+  {
+    "url": "https://techcrunch.com/2026/06/27/asian-ai-startups-launch-mythos-like-models-as-anthropics-export-ban-drags-on/",
+    "name": "TechCrunch",
+    "category": "テクノロジー",
+    "title": "Asian AI startups launch Mythos-like  models as Anthropic’s export ban drags on",
+    "content": "New models are launching in Asia that promise Mythos-like capabilities without fear of an export ban. U.S. AI labs may never recover this enormous market.",
+    "pubDate": "Sat, 27 Jun 2026 12:00:00 +0000"
+  },
+  {
+    "url": "https://venturebeat.com/technology/google-just-redesigned-the-search-box-for-the-first-time-in-25-years-heres-why-it-matters-more-than-you-think",
+    "name": "VentureBeat",
+    "category": "AI・機械学習",
+    "title": "Google just redesigned the search box for the first time in 25 years — here’s why it matters more than you think.",
+    "content": "For a quarter century, the Google search box has been one of the most recognizable interfaces in computing: a thin white rectangle, a blinking cursor, a few typed words, and a list of blue links. On Tuesday, Google will formally retire that paradigm. At its annual I/O developer conference , Google announced a sweeping redesign of the search box itself — the literal text field where billions of queries begin every day — transforming it from a simple keyword input into a dynamic, AI-driven conversation starter that can accept text, images, PDFs, videos, and even open Chrome tabs as inputs. The company is also merging its AI Overviews and AI Mode features into a single, seamless search flow, eliminating the friction that previously forced users to choose between a traditional results page and an AI-forward experience. Liz Reid, Google&#x27;s vice president and head of Search, called it \"the biggest upgrade to our iconic search box since its debut over 25 years ago\" during a press briefing on Monday. The announcement arrived alongside a blizzard of other news — new Gemini models , a personal AI agent called Spark , an intelligent shopping cart , a reimagined developer platform — but the search box redesign may prove to be the most consequential. It is the clearest signal yet that Google views the future of its flagship product not as a place where users type fragmented keywords, but as an interface where they hold open-ended, multimodal conversations with an AI system backed by the entire web. The new search box expands, accepts files, and coaches you on what to ask The changes show a fundamental shift in how Google expects people to interact with the product that generates the vast majority of Alphabet&#x27;s revenue. The box itself now dynamically expands to accommodate longer, more conversational queries. Where the old interface subtly encouraged brevity — a narrow field suited to two- or three-word keyword strings — the new design invites users to fully articulate complex questions in granular detail. It also now supports multimodal inputs directly. Users can upload images, PDFs, files, and videos, or drag in content from Chrome tabs, right from the main search interface. Previously, some of these capabilities existed in AI Mode, but reaching them required extra steps. Now they sit at the primary entry point. Google is also deploying what it describes as an AI-powered query suggestion system that \"goes beyond autocomplete.\" Rather than simply predicting the next word a user might type based on popular searches, the system helps users formulate complex, nuanced queries — essentially coaching them toward the kind of detailed questions that AI Mode handles best. The new search box is starting to roll out immediately in all countries and languages where AI Mode is available. Google is merging AI overviews and AI mode into one seamless experience Perhaps more significant than the box itself is the architectural change happening behind it. Google is un",
+    "pubDate": "Tue, 19 May 2026 17:45:00 GMT"
+  },
+  {
+    "url": "https://techcrunch.com/2026/06/26/trump-admin-releases-anthropic-mythos-to-be-used-by-more-than-100-us-companies-agencies/",
+    "name": "TechCrunch",
+    "category": "テクノロジー",
+    "title": "Trump Admin releases Anthropic  Mythos to be used by more than 100 US companies, agencies",
+    "content": "Over 100 companies and government agencies are reportedly authorized to use Mythos 5, including their non-American employees.",
+    "pubDate": "Sat, 27 Jun 2026 01:01:37 +0000"
+  },
+  {
+    "url": "https://github.com/deepseek-ai/DeepSpec/blob/main/DSpark_paper.pdf",
+    "name": "Hacker News",
+    "category": "スタートアップ・開発",
+    "title": "DeepSeek open-sources inference optimizations with 60–85% faster generation [pdf]",
+    "content": "Article URL: https://github.com/deepseek-ai/DeepSpec/blob/main/DSpark_paper.pdf Comments URL: https://news.ycombinator.com/item?id=48696585 Points: 450 # Comments: 146",
+    "pubDate": "Sat, 27 Jun 2026 09:18:52 +0000"
+  },
+  {
+    "url": "https://www.producthunt.com/products/retromac",
     "name": "Product Hunt",
     "category": "新サービス・ガジェット",
-    "title": "Folio AI",
+    "title": "RetroMac",
     "content": "",
-    "pubDate": "2026-06-25T20:15:56.000Z"
+    "pubDate": "2026-06-26T04:24:48.000Z"
   },
   {
     "url": "https://www.producthunt.com/products/nada-2",
@@ -144,12 +80,36 @@
     "pubDate": "2026-06-24T07:54:20.000Z"
   },
   {
-    "url": "https://github.com/schlae/IBM_MCGA",
+    "url": "https://www.ycombinator.com/companies/nox-metals/jobs/M1f1enD-software-engineer",
     "name": "Hacker News",
     "category": "スタートアップ・開発",
-    "title": "IBM MCGA Gate Array Reverse Engineering",
-    "content": "Article URL: https://github.com/schlae/IBM_MCGA Comments URL: https://news.ycombinator.com/item?id=48695363 Points: 35 # Comments: 5",
-    "pubDate": "Sat, 27 Jun 2026 05:17:08 +0000"
+    "title": "Nox Metals (YC S25) Is Hiring SWE",
+    "content": "Article URL: https://www.ycombinator.com/companies/nox-metals/jobs/M1f1enD-software-engineer Comments URL: https://news.ycombinator.com/item?id=48697504 Points: 0 # Comments: 0",
+    "pubDate": "Sat, 27 Jun 2026 12:01:03 +0000"
+  },
+  {
+    "url": "https://www.openra.net/",
+    "name": "Hacker News",
+    "category": "スタートアップ・開発",
+    "title": "OpenRA",
+    "content": "Article URL: https://www.openra.net/ Comments URL: https://news.ycombinator.com/item?id=48697560 Points: 13 # Comments: 4",
+    "pubDate": "Sat, 27 Jun 2026 12:10:27 +0000"
+  },
+  {
+    "url": "https://dervis.de/physical/",
+    "name": "Hacker News",
+    "category": "スタートアップ・開発",
+    "title": "If You Can't Hold It, You Don't Own It",
+    "content": "Article URL: https://dervis.de/physical/ Comments URL: https://news.ycombinator.com/item?id=48697335 Points: 13 # Comments: 0",
+    "pubDate": "Sat, 27 Jun 2026 11:32:10 +0000"
+  },
+  {
+    "url": "https://venturebeat.com/infrastructure/claude-code-costs-up-to-usd200-a-month-goose-does-the-same-thing-for-free",
+    "name": "VentureBeat",
+    "category": "AI・機械学習",
+    "title": "Claude Code costs up to $200 a month. Goose does the same thing for free.",
+    "content": "The artificial intelligence coding revolution comes with a catch: it&#x27;s expensive. Claude Code , Anthropic&#x27;s terminal-based AI agent that can write, debug, and deploy code autonomously, has captured the imagination of software developers worldwide. But its pricing — ranging from $20 to $200 per month depending on usage — has sparked a growing rebellion among the very programmers it aims to serve. Now, a free alternative is gaining traction. Goose , an open-source AI agent developed by Block (the financial technology company formerly known as Square), offers nearly identical functionality to Claude Code but runs entirely on a user&#x27;s local machine. No subscription fees. No cloud dependency. No rate limits that reset every five hours. \"Your data stays with you, period,\" said Parth Sareen, a software engineer who demonstrated the tool during a recent livestream . The comment captures the core appeal: Goose gives developers complete control over their AI-powered workflow, including the ability to work offline — even on an airplane. The project has exploded in popularity. Goose now boasts more than 26,100 stars on GitHub , the code-sharing platform, with 362 contributors and 102 releases since its launch. The latest version, 1.20.1 , shipped on January 19, 2026, reflecting a development pace that rivals commercial products. For developers frustrated by Claude Code&#x27;s pricing structure and usage caps, Goose represents something increasingly rare in the AI industry: a genuinely free, no-strings-attached option for serious work. Anthropic&#x27;s new rate limits spark a developer revolt To understand why Goose matters, you need to understand the Claude Code pricing controversy . Anthropic, the San Francisco artificial intelligence company founded by former OpenAI executives, offers Claude Code as part of its subscription tiers. The free plan provides no access whatsoever. The Pro plan , at $17 per month with annual billing (or $20 monthly), limits users to just 10 to 40 prompts every five hours — a constraint that serious developers exhaust within minutes of intensive work. The Max plans , at $100 and $200 per month, offer more headroom: 50 to 200 prompts and 200 to 800 prompts respectively, plus access to Anthropic&#x27;s most powerful model, Claude 4.5 Opus . But even these premium tiers come with restrictions that have inflamed the developer community. In late July, Anthropic announced new weekly rate limits. Under the system, Pro users receive 40 to 80 hours of Sonnet 4 usage per week. Max users at the $200 tier get 240 to 480 hours of Sonnet 4, plus 24 to 40 hours of Opus 4. Nearly five months later, the frustration has not subsided. The problem? Those \"hours\" are not actual hours. They represent token-based limits that vary wildly depending on codebase size, conversation length, and the complexity of the code being processed. Independent analysis suggests the actual per-session limits translate to roughly 44,000 tokens for Pro users",
+    "pubDate": "Mon, 19 Jan 2026 14:00:00 GMT"
   },
   {
     "url": "https://techcrunch.com/2026/06/26/novak-djokovic-has-a-new-job-advisor-to-private-equity-firm-general-atlantic/",
@@ -158,5 +118,45 @@
     "title": "Novak Djokovic has a new job —  advisor to private equity firm General Atlantic",
     "content": "General Atlantic has tapped tennis legend Novak Djokovic to serve as a global strategic advisor.",
     "pubDate": "Fri, 26 Jun 2026 19:13:40 +0000"
+  },
+  {
+    "url": "https://techcrunch.com/2026/06/26/corgi-the-buzzy-y-combinator-backed-insurance-tech-startup-says-it-didnt-steal-an-open-source-product/",
+    "name": "TechCrunch",
+    "category": "テクノロジー",
+    "title": "Corgi, the buzzy Y Combinator-backed insurance tech startup, says it didn’t steal an open source product",
+    "content": "Corgi became embroiled in controversy when Papermark accused it of stealing its software. Corgi says it did not, raising new questions about vibe coding.",
+    "pubDate": "Fri, 26 Jun 2026 22:00:37 +0000"
+  },
+  {
+    "url": "https://techcrunch.com/2026/06/26/ftc-gives-musk-the-ok-to-acquire-spacex-alumni-startup-mesh/",
+    "name": "TechCrunch",
+    "category": "テクノロジー",
+    "title": "FTC gives Musk the OK to acquire SpaceX alumni startup Mesh",
+    "content": "Mesh came out of stealth in February with a $50 million Series A.",
+    "pubDate": "Sat, 27 Jun 2026 00:38:34 +0000"
+  },
+  {
+    "url": "https://www.producthunt.com/products/folio-ai",
+    "name": "Product Hunt",
+    "category": "新サービス・ガジェット",
+    "title": "Folio AI",
+    "content": "",
+    "pubDate": "2026-06-25T20:15:56.000Z"
+  },
+  {
+    "url": "https://www.producthunt.com/products/qapilot",
+    "name": "Product Hunt",
+    "category": "新サービス・ガジェット",
+    "title": "QApilot's CoWork",
+    "content": "",
+    "pubDate": "2026-06-17T21:40:16.000Z"
+  },
+  {
+    "url": "https://www.producthunt.com/products/epilogue-book-writing-app",
+    "name": "Product Hunt",
+    "category": "新サービス・ガジェット",
+    "title": "Epilogue. Write novels, scripts & poetry",
+    "content": "",
+    "pubDate": "2026-05-26T12:25:59.000Z"
   }
 ]
