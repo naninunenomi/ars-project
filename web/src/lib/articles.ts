@@ -10,6 +10,7 @@ export interface Article {
   date: string;
   draft: boolean;
   content: string;
+  featured?: boolean; // 特集・おすすめ（エバーグリーン記事）として固定表示するか
 }
 
 // JSONファイルが入るディレクトリ（手動作成・trigger.js経由）
@@ -155,4 +156,14 @@ export function getAllArticles(includeDrafts: boolean = false): Article[] {
 
 export function getArticleById(id: string): Article | null {
   return getAllArticles(true).find(a => a.id === id) || null;
+}
+
+/** 特集・おすすめ（エバーグリーン）記事のみ */
+export function getFeaturedArticles(): Article[] {
+  return getAllArticles(false).filter(a => a.featured);
+}
+
+/** 通常の深掘り記事（特集を除く）。最新→過去の順 */
+export function getRegularArticles(): Article[] {
+  return getAllArticles(false).filter(a => !a.featured);
 }
