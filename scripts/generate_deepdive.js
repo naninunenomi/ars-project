@@ -81,6 +81,7 @@ const stripHtml = (h) => (h || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ')
 const V2_RULES = `
 あなたは経済・ビジネスを「面白く深く」語る解説ライターであり、金融商品取引法・景品表示法を守るコンプラ番人。
 株価の上下を当てる記事ではなく「登場企業が何者で、どんな取り組みをし、その連鎖で世の中がどう変わりそうか」を描く。
+【この記事の主役】ニュースそのものの解説記事にしない。主役は、下書きの「ニュース関連株情報（関連株）」に挙がった企業たちの深掘り。ニュースは「各企業がなぜ今注目されるのか」を示す"入口・文脈"として冒頭と各社説明で触れつつ、記事の中心は関連株企業の正体・取り組み・独自見解・連鎖する未来に置くこと。
 【厳守】1.株価の方向を断定しない(上がる/下がる/儲かる/買い 禁止、値動きは「注目される/思惑」程度)。
 2.確証のない数字を創作しない。リサーチ結果にない具体数字は書かない。不確実は「〜とされる」。
 3.各企業の説明に必ず「ただし〜のリスク/不確実」を一言添える(良い面だけにしない)。
@@ -95,7 +96,7 @@ async function main() {
 
   // ① 企業抽出
   console.log('① 企業を抽出中...');
-  const listRaw = await callGemini(`次のニュース下書きから、株式・企業に関する登場企業を最大8件抽出し、JSON配列だけを返せ。形式:[{"name":"企業名","ticker":"証券コード"}]。\n\n下書き:\n${draft.slice(0, 8000)}`);
+  const listRaw = await callGemini(`次のニュース下書きの中の「ニュース関連株情報」や関連銘柄が列挙された部分（証券コード [^] や [$] が付いた箇所など。多くは下書きの後半にある）に注目し、そこに挙がっている企業を最大8件抽出してJSON配列だけを返せ。形式:[{"name":"企業名","ticker":"証券コード"}]。関連株の記載が見当たらない時のみ、本文の主要企業を抽出せよ。\n\n下書き:\n${draft.slice(0, 24000)}`);
   let companies = parseJsonLoose(listRaw);
   if (!Array.isArray(companies)) companies = [];
   if (companies.length === 0) {
@@ -119,7 +120,7 @@ async function main() {
 
   // ③ 執筆
   console.log('③ 記事を執筆中...');
-  const writePrompt = `${V2_RULES}\n\n【当日のニュース下書き】\n${draft.slice(0, 8000)}\n\n【各企業のリサーチ結果】\n${research.slice(0, 8000)}\n\n次のJSONだけを返せ: {"title":"記事タイトル","content_html":"<p>...</p><h2>...</h2>... 本文をHTMLで"}`;
+  const writePrompt = `${V2_RULES}\n\n【当日のニュース下書き（後半の関連株情報が主役）】\n${draft.slice(0, 24000)}\n\n【各企業のリサーチ結果】\n${research.slice(0, 8000)}\n\n次のJSONだけを返せ: {"title":"記事タイトル","content_html":"<p>...</p><h2>...</h2>... 本文をHTMLで"}`;
   let article = parseJsonLoose(await callGemini(writePrompt));
   if (!article || !article.content_html) { console.error('🚨 記事本文の生成に失敗しました'); process.exit(1); }
 
