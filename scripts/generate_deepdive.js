@@ -9,10 +9,12 @@
 
 const fs = require('fs');
 const path = require('path');
+const crypto = require('crypto');
 
 const MODEL_NAME = 'gemini-2.5-flash';
 const ARS_URL = 'https://ars-project.vercel.app/api/check.js';
 const OUT_DIR = path.join(__dirname, '../web/src/data/articles');
+const STATE_FILE = path.join(__dirname, '../blog/deepdive_state.json');
 
 // ---- Gemini（執筆・抽出用。JSONモードで確実にJSONを返させる）----
 const callGemini = async (prompt) => {
@@ -91,8 +93,24 @@ const V2_RULES = `
 免責文:「本記事は情報提供・読み物であり、特定銘柄の売買を推奨するものではありません。企業の取り組みや将来の見通しには筆者の見解を含み、正確性や実現を保証しません。投資判断はご自身の責任で。」`;
 
 async function main() {
-  const draft = (process.env.DAILY_DRAFT || '').trim();
-  if (!draft) { console.error('🚨 DAILY_DRAFT が空です'); process.exit(1); }
+  // 下書きの取得：手動(DAILY_DRAFT)があればそれ、無ければGoogleドキュメント(DRAFT_DOC_URL)を読む
+  const isManual = !!(process.env.DAILY_DRAFT || '').trim();
+  let draft = (process.env.DAILY_DRAFT || '').trim();
+  if (!draft && process.env.DRAFT_DOC_URL) {
+    try {
+      console.log('Googleドキュメントから下書きを読み込み中...');
+      const res = await fetch(process.env.DRAFT_DOC_URL);
+      draft = (await res.text()).replace(/^﻿/, '').trim();
+    } catch (e) { console.error('[Doc] 読み込み失敗', e.message); }
+  }
+  draft = draft.replace(/^﻿/, '').trim();
+  if (!draft || draft.length < 100) { console.log('⏭ 下書きが空か短すぎます。今回はスキップします。'); process.exit(0); }
+
+  // 二重投稿ふせぎ：前回と同じ下書きなら何もしない（手動テストは常に処理）
+  const hash = crypto.createHash('sha256').update(draft).digest('hex').slice(0, 16);
+  let state = {};
+  try { state = JSON.parse(fs.readFileSync(STATE_FILE, 'utf8')); } catch { /* 初回はファイル無し */ }
+  if (!isManual && state.lastHash === hash) { console.log('⏭ 下書きに変化なし。公開済みのためスキップします。'); process.exit(0); }
 
   // ① 企業抽出
   console.log('① 企業を抽出中...');
@@ -153,6 +171,7 @@ async function main() {
   };
   if (!fs.existsSync(OUT_DIR)) fs.mkdirSync(OUT_DIR, { recursive: true });
   fs.writeFileSync(path.join(OUT_DIR, `${id}.json`), JSON.stringify(out, null, 2), 'utf8');
+  fs.writeFileSync(STATE_FILE, JSON.stringify({ lastHash: hash, lastId: id, updated: new Date().toISOString() }, null, 2), 'utf8');
   console.log(`✅ 記事を出力しました: ${id}.json`);
 }
 
