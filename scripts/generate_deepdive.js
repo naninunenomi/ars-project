@@ -5,7 +5,6 @@
  *
  * 実行: DAILY_DRAFT 環境変数に下書き本文を入れて node scripts/generate_deepdive.js
  * 必要な鍵(環境変数): GEMINI_API_KEY, TAVILY_API_KEY
- * 既存の researcher.js と同じ呼び出し方を踏襲。
  */
 
 const fs = require('fs');
@@ -15,17 +14,20 @@ const MODEL_NAME = 'gemini-2.5-flash';
 const ARS_URL = 'https://ars-project.vercel.app/api/check.js';
 const OUT_DIR = path.join(__dirname, '../web/src/data/articles');
 
-// ---- Gemini（執筆・抽出用）----
+// ---- Gemini（執筆・抽出用。JSONモードで確実にJSONを返させる）----
 const callGemini = async (prompt) => {
   const key = process.env.GEMINI_API_KEY;
   const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${MODEL_NAME}:generateContent?key=${key}`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
+    body: JSON.stringify({
+      contents: [{ parts: [{ text: prompt }] }],
+      generationConfig: { responseMimeType: 'application/json' }
+    })
   });
   const data = await res.json();
   if (!data.candidates) {
-    console.error('[Gemini] no candidates:', JSON.stringify(data).slice(0, 500));
+    console.error('[Gemini] no candidates:', JSON.stringify(data).slice(0, 600));
     return '';
   }
   return data.candidates?.[0]?.content?.parts?.[0]?.text || '';
@@ -64,10 +66,15 @@ const callARS = async (text) => {
   }
 };
 
-// 純粋なJSONだけを取り出す（```json などが混ざっても拾う）
-const extractJson = (s) => {
-  const m = s.match(/\{[\s\S]*\}/);
-  return m ? m[0] : s;
+// JSONを緩く解析（配列[...]・オブジェクト{...}・```json```のどれでも拾う）
+const parseJsonLoose = (s) => {
+  if (!s) return null;
+  const t = s.replace(/```json/gi, '').replace(/```/g, '').trim();
+  const tries = [t];
+  const obj = t.match(/\{[\s\S]*\}/); if (obj) tries.push(obj[0]);
+  const arr = t.match(/\[[\s\S]*\]/); if (arr) tries.push(arr[0]);
+  for (const x of tries) { try { return JSON.parse(x); } catch { /* next */ } }
+  return null;
 };
 const stripHtml = (h) => (h || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
 
@@ -88,28 +95,33 @@ async function main() {
 
   // ① 企業抽出
   console.log('① 企業を抽出中...');
-  const listRaw = await callGemini(`次のニュース下書きから、株式・企業に関する登場企業を最大8件、JSON配列で抽出せよ。形式:[{"name":"企業名","ticker":"証券コード"}]。純粋なJSONのみ(Markdown不可)。\n\n下書き:\n${draft.slice(0, 8000)}`);
-  let companies = [];
-  try { companies = JSON.parse(extractJson(listRaw)); } catch { companies = []; }
-  if (!Array.isArray(companies) || companies.length === 0) { console.error('🚨 企業を抽出できませんでした'); process.exit(1); }
-  console.log('   抽出:', companies.map(c => c.name).join(', '));
+  const listRaw = await callGemini(`次のニュース下書きから、株式・企業に関する登場企業を最大8件抽出し、JSON配列だけを返せ。形式:[{"name":"企業名","ticker":"証券コード"}]。\n\n下書き:\n${draft.slice(0, 8000)}`);
+  let companies = parseJsonLoose(listRaw);
+  if (!Array.isArray(companies)) companies = [];
+  if (companies.length === 0) {
+    console.error('⚠️ 企業を抽出できませんでした。Geminiの返答（先頭）:', (listRaw || '(空)').slice(0, 300));
+    console.error('   → 検索なしで、下書きとAIの知識だけで執筆を続けます。');
+  } else {
+    console.log('   抽出:', companies.map(c => c.name).join(', '));
+  }
 
   // ② 各社リサーチ
-  console.log('② 各社をネット検索中...');
   let research = '';
-  for (const c of companies) {
-    const data = await callTavily(`${c.name} ${c.ticker || ''} 事業 最新 2026 取り組み IR`);
-    if (data && data.results) {
-      research += `\n【${c.name}】\n` + data.results.slice(0, 3).map(r => `- ${r.title}: ${r.content}`).join('\n');
+  if (companies.length > 0) {
+    console.log('② 各社をネット検索中...');
+    for (const c of companies) {
+      const data = await callTavily(`${c.name} ${c.ticker || ''} 事業 最新 2026 取り組み IR`);
+      if (data && data.results) {
+        research += `\n【${c.name}】\n` + data.results.slice(0, 3).map(r => `- ${r.title}: ${r.content}`).join('\n');
+      }
     }
   }
 
   // ③ 執筆
   console.log('③ 記事を執筆中...');
-  const writePrompt = `${V2_RULES}\n\n【当日のニュース下書き】\n${draft.slice(0, 8000)}\n\n【各企業のリサーチ結果】\n${research.slice(0, 8000)}\n\n出力は必ず次のJSONのみ(前後に説明文やMarkdownを付けない): {"title":"記事タイトル","content_html":"<p>...</p><h2>...</h2>... 本文をHTMLで"}`;
-  let article = {};
-  try { article = JSON.parse(extractJson(await callGemini(writePrompt))); } catch (e) { console.error('🚨 執筆結果のJSON解析に失敗', e.message); process.exit(1); }
-  if (!article.content_html) { console.error('🚨 本文が空です'); process.exit(1); }
+  const writePrompt = `${V2_RULES}\n\n【当日のニュース下書き】\n${draft.slice(0, 8000)}\n\n【各企業のリサーチ結果】\n${research.slice(0, 8000)}\n\n次のJSONだけを返せ: {"title":"記事タイトル","content_html":"<p>...</p><h2>...</h2>... 本文をHTMLで"}`;
+  let article = parseJsonLoose(await callGemini(writePrompt));
+  if (!article || !article.content_html) { console.error('🚨 記事本文の生成に失敗しました'); process.exit(1); }
 
   // ④ ARSチェック（DANGERなら1回だけ書き直し）
   console.log('④ ARSで法務チェック中...');
@@ -119,8 +131,8 @@ async function main() {
     if (check.verdict !== 'DANGER') break;
     if (i === 1) break;
     console.log('   DANGER→リスク併記を足して書き直し...');
-    const fixRaw = await callGemini(`次の記事はARSで「一方的・リスク記載不足」でDANGER判定でした。各企業の説明に「ただし〜のリスク/不確実」を一言ずつ加え、断定表現を全て避けて書き直せ。免責も冒頭末尾に。出力はJSONのみ:{"title","content_html"}\n\n記事:\n${JSON.stringify(article).slice(0, 12000)}`);
-    try { article = JSON.parse(extractJson(fixRaw)); } catch { /* keep previous */ }
+    const fixed = parseJsonLoose(await callGemini(`次の記事はARSで「一方的・リスク記載不足」でDANGER判定でした。各企業の説明に「ただし〜のリスク/不確実」を一言ずつ加え、断定表現を全て避けて書き直せ。免責も冒頭末尾に。次のJSONだけを返せ:{"title":"...","content_html":"..."}\n\n記事:\n${JSON.stringify(article).slice(0, 12000)}`));
+    if (fixed && fixed.content_html) article = fixed;
   }
 
   // ⑤ 記事JSONを出力
