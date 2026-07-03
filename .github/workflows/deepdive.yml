@@ -4,7 +4,7 @@ name: Deep-Dive 記事生成（自動＋手動）
 # 手動: 「Run workflow」で下書きを貼れば、その場でテスト実行できます。
 on:
   schedule:
-    - cron: '0 22 * * *'   # 22:00 UTC = 日本時間 朝7:00（毎日）
+    - cron: '0 16 * * *'   # 16:00 UTC = 日本時間 深夜1:00（毎日）
   workflow_dispatch:
     inputs:
       draft:
