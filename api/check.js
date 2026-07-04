@@ -23,6 +23,35 @@ const redis = async (command, ...args) => {
     return data.result;
 };
 
+// Gemini Helper (Phase0): 思考OFF＋JSON強制で1〜2秒に高速化し、空返事・パース失敗は1回だけ再試行する
+const callGemini = async (prompt) => {
+    for (let attempt = 1; attempt <= 2; attempt++) {
+        try {
+            const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${process.env.GEMINI_API_KEY}`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    contents: [{ parts: [{ text: prompt }] }],
+                    generationConfig: {
+                        responseMimeType: "application/json",
+                        thinkingConfig: { thinkingBudget: 0 }
+                    }
+                })
+            });
+            const data = await res.json();
+            if (data.candidates && data.candidates.length > 0) {
+                const responseText = data.candidates[0].content.parts[0].text;
+                const jsonMatch = responseText.match(/\{.*\}/s);
+                return JSON.parse(jsonMatch ? jsonMatch[0] : responseText);
+            }
+            console.error(`[ARS] Gemini empty response (attempt ${attempt}/2):`, JSON.stringify(data).slice(0, 300));
+        } catch (e) {
+            console.error(`[ARS] Gemini call failed (attempt ${attempt}/2):`, e.message);
+        }
+    }
+    return null;
+};
+
 module.exports = async (req, res) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     const ghToken = process.env.GH_PAT;
@@ -62,19 +91,7 @@ ${existingThemes.map(t => `- ${t}`).join('\n') || "(なし)"}
   "theme": "選択した既存テーマ名、または新規に自動命名したテーマ名"
 }`;
 
-            const geminiClassifyRes = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${process.env.GEMINI_API_KEY}`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ contents: [{ parts: [{ text: classifierPrompt }] }] })
-            });
-            const classifyData = await geminiClassifyRes.json();
-            
-            let classifyResult = { matched: false, theme: "広告鑑定（一般法）" };
-            if (classifyData.candidates && classifyData.candidates.length > 0) {
-                const responseText = classifyData.candidates[0].content.parts[0].text;
-                const jsonMatch = responseText.match(/\{.*\}/s);
-                classifyResult = JSON.parse(jsonMatch ? jsonMatch[0] : responseText);
-            }
+            const classifyResult = (await callGemini(classifierPrompt)) || { matched: false, theme: "広告鑑定（一般法）" };
 
             theme = classifyResult.theme;
             console.log(`[ARS] Auto-Classifier result: matched=${classifyResult.matched}, theme=${theme}`);
@@ -179,18 +196,9 @@ ${manual}
   "details_ja": "監督およびクライクライアントAI向けの、親切で非常にわかりやすい具体的な法律違反解説（日本語）。どの法令のどの部分に、広告テキストのどの表現が違反しているのかを日本語で具体的に説明すること。"
 }`;
             
-            const geminiRes = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${process.env.GEMINI_API_KEY}`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ contents: [{ parts: [{ text: evalPrompt }] }] })
-            });
-            const data = await geminiRes.json();
-            
-            if (data.candidates && data.candidates.length > 0) {
-                const responseText = data.candidates[0].content.parts[0].text;
-                const jsonMatch = responseText.match(/\{.*\}/s);
-                const evalResult = JSON.parse(jsonMatch ? jsonMatch[0] : responseText);
-                
+            const evalResult = await callGemini(evalPrompt);
+
+            if (evalResult) {
                 console.log(`[ARS] Knowledge Confidence: ${evalResult.confidence}%`);
 
                 // 1. 課金＆売上本番反映
@@ -272,7 +280,7 @@ ${manual}
                     model: "gemini-2.5-flash"
                 });
             } else {
-                console.error("[ARS] Gemini Valuation Failed:", data);
+                console.error("[ARS] Gemini Valuation Failed after retry.");
                 return res.json({ status: "STUDYING", message: "Valuation failed. Refining...", disclaimer: DISCLAIMER });
             }
         } else {
