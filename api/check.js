@@ -232,8 +232,7 @@ ${manual}
                 if (evalResult.confidence < 90 && ghToken && currentStatus !== 'STUDYING') {
                     console.log(`[ARS] Confidence low. Gap detected: ${evalResult.gap}. Dispatching Incremental Research...`);
                     try {
-                        await redis('hset', 'ars_v12_status', activeTheme, 'STUDYING');
-                        
+                        // 先に「他の研究員が稼働中か」を確認してから自分の札を掛ける（自己ブロック防止）
                         const activeStatus = await redis('hgetall', 'ars_v12_status') || {};
                         let isResearcherRunning = false;
                         if (Array.isArray(activeStatus)) {
@@ -247,6 +246,7 @@ ${manual}
 
                         if (!isResearcherRunning && !dispatchLock) {
                             await redis('setex', 'ars_dispatch_lock', 60, '1');
+                            await redis('hset', 'ars_v12_status', activeTheme, 'STUDYING');
                             await fetch(`https://api.github.com/repos/${owner}/${repo}/dispatches`, {
                                 method: 'POST',
                                 headers: {
