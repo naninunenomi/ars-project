@@ -77,8 +77,9 @@ module.exports = async (req, res) => {
                 existingThemes = Object.keys(knowledgeBase);
             }
 
-            const classifierPrompt = `あなたはAI専用の分類ゲートキーパーです。以下の【広告テキスト】を入力とし、既存のナレッジテーマ【既存テーマ一覧】からもっとも合致する法律違反監査用のテーマを選択せよ。
-既存のどのテーマにも高精度（90%以上の確信度）で合致しない場合は、その広告テキストを監査するのにふさわしい【新しい具体的な法規テーマ名】を自動で定義せよ（例: 金融取引法に基づく『金融広告（金融商品取引法）』、資金決済法に基づく『暗号資産広告（資金決済法）』など）。
+            const classifierPrompt = `あなたはAI専用の分類ゲートキーパーです。以下の【広告テキスト】を入力とし、既存のナレッジテーマ【既存テーマ一覧】からこの広告の監査に最も適したテーマを1つ選択せよ。
+完全一致でなくてもよい。法分野が近いテーマがあれば必ずそれを選び、matched=true とせよ。
+既存テーマのどれとも法分野が明らかに異なる場合に限り、その広告テキストを監査するのにふさわしい【新しい具体的な法規テーマ名】を自動で定義し、matched=false とせよ（例: 金融取引法に基づく『金融広告（金融商品取引法）』、資金決済法に基づく『暗号資産広告（資金決済法）』など）。
 
 既存テーマ一覧:
 ${existingThemes.map(t => `- ${t}`).join('\n') || "(なし)"}
@@ -97,7 +98,8 @@ ${existingThemes.map(t => `- ${t}`).join('\n') || "(なし)"}
             console.log(`[ARS] Auto-Classifier result: matched=${classifyResult.matched}, theme=${theme}`);
 
             // 未知のテーマを検出した場合：即時リサーチを起動し、STUDYINGステータスを返す
-            if (!classifyResult.matched || !existingThemes.includes(theme)) {
+            // （テーマが書庫に実在するなら matched=false でも鑑定に進む＝鑑定機会を逃さない・憲章4-3）
+            if (!existingThemes.includes(theme)) {
                 console.log(`[ARS] Unknown theme detected: "${theme}". Initializing self-evolving research...`);
                 
                 // 新規テーマ検知：学習起動のトランザクションを記録
