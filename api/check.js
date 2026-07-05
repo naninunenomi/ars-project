@@ -23,30 +23,40 @@ const redis = async (command, ...args) => {
     return data.result;
 };
 
-// Gemini Helper (Phase0): 思考OFF＋JSON強制で1〜2秒に高速化し、空返事・パース失敗は1回だけ再試行する
+// Gemini Helper (Phase0): 思考OFF＋JSON強制で高速化し、空返事・パース失敗はモデル切替＋1回再試行する
+// 無料枠が多い gemini-3-flash-preview(1500回/日・2.5とは別クォータ)を優先し、失敗時は 2.5-flash に自動フォールバック
+// ※研究員(researcher.js)は2.5のまま＝窓口と研究員でクォータを分離し、共倒れを防ぐ
+const GEMINI_MODELS = [
+    { model: 'gemini-3-flash-preview', thinkingConfig: { thinkingLevel: 'minimal' } },
+    { model: 'gemini-2.5-flash', thinkingConfig: { thinkingBudget: 0 } }
+];
+let lastGeminiModel = 'unknown';
 const callGemini = async (prompt) => {
     for (let attempt = 1; attempt <= 2; attempt++) {
-        try {
-            const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${process.env.GEMINI_API_KEY}`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    contents: [{ parts: [{ text: prompt }] }],
-                    generationConfig: {
-                        responseMimeType: "application/json",
-                        thinkingConfig: { thinkingBudget: 0 }
-                    }
-                })
-            });
-            const data = await res.json();
-            if (data.candidates && data.candidates.length > 0) {
-                const responseText = data.candidates[0].content.parts[0].text;
-                const jsonMatch = responseText.match(/\{.*\}/s);
-                return JSON.parse(jsonMatch ? jsonMatch[0] : responseText);
+        for (const { model, thinkingConfig } of GEMINI_MODELS) {
+            try {
+                const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${process.env.GEMINI_API_KEY}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        contents: [{ parts: [{ text: prompt }] }],
+                        generationConfig: {
+                            responseMimeType: "application/json",
+                            thinkingConfig
+                        }
+                    })
+                });
+                const data = await res.json();
+                if (data.candidates && data.candidates.length > 0) {
+                    const responseText = data.candidates[0].content.parts[0].text;
+                    const jsonMatch = responseText.match(/\{.*\}/s);
+                    lastGeminiModel = model;
+                    return JSON.parse(jsonMatch ? jsonMatch[0] : responseText);
+                }
+                console.error(`[ARS] Gemini(${model}) empty response (attempt ${attempt}/2):`, JSON.stringify(data).slice(0, 300));
+            } catch (e) {
+                console.error(`[ARS] Gemini(${model}) call failed (attempt ${attempt}/2):`, e.message);
             }
-            console.error(`[ARS] Gemini empty response (attempt ${attempt}/2):`, JSON.stringify(data).slice(0, 300));
-        } catch (e) {
-            console.error(`[ARS] Gemini call failed (attempt ${attempt}/2):`, e.message);
         }
     }
     return null;
@@ -279,7 +289,7 @@ ${manual}
                     price: `${unitPrice} ARS`,
                     source: manual === theme ? 'KNOWLEDGE_LIBRARY' : `HIERARCHICAL_MATCH (${activeTheme})`, 
                     disclaimer: DISCLAIMER,
-                    model: "gemini-2.5-flash"
+                    model: lastGeminiModel
                 });
             } else {
                 console.error("[ARS] Gemini Valuation Failed after retry.");

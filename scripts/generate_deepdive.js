@@ -11,8 +11,8 @@ const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
 
-// 無料枠が多い gemini-3-flash を優先し、使えなければ gemini-2.5-flash に自動フォールバック
-let MODELS = (process.env.GEMINI_MODELS || 'gemini-3-flash,gemini-2.5-flash').split(',').map((s) => s.trim()).filter(Boolean);
+// 無料枠が多い gemini-3-flash-preview を優先し、使えなければ gemini-2.5-flash に自動フォールバック
+let MODELS = (process.env.GEMINI_MODELS || 'gemini-3-flash-preview,gemini-2.5-flash').split(',').map((s) => s.trim()).filter(Boolean);
 const ARS_URL = 'https://ars-project.vercel.app/api/check.js';
 const OUT_DIR = path.join(__dirname, '../web/src/data/articles');
 const STATE_FILE = path.join(__dirname, '../blog/deepdive_state.json');
@@ -33,12 +33,14 @@ const geminiOnce = async (model, prompt, generationConfig) => {
 };
 
 const callGemini = async (prompt, { json = false, maxTokens = 8192 } = {}) => {
-  const generationConfig = { maxOutputTokens: maxTokens, thinkingConfig: { thinkingBudget: 0 } };
+  const generationConfig = { maxOutputTokens: maxTokens };
   if (json) generationConfig.responseMimeType = 'application/json';
   for (let round = 0; round < 3; round++) {
     let hit429 = false;
     for (const model of [...MODELS]) {
-      const data = await geminiOnce(model, prompt, generationConfig);
+      // 思考OFFの指定書式はモデル世代で異なる（3系=thinkingLevel、2.5系=thinkingBudget）
+      const thinkingConfig = model.startsWith('gemini-3') ? { thinkingLevel: 'minimal' } : { thinkingBudget: 0 };
+      const data = await geminiOnce(model, prompt, { ...generationConfig, thinkingConfig });
       if (data.candidates) {
         const text = data.candidates?.[0]?.content?.parts?.[0]?.text || '';
         if (text) return text;
