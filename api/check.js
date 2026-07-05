@@ -32,8 +32,12 @@ const GEMINI_MODELS = [
 ];
 let lastGeminiModel = 'unknown';
 const callGemini = async (prompt) => {
+    // gemini-3が429(枠切れ)を返したら10分間は最初から2.5へ（無駄打ちと2.5のRPM巻き添えを防ぐ）
+    let g3Cooldown = false;
+    try { g3Cooldown = !!(await redis('get', 'ars_v12_g3_cooldown')); } catch (e) {}
     for (let attempt = 1; attempt <= 2; attempt++) {
         for (const { model, thinkingConfig } of GEMINI_MODELS) {
+            if (g3Cooldown && model.startsWith('gemini-3')) continue;
             try {
                 const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${process.env.GEMINI_API_KEY}`, {
                     method: 'POST',
@@ -53,7 +57,11 @@ const callGemini = async (prompt) => {
                     lastGeminiModel = model;
                     return JSON.parse(jsonMatch ? jsonMatch[0] : responseText);
                 }
-                console.error(`[ARS] Gemini(${model}) empty response (attempt ${attempt}/2):`, JSON.stringify(data).slice(0, 300));
+                console.error(`[ARS] Gemini(${model}) empty response (attempt ${attempt}/2):`, JSON.stringify(data).slice(0, 500));
+                if (data.error && data.error.code === 429 && model.startsWith('gemini-3')) {
+                    g3Cooldown = true;
+                    try { await redis('setex', 'ars_v12_g3_cooldown', 600, '1'); } catch (e) {}
+                }
             } catch (e) {
                 console.error(`[ARS] Gemini(${model}) call failed (attempt ${attempt}/2):`, e.message);
             }
