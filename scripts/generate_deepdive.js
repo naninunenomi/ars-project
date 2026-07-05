@@ -16,25 +16,40 @@ const ARS_URL = 'https://ars-project.vercel.app/api/check.js';
 const OUT_DIR = path.join(__dirname, '../web/src/data/articles');
 const STATE_FILE = path.join(__dirname, '../blog/deepdive_state.json');
 
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
 // ---- Gemini ----
 // json:true でJSON強制。長文執筆は json:false + 大きめ maxTokens。考え込み(thinking)は0で無効化。
+// 無料枠の上限(429)に当たったら、指定秒だけ待って自動で再試行する。
 const callGemini = async (prompt, { json = false, maxTokens = 8192 } = {}) => {
   const key = process.env.GEMINI_API_KEY;
   const generationConfig = { maxOutputTokens: maxTokens, thinkingConfig: { thinkingBudget: 0 } };
   if (json) generationConfig.responseMimeType = 'application/json';
-  const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${MODEL_NAME}:generateContent?key=${key}`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }], generationConfig })
-  });
-  const data = await res.json();
-  if (!data.candidates) {
-    console.error('[Gemini] no candidates:', JSON.stringify(data).slice(0, 600));
+  for (let attempt = 0; attempt < 3; attempt++) {
+    const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${MODEL_NAME}:generateContent?key=${key}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }], generationConfig })
+    });
+    const data = await res.json();
+    if (data.candidates) {
+      const text = data.candidates?.[0]?.content?.parts?.[0]?.text || '';
+      if (!text) console.error('[Gemini] empty text, finishReason=', data.candidates[0].finishReason);
+      return text;
+    }
+    if (data.error?.code === 429 && attempt < 2) {
+      let wait = 62;
+      const ri = (data.error.details || []).find((d) => String(d['@type'] || '').includes('RetryInfo'));
+      const s = ri && ri.retryDelay ? parseInt(ri.retryDelay, 10) : 0;
+      if (s > 0) wait = s + 3;
+      console.log(`[Gemini] 429 無料枠の上限。${wait}秒待って再試行します (${attempt + 1}/2)...`);
+      await sleep(wait * 1000);
+      continue;
+    }
+    console.error('[Gemini] no candidates:', JSON.stringify(data).slice(0, 500));
     return '';
   }
-  const text = data.candidates?.[0]?.content?.parts?.[0]?.text || '';
-  if (!text) console.error('[Gemini] empty text, finishReason=', data.candidates[0].finishReason);
-  return text;
+  return '';
 };
 
 // ---- Tavily ----
