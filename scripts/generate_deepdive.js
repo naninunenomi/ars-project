@@ -11,7 +11,8 @@ const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
 
-const MODEL_NAME = 'gemini-2.5-flash';
+// 無料枠が多い gemini-3-flash を優先し、使えなければ gemini-2.5-flash に自動フォールバック
+let MODELS = (process.env.GEMINI_MODELS || 'gemini-3-flash,gemini-2.5-flash').split(',').map((s) => s.trim()).filter(Boolean);
 const ARS_URL = 'https://ars-project.vercel.app/api/check.js';
 const OUT_DIR = path.join(__dirname, '../web/src/data/articles');
 const STATE_FILE = path.join(__dirname, '../blog/deepdive_state.json');
@@ -19,34 +20,38 @@ const STATE_FILE = path.join(__dirname, '../blog/deepdive_state.json');
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 // ---- Gemini ----
-// json:true でJSON強制。長文執筆は json:false + 大きめ maxTokens。考え込み(thinking)は0で無効化。
-// 無料枠の上限(429)に当たったら、指定秒だけ待って自動で再試行する。
-const callGemini = async (prompt, { json = false, maxTokens = 8192 } = {}) => {
+// gemini-3-flash(無料枠1日1500回)を優先。空応答/上限/非対応なら別モデルに切替。
+// 429(1分あたり上限)は約62秒待って再試行。404/400(モデル非対応)はそのモデルを外す。
+const geminiOnce = async (model, prompt, generationConfig) => {
   const key = process.env.GEMINI_API_KEY;
+  const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${key}`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }], generationConfig })
+  });
+  return res.json();
+};
+
+const callGemini = async (prompt, { json = false, maxTokens = 8192 } = {}) => {
   const generationConfig = { maxOutputTokens: maxTokens, thinkingConfig: { thinkingBudget: 0 } };
   if (json) generationConfig.responseMimeType = 'application/json';
-  for (let attempt = 0; attempt < 3; attempt++) {
-    const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${MODEL_NAME}:generateContent?key=${key}`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }], generationConfig })
-    });
-    const data = await res.json();
-    if (data.candidates) {
-      const text = data.candidates?.[0]?.content?.parts?.[0]?.text || '';
-      if (!text) console.error('[Gemini] empty text, finishReason=', data.candidates[0].finishReason);
-      return text;
+  for (let round = 0; round < 3; round++) {
+    let hit429 = false;
+    for (const model of [...MODELS]) {
+      const data = await geminiOnce(model, prompt, generationConfig);
+      if (data.candidates) {
+        const text = data.candidates?.[0]?.content?.parts?.[0]?.text || '';
+        if (text) return text;
+        console.error(`[Gemini:${model}] 空応答 finishReason=`, data.candidates[0].finishReason);
+        continue; // 別モデルへ
+      }
+      const code = data.error?.code;
+      console.error(`[Gemini:${model}] error ${code}: ${(data.error?.message || '').slice(0, 140)}`);
+      if (code === 429) { hit429 = true; continue; }                     // 上限→別モデル/後で待つ
+      if (code === 404 || code === 400) MODELS = MODELS.filter((m) => m !== model); // 非対応→外す
     }
-    if (data.error?.code === 429 && attempt < 2) {
-      let wait = 62;
-      const ri = (data.error.details || []).find((d) => String(d['@type'] || '').includes('RetryInfo'));
-      const s = ri && ri.retryDelay ? parseInt(ri.retryDelay, 10) : 0;
-      if (s > 0) wait = s + 3;
-      console.log(`[Gemini] 429 無料枠の上限。${wait}秒待って再試行します (${attempt + 1}/2)...`);
-      await sleep(wait * 1000);
-      continue;
-    }
-    console.error('[Gemini] no candidates:', JSON.stringify(data).slice(0, 500));
+    if (MODELS.length === 0) { console.error('[Gemini] 使えるモデルがありません'); return ''; }
+    if (hit429 && round < 2) { console.log('[Gemini] 上限のため約62秒待って再試行...'); await sleep(62000); continue; }
     return '';
   }
   return '';
