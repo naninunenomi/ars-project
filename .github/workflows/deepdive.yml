@@ -31,7 +31,7 @@ jobs:
 
       - name: Generate deep-dive article（調べる→書く→ARSチェック）
         env:
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY_DEEPDIVE || secrets.GEMINI_API_KEY }}
           TAVILY_API_KEY: ${{ secrets.TAVILY_API_KEY }}
           DAILY_DRAFT: ${{ github.event.inputs.draft }}
           DRAFT_DOC_URL: 'https://docs.google.com/document/d/1FXHp64Z3XMcIc-igmdfX436rHJ86TwU3gI4vxB_R58A/export?format=txt'
