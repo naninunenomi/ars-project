@@ -123,10 +123,10 @@ const V2_RULES = `
 3.各企業の説明に必ず「ただし〜のリスク/不確実」を一言添える(良い面だけにしない)。
 4.特定銘柄の購入推奨と取れる表現を避ける。5.強調は「」『』。**は不可。冒頭と末尾に免責文。
 【トーン】各段落に絵文字1つ以上、フランクな先輩口調。面白さは「会社の意外な正体」「点がつながる連想」「未来シナリオ」で。
-【構成】1.導入フック 2.登場企業の正体(各社:どんな会社か[たとえ話]/最近の動き[リサーチ根拠]/ただし〜リスク/独自見解1つ) 3.連鎖する未来 4.だから経済を耳で追うと面白い→ <a href='/articles/hub_mimi_audible'>特集</a> へ誘導 5.免責文(冒頭・末尾)。
+【構成】1.導入フック 2.登場企業の正体(各社ごとに小見出しを付ける。小見出しは「企業名（証券コード）――ひとことキャッチ」の形にすること。要素のラベル『ただし〜リスク』『最近の動き』等をそのまま小見出しにしてはいけない。本文の中に、どんな会社か[たとえ話]・最近の動き[リサーチ根拠]・リスクや不確実な点・独自見解1つ、を自然に織り込む) 3.連鎖する未来 4.だから経済を耳で追うと面白い→ <a href='/articles/hub_mimi_audible'>特集</a> へ誘導 5.免責文(冒頭・末尾)。
 免責文:「本記事は情報提供・読み物であり、特定銘柄の売買を推奨するものではありません。企業の取り組みや将来の見通しには筆者の見解を含み、正確性や実現を保証しません。投資判断はご自身の責任で。」`;
 
-const OUT_FORMAT = `\n\n【出力形式（厳守）】1行目に「TITLE: 記事タイトル」。2行目に「===BODY===」。3行目以降に記事本文をHTML(<p>や<h2>等)で書く。JSONやMarkdownコードブロックにはしない。`;
+const OUT_FORMAT = `\n\n【出力形式（厳守）】1行目に「TITLE: 記事タイトル」。2行目に「===BODY===」。3行目以降に記事本文をHTML(<p>や<h2>等)で書く。JSONやMarkdownコードブロックにはしない。タイトルに日付や「○月○日号」は入れないこと（日付はシステムが自動で付けます）。`;
 
 async function main() {
   // 下書きの取得
@@ -195,6 +195,10 @@ async function main() {
   const jst = new Date(now.getTime() + 9 * 3600 * 1000);
   const stamp = jst.toISOString().replace(/[-:T]/g, '').slice(0, 14);
   const id = `article_${stamp}`;
+  // タイトル先頭に「処理した日（JST）＝発行日」を付ける。AIが日付を入れていたら除去して付け直す。
+  const mmdd = `${jst.getMonth() + 1}/${jst.getDate()}`;
+  title = title.replace(/^[【\[]?\s*(?:20\d{2}[\/.年-])?\d{1,2}[\/.月-]\d{1,2}日?号?\s*[】\]]?[\s　：:]*/, '').trim();
+  title = `【${mmdd}号】${title}`;
   const out = { id, title, category: 'お金・経済の深掘り', source_url: 'https://note.com/kijicast', source_name: 'kijicast', date: now.toISOString(), draft: false, content };
   if (!fs.existsSync(OUT_DIR)) fs.mkdirSync(OUT_DIR, { recursive: true });
   fs.writeFileSync(path.join(OUT_DIR, `${id}.json`), JSON.stringify(out, null, 2), 'utf8');
