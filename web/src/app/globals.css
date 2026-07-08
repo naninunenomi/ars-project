@@ -84,6 +84,8 @@ a:hover { color: var(--orange); }
 .article-body { font-size: 1.02rem; color: var(--text-body); }
 .article-body h2 { font-size: 1.35rem; margin: 40px 0 14px; padding-left: 12px; border-left: 4px solid var(--orange); }
 .article-body h3 { font-size: 1.12rem; margin: 30px 0 10px; color: var(--navy-soft); }
+.article-body h4 { font-size: 0.98rem; font-weight: 700; color: var(--navy-soft); margin: 20px 0 4px; }
+.article-body .pub-date { color: var(--text-light); font-size: 0.85rem; margin: 0 0 16px; }
 .article-body p { margin: 0 0 18px; }
 .article-body ul, .article-body ol { margin: 0 0 18px; padding-left: 1.4em; }
 .article-body li { margin-bottom: 8px; }
