@@ -31,27 +31,13 @@ export default function Home() {
       </section>
 
       <div className="container">
-        {featured.length > 0 && (
-          <section className="featured-section">
-            <h2 className="section-title">✨ おすすめ・特集</h2>
-            <div className="featured-grid">
-              {featured.map((a) => (
-                <Link key={a.id} href={`/articles/${a.id}`} className="featured-card">
-                  <span className="label">特集</span>
-                  <div className="title">{a.title}</div>
-                  <div className="desc">{a.category}</div>
-                </Link>
-              ))}
-            </div>
-          </section>
-        )}
-
+        {/* ① 最新の深掘り記事（2日分） */}
         <h2 className="section-title">最新の深掘り記事</h2>
         {recent.length === 0 ? (
           <p className="empty">まだ記事がありません。まもなく自動で公開されます。</p>
         ) : (
           <ul className="post-list">
-            {recent.slice(0, 10).map((a) => (
+            {recent.slice(0, 2).map((a) => (
               <li key={a.id}>
                 <Link href={`/articles/${a.id}`} className="post-card">
                   <span className="cat">{a.category}</span>
@@ -63,6 +49,7 @@ export default function Home() {
           </ul>
         )}
 
+        {/* ② 過去記事アーカイブ（折りたたみ） */}
         {years.length > 0 && (
           <section className="archive">
             <h2 className="section-title">📚 過去記事アーカイブ</h2>
@@ -89,6 +76,22 @@ export default function Home() {
                   ))}
               </div>
             ))}
+          </section>
+        )}
+
+        {/* ③ おすすめ・特集 */}
+        {featured.length > 0 && (
+          <section className="featured-section">
+            <h2 className="section-title">✨ おすすめ・特集</h2>
+            <div className="featured-grid">
+              {featured.map((a) => (
+                <Link key={a.id} href={`/articles/${a.id}`} className="featured-card">
+                  <span className="label">特集</span>
+                  <div className="title">{a.title}</div>
+                  <div className="desc">{a.category}</div>
+                </Link>
+              ))}
+            </div>
           </section>
         )}
       </div>
