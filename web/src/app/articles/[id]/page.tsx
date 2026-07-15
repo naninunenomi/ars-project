@@ -28,7 +28,6 @@ export default async function ArticlePage({ params }: { params: Promise<{ id: st
           <span className="cat" style={{ color: "#ef4444", marginLeft: 8 }}>下書き</span>
         )}
         <h1>{article.title}</h1>
-        <div className="meta">{new Date(article.date).toLocaleDateString("ja-JP")}</div>
       </div>
 
       <MermaidInit />

@@ -23,7 +23,6 @@ export default function LatestPage() {
       <div className="article-head">
         <span className="cat">{article.category}</span>
         <h1>{article.title}</h1>
-        <div className="meta">{new Date(article.date).toLocaleDateString("ja-JP")}</div>
       </div>
 
       <MermaidInit />
