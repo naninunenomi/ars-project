@@ -24,15 +24,17 @@ const redis = async (command, ...args) => {
 };
 
 // Gemini Helper (Phase0): 思考OFF＋JSON強制で高速化し、空返事・パース失敗はモデル切替＋1回再試行する
-// 無料枠が多い gemini-3-flash-preview(1500回/日・2.5とは別クォータ)を優先し、失敗時は 2.5-flash に自動フォールバック
-// ※研究員(researcher.js)は2.5のまま＝窓口と研究員でクォータを分離し、共倒れを防ぐ
+// 主役=2.5-flash(速く安定・7秒/250回日)。控え=3-flash-preview(1500回日だがpreviewで503/429が頻発・遅い)。
+// 普段は速い2.5で即答し、2.5が枠(250回日)を使い切ったときだけ3が受け止める＝合計~1750回日の余力。
+// gemini-3が安定したら並び順を戻すだけで主役に昇格できる。
+// ※研究員(researcher.js)は2.5のまま＝窓口とクォータを分離し共倒れを防ぐ(窓口のGEMINI_API_KEYは専用プロジェクトの鍵)。
 const GEMINI_MODELS = [
-    { model: 'gemini-3-flash-preview', thinkingConfig: { thinkingLevel: 'minimal' } },
-    { model: 'gemini-2.5-flash', thinkingConfig: { thinkingBudget: 0 } }
+    { model: 'gemini-2.5-flash', thinkingConfig: { thinkingBudget: 0 } },
+    { model: 'gemini-3-flash-preview', thinkingConfig: { thinkingLevel: 'minimal' } }
 ];
 let lastGeminiModel = 'unknown';
 const callGemini = async (prompt) => {
-    // gemini-3が429(枠切れ)を返したら10分間は最初から2.5へ（無駄打ちと2.5のRPM巻き添えを防ぐ）
+    // gemini-3(控え)が429を返したら10分間は控えの呼び出し自体をスキップ（無駄打ち防止）
     let g3Cooldown = false;
     try { g3Cooldown = !!(await redis('get', 'ars_v12_g3_cooldown')); } catch (e) {}
     for (let attempt = 1; attempt <= 2; attempt++) {
