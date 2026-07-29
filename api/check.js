@@ -97,25 +97,39 @@ module.exports = async (req, res) => {
                 existingThemes = Object.keys(knowledgeBase);
             }
 
-            const classifierPrompt = `あなたはAI専用の分類ゲートキーパーです。以下の【広告テキスト】を入力とし、既存のナレッジテーマ【既存テーマ一覧】からこの広告の監査に最も適したテーマを1つ選択せよ。
-完全一致でなくてもよい。法分野が近いテーマがあれば必ずそれを選び、matched=true とせよ。
-既存テーマのどれとも法分野が明らかに異なる場合に限り、その広告テキストを監査するのにふさわしい【新しい具体的な法規テーマ名】を自動で定義し、matched=false とせよ（例: 金融取引法に基づく『金融広告（金融商品取引法）』、資金決済法に基づく『暗号資産広告（資金決済法）』など）。
+            // 【2026-07 改修 / I1・I2対策】受付は必ず"広い実務棚"8個のどれかに寄せる。
+            // 新テーマの乱造＝STUDYING落ち（判定なし）を防ぐ。8キーは ars_v12_knowledge に
+            // 代表マニュアルとして必ず存在させること（温存アーカイブ方式＝既存166棚は書庫として温存）。
+            const FRONTLINE_THEMES = [
+                "広告表現一般（景品表示法）",
+                "健康・美容・食品の広告（薬機法・健康増進法）",
+                "投資・金融の広告（金融商品取引法）",
+                "ステルスマーケティング・アフィリエイト表示（景品表示法）",
+                "通販・ECの表示（特定商取引法）",
+                "求人・募集の広告（職業安定法）",
+                "医療広告（医療法・医療広告ガイドライン）",
+                "プラットフォーム規約・アカウントBAN予測"
+            ];
 
-既存テーマ一覧:
-${existingThemes.map(t => `- ${t}`).join('\n') || "(なし)"}
+            const classifierPrompt = `あなたはAI専用の分類ゲートキーパーです。以下の【広告テキスト】を、必ず下記【対応棚リスト】の中から最も近いものを1つだけ選び、その番号を返せ。
+- 必ずリストの番号(1〜${FRONTLINE_THEMES.length})の中から1つ選ぶこと。新しいテーマを作ってはならない。
+- どれとも判断がつかない曖昧な場合は 1（広告表現一般）を選べ。
+
+対応棚リスト:
+${FRONTLINE_THEMES.map((t, i) => `${i + 1}. ${t}`).join('\n')}
 
 対象テキスト: "${text}"
 
-返却値は必ず以下のJSONフォーマットにせよ。Markdownのマークアップ（\`\`\`json）などは一切含めず、純粋なJSONオブジェクト単体として返せ。
+返却値は必ず以下のJSONフォーマットのみ。Markdownのマークアップ（バッククォート等）は一切含めず、純粋なJSONオブジェクト単体として返せ。
 {
-  "matched": true/false（既存テーマに合致した場合はtrue、新規テーマを自律定義した場合はfalse）,
-  "theme": "選択した既存テーマ名、または新規に自動命名したテーマ名"
+  "index": 選んだ棚の番号(1〜${FRONTLINE_THEMES.length}の整数)
 }`;
 
-            const classifyResult = (await callGemini(classifierPrompt)) || { matched: false, theme: "広告鑑定（一般法）" };
-
-            theme = classifyResult.theme;
-            console.log(`[ARS] Auto-Classifier result: matched=${classifyResult.matched}, theme=${theme}`);
+            const classifyResult = (await callGemini(classifierPrompt)) || { index: 1 };
+            const idx = parseInt(classifyResult.index, 10);
+            // 安全網：範囲外や解析失敗でも必ず8棚のどれか（既定=1.広告表現一般）に丸める＝STUDYINGに落とさない
+            theme = (idx >= 1 && idx <= FRONTLINE_THEMES.length) ? FRONTLINE_THEMES[idx - 1] : FRONTLINE_THEMES[0];
+            console.log(`[ARS] Auto-Classifier result: idx=${classifyResult.index} theme=${theme}`);
 
             // 未知のテーマを検出した場合：即時リサーチを起動し、STUDYINGステータスを返す
             // （テーマが書庫に実在するなら matched=false でも鑑定に進む＝鑑定機会を逃さない・憲章4-3）
