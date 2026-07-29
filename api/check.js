@@ -88,14 +88,8 @@ module.exports = async (req, res) => {
         if (!theme || theme === 'auto' || theme === '') {
             console.log(`[ARS] Auto-Classifier activated for text...`);
             
-            // Redisから登録済みのテーマ一覧を取得
-            const knowledgeBase = await redis('hgetall', 'ars_v12_knowledge') || {};
-            let existingThemes = [];
-            if (Array.isArray(knowledgeBase)) {
-                for (let j = 0; j < knowledgeBase.length; j += 2) existingThemes.push(knowledgeBase[j]);
-            } else {
-                existingThemes = Object.keys(knowledgeBase);
-            }
+            // 【改修2026-07】全棚のhgetall(174件・巨大)は重く不安定で、失敗すると誤STUDYINGの原因になるため廃止。
+            //  存在確認は後段のHEXISTS（1棚だけ）で安価・確実に行う。
 
             // 【2026-07 改修 / I1・I2対策】受付は必ず"広い実務棚"8個のどれかに寄せる。
             // 新テーマの乱造＝STUDYING落ち（判定なし）を防ぐ。8キーは ars_v12_knowledge に
@@ -131,9 +125,10 @@ ${FRONTLINE_THEMES.map((t, i) => `${i + 1}. ${t}`).join('\n')}
             theme = (idx >= 1 && idx <= FRONTLINE_THEMES.length) ? FRONTLINE_THEMES[idx - 1] : FRONTLINE_THEMES[0];
             console.log(`[ARS] Auto-Classifier result: idx=${classifyResult.index} theme=${theme}`);
 
-            // 未知のテーマを検出した場合：即時リサーチを起動し、STUDYINGステータスを返す
-            // （テーマが書庫に実在するなら matched=false でも鑑定に進む＝鑑定機会を逃さない・憲章4-3）
-            if (!existingThemes.includes(theme)) {
+            // 選ばれた棚が書庫に実在するかを安価に確認（HEXISTS・1棚のみ）。8棚は種まき済みなので通常true。
+            // 万一その棚が未整備なら、従来どおり研究員を起動してSTUDYINGを返す（保険）。
+            const themeKnown = await redis('hexists', 'ars_v12_knowledge', theme);
+            if (!themeKnown) {
                 console.log(`[ARS] Unknown theme detected: "${theme}". Initializing self-evolving research...`);
                 
                 // 新規テーマ検知：学習起動のトランザクションを記録
