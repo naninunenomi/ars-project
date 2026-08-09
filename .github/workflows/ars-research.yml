@@ -9,8 +9,7 @@ on:
     types: [ars-research-command]
   workflow_dispatch:
   schedule:
-    - cron: '0 23 * * *' # 毎日 日本時間 朝8時
-    - cron: '0 11 * * *' # 毎日 日本時間 夜20時
+    - cron: '0 */6 * * *' # 6時間おき・1日4回（鮮度更新と学習の回転を上げる・2026-08改修）
 
 jobs:
   research:

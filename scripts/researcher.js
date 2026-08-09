@@ -98,9 +98,82 @@ ${searchSummary}
     return addedWork;
 }
 
+/**
+ * 【2026-07 追加】鮮度更新（Freshness Refresh）
+ * 実際に判定で使う"前線8棚"(ars_v12_frontline)のうち、最終確認日(ars_v12_verified_at)が
+ * 最も古い1棚を選び、最新の法改正を反映して更新する。憲章「最も新鮮な鑑定」を実装で担保する。
+ * 無料枠保護のため1起動につき1棚のみ。上書きせず"追記"方式で既存を絶対に失わない。
+ * まず変更の有無を判定し、変更がある時だけ日付つきで追記。無ければ確認日のみ更新する。
+ */
+async function performFreshnessRefresh() {
+    const frontline = await redis('lrange', 'ars_v12_frontline', 0, -1) || [];
+    if (!frontline || frontline.length === 0) {
+        console.log("[Freshness] 前線棚リスト(ars_v12_frontline)が空のためスキップ。");
+        return false;
+    }
+
+    // 最終確認日が最も古い（または未確認の）棚を選ぶ
+    let target = null, oldestTime = Infinity;
+    for (const t of frontline) {
+        const v = await redis('hget', 'ars_v12_verified_at', t);
+        const time = v ? Date.parse(v) : 0; // 未確認は最古(=0)扱いで最優先
+        if (time < oldestTime) { oldestTime = time; target = t; }
+    }
+    if (!target) return false;
+
+    console.log(`[Freshness] 最古の棚を再検証: ${target}`);
+    const existingManual = await redis('hget', 'ars_v12_knowledge', target) || "";
+
+    const searchData = await callTavily(`${target} 法改正 新ガイドライン 違反事例 2026 最新`);
+    let searchContext = "";
+    if (searchData && searchData.results) {
+        searchContext = "\n【最新の外部検索結果】\n" + searchData.results.map(r => `- ${r.title}: ${r.content} (${r.url})`).join("\n");
+    }
+
+    // まず「既存マニュアルに未反映の重要な変更があるか」を判定させる（あるときだけ追記＝無料枠を無駄打ちしない）
+    const prompt = `あなたは法令の鮮度チェック担当AIです。テーマ「${target}」について、既存マニュアルの記述と最新情報を比較してください。
+既存マニュアルに【未反映の重要な変更】（法改正・新ガイドライン・新しい違反事例・運用変更）がある場合のみ changed=true とし、その変更点を簡潔にまとめてください。
+既存の焼き直し・些末な言い換え・単なる具体例追加は changed=false としてください。
+出力は純粋なJSONオブジェクト単体のみ（マークダウン囲み禁止）:
+{ "changed": true/false, "summary": "changed=trueのときのみ。既存のどの記述がどう変わったかを含めた変更点の要約" }
+${searchContext}
+【既存マニュアル(冒頭)】
+${existingManual.substring(0, 4000)}`;
+
+    const raw = await callGemini(prompt);
+    let result = { changed: false, summary: "" };
+    try {
+        const m = raw.match(/\{[\s\S]*\}/);
+        if (m) result = JSON.parse(m[0]);
+    } catch (e) {
+        console.error("[Freshness] 判定JSONの解析に失敗。安全側=変更なし扱い。");
+    }
+
+    if (result.changed && result.summary && result.summary.length > 10) {
+        // ★上書きせず"追記"：既存マニュアルは絶対に失わない（既存の差分リサーチと同じ方式）
+        const today = new Date().toISOString().split('T')[0];
+        let addend = `\n\n---\n## 【鮮度更新 ${today}】\n${result.summary}`;
+        if (searchData && searchData.results) {
+            addend += "\n【出典】\n" + searchData.results.map(r => `- ${r.url}`).join("\n");
+        }
+        const finalKnowledge = existingManual + addend;
+        await redis('hset', 'ars_v12_knowledge', target, finalKnowledge);
+        const checklist = await callGemini(`以下を300文字の高速鑑定用チェックリストに要約せよ。\n${finalKnowledge.substring(0, 5000)}`);
+        if (checklist) await redis('hset', 'ars_v12_checklist', target, checklist);
+        console.log(`[Freshness] ✅ 変更を追記＆確認: ${target}`);
+    } else {
+        console.log(`[Freshness] 変更なし。確認日のみ更新: ${target}`);
+    }
+
+    // 変更の有無に関わらず確認日は更新（次の起動では別の棚が最古になり、8棚を順に巡回する）
+    await redis('hset', 'ars_v12_verified_at', target, new Date().toISOString());
+    return true;
+}
+
 async function main() {
     let isIncrementalRun = false;
     let hasScoutedThisRun = false; // 無限スカウト（暴走）を防ぐためのフラグ
+    let hasRefreshedThisRun = false; // 1起動につき鮮度更新は1回だけ
     const gap = process.env.ARS_GAP;
     const targetTopic = process.env.ARS_TOPIC;
     
@@ -129,17 +202,22 @@ async function main() {
 
             if (!topic) {
                 if (isIncrementalRun) break;
-                
-                // 1回の起動につき、スカウトミッションは1回だけ（無限ループ暴走防止）
-                if (!hasScoutedThisRun) {
-                    hasScoutedThisRun = true;
-                    const scoutFoundWork = await performScout();
-                    if (scoutFoundWork) {
-                        continue; // 新しいテーマを見つけたので、ループを回してすぐに学習を開始する
-                    }
+
+                // 【2026-07 改修】アイドル時は既存"前線8棚"の鮮度更新を最優先（1起動1回）。
+                // 新テーマのスカウトは棚が十分揃ったため当面停止（無料枠を鮮度に集中・棚の乱立防止）。
+                // ※再開したい場合は下のperformScout()ブロックのコメントを外す。
+                if (!hasRefreshedThisRun) {
+                    hasRefreshedThisRun = true;
+                    await performFreshnessRefresh();
                 }
-                
-                console.log("[ARS] No more work and scout finished. Exiting loop.");
+
+                // if (!hasScoutedThisRun) {
+                //     hasScoutedThisRun = true;
+                //     const scoutFoundWork = await performScout();
+                //     if (scoutFoundWork) continue;
+                // }
+
+                console.log("[ARS] Idle work done (freshness pass). Exiting loop.");
                 break;
             }
             
