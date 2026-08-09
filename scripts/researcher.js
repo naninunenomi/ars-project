@@ -33,20 +33,81 @@ const callGemini = async (prompt) => {
     return data.candidates?.[0]?.content?.parts?.[0]?.text || "";
 };
 
-const callTavily = async (query) => {
+// 一次資料を優先する公式ドメイン（消費者庁/厚労省/金融庁/個人情報保護委員会/e-Gov法令/裁判所/警察庁/デジタル庁）
+const OFFICIAL_DOMAINS = [
+    "caa.go.jp", "mhlw.go.jp", "fsa.go.jp", "ppc.go.jp",
+    "elaws.e-gov.go.jp", "e-gov.go.jp", "courts.go.jp", "npa.go.jp", "digital.go.jp"
+];
+
+// includeDomains を渡すと、その公式ドメインに限定して検索（＝一次資料ベース学習）。
+// 公式で結果が得られない場合は、呼び出し側で一般Web検索にフォールバックする。
+const callTavily = async (query, includeDomains = null) => {
     const key = process.env.TAVILY_API_KEY;
     if (!key) return null;
     try {
+        // include_raw_content: 各結果の本文全体を取得（TavilyがPDFも解析して本文テキストを返す）
+        const body = { api_key: key, query, search_depth: "advanced", max_results: 5, include_raw_content: true };
+        if (includeDomains && includeDomains.length) body.include_domains = includeDomains;
         const res = await fetch('https://api.tavily.com/search', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ api_key: key, query, search_depth: "advanced", max_results: 5 })
+            body: JSON.stringify(body)
         });
         return await res.json();
     } catch (e) {
         console.error("[Tavily ERROR]", e);
         return null;
     }
+};
+
+// 検索結果を学習用テキストに整形。raw_content（PDF含む本文）があれば優先し、長すぎる分は切る。
+const formatSources = (results) => (results || []).map(r => {
+    const bodyText = (r.raw_content || r.content || "").substring(0, 3500);
+    return `- ${r.title}（${r.url}）\n${bodyText}`;
+}).join("\n\n");
+
+// 【PDF直読み】PDFを直接DLし、Geminiのマルチモーダル解析で本文テキスト化する（Tavilyが解析しきれないPDF対策）。
+// npmライブラリ不要。失敗は全て握りつぶして空文字を返し、学習を絶対に止めない。15MB超はスキップ。
+const extractPdfViaGemini = async (url) => {
+    try {
+        if (!/\.pdf($|\?)/i.test(url)) return "";
+        const res = await fetch(url);
+        if (!res.ok) return "";
+        const ct = res.headers.get('content-type') || "";
+        const buf = Buffer.from(await res.arrayBuffer());
+        if (buf.length > 15 * 1024 * 1024) return "";           // 15MB超はスキップ
+        if (!/pdf/i.test(ct) && !/\.pdf/i.test(url)) return ""; // 実体がPDFでなければスキップ
+        const base64 = buf.toString('base64');
+        const key = process.env.GEMINI_API_KEY;
+        const gres = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${MODEL_NAME}:generateContent?key=${key}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                contents: [{ parts: [
+                    { text: "この公式PDFから、日本の広告・表示規制に関する重要なルール・条文・ガイドライン・違反基準・判断要素を、漏れなく箇条書きで抽出せよ。本文に無い内容は補わない。" },
+                    { inline_data: { mime_type: "application/pdf", data: base64 } }
+                ]}]
+            })
+        });
+        const gdata = await gres.json();
+        return gdata.candidates?.[0]?.content?.parts?.[0]?.text || "";
+    } catch (e) {
+        console.error("[PDF Extract ERROR]", url, e.message);
+        return "";
+    }
+};
+
+// 検索結果のうち公式PDFを最大max件、直接DL＆Gemini解析して本文を得る（無料枠保護で既定1件）。
+const extractPdfsFromResults = async (results, max = 1) => {
+    const pdfs = (results || []).filter(r => /\.pdf($|\?)/i.test(r.url || "")).slice(0, max);
+    let out = "";
+    for (const r of pdfs) {
+        const text = await extractPdfViaGemini(r.url);
+        if (text && text.length > 50) {
+            out += `\n\n【PDF直読み: ${r.title}（${r.url}）】\n${text.substring(0, 4000)}`;
+        }
+    }
+    return out;
 };
 
 async function performScout() {
@@ -124,10 +185,14 @@ async function performFreshnessRefresh() {
     console.log(`[Freshness] 最古の棚を再検証: ${target}`);
     const existingManual = await redis('hget', 'ars_v12_knowledge', target) || "";
 
-    const searchData = await callTavily(`${target} 法改正 新ガイドライン 違反事例 2026 最新`);
+    let searchData = await callTavily(`${target} 法改正 ガイドライン改正 措置命令 2026`, OFFICIAL_DOMAINS);
+    if (!searchData || !searchData.results || searchData.results.length === 0) {
+        searchData = await callTavily(`${target} 法改正 新ガイドライン 違反事例 2026 最新`); // フォールバック：一般Web
+    }
     let searchContext = "";
     if (searchData && searchData.results) {
-        searchContext = "\n【最新の外部検索結果】\n" + searchData.results.map(r => `- ${r.title}: ${r.content} (${r.url})`).join("\n");
+        searchContext = "\n【最新の一次資料（本文抜粋・PDF含む）】\n" + formatSources(searchData.results);
+        searchContext += await extractPdfsFromResults(searchData.results, 1); // 鮮度更新はPDF最大1件を直読み
     }
 
     // まず「既存マニュアルに未反映の重要な変更があるか」を判定させる（あるときだけ追記＝無料枠を無駄打ちしない）
@@ -225,18 +290,23 @@ async function main() {
             await redis('hset', 'ars_v12_status', topic, 'STUDYING');
             console.log(`[ARS] Research started for: ${topic}`);
 
-            // --- 外部検索フェーズ ---
+            // --- 外部検索フェーズ（一次資料＝公式ドメイン優先→無ければ一般Webにフォールバック） ---
             let searchContext = "";
-            const searchQuery = isIncremental ? `${topic} ${gap} 規制 ニュース 2026` : `${topic} 最新 法規制 2026 事例`;
-            const searchData = await callTavily(searchQuery);
+            const searchQuery = isIncremental ? `${topic} ${gap} 規制 ガイドライン 2026` : `${topic} ガイドライン 法令 措置命令 2026`;
+            let searchData = await callTavily(searchQuery, OFFICIAL_DOMAINS);
+            if (!searchData || !searchData.results || searchData.results.length === 0) {
+                searchData = await callTavily(searchQuery); // フォールバック：一般Web
+            }
             if (searchData && searchData.results) {
-                searchContext = "\n【最新の外部検索結果】\n" + searchData.results.map(r => `- ${r.title}: ${r.content} (${r.url})`).join("\n");
+                searchContext = "\n【参照した一次資料（本文抜粋・PDF含む）】\n" + formatSources(searchData.results);
+                searchContext += await extractPdfsFromResults(searchData.results, 2); // 新規学習はPDF最大2件を直読み
             }
 
-            // --- リサーチフェーズ ---
-            let prompt = isIncremental 
-                ? `テーマ「${topic}」の既存マニュアルに、不足論点「${gap}」を追記せよ。\n${searchContext}\n【既存マニュアル】\n${existingManual.substring(0, 3000)}...\n最新事例を優先し、人間が数日がかりで読み込むレベルの詳細な追記を行え。`
-                : `テーマ「${topic}」について、世界最高峰の法学者として極限まで詳細なリファレンスマニュアルを作成せよ。\n${searchContext}\n2026年の最新ニュースを反映させ、全知全能のバイブルを完成させよ。`;
+            // --- リサーチフェーズ（一次資料に基づく／推測禁止／出典明記） ---
+            const SOURCE_RULE = `\n【厳守ルール】上記の一次資料・検索結果に基づいて記述し、参照した条文・ガイドライン名・URLを本文中に明記せよ。資料で確認できない内容は推測で補わず「未確認（要一次資料確認）」と正直に記せ。`;
+            let prompt = isIncremental
+                ? `テーマ「${topic}」の既存マニュアルに、不足論点「${gap}」を追記せよ。\n${searchContext}${SOURCE_RULE}\n【既存マニュアル】\n${existingManual.substring(0, 3000)}...\n最新事例を優先し、詳細な追記を行え。`
+                : `テーマ「${topic}」について、日本の法令・公式ガイドラインに基づく詳細なリファレンスマニュアルを作成せよ。\n${searchContext}${SOURCE_RULE}\n2026年の最新の法改正・措置命令を反映し、違反コードと判定基準(SAFE/RISKY/DANGER)を含めよ。`;
 
             const newKnowledge = await callGemini(prompt);
 
